@@ -252,11 +252,12 @@
     display: inline-block;
     position: relative;
     left: -40px;
-    width: 60px;
+    width: 50px;
     height: 85px;
     background: url("../assets/img/icon_touxiang.png") no-repeat;
     /*float: left;*/
     background-position: center;
+    background-size: contain;
 
   }
   .personal{

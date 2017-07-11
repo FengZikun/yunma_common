@@ -45,7 +45,7 @@
         <input class="delbutton" type="button" name="" value="取消" @click='hide'>
       </div>
     </div>
-            <div class="rig_main">
+            <div class="right-main">
             <div class='center2'>
               <a href="javascript:void(0)"><span class='span_first' @click.self='mengban' v-bind:data-id='1'>+&nbsp;新增一级分类</span></a>
             </div>
@@ -168,7 +168,7 @@
   }
   .order_center {
     width: 90%;
-    height: 690px;
+    min-height: 690px;
     margin: 0 auto;
   }
   .order_center ul {

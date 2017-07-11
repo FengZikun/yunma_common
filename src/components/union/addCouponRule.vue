@@ -425,18 +425,17 @@
 					orderList:self.orderList,
 					timeType:self.myTime,
 				}
-				console.log(data)
 
-				// var success=function(res){
-				// 	console.log(res);
-				// 	if(res.statuscode===1){
-				// 		router.push({path:'couponRule'})
-				// 	}else{
-				// 		self.showWarn2=true;
-				// 		self.warnText=res.msg
-				// 	}
-				// }
-				// common.Ajax(url,type,data,success)
+				var success=function(res){
+					console.log(res);
+					if(res.statuscode===1){
+						router.push({path:'couponRule'})
+					}else{
+						self.showWarn2=true;
+						self.warnText=res.msg
+					}
+				}
+				common.Ajax(url,type,data,success)
 			}
 		},
 		created:function(){

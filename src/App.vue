@@ -534,7 +534,8 @@
   background: #fff;
   position: relative;
   top: 50%;
-  margin: auto;
+  left: 50%;
+  margin-left: -210px;
   margin-top: -125px;
 }
 .wordbreak{

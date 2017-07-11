@@ -61,7 +61,7 @@
 							<span class="pro-li-span">
 								<span class="zanting"></span>
 							</span>
-							<span class="pro-li-span" v-if='pro.timeType==null||0'>
+							<span class="pro-li-span" v-if='pro.timeType==0'>
 								<span>长期</span>
 							</span>
 							<span class="pro-li-span" v-else style="line-height:26px;margin:10px 0;vertical-align: top">

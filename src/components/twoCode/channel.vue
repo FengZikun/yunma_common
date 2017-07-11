@@ -2,7 +2,7 @@
   <div>
     <div class="right-main">
       <div class='right-main-top'>
-      <svg width="960" height="800" @click='selectTree'></svg>
+        <svg width="960" height="500" @click='selectTree'></svg>
         
       </div>
 
@@ -26,19 +26,20 @@
               <span class="pro-li-span head">操作</span>
             </li>
             <li v-for='pro in proInfo'>
-              <span class="pro-li-span">{{pro.id}}</span>
-              <span class="pro-li-span">{{pro.agentName}}</span>
-              <span class="pro-li-span">{{pro.agentAddress}}</span>
-              <span class="pro-li-span">{{pro.agentTel}}</span>
-              <span class="pro-li-span">{{pro.agentEmaill}}</span>
-              <span class="pro-li-span">{{pro.mark}}</span>
-              <span class="pro-li-span">{{pro.agentFid}}</span>
+              <span class="pro-li-span">{{pro.id||pro.noData.id}}</span>
+              <span class="pro-li-span">{{pro.agentName||pro.noData.agentName}}</span>
+              <span class="pro-li-span">{{pro.agentAddress||pro.noData.agentAddress}}</span>
+              <span class="pro-li-span">{{pro.agentTel||pro.noData.agentTel}}</span>
+              <span class="pro-li-span">{{pro.agentEmaill||pro.noData.agentEmaill}}</span>
+              <span class="pro-li-span">{{pro.mark||pro.noData.mark}}</span>
+              <span class="pro-li-span" v-if='pro.noData==undefined'>{{pro.agentFid}}</span>
+              <span class="pro-li-span" v-else>{{pro.noData.agentFid}}</span>
               <span class="pro-li-span">
                 <a href="javascript:void(0)">授权码</a>
               </span> 
             </li>
           </ul>
-          <div class="page-num">
+          <div class="page-num" v-if='fenye'>
             <ul class="page-num-ul">
               <a href="javascript:void(0)"><li class="page-num-li-arrow page-num-li" v-if='currentPage>1' @click='prevPage'><span class="arrow-left"></span></li></a>
               <a href="javascript:void(0)"><li class="page-num-li" v-if='currentPage>4&&totalPage.length!=1&&totalPage[0]!=1' v-bind:data-page='1' @click.self='changePage'>1</li></a>
@@ -134,6 +135,9 @@
   stroke-opacity: 0.4;
   stroke-width: 1.5px;
 }
+.pro-list{
+  overflow-y: scroll;
+}
 </style>
 <!-- <script src='../assets/js/echarts2.js'></script> -->
 <script>
@@ -150,38 +154,39 @@
         resData:[],      //请求回的所有数据
         currentPage:'',  //当前页
         totalPages:'',    //总页数
+        fenye:true,
 
       }
     },
     props:['datas'],
     methods:{
-      Myinit:function(){
-        var self=this;
-        d3.select('#treeBox').text('Hello,yiifaa!');
-        var url='http://192.168.1.107:8080/cloud_code/GET/agent/getAgentTree.do';
-        var url2='http://192.168.1.107:8080/cloud_code/GET/agent/getAllAgent.do'
-        var type='get';
-        var data={
-          vendorId:self.datas.vendorId
-        }
-        var success2=function(res){
-          console.log(res);
-          var pagenum=res.totalPages;
-          self.totalPage=[];
-          self.resData=res;
-          self.proInfo=res.result.data;
-          self.totalPages=res.totalPages;
-          self.currentPage=res.currentPage;
-          self.getPage();
-        }
-        common.Ajax(url2,type,data,success2);
-        var svg = d3.select("svg"),
-        width = +svg.attr("width"),
-        height = +svg.attr("height"),
-        g = svg.append("g").attr("transform", "translate(40,0)");
-        console.log(svg)
-        var tree = d3.tree()
-        .size([height, width - 160]);
+     init:function(currentPage){
+      var self=this;
+      d3.select('#treeBox').text('Hello,yiifaa!');
+      var url2='http://192.168.1.107:8080/cloud_code/GET/agent/getAllAgent.do'
+      var type='get';
+      var data={
+        vendorId:self.datas.vendorId,
+        currentPage:currentPage
+      }
+      var success2=function(res){
+        console.log(res);
+        var pagenum=res.totalPages;
+        self.fenye=true
+        self.totalPage=[];
+        self.resData=res;
+        self.proInfo=res.result.data;
+        self.totalPages=res.totalPages;
+        self.currentPage=res.currentPage;
+        self.getPage();
+      }
+      common.Ajax(url2,type,data,success2);
+      var svg = d3.select("svg"),
+      width = +svg.attr("width"),
+      height = +svg.attr("height"),
+      g = svg.append("g").attr("transform", "translate(40,0)");
+      var tree = d3.tree()
+      .size([height, width - 160]);
 
         // var hierarchy = d3.hierarchy()
         // .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
@@ -212,6 +217,7 @@
           node.append("text")
           .attr("dy", 3)
           .attr("x", function(d) { return d.children ? -8 : 8; })
+          .attr("data-id",function(d){return d.data.id})
           .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
           .text(function(d) { 
             return d.data.name
@@ -222,7 +228,21 @@
       //点击节点
       selectTree:function(){
         var self=this;
-        console.log(event.target)
+        if($(event.target)[0].nodeName==='text'){
+          var id=$(event.target).attr('data-id');
+          var url='http://192.168.1.107:8080/cloud_code/GET/agent/getAgentInfoByNodeId.do';
+          var type='get';
+          var data={
+            vendorId:self.datas.vendorId,
+            id:id
+          };
+          var success=function(res){
+            self.proInfo=res.data;
+            self.fenye=false;
+          };
+          common.Ajax(url,type,data,success);
+        };
+        
       },
       //获取页数
       getPage:common.getPage,
@@ -237,7 +257,7 @@
 
     },
     mounted:function(){
-      this.Myinit();
+      this.init();
     }
   }
 </script>

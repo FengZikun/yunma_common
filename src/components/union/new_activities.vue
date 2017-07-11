@@ -196,7 +196,7 @@
 				step4:false,
 				weidian:false,
 				weixin:false,
-				ifSwitch:true,
+				ifSwitch:false,
 				openGet:1,
 				ifSwitch2:true,
 				showFinish:1,

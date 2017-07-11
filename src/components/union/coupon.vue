@@ -32,7 +32,7 @@
 				<div class="right-main-top">
 					<p class="right-main-top1">
 						<span class="right-main-top-icon1"></span>
-						<span>您可以设置不同的购物券领取活动，每个购物券活动均有独立的领取链接，您可将购物券的领取链接设置在商城自定义首页或自定义页面，让会员领取使用（促进转化），同时在商品详情页、购物车、活动中心均有领取入口。</span>
+						<span style="display:inline-block;width:95%;">您可以设置不同的购物券领取活动，每个购物券活动均有独立的领取链接，您可将购物券的领取链接设置在商城自定义首页或自定义页面，让会员领取使用（促进转化），同时在商品详情页、购物车、活动中心均有领取入口。</span>
 
 					</p>
 				</div>
@@ -236,7 +236,7 @@
 		margin-top: 44px;
 	}
 	.right-main-top{
-		width: 90%;
+		width: 95%;
 		margin: auto;
 		padding-top: 60px;
 		text-align: left;

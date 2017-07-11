@@ -2,7 +2,7 @@
   <div>
     <div class="right-main">
       <div class='right-main-top'>
-        <svg width="960" height="500" @click='selectTree'></svg>
+        <svg width="1460" height="500" @click='selectTree'></svg>
         
       </div>
 
@@ -66,6 +66,7 @@
   margin: auto;
   padding-top: 60px;
   text-align: left;
+  overflow-x: scroll;
 }
 .right-main-top1{
   margin-bottom: 50px;
@@ -181,6 +182,9 @@
         self.getPage();
       }
       common.Ajax(url2,type,data,success2);
+
+      //创建树状图
+      
       var svg = d3.select("svg"),
       width = +svg.attr("width"),
       height = +svg.attr("height"),

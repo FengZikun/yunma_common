@@ -1,0 +1,15 @@
+.return{
+		color: #00baff;
+		float: right;
+		display: inline-block;
+		margin-right: 40px;
+		margin-top: -20px;
+	}
+	.top{
+		margin-top: 80px;
+		margin-left: 70px;
+	}
+	.texteditor{
+  width: 500px;
+  height: 600px;
+}

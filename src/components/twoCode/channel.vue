@@ -164,7 +164,7 @@
      init:function(currentPage){
       var self=this;
       d3.select('#treeBox').text('Hello,yiifaa!');
-      var url2='http://192.168.1.107:8080/cloud_code/GET/agent/getAllAgent.do'
+      var url2='http://120.77.149.115/cloud_code/GET/agent/getAllAgent.do'
       var type='get';
       var data={
         vendorId:self.datas.vendorId,
@@ -195,7 +195,7 @@
         // var hierarchy = d3.hierarchy()
         // .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
 
-        d3.json("http://192.168.1.107:8080/cloud_code/GET/agent/getAgentTree.do?vendorId="+self.datas.vendorId, function(error, data) {
+        d3.json("http://120.77.149.115/cloud_code/GET/agent/getAgentTree.do?vendorId="+self.datas.vendorId, function(error, data) {
           if (error) throw error;
 
           var root = d3.hierarchy(data)
@@ -234,7 +234,7 @@
         var self=this;
         if($(event.target)[0].nodeName==='text'){
           var id=$(event.target).attr('data-id');
-          var url='http://192.168.1.107:8080/cloud_code/GET/agent/getAgentInfoByNodeId.do';
+          var url='http://120.77.149.115/cloud_code/GET/agent/getAgentInfoByNodeId.do';
           var type='get';
           var data={
             vendorId:self.datas.vendorId,

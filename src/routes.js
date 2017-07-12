@@ -63,6 +63,7 @@ import addRule from './components/twoCode/addRule.vue'
 import corporateDetail from './components/admin/corporateDetail.vue'
 import addCorporate from './components/admin/addCorporate.vue'
 import addActivity from './components/twoCode/addActivity.vue'
+import analysis from './components/twoCode/analysis.vue'
 import addAdmin from './components/admin/addAdmin.vue'
 
 //编写路由集合
@@ -236,6 +237,10 @@ const routes = [
   {
     path:'addActivity',
     component:addActivity
+  },
+  {
+    path:'analysis',
+    component:analysis
   }
   ]
 },

@@ -13,9 +13,9 @@
       </div>
       <div class='two_top_right'>
         <ul>
-          <li>昨日扫码量：<span>0</span></li>
+          <li>昨日扫码量：<span>{{dayTotalScanCount}}</span></li>
           <li>标识被扫量：<span>16</span></li>
-          <li>昨日活动参与量：<span>0</span></li>
+          <li>昨日活动参与量：<span>{{daylyJoinActivCount}}</span></li>
           <li>标识总量：<span>599</span></li>
         </ul>
       </div>
@@ -237,6 +237,8 @@
         childCon:'我是子页面',
         securityCodeScanCount:null,
         joinActivCount:null,
+        daylyJoinActivCount:null,
+        dayTotalScanCount:null,
         edata:'',
       }
     },
@@ -253,10 +255,12 @@
           userId:self.datas.userId,
           vendorId:self.datas.vendorId
         };
-        console.log(self.datas)
         var success=function(res){
+          console.log(res);
           self.securityCodeScanCount=res.securityCodeScanCount;
           self.joinActivCount=res.joinActivCount;
+          self.daylyJoinActivCount=res.daylyJoinActivCount;
+          self.dayTotalScanCount=res.dayTotalScanCount;
         };
 
         common.Ajax(url,type,data,success)
@@ -269,7 +273,7 @@
           },
           datatype:'json',
           success:function(res){
-            console.log(res.weekScanCount[1]);
+            // console.log(res.weekScanCount[1]);
             self.edata=res.weekScanCount;
             self.hans();
           },
@@ -288,8 +292,8 @@
           date.push(self.edata[i]['scanTime']);
           dateVal.push(self.edata[i]['coun']);
         }
-        console.log(date);
-        console.log(dateVal)
+        // console.log(date);
+        // console.log(dateVal)
         var myChart = echarts.init(document.getElementById('zhex'));
 
         var option = {

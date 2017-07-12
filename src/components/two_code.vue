@@ -42,7 +42,7 @@
                 <router-link tag='li' to="/twoCode/channel">
                   <a>渠道管理</a>
                 </router-link>
-                <router-link tag='li' to="#">
+                <router-link tag='li' to="/twoCode/analysis">
                   <a>渠道信息分析</a>
                 </router-link>
               </ul>

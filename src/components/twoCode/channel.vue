@@ -188,7 +188,7 @@
       var svg = d3.select("svg"),
       width = +svg.attr("width"),
       height = +svg.attr("height"),
-      g = svg.append("g").attr("transform", "translate(40,0)");
+      g = svg.append("g").attr("transform", "translate(70,0)");
       var tree = d3.tree()
       .size([height, width - 160]);
 

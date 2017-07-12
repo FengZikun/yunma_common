@@ -109,7 +109,7 @@
 						（模板功能：公司官网、防伪、溯源、红包）
 					</div>
 					<div>
-						<span v-if='modelSelected' style="margin-left:150px;" class="editModel" @click="showKuang($event,'modelS')" v-bind:data-url='modelSelected.urlName'>预览/编辑</span>
+						<span v-if='modelSelected' style="margin-left:165px;color: red;" class="editModel" @click="showKuang($event,'modelS')" v-bind:data-url='modelSelected.urlName'>预览/编辑</span>
 					</div>
 				</div>
 				<div class="messagebox">
@@ -331,7 +331,7 @@
 				$(event.target).parent().parent().addClass('modHid');
 			},
 			showKuang(event,name){
-				console.log(event.target,name);
+				// console.log(event.target,name);
 				if(name==="guan"){
 					$("[defName=guan]").removeClass('modHid');
 					return;

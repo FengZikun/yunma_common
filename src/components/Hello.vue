@@ -320,6 +320,7 @@
 </style>
 <script>
   import common from '../common.js'
+  import router from '../router'
   export default {
     name: 'hello',
     data () {

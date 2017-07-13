@@ -1,5 +1,44 @@
 <template>
   <div>
+    <div class="mengban" v-if='showMB'>
+      <div class="contentBox">
+        <div class="contentTop">
+          <span class="titleFont">编辑窗口</span>
+          <span class="cha" @click='showMB=false'></span>
+        </div>
+        <div class="contentMain">
+          <div class="message-box">
+            <span class="message-name">代理名称：</span>
+            <input class="message-value" type="text" name="">
+            <p class="message-warn">请输入代理商名称</p>
+          </div>
+          <div class="message-box">
+            <span class="message-name">代理地址：</span>
+            <input class="message-value" type="text" name="">
+            <p class="message-warn"></p>
+          </div>
+          <div class="message-box">
+            <span class="message-name">联系方式：</span>
+            <input class="message-value" type="text" name="">
+            <p class="message-warn"></p>
+          </div>
+          <div class="message-box">
+            <span class="message-name">邮箱：</span>
+            <input class="message-value" type="text" name="">
+            <p class="message-warn"></p>
+          </div>
+          <div class="message-box">
+            <span class="message-name">备注：</span>
+            <input class="message-value" type="text" name="">
+            <p class="message-warn"></p>
+          </div>
+        </div>
+        <div class="contentBottom">
+          <input class="content-botton" type="button" name="" value="发布">
+          <input class="content-botton" type="button" name="" value="取消" @click='showMB=false'>
+        </div>
+      </div>
+    </div>
     <div class="right-main">
       <div class='right-main-top'>
         <svg width="1460" height="500" @click='selectTree'></svg>
@@ -11,7 +50,12 @@
     <div class="right-main">
       <div class="right-main-bottom">
         <div class="button-group">
-          详细列表：
+        <a href="javascript:void(0)" @click='addProxy'>
+          <div class="add-pro">
+            +新增代理
+          </div>
+        </a>
+          
         </div>
         <div class="my-form">
           <ul class="pro-list">
@@ -113,6 +157,7 @@
 }
 .button-group{
   margin-top: 50px;
+  font-size: 18px;
 }
 .node circle {
   fill: #999;
@@ -139,6 +184,45 @@
 .pro-list{
   overflow-y: scroll;
 }
+.contentTop{
+  margin-bottom: 50px;
+}
+.contentBox{
+  width: 625px;
+  height: initial;
+  margin-left: -312.5px;
+  top: 20%;
+}
+.message-box{
+  height: 70px;
+}
+.message-name{
+  font-size: 16px;
+  width: 80px;
+  color: #000;
+  font-family: 'Microsoft YaHei';
+  vertical-align: middle;
+}
+.message-value{
+  width: 390px;
+  height: 38px;
+  border-radius: 5px;
+  margin-left: 13px;
+}
+.contentBottom{
+  text-align: center;
+}
+.content-botton{
+  background-color: #00baff;
+  color: #fff;
+  border: 1px solid transparent;
+  width: 110px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 40px 30px;
+}
 </style>
 <!-- <script src='../assets/js/echarts2.js'></script> -->
 <script>
@@ -156,6 +240,7 @@
         currentPage:'',  //当前页
         totalPages:'',    //总页数
         fenye:true,
+        showMB:false,
 
       }
     },
@@ -247,6 +332,12 @@
           common.Ajax(url,type,data,success);
         };
         
+      },
+
+      //新增代理
+      addProxy:function(){
+        var self=this;
+        self.showMB=true;
       },
       //获取页数
       getPage:common.getPage,

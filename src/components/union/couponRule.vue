@@ -16,7 +16,7 @@
 		<div class="mengban" v-if='content'>
 			<div class="contentBox">
 				<div class="contentTop">
-					<span style="margin-left: 40px;font-size: 18px;font-family: 'Microsoft YaHei';">发放内容</span>
+					<span class="titleFont">发放内容</span>
 					<span class="cha" @click='content=false'></span>
 				</div>
 				<div class="contentMain">
@@ -204,36 +204,6 @@
 		background-image: url('../../assets/img/icon_yulan2.png');
 		background-repeat: no-repeat;
 		background-position: center center;
-	}
-	.contentBox{
-		width: 900px;
-		height: 300px;
-		position: relative;
-		top: 30%;
-		left: 50%;
-		margin-left: -450px;
-		border-radius: 10px;
-		background-color: #fff;
-	}
-	.contentTop{
-		width: 100%;
-		height: 60px;
-		line-height: 60px;
-		background-color: #f6f8fc;
-		border-radius: 10px 10px 0 0;
-		text-align: left;
-	}
-	.cha{
-		display: inline-block;
-		width: 18px;
-		height: 18px;
-		background-image: url(../../assets/img/icon_cha_76.png);
-		float: right;
-		margin-right: 40px;
-		margin-top: 21px;
-	}
-	.cha:hover{
-		background-image: url(../../assets/img/icon_cha_75.png);
 	}
 	.contentUl li{
 		float: left;

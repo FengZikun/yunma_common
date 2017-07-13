@@ -816,5 +816,53 @@
   .goods_li:hover{
     background-color: rgba(255,255,255,0.2);
   }
+  .cha{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url(./assets/img/icon_cha_75.png);
+    float: right;
+    margin-right: 40px;
+    margin-top: 21px;
+  }
+  .cha:hover{
+    background-image: url(./assets/img/icon_cha_76.png);
+  }
+  .contentBox{
+    width: 900px;
+    height: 300px;
+    position: relative;
+    top: 30%;
+    left: 50%;
+    margin-left: -450px;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  .contentTop{
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #f6f8fc;
+    border-radius: 10px 10px 0 0;
+    text-align: left;
+  }
+  .titleFont{
+    margin-left: 40px;
+    font-size: 18px;
+    font-family: 'Microsoft YaHei';
+  }
+  .message-value{
+    border: 1px solid #ccc;
+    height: 30px;
+    padding-left: 5px;
+  }
+  .message-name{
+    display: inline-block;
+    width: 120px;
+    margin-left: 60px;
+    text-align: right;
+    color: #666;
+    vertical-align: top;
+  }
 
 </style>

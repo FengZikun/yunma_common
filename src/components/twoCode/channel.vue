@@ -58,7 +58,7 @@
           
         </div>
         <div class="my-form">
-          <ul class="pro-list">
+          <ul class="pro-list" @click='shouquan'>
             <li class="pro-li">
               <span class="pro-li-span head">ID</span>
               <span class="pro-li-span head">代理厂商名称</span>
@@ -79,7 +79,7 @@
               <span class="pro-li-span" v-if='pro.noData==undefined'>{{pro.agentFid}}</span>
               <span class="pro-li-span" v-else>{{pro.noData.agentFid}}</span>
               <span class="pro-li-span">
-                <a href="javascript:void(0)">授权码</a>
+                <a href="javascript:void(0)" v-bind:data-id='pro.id' v-bind:data-level='pro.agentLevel'>授权码</a>
               </span> 
             </li>
           </ul>
@@ -234,6 +234,8 @@
   // import DataV from 'datavjs'
   import * as d3 from 'd3'
   // var  DataV =require('d3') ;
+  import QRCode from 'qrcodejs2'
+
   export default{
     data(){
       return{
@@ -417,6 +419,57 @@
         }
         
       },
+
+      //授权码
+      shouquan:function(){
+        var self=this;
+        if($(event.target)[0].nodeName==='A'){
+          var agentId=$(event.target).attr('data-id');
+          var agentLevel=$(event.target).attr('data-level');
+          var url='http://120.77.149.115/cloud_code/ADD/agent/vendorGenerateLogisticCode.do';
+          var type='get';
+          var data={
+            agentId:agentId,
+            agentLevel:agentLevel,
+            vendorId:self.datas.vendorId
+          };
+          var success=function(res){
+            self.showMa(agentId);
+          }
+          common.Ajax(url,type,data,success)
+        }
+      },
+
+      //展示二维码
+      showMa:function(id){
+        var self=this;
+        var url='http://120.77.149.115/cloud_code/GET/agent/getAgentLogisticCode.do';
+        var type='get';
+        var data={
+          agentId:id
+        };
+        var success=function(res){
+          console.log(res);
+        }
+        common.Ajax(url,type,data,success);
+      },
+
+      //生成二维码
+      // newCode:function(){
+      //   var self=this;
+      //   self.showCode=true;
+      //   var securityCode=$(event.target).attr('data-code');
+      //   var code="http://project.ym-b.top/cloud_code/s/"+securityCode;
+      //   var qrcodeNode=document.getElementsByClassName('codeImg')[0];
+      //   $(qrcodeNode).html('');
+      //   self.qrcode = new QRCode(qrcodeNode, {
+      //     text: code,
+      //     width: 200,
+      //     height: 200,
+      //     colorDark: "#000000",
+      //     colorLight: "#ffffff"
+      //   });
+      // },
       //获取页数
       getPage:common.getPage,
       //翻页

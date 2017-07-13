@@ -2,7 +2,7 @@
   <div id="app">
     <hello v-if='vendorId!=""&&userType!=99&&vendorId!=undefined' v-bind:vendorId='vendorId' v-on:tuichu='logout'></hello>
     <admin v-if='userType==99' v-bind:vendorId='vendorId' v-on:tuichu='logout'></admin>
-    <!--先点菜-->
+    <!---->
     <div class='linkStyle'>
       
       <router-view v-bind:datas='{vendorId:this.vendorId,
@@ -855,14 +855,15 @@
     border: 1px solid #ccc;
     height: 30px;
     padding-left: 5px;
+    vertical-align: middle;
   }
   .message-name{
     display: inline-block;
     width: 120px;
     margin-left: 60px;
     text-align: right;
-    color: #666;
-    vertical-align: top;
+    /*color: #666;*/
+    vertical-align: middle;
   }
 
 </style>

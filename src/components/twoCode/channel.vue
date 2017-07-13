@@ -9,32 +9,32 @@
         <div class="contentMain">
           <div class="message-box">
             <span class="message-name">代理名称：</span>
-            <input class="message-value" type="text" name="">
-            <p class="message-warn">请输入代理商名称</p>
+            <input class="message-value" type="text" name="" v-model="agentName">
+            <p class="message-warn" v-show='ifagentName'>请输入代理商名称</p>
           </div>
           <div class="message-box">
             <span class="message-name">代理地址：</span>
-            <input class="message-value" type="text" name="">
-            <p class="message-warn"></p>
+            <input class="message-value" type="text" name="" v-model="agentAddress">
+            <p class="message-warn" v-show='ifagentAddress'>请输入代理地址</p>
           </div>
           <div class="message-box">
             <span class="message-name">联系方式：</span>
-            <input class="message-value" type="text" name="">
-            <p class="message-warn"></p>
+            <input class="message-value" type="text" name="" v-model="agentTel">
+            <p class="message-warn" v-show='ifagentTel'>请输入合法的联系方式</p>
           </div>
           <div class="message-box">
             <span class="message-name">邮箱：</span>
-            <input class="message-value" type="text" name="">
-            <p class="message-warn"></p>
+            <input class="message-value" type="text" name="" v-model="agentEmaill">
+            <p class="message-warn" v-show='ifagentEmaill'>请输入合法的邮箱</p>
           </div>
           <div class="message-box">
             <span class="message-name">备注：</span>
-            <input class="message-value" type="text" name="">
+            <input class="message-value" type="text" name="" v-model="mark">
             <p class="message-warn"></p>
           </div>
         </div>
         <div class="contentBottom">
-          <input class="content-botton" type="button" name="" value="发布">
+          <input class="content-botton" type="button" name="" value="发布" @click='confirm'>
           <input class="content-botton" type="button" name="" value="取消" @click='showMB=false'>
         </div>
       </div>
@@ -223,6 +223,10 @@
   border-radius: 5px;
   margin: 40px 30px;
 }
+.message-warn{
+  margin-left: 165px;
+  color: red;
+}
 </style>
 <!-- <script src='../assets/js/echarts2.js'></script> -->
 <script>
@@ -241,6 +245,17 @@
         totalPages:'',    //总页数
         fenye:true,
         showMB:false,
+        agentName:null,
+        agentAddress:null,
+        agentTel:null,
+        agentEmaill:null,
+        mark:null,
+        ifagentName:false,
+        ifagentAddress:false,
+        ifagentTel:false,
+        ifagentEmaill:false,
+        id:null,
+        level:null
 
       }
     },
@@ -248,7 +263,6 @@
     methods:{
      init:function(currentPage){
       var self=this;
-      d3.select('#treeBox').text('Hello,yiifaa!');
       var url2='http://120.77.149.115/cloud_code/GET/agent/getAllAgent.do'
       var type='get';
       var data={
@@ -269,7 +283,7 @@
       common.Ajax(url2,type,data,success2);
 
       //创建树状图
-      
+      d3.selectAll("svg > *").remove();
       var svg = d3.select("svg"),
       width = +svg.attr("width"),
       height = +svg.attr("height"),
@@ -307,6 +321,7 @@
           .attr("dy", 3)
           .attr("x", function(d) { return d.children ? -8 : 8; })
           .attr("data-id",function(d){return d.data.id})
+          .attr("data-level",function(d){return d.data.nodeData.agentLevel})
           .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
           .text(function(d) { 
             return d.data.name
@@ -319,6 +334,8 @@
         var self=this;
         if($(event.target)[0].nodeName==='text'){
           var id=$(event.target).attr('data-id');
+          self.id=id;
+          self.level=$(event.target).attr('data-level')
           var url='http://120.77.149.115/cloud_code/GET/agent/getAgentInfoByNodeId.do';
           var type='get';
           var data={
@@ -334,10 +351,71 @@
         
       },
 
+      //发布
+      confirm:function(){
+        var self=this;
+        var phoneReg=/^1[34578]\d{9}$/;
+        var maillReg=/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(self.agentName==null){
+          self.ifagentName=true;
+          return
+        }else{
+          self.ifagentName=false;
+        }
+        if(self.agentAddress==null){
+          self.ifagentAddress=true;
+          return
+        }else{
+          self.ifagentAddress=false;
+        }
+        if(self.agentTel==null||!phoneReg.test(self.agentTel)){
+          self.ifagentTel=true;
+          return
+        }else{
+          self.ifagentTel=false;
+        }
+        if(self.agentEmaill==null||!maillReg.test(self.agentEmaill)){
+          self.ifagentEmaill=true;
+          return
+        }else{
+          self.ifagentEmaill=false;
+        }
+        var url='http://120.77.149.115/cloud_code/ADD/agent/addAgentInfo.do';
+        var type='post';
+        var data={
+          vendorId:self.datas.vendorId,
+          agentLevel:parseInt(self.level)+1,
+          agentFid:self.id,
+          agentName:self.agentName,
+          agentAddress:self.agentAddress,
+          agentTel:self.agentTel,
+          agentEmaill:self.agentEmaill,
+        };
+        var success=function(res){
+          if(res.status===1){
+            self.showMB=false;
+            self.init();
+          }else{
+            console.log(res);
+          }
+        }
+        common.Ajax(url,type,data,success)
+      },
+
       //新增代理
       addProxy:function(){
         var self=this;
-        self.showMB=true;
+        if(self.id==null){
+
+        }else{
+          self.showMB=true;
+          self.agentName=null;
+          self.agentTel=null;
+          self.agentEmaill=null;
+          self.agentAddress=null;
+          self.mark=null;
+        }
+        
       },
       //获取页数
       getPage:common.getPage,

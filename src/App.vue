@@ -2,7 +2,7 @@
   <div id="app">
     <hello v-if='vendorId!=""&&userType!=99&&vendorId!=undefined' v-bind:vendorId='vendorId' v-on:tuichu='logout'></hello>
     <admin v-if='userType==99' v-bind:vendorId='vendorId' v-on:tuichu='logout'></admin>
-    <!--反反复复付付-->
+    <!--先点菜-->
     <div class='linkStyle'>
       
       <router-view v-bind:datas='{vendorId:this.vendorId,

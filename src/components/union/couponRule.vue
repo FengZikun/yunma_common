@@ -14,8 +14,8 @@
         </div>
       </div>
 		<div class="mengban" v-if='content'>
-			<div class="contentBox">
-				<div class="contentTop">
+			<div class="CcontentBox">
+				<div class="CcontentTop">
 					<span class="titleFont">发放内容</span>
 					<span class="cha" @click='content=false'></span>
 				</div>

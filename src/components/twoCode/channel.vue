@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div class="mengban" v-show='showCode' @click='hide'>
+      <div class="codeImg">
+        
+      </div>
+    </div>
     <div class="mengban" v-if='showMB'>
       <div class="contentBox">
         <div class="contentTop">
@@ -55,7 +60,7 @@
             +新增代理
           </div>
         </a>
-          
+          <span style="color:#b3b3b7;">（新增代理前请选择树状图的某个节点，新增的代理将添加在选中节点的分支中）</span>
         </div>
         <div class="my-form">
           <ul class="pro-list" @click='shouquan'>
@@ -227,6 +232,16 @@
   margin-left: 165px;
   color: red;
 }
+.codeImg{
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+}
 </style>
 <!-- <script src='../assets/js/echarts2.js'></script> -->
 <script>
@@ -257,7 +272,8 @@
         ifagentTel:false,
         ifagentEmaill:false,
         id:null,
-        level:null
+        level:null,
+        showCode:false
 
       }
     },
@@ -449,27 +465,35 @@
           agentId:id
         };
         var success=function(res){
-          console.log(res);
+          self.newCode(res.logisticCode);
         }
         common.Ajax(url,type,data,success);
       },
 
       //生成二维码
-      // newCode:function(){
-      //   var self=this;
-      //   self.showCode=true;
-      //   var securityCode=$(event.target).attr('data-code');
-      //   var code="http://project.ym-b.top/cloud_code/s/"+securityCode;
-      //   var qrcodeNode=document.getElementsByClassName('codeImg')[0];
-      //   $(qrcodeNode).html('');
-      //   self.qrcode = new QRCode(qrcodeNode, {
-      //     text: code,
-      //     width: 200,
-      //     height: 200,
-      //     colorDark: "#000000",
-      //     colorLight: "#ffffff"
-      //   });
-      // },
+      newCode:function(code){
+        var self=this;
+        self.showCode=true;
+        var code="http://project.ym-b.top/cloud_code/w/"+code;
+        var qrcodeNode=document.getElementsByClassName('codeImg')[0];
+        $(qrcodeNode).html('');
+        self.qrcode = new QRCode(qrcodeNode, {
+          text: code,
+          width: 200,
+          height: 200,
+          colorDark: "#000000",
+          colorLight: "#ffffff"
+        });
+      },
+
+      //隐藏蒙版
+      hide:function(){
+        var self=this;
+        if($(event.target)[0].className=='mengban'){
+          self.showCode=false;
+        }
+        
+      },
       //获取页数
       getPage:common.getPage,
       //翻页

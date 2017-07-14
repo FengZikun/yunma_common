@@ -55,7 +55,7 @@
 						
 					</div>
 				</div>
-				<div class="contentBox">
+				<div class="CcontentBox">
 					<div class="contentTitle">
 						<span class="message-name">发放内容：</span>
 						<span class="after2">（选择需要在扫码界面发放那些其他厂商优惠券）</span>
@@ -98,7 +98,7 @@
 								</ul>
 							</div> -->
 						</div>
-						<div class="contentBox">
+						<div class="CcontentBox">
 							<div class="contentTitle">
 								<span class="message-name">发放载体：</span>
 								<span class="after2">（选择在指定产品的扫码页面投放其他厂商的优惠券）</span>
@@ -517,7 +517,7 @@
 		vertical-align: middle;
 		margin: 0;
 	}
-	.contentBox{
+	.CcontentBox{
 		margin-top: 20px;
 	}
 	.contentTitle,.content1,.content2,.content1-left,.content1-left2,.content1-right,.content1-right2{

@@ -161,6 +161,17 @@
 					填写资料
 				</div>
 				<div class="messagebox2">
+					<span class="message-name">最低使用限额：</span>
+					<input class="message-value" type="" name="">
+					<span class="message-after">（必须大于优惠券面值）</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券面值：</span>
+					<input class="message-value" type="" name="">
+					<span class="message-after">（设置优惠券的金额）</span>
+					<span class='message-warn' v-if='showWarn'>面值必须小于最低使用限额</span>
+				</div>
+				<div class="messagebox2">
 					<span class="message-name">优惠券ID：</span>
 					<input class="message-value" type="" name="">
 					<span class="message-after">（优惠券ID可以从公众号商户平台的营销中心里获取）</span>

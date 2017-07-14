@@ -22,7 +22,7 @@
 				<div class="contentMain">
 					<ul class="contentUl">
 						<li v-for='item in contentInfo'>
-							{{item.itemName}}、
+							{{item.itemName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</li>
 					</ul>
 				</div>
@@ -163,7 +163,7 @@
 				var self=this;
 				self.content=true;
 				self.contentInfo=self.proInfo[index].whiteArray;
-				console.log(self.contentInfo);
+				console.log(self.proInfo[index]);
 			},
 			//翻页
 			changePage:common.changePage,

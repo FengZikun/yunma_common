@@ -851,13 +851,13 @@
     font-size: 18px;
     font-family: 'Microsoft YaHei';
   }
-  .message-value{
+  .contentBox .message-value{
     border: 1px solid #ccc;
     height: 30px;
     padding-left: 5px;
     vertical-align: middle;
   }
-  .message-name{
+  .contentBox .message-name{
     display: inline-block;
     width: 120px;
     margin-left: 60px;

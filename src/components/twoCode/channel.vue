@@ -84,7 +84,8 @@
               <span class="pro-li-span" v-if='pro.noData==undefined'>{{pro.agentFid}}</span>
               <span class="pro-li-span" v-else>{{pro.noData.agentFid}}</span>
               <span class="pro-li-span">
-                <a href="javascript:void(0)" v-bind:data-id='pro.id' v-bind:data-level='pro.agentLevel'>授权码</a>
+                <a href="javascript:void(0)" v-bind:data-id='pro.id||pro.noData.id' v-bind:data-level='pro.agentLevel||pro.noData.agentLevel'>授权码</a>
+                <a href="javascript:void(0)" v-bind:data-id='pro.id||pro.noData.id'>删除</a>
               </span> 
             </li>
           </ul>
@@ -288,7 +289,6 @@
         currentPage:currentPage
       }
       var success2=function(res){
-        console.log(res);
         var pagenum=res.totalPages;
         self.fenye=true
         self.totalPage=[];
@@ -314,7 +314,7 @@
 
         d3.json("http://120.77.149.115/cloud_code/GET/agent/getAgentTree.do?vendorId="+self.datas.vendorId, function(error, data) {
           if (error) throw error;
-
+          console.log(data);
           var root = d3.hierarchy(data)
           .sort(function(a, b) { return (a.height - b.height)});
 
@@ -351,6 +351,8 @@
       selectTree:function(){
         var self=this;
         if($(event.target)[0].nodeName==='text'){
+          $(event.target).css('fill','#00baff').parents('g').siblings().find('text').css('fill','#000');
+
           var id=$(event.target).attr('data-id');
           self.id=id;
           self.level=$(event.target).attr('data-level')
@@ -439,7 +441,7 @@
       //授权码
       shouquan:function(){
         var self=this;
-        if($(event.target)[0].nodeName==='A'){
+        if($(event.target)[0].innerText==='授权码'){
           var agentId=$(event.target).attr('data-id');
           var agentLevel=$(event.target).attr('data-level');
           var url='http://120.77.149.115/cloud_code/ADD/agent/vendorGenerateLogisticCode.do';
@@ -449,9 +451,23 @@
             agentLevel:agentLevel,
             vendorId:self.datas.vendorId
           };
+          console.log(data)
           var success=function(res){
             self.showMa(agentId);
           }
+          common.Ajax(url,type,data,success)
+        }else if($(event.target)[0].innerText==='删除'){
+          var agentId=$(event.target).attr('data-id');
+          var url='http://120.77.149.115/cloud_code/DELETE/agent/deleteAgentNode.do';
+          var type='get';
+          var data={
+            vendorId:parseInt(self.datas.vendorId),
+            id:parseInt(agentId),
+          };
+          console.log(data)
+          var success=function(res){
+            console.log(res);
+          };
           common.Ajax(url,type,data,success)
         }
       },

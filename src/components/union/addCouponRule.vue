@@ -166,7 +166,7 @@
 						endTime:'2100-01-01',
 						blackList:[],
 						whiteList:[],
-						isBlackWhite:null,
+						isBlackWhite:1,
 						isScope:null,
 						productList:[],
 						orderList:[],

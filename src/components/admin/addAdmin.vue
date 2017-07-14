@@ -70,9 +70,9 @@
 		</div>
 		<div class="messagebox">
 			<span class='message-name'>厂商名：</span>
-			<input class="message-value" type="text" name="" v-model='vendorName' @click='mengban'>
+			<input class="message-value" type="text" name="" v-model='vendorName' @focus='mengban'>
 		</div>
-		<div>
+		<div style="text-align: left;padding-left: 75px;">
 			<input class="delbutton" type="button" name="" value="确认" @click='addNew'>
 			<input class="delbutton" type="button" name="" value="取消" @click='goback'>
 		</div>
@@ -250,5 +250,18 @@
 	.inputWarn{
 		color: red;
 		margin-left: 123px;
+	}
+	.delbutton{
+		width: 100px;
+		height: 36px;
+		color: #fff;
+		background-color: #00baff;
+		outline: none;
+		border: none;
+		border-radius: 3px;
+		padding: 0 10px;
+		margin-top: 80px;
+		margin-left: 50px;
+		margin-bottom: 34px;
 	}
 </style>

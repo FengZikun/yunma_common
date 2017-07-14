@@ -163,7 +163,7 @@
 				var self=this;
 				self.content=true;
 				self.contentInfo=self.proInfo[index].whiteArray;
-				console.log(self.contentInfo);
+				console.log(self.proInfo[index]);
 			},
 			//翻页
 			changePage:common.changePage,

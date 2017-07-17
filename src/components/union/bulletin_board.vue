@@ -9,7 +9,7 @@
       </div>
       <div class="right-main-bottom">
         <div class="button-group">
-          <router-link to='/goods/updataproduct'>
+          <router-link to='#'>
             <div class="add-pro">
             +&nbsp;新建公告
             </div>
@@ -59,9 +59,10 @@
 </template>
 <style scoped>
   /*@import "../../assets/css/common.css";*/
-/*.button-group{
+.button-group{
   text-align: left;
-}*/
+  padding: 0 30px;
+}
 
 .right-top,
 .right-main,

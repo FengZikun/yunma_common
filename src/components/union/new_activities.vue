@@ -209,7 +209,7 @@
 				weixin:false,
 				ifSwitch:false,
 				openGet:1,
-				ifSwitch2:true,
+				ifSwitch2:false,
 				showFinish:1,
 				name:null,
 				reduce:null,
@@ -499,7 +499,7 @@
 		height: 28px;
 		background: #e7e7e7;
 		border-radius: 50%;
-		margin-left: 30px;
+		margin-left: 0;
 		transition: 0.3s;
 	}
 	.right{

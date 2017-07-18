@@ -143,7 +143,8 @@
 				var url='http://120.77.149.115/cloud_code/DELETE/couponRule/info.do';
 				var type='get';
 				var data={
-					id:id
+					id:id,
+					vendorId:self.vendorId
 				};
 				var success=function(res){
 					if(res.statuscode===1){

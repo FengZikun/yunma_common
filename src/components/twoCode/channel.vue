@@ -267,7 +267,7 @@
         agentAddress:null,
         agentTel:null,
         agentEmaill:null,
-        mark:null,
+        mark:' ',
         ifagentName:false,
         ifagentAddress:false,
         ifagentTel:false,
@@ -297,6 +297,7 @@
         self.totalPages=res.totalPages;
         self.currentPage=res.currentPage;
         self.getPage();
+        console.log(self.proInfo);
       }
       common.Ajax(url2,type,data,success2);
 
@@ -314,7 +315,6 @@
 
         d3.json("http://120.77.149.115/cloud_code/GET/agent/getAgentTree.do?vendorId="+self.datas.vendorId, function(error, data) {
           if (error) throw error;
-          console.log(data);
           var root = d3.hierarchy(data)
           .sort(function(a, b) { return (a.height - b.height)});
 
@@ -404,17 +404,20 @@
         var type='post';
         var data={
           vendorId:self.datas.vendorId,
-          agentLevel:parseInt(self.level)+1,
+          agentLevel:parseInt(self.level)+1||1,
           agentFid:self.id,
           agentName:self.agentName,
           agentAddress:self.agentAddress,
           agentTel:self.agentTel,
           agentEmaill:self.agentEmaill,
+          mark:self.mark
         };
         var success=function(res){
           if(res.status===1){
             self.showMB=false;
             self.init();
+            self.level=null;
+            self.id=null;
           }else{
             console.log(res);
           }
@@ -425,8 +428,10 @@
       //新增代理
       addProxy:function(){
         var self=this;
-        if(self.id==null){
-
+        if(self.proInfo.length==0){
+          self.showMB=true;
+        }else if(self.id==null){
+          return
         }else{
           self.showMB=true;
           self.agentName=null;
@@ -451,7 +456,6 @@
             agentLevel:agentLevel,
             vendorId:self.datas.vendorId
           };
-          console.log(data)
           var success=function(res){
             self.showMa(agentId);
           }
@@ -464,9 +468,12 @@
             vendorId:parseInt(self.datas.vendorId),
             id:parseInt(agentId),
           };
-          console.log(data)
           var success=function(res){
-            console.log(res);
+            if(res.status===1){
+              self.init();
+              self.id=null;
+              self.level=null;
+            }
           };
           common.Ajax(url,type,data,success)
         }

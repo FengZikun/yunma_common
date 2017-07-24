@@ -1,7 +1,10 @@
 <template>
   <div>
           <div class='right-main'>
-            <div class='title'><span>账户登录信息</span></div>
+          <div class="plzWait">
+            <p class="plzp">此功能正在开发中，敬请等待......</p>
+          </div>
+            <!-- <div class='title'><span>账户登录信息</span></div>
             <div class='text'>
               <p class="textname">用户名：13925192837</p>
               <p class="textname">上次登录时间：2017-04-1209:34:23</p>
@@ -27,7 +30,7 @@
                 <span class='three'>完成手机绑定可以提升账户安全等级，也是识别最高管理员身份的有<br>效途径，绑定后可以修改。</span>
                 <span class='four'><a href="javascript:void(0)">设置</a></span>
               </li>
-            </ul>
+            </ul> -->
           </div>
   </div>
 </template>

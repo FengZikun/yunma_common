@@ -1,11 +1,14 @@
 <template>
   <div>
-          <div class='top-title'>
+          <!-- <div class='top-title'>
             <span class='title-one'>全部信息</span>
             <span class='title-two'>未读(<span class='number'>3</span>)</span>
-          </div>
+          </div> -->
           <div class='right-main'>
-              <p class='title'>消息中心</p>
+          <div class="plzWait">
+            <p class="plzp">此功能正在开发中，敬请等待......</p>
+          </div>
+              <!-- <p class='title'>消息中心</p>
               <ul class="message">
                 <li class="mesage-cell">
                   <span class="check-box checkshu" @click='selectThis'></span>
@@ -40,7 +43,7 @@
 
               </ul>
             </div>
-            </div>
+            </div> -->
           </div>
   </div>
 </template>

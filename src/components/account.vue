@@ -6,7 +6,10 @@
       <router-link to="/enterprise/account" class='title-one'>充值</router-link>
     </div>
     <div class='right-main'>
-      <div class="right-main-top">
+      <div class="plzWait">
+        <p class="plzp">此功能正在开发中，敬请等待......</p>
+      </div>
+      <!-- <div class="right-main-top">
         <div class='message-box'>
 
           <span class='textname'>账户余额:</span>
@@ -44,7 +47,7 @@
           <span class='center-three'>(2)请查看支付账户是否设置了限额，如限制支付金额不能超过2000，超过2000的金额则无法支付成功，您可重新设置支付限额的额度；</span><br>
           <span class='center-three'>(3)支付系统数据可能出现异常，建议您刷新页面或者稍后重启电脑再进行支付。</span><br>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

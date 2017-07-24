@@ -202,6 +202,7 @@
 			border-radius: 5px;
 			border: 1px solid #e7e7eb;
 			margin-left: 30px;
+			padding: 10px;
 		}
 		.sanjiao:after{
 			content: "";

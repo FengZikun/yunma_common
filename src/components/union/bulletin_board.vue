@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class='right-main'>
-      <div class="right-main-top">
+    <div class="plzWait">
+            <p class="plzp">此功能正在开发中，敬请等待......</p>
+          </div>
+      <!-- <div class="right-main-top">
         <p class="right-main-top1">
           <span class="right-main-top-icon1"></span>
           新建的优惠券用于在合作企业的平台上投放
@@ -53,7 +56,7 @@
 
           </ul>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

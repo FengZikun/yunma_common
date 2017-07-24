@@ -132,6 +132,7 @@
       },
       showList:function(event){
         $(event.target).parents("li").find("ul").toggleClass("hidelist");
+        $(event.target).parents("li").find('.arrow').toggleClass("upArrow");
       },
       getdata:function(id){
         this.goodsid=id;

@@ -1,9 +1,12 @@
 <template>
 	<div class="right-main">
-		<div class="right-main-main" id="pic">
-			
+		<div class="plzWait">
+			<p class="plzp">此功能正在开发中，敬请等待......</p>
 		</div>
-	</div>
+		<!-- <div class="right-main-main" id="pic">
+			
+	</div> -->
+</div>
 </template>
 
 <script>
@@ -22,15 +25,15 @@
 			}
 		},
 		mounted:function(){
-			this.init();
+			// this.init();
 		}
 	}
 	
 </script>
 
 <style scoped>
-	.right-main-main{
+	/*.right-main-main{
 		widows: 95%;
 		height: 500px;
-	}
+	}*/
 </style>

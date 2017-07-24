@@ -865,5 +865,19 @@
     /*color: #666;*/
     vertical-align: middle;
   }
+  .plzWait{
+    width: 100%;
+    height: 1215px;
+    background-image: url(./assets/img/img_kaifa.png);
+    background-repeat: no-repeat;
+    background-position: 50% 10%;
+  }
+  .plzp{
+    color: #999999;
+    font-size: 16px;
+    position: relative;
+    top: 30%;
+    text-align: center;
+  }
 
 </style>

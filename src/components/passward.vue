@@ -6,7 +6,10 @@
       <router-link to="/enterprise/account" class='title-two'>充值</router-link>
     </div>
     <div class='right-main'>
-      <div class="right-main-top">
+      <div class="plzWait">
+            <p class="plzp">此功能正在开发中，敬请等待......</p>
+      </div>
+      <!-- <div class="right-main-top">
         <p class="top">
           <span class="icon1"></span>
           1、什么是支付密码？在账户资金变动，或修改账户相关信息时需要输入的密码。
@@ -44,7 +47,7 @@
         <div class='message-box'>
           <input id='submit' type="submit" value='保存'>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

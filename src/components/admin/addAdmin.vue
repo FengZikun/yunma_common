@@ -105,7 +105,7 @@
 			//初始化
 			init:function(currentPage){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/GET/vendor/info.do';
+				var url='https://ym-a.top/cloud_code/GET/vendor/info.do';
 				var type='get';
 				var data={
 					deleteFlag:0,
@@ -141,7 +141,7 @@
 					self.warnText='请选择厂商';
 					return;
 				}
-				var url='http://120.77.149.115/cloud_code/POST/user/vendorUser.do';
+				var url='https://ym-a.top/cloud_code/POST/user/vendorUser.do';
 				var type='post';
 				var data={
 					userName:self.userName,

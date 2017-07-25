@@ -71,27 +71,27 @@
 			<div class='message-box'>
 				<span class='textname'>相关图片资料：</span>
 				<div class="phbox">
-					<img v-if='imgSrcA!=null' class="photo1" v-bind:src="'http://120.77.149.115'+imgSrcA"></img>
+					<img v-if='imgSrcA!=null' class="photo1" v-bind:src="'https://ym-a.top'+imgSrcA"></img>
 					<span v-else class='photo' v-bind:style="{backgroundImage: imgSrcA}"></span>
 					<p class="p">客户证书</p>
 				</div>
 				<div class="phbox">
-					<img v-if='imgSrcB!=null' class="photo1" v-bind:src="'http://120.77.149.115'+imgSrcB"></img>
+					<img v-if='imgSrcB!=null' class="photo1" v-bind:src="'https://ym-a.top'+imgSrcB"></img>
 					<span v-else class='photo'  v-bind:style="{backgroundImage: imgSrcB}"></span>
 					<p class="p">商标注册证</p>
 				</div>
 				<div class="phbox">
-					<img v-if='imgSrcC!=null' class="photo1" v-bind:src="'http://120.77.149.115'+imgSrcC"></img>
+					<img v-if='imgSrcC!=null' class="photo1" v-bind:src="'https://ym-a.top'+imgSrcC"></img>
 					<span v-else class='photo'  v-bind:style="{backgroundImage: imgSrcC}"></span>
 					<p class="p">工业产品生产许可证</p>
 				</div>
 				<div class="phbox">
-					<img v-if='imgSrcD!=null' class="photo1" v-bind:src="'http://120.77.149.115'+imgSrcD"></img>
+					<img v-if='imgSrcD!=null' class="photo1" v-bind:src="'https://ym-a.top'+imgSrcD"></img>
 					<span v-else class='photo'  v-bind:style="{backgroundImage: imgSrcD}"></span>
 					<p class="p">食品生产许可证</p>
 				</div>
 				<div class="phbox">
-					<img v-if='imgSrcE!=null' class="photo1" v-bind:src="'http://120.77.149.115'+imgSrcE"></img>
+					<img v-if='imgSrcE!=null' class="photo1" v-bind:src="'https://ym-a.top'+imgSrcE"></img>
 					<span v-else class='photo'  v-bind:style="{backgroundImage: imgSrcE}"></span>
 					<p class="p">银行开户许可证</p>
 				</div>
@@ -103,7 +103,7 @@
 					<a href="javascript:void(0)"><span class="button">图片批量下载</span></a>
 				</div>
 				<div class="phbox" v-for='item in imgInfo'>
-					<img class="photo1" v-bind:src="'http://120.77.149.115'+item.imgUrl"></img>
+					<img class="photo1" v-bind:src="'https://ym-a.top'+item.imgUrl"></img>
 				</div>
 			</div>
 		</div>
@@ -135,7 +135,7 @@
 		methods:{
 			init:function(){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/GET/vendor/getVendorInfo.do';
+				var url='https://ym-a.top/cloud_code/GET/vendor/getVendorInfo.do';
 				var type='get';
 				var data={
 					detailId:self.detailId
@@ -163,7 +163,7 @@
 			//品牌代表图
 			// init2:function(){
 			// 	var self=this;
-			// 	var url='http://120.77.149.115/cloud_code/GET/vendor/getVendorBrandImg.do';
+			// 	var url='https://ym-a.top/cloud_code/GET/vendor/getVendorBrandImg.do';
 			// 	var type='get';
 			// 	var data={
 			// 		id:self.detailId

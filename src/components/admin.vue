@@ -281,7 +281,7 @@
     props:['datas'],
     methods:{
       // init:function(){
-      //   this.$http.get('http://120.77.149.115/cloud_code/GET/product/group.do?detailId=1').then(function(res){
+      //   this.$http.get('https://ym-a.top/cloud_code/GET/product/group.do?detailId=1').then(function(res){
       //     console.log('请求成功');
       //     // res=JSON.stringify(res);
       //     console.log(res.body);

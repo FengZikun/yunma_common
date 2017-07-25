@@ -56,7 +56,7 @@
 					<div class="imgmain" v-if='local'>
 						<ul @click.prevent='chooseimg' style="height:450px;">
 							<li class="single-img" v-for='item in imglist'>
-								<img v-bind:src="'http://120.77.149.115'+item.imgUrl" class="proimg" style="width:110px;height:110px" v-bind:data-id='item.id'>
+								<img v-bind:src="'https://ym-a.top'+item.imgUrl" class="proimg" style="width:110px;height:110px" v-bind:data-id='item.id'>
 								<span class="size">{{item.imgWidth}}*{{item.imgHeight}}</span>
 								<span class="imgname">{{item.imgName}}</span>
 							</li>
@@ -112,7 +112,7 @@
 				</div>
 				<div class="promessage">
 					<span class="message-name star">礼品图片：</span>
-					<img v-for='img in selectimg' class="myimg" style="width:86px;height:86px;vertical-align:top;" v-bind:src="'http://120.77.149.115'+img">
+					<img v-for='img in selectimg' class="myimg" style="width:86px;height:86px;vertical-align:top;" v-bind:src="'https://ym-a.top'+img">
 					<span class="message-add" @click='searchphoto'></span>
 					<p class="p">图片宽高要求1:1比例，建议尺寸为640px*640px以上；最多上传5张图片，您可以拖曳图片调整图片顺序。</p>
 					<form action="/cloud_code/ADD/product/info.do" method="post" enctype="multipart/form-data" style="display:none">
@@ -417,7 +417,7 @@ Vue.use(VueHtml5Editor, {
 			height: 500,
 			quality: 80,
       // upload: {
-      //       url: 'http://120.77.149.115/imageContent/',
+      //       url: 'https://ym-a.top/imageContent/',
       //       headers: {},
       //       params: {},
       //       fieldName: {}
@@ -529,7 +529,7 @@ Vue.use(VueHtml5Editor, {
 				var self=this;
 				//修改
 				if(self.productid!=''){
-				var url='http://120.77.149.115/cloud_code/GET/product/presentById.do';
+				var url='https://ym-a.top/cloud_code/GET/product/presentById.do';
 				var type='post';
 				var data={
 					id:self.productid
@@ -557,7 +557,7 @@ Vue.use(VueHtml5Editor, {
         		common.Ajax(url,type,data,success)
 			}
 				//进入新增页面后请求分类信息
-				var url='http://120.77.149.115/cloud_code/GET/product/presentGroup.do';
+				var url='https://ym-a.top/cloud_code/GET/product/presentGroup.do';
 		        var type='get';
 		        var data={
 		          vendorId:self.vendorId
@@ -646,7 +646,7 @@ Vue.use(VueHtml5Editor, {
 				var self=this;
 				//修改
 				if(self.productid!=''){
-					var url='http://120.77.149.115/cloud_code/UPDATE/product/present.do';
+					var url='https://ym-a.top/cloud_code/UPDATE/product/present.do';
 					var type='post';
 					var data={
 						id:self.productid,
@@ -670,7 +670,7 @@ Vue.use(VueHtml5Editor, {
 					return
 				}
 				
-				var url='http://120.77.149.115/cloud_code/ADD/product/present.do';
+				var url='https://ym-a.top/cloud_code/ADD/product/present.do';
 				var type='post';
 				var data={
 					vendorId:self.vendorId,
@@ -698,7 +698,7 @@ Vue.use(VueHtml5Editor, {
 			searchphoto:function(){
 				var self=this;
 				self.showMBimg=true;
-				var url='http://120.77.149.115/cloud_code//GET/product/Image.do';
+				var url='https://ym-a.top/cloud_code//GET/product/Image.do';
 				var type='get';
 				var data={
 					currentPage:1,
@@ -729,7 +729,7 @@ Vue.use(VueHtml5Editor, {
 				var self=this;
 				self.selectimg=[self.chooselist.url];
 				self.imgId=self.chooselist.id;
-				$('.myimg').attr('src',"http://120.77.149.115"+self.selectimg)
+				$('.myimg').attr('src',"https://ym-a.top"+self.selectimg)
 				self.hide();
 				console.log(self.selectimg);
 			},
@@ -737,7 +737,7 @@ Vue.use(VueHtml5Editor, {
 			//删除图片
 			delImg:function(){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/DELETE/product/Image.do';
+				var url='https://ym-a.top/cloud_code/DELETE/product/Image.do';
 				var type='post';
 				var data={
 					id:$(event.target).attr('data-id')
@@ -757,7 +757,7 @@ Vue.use(VueHtml5Editor, {
 				var data=new FormData($('#myform')[0]);
 
 				$.ajax({
-					url: 'http://120.77.149.115/cloud_code/ADD/product/uploadImage.do',
+					url: 'https://ym-a.top/cloud_code/ADD/product/uploadImage.do',
 					type:'post',
 					data: data,
 					cache: false,

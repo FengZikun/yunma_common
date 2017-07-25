@@ -75,7 +75,7 @@
 					<div class="imgmain" v-if='local'>
 						<ul @click.prevent='chooseimg' style="height:450px;">
 							<li class="single-img" v-for='item in imglist'>
-								<img v-bind:src="'http://120.77.149.115'+item.imgUrl" class="proimg" style="width:110px;height:110px" v-bind:data-id='item.id'>
+								<img v-bind:src="'https://ym-a.top'+item.imgUrl" class="proimg" style="width:110px;height:110px" v-bind:data-id='item.id'>
 								<span class="size">{{item.imgWidth}}*{{item.imgHeight}}</span>
 								<span class="imgname">{{item.imgName}}</span>
 							</li>
@@ -143,7 +143,7 @@
 				<div class="promessage">
 					<span class="message-name star">产品图片：</span>
 					<img v-for='img in selectimg' class="myimg" style="width:86px;height:86px;vertical-align:top;" v-bind:src="img" v-if='productid==""'>
-					<img class="myimg" style="width:86px;height:64px;vertical-align:top;" v-bind:src="'http://120.77.149.115'+productImg" @click='delImg' v-if='productid!=""'>
+					<img class="myimg" style="width:86px;height:64px;vertical-align:top;" v-bind:src="'https://ym-a.top'+productImg" @click='delImg' v-if='productid!=""'>
 					<span class="message-add" @click='searchphoto(1)'></span>
 					<p class="p">图片宽高要求1:1比例，建议尺寸为640px*640px以上；最多上传5张图片，您可以拖曳图片调整图片顺序。</p>
 				</div>
@@ -578,7 +578,7 @@
 			height: 500,
 			quality: 80,
       // upload: {
-      //       url: 'http://120.77.149.115/imageContent/',
+      //       url: 'https://ym-a.top/imageContent/',
       //       headers: {},
       //       params: {},
       //       fieldName: {}
@@ -703,7 +703,7 @@
 
 				//修改
 				if(self.productid!=''){
-					var url='http://120.77.149.115/cloud_code/GET/product/infoById.do';
+					var url='https://ym-a.top/cloud_code/GET/product/infoById.do';
 					var type='post';
 					var data={
 						productId:self.productid
@@ -800,7 +800,7 @@
 			chooseClassify:function(){
 				var self=this;
 				self.showMB=true;
-				var url='http://120.77.149.115/cloud_code/GET/product/group.do';
+				var url='https://ym-a.top/cloud_code/GET/product/group.do';
 				var type='get';
 				var data={
 					vendorId:self.vendorId
@@ -840,7 +840,7 @@
 				var self=this;
 				//修改
 				if(self.productid!=''){
-					var url='http://120.77.149.115/cloud_code/UPDATE/product/info.do';
+					var url='https://ym-a.top/cloud_code/UPDATE/product/info.do';
 					var type='post';
 					if(self.savename!=self.productName){
 						var data={
@@ -892,7 +892,7 @@
 				}
 				
 				//增加
-				var url='http://120.77.149.115/cloud_code/ADD/product/info.do';
+				var url='https://ym-a.top/cloud_code/ADD/product/info.do';
 				var type='post';
 				var data={
 					vendorId:self.vendorId,
@@ -924,7 +924,7 @@
 			searchphoto:function(num){
 				var self=this;
 				self.showMBimg=true;
-				var url='http://120.77.149.115/cloud_code/GET/product/Image.do';
+				var url='https://ym-a.top/cloud_code/GET/product/Image.do';
 				var type='get';
 				var data={
 					currentPage:num,
@@ -964,7 +964,7 @@
 				if(self.productId!=''){
 					$('.myimg').attr('src',self.selectimg);
 				}else{
-					$('.myimg').attr('src',"http://120.77.149.115"+self.selectimg)
+					$('.myimg').attr('src',"https://ym-a.top"+self.selectimg)
 				}
 				
 				self.hide();
@@ -975,7 +975,7 @@
 				var data=new FormData($('#myform')[0]);
 
 				$.ajax({
-					url: 'http://120.77.149.115/cloud_code/ADD/product/uploadImage.do',
+					url: 'https://ym-a.top/cloud_code/ADD/product/uploadImage.do',
 					type:'post',
 					data: data,
 					cache: false,
@@ -999,7 +999,7 @@
 			//删除图片
 			delImg:function(){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/DELETE/product/Image.do';
+				var url='https://ym-a.top/cloud_code/DELETE/product/Image.do';
 				var type='post';
 				var data={
 					id:$(event.target).attr('data-id')
@@ -1032,7 +1032,7 @@
 				}
 				var name=self.parametername;
 				var value=self.parametervalue;
-				var url='http://120.77.149.115/cloud_code/ADD/product/param.do';
+				var url='https://ym-a.top/cloud_code/ADD/product/param.do';
 				var type='post';
 				if(self.productid!=undefined){
 					var data={
@@ -1061,7 +1061,7 @@
 				self.paramKey.splice(index,1);
 				self.paramValue.splice(index,1);
 				var id=parseInt($(event.target).attr('data-id'));
-				var url='http://120.77.149.115/cloud_code/DELETE/product/param.do';
+				var url='https://ym-a.top/cloud_code/DELETE/product/param.do';
 				var type='post';
 				var data={
 					paramId:id

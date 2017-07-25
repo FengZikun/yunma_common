@@ -282,7 +282,7 @@
     methods:{
      init:function(currentPage){
       var self=this;
-      var url2='http://120.77.149.115/cloud_code/GET/agent/getAllAgent.do'
+      var url2='https://ym-a.top/cloud_code/GET/agent/getAllAgent.do'
       var type='get';
       var data={
         vendorId:self.datas.vendorId,
@@ -313,7 +313,7 @@
         // var hierarchy = d3.hierarchy()
         // .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
 
-        d3.json("http://120.77.149.115/cloud_code/GET/agent/getAgentTree.do?vendorId="+self.datas.vendorId, function(error, data) {
+        d3.json("https://ym-a.top/cloud_code/GET/agent/getAgentTree.do?vendorId="+self.datas.vendorId, function(error, data) {
           if (error) throw error;
           var root = d3.hierarchy(data)
           .sort(function(a, b) { return (a.height - b.height)});
@@ -356,7 +356,7 @@
           var id=$(event.target).attr('data-id');
           self.id=id;
           self.level=$(event.target).attr('data-level')
-          var url='http://120.77.149.115/cloud_code/GET/agent/getAgentInfoByNodeId.do';
+          var url='https://ym-a.top/cloud_code/GET/agent/getAgentInfoByNodeId.do';
           var type='get';
           var data={
             vendorId:self.datas.vendorId,
@@ -400,7 +400,7 @@
         }else{
           self.ifagentEmaill=false;
         }
-        var url='http://120.77.149.115/cloud_code/ADD/agent/addAgentInfo.do';
+        var url='https://ym-a.top/cloud_code/ADD/agent/addAgentInfo.do';
         var type='post';
         var data={
           vendorId:self.datas.vendorId,
@@ -449,7 +449,7 @@
         if($(event.target)[0].innerText==='授权码'){
           var agentId=$(event.target).attr('data-id');
           var agentLevel=$(event.target).attr('data-level');
-          var url='http://120.77.149.115/cloud_code/ADD/agent/vendorGenerateLogisticCode.do';
+          var url='https://ym-a.top/cloud_code/ADD/agent/vendorGenerateLogisticCode.do';
           var type='get';
           var data={
             agentId:agentId,
@@ -462,7 +462,7 @@
           common.Ajax(url,type,data,success)
         }else if($(event.target)[0].innerText==='删除'){
           var agentId=$(event.target).attr('data-id');
-          var url='http://120.77.149.115/cloud_code/DELETE/agent/deleteAgentNode.do';
+          var url='https://ym-a.top/cloud_code/DELETE/agent/deleteAgentNode.do';
           var type='get';
           var data={
             vendorId:parseInt(self.datas.vendorId),
@@ -482,7 +482,7 @@
       //展示二维码
       showMa:function(id){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/GET/agent/getAgentLogisticCode.do';
+        var url='https://ym-a.top/cloud_code/GET/agent/getAgentLogisticCode.do';
         var type='get';
         var data={
           agentId:id
@@ -497,7 +497,7 @@
       newCode:function(code){
         var self=this;
         self.showCode=true;
-        var code="http://project.ym-b.top/cloud_code/w/"+code;
+        var code="https://ym-a.top/cloud_code/w/"+code;
         var qrcodeNode=document.getElementsByClassName('codeImg')[0];
         $(qrcodeNode).html('');
         self.qrcode = new QRCode(qrcodeNode, {

@@ -1,28 +1,45 @@
 <template>
   <div>
     <div class="mengban" v-show='showWarn'>
-        <div class="warn">
-          <div class="classifyHeader">
-            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-          </div>
-          <div class="warnmain">
-            {{warnText}}
-          </div>
-          <div class="warnbottom">
-            <input type="button" name="" value="确定" @click='showWarn=false'>
-          </div>
+      <div class="warn">
+        <div class="classifyHeader">
+          <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+        </div>
+        <div class="warnmain">
+          {{warnText}}
+        </div>
+        <div class="warnbottom">
+          <input type="button" name="" value="确定" @click='showWarn=false'>
         </div>
       </div>
+    </div>
     <div class="mengban" v-if='showMB'>
       <div class="proclassify" >
-      <div class="classifyHeader">
-            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-          </div>
+        <div class="classifyHeader">
+          <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+        </div>
         <div class="tishi">
           删除订单同时删除根据订单创建的所有表,慎重!
         </div>
         <div style="text-align: right;margin-top: 40px;margin-right: 20px;">
           <input class="delbutton" type="button" name="" value="确认" @click='deletOrder'>
+          <input class="delbutton" type="button" name="" value="取消" @click='hide'>
+        </div>
+        
+      </div>
+    </div>
+    <div class="mengban" v-if='showSource'>
+      <div class="proclassify" >
+        <div class="classifyHeader">
+          <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+        </div>
+        <div class="tishi">
+          <span class="message-name">生成数量：</span>
+          <input class="message-value" type="text" name="" v-model="proNum">
+          <p class="message-after">（小于等于此订单内的产品数）</p>
+        </div>
+        <div style="text-align: right;margin-top: 40px;margin-right: 20px;">
+          <input class="delbutton" type="button" name="" value="确认" @click='source'>
           <input class="delbutton" type="button" name="" value="取消" @click='hide'>
         </div>
         
@@ -57,9 +74,9 @@
               <span class="pro-li-span">{{item.productName}}</span>
               <span class="pro-li-span">{{item.productCount}}</span>
               <span class="pro-li-span">{{item.createDate}}</span>
-              <span class="pro-li-span" v-if='item.status==2'>已生成</span>
+              <span class="pro-li-span" v-if='item.tracingFlag==2'>已生成</span>
               <span class="pro-li-span" v-else>未生成</span>
-              <span class="pro-li-span last"><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='toDetail'>详情</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='mengban'>删除订单、</a><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='two'>生成二维码</a>、<router-link to='/twoCode/briefCode'>扫码页模板</router-link>、<a href="javascript:void(0)">扫码活动管理</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='confirmDownLoad'>导出二维码</a></span>
+              <span class="pro-li-span last"><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='toDetail'>详情</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' v-bind:data-num='item.productCount' @click='sourceBox'>生成溯源码</a>、<router-link to='/twoCode/briefCode'>扫码页模板</router-link>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='downLoad1'>导出溯源码</a></span>
 
             </li>
           </ul>
@@ -81,7 +98,7 @@
         </div>
       </div>
     </div>
-      <div class="modelBg modHid" id='info'>
+    <div class="modelBg modHid" id='info'>
       <div class="modelContent">
         正在加载请等待
       </div>
@@ -112,7 +129,7 @@
   .right-main-top-icon1{
     width: 18px;
     height: 18px;
-    background: url("../assets/img/icon_tishi.png") no-repeat;
+    background: url("../../assets/img/icon_tishi.png") no-repeat;
     float: left;
     margin-right: 8px;
   }
@@ -176,32 +193,42 @@
   }
   .modelBg{
    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2000;
-    background: rgba(0, 0, 0, 0.6);
-  }
-  .modelContent{
-    width: 420px;
-    height: 250px;
-    background: #fff;
-    position: relative;
-    top: 50%;
-    margin: auto;
-    margin-top: -125px;
-    text-align: center;
-    line-height: 250px;
-  }
-    .modHid {
-    display: none;
-  }
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 2000;
+   background: rgba(0, 0, 0, 0.6);
+ }
+ .modelContent{
+  width: 420px;
+  height: 250px;
+  background: #fff;
+  position: relative;
+  top: 50%;
+  margin: auto;
+  margin-top: -125px;
+  text-align: center;
+  line-height: 250px;
+}
+.modHid {
+  display: none;
+}
+.message-value{
+  line-height: 18px;
+  padding-left: 10px;
+}
+.message-after{
+  line-height: 18px;
+  font-size: 16px;
+  color: #666;
+}
 </style>
 <script>
-  import common from '../common.js'
-  import router from '../router.js'
+  import common from '../../common.js'
+  import router from '../../router.js'
   import {mapMutations} from 'vuex'
+
   export default{
     data(){
       return{
@@ -217,7 +244,11 @@
         keyword:'',
         delOrder:null,
         showWarn:false,
-        warnText:null
+        warnText:null,
+        showSource:false,
+        orderId:null,
+        proNum:null,
+        proCount:null
       }
     },
     props:['datas'],
@@ -258,13 +289,15 @@
         var self=this;
         var id=$(event.target).attr('data-id');
         self.$emit('upOrderId',id);
-        self.changeType('b');
+        self.changeType('a');
+
         router.push({path:'detail'})
       },
 
       //隐藏蒙版
       hide:function(){
         this.showMB=false;
+        this.showSource=false;
       },
 
       //显示蒙版
@@ -291,61 +324,44 @@
         common.Ajax(url,type,data,success)
       },
 
-      //生成二维码
-      two:function(){
-        $('#info').removeClass('modHid')
+      //溯源码弹窗
+      sourceBox:function(){
         var self=this;
-        var id=$(event.target).attr('data-id');
-        var url='https://ym-a.top/cloud_code/POST/securityCode/createSecurityCode.do';
-        var type='post';
-        var data={
-          orderId:id
-        };
-        var success=function(res){
-          $('#info').addClass('modHid')
-          if(res.errorCode===0){
-            self.showWarn=true;
-            self.warnText='已成功生成二维码'
-            self.init();
-          }else{
-            self.showWarn=true;
-            self.warnText=res.msg;
-          }
-        };
-        common.Ajax(url,type,data,success)
+        self.showSource=true;
+        self.orderId=$(event.target).attr('data-id');
+        self.proCount=$(event.target).attr('data-num');
       },
-      // 下载二维码信息
-      confirmDownLoad:function(){
+      //生成溯源码
+      source:function(){
         var self=this;
-        var id=$(event.target).attr('data-id');
-        $.ajax({
-          url:'https://ym-a.top/cloud_code/GET/securityCode/securityCodeExportCountWarn.do',
-          type:'post',
-          data:{orderId:id},
-          datatype:'json',
-          success:function(res){
-            if(res.code==-1){
-              var r=confirm("该订单导出二维码次数超过1次，可能在流通过程中出现重复!是否导出二维码");
-              if(r==true){
-                self.downLoad(id);
-                return
-              }
+        if(parseInt(self.proNum)<=parseInt(self.proCount)){
+          $('#info').removeClass('modHid')
+          self.showSource=false;
+          var url='https://ym-a.top/cloud_code/POST/productTracing/createProductTracingCode.do';
+          var type='post';
+          var data={
+            orderId:self.orderId,
+            rowCount:self.proNum
+          };
+          var success=function(res){
+            $('#info').addClass('modHid')
+            if(res.errorCode===0){
+              self.showWarn=true;
+              self.warnText='已成功生成二维码';
+              self.orderId=null;
+              self.proCount=null;
+            }else{
+              self.showWarn=true;
+              self.warnText=res.msg;
             }
-            else if(res.code==0){
-              var r=confirm("该订单未导出二维码!请确认是否导出二维码!");
-              if(r==true){
-                self.downLoad(id);
-                return
-              }
-            }
-            else{
-              alert('导出失败')
-            }
-          }
-        })
+          };
+          common.Ajax(url,type,data,success)
+        }
+        
       },
-      downLoad:function(id){
-        var downloadURL = "https://ym-a.top/cloud_code/POST/securityCode/exportVendorSecurityCode.do";  
+      downLoad1:function(){
+        var id=$(event.target).attr('data-id');
+        var downloadURL = "http://project.ym-b.top/cloud_code//POST/securityCode/exportProductTracingCode.do";  
         var form = $("<form>");   //定义一个form表单  
         form.attr('style','display:none');   //在form表单中添加查询参数  
         form.attr('target','');  

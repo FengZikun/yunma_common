@@ -323,7 +323,7 @@ import common from '../../common.js'
 			showStep2:function(){
 				var self=this;
 				//获取金额信息
-				var url='http://120.77.149.115/cloud_code/GET/redEnv/moneyScope.do';
+				var url='https://ym-a.top/cloud_code/GET/redEnv/moneyScope.do';
 				var type='get';
 				var data={
 					ruleId:parseInt(self.ruleId),
@@ -345,7 +345,7 @@ import common from '../../common.js'
 			//进入step3
 			showStep3:function(){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/ADD/redEnv/info.do';
+				var url='https://ym-a.top/cloud_code/ADD/redEnv/info.do';
 				var type='post';
 				var data={
 					vendorId:parseInt(self.datas.vendorId),
@@ -377,7 +377,7 @@ import common from '../../common.js'
 				var self=this;
 				self.showMB=true;
 				self.order=true;
-				var url='http://120.77.149.115/cloud_code/GET/product/productEnvInfoList.do';
+				var url='https://ym-a.top/cloud_code/GET/product/productEnvInfoList.do';
 		        var type='get';
 		        var data={
 		          vendorId:self.datas.vendorId,
@@ -417,7 +417,7 @@ import common from '../../common.js'
 				var self=this;
 				self.showMB=true;
 				self.rule=true;
-				var url='http://120.77.149.115/cloud_code/GET/redEnv/ruleInfo.do';
+				var url='https://ym-a.top/cloud_code/GET/redEnv/ruleInfo.do';
 				var type='get';
 				var data={
 					vendorId:parseInt(self.datas.vendorId),

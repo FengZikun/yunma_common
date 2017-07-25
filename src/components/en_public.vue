@@ -272,7 +272,7 @@
       init:function(){
         var self=this;
         $.ajax({
-          url: 'http://project.ym-b.top/cloud_code/GET/wxConfig/getWxGzhInfo.do',
+          url: 'https://ym-a.top/cloud_code/GET/wxConfig/getWxGzhInfo.do',
           type:'get',
           data: {vendorId:self.vendorId},
           dataType: 'json',

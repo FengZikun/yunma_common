@@ -39,6 +39,9 @@
               </div>
 
               <ul class='goods_sub3 hidelist'>
+              <router-link tag='li' to="/twoCode/sourceCode">
+                <a>溯源码生成</a>
+                </router-link>
                 <router-link tag='li' to="/twoCode/channel">
                   <a>渠道管理</a>
                 </router-link>
@@ -61,7 +64,7 @@
                 <li v-if='appList!=""' v-for='app in appList'>
                   <a href="javascript:void(0)"><p @click='toWeiQing(app.weqUrl)' style="color:#fff;font-size:16px;">{{app.appName}}</p></a>
                 </li>
-                <li @click="WxGzhInfo('http://www.ym-b.top/web/index.php?c=profile&a=module&')" style="color:#fff;font-size:16px;" >
+                <li @click="WxGzhInfo('https://www.ym-b.top/web/index.php?c=profile&a=module&')" style="color:#fff;font-size:16px;" >
                 <a href="javascript:void(0)">更多应用</a>
                 </li>
               </ul>
@@ -386,15 +389,15 @@
         you:true,
         antifake:true,
         shop:true,
-        shopUrl:'http://www.ym-b.top/',
+        shopUrl:'https://www.ym-b.top/',
         keyOne:true,
         keyOneName:'公司官网',
         keyOneContent:'公司官网页面',
-        keyOneURL:'http://ym-b.top',
+        keyOneURL:'https://ym-b.top',
         keyTwo:true,
         keyTwoName:'产品介绍',
         keyTwoContent:'产品介绍页面',
-        keyTwoURL:'http://ym-b.top',
+        keyTwoURL:'https://ym-b.top',
         keyThree:true,
         keyThreeName:'取蜜视频',
         keyThreeContent:'取蜜视频页面',
@@ -429,15 +432,15 @@
         self.you=true;
         self.antifake=true;
         self.shop=true;
-        self.shopUrl='http://www.ym-b.top/';
+        self.shopUrl='https://www.ym-b.top/';
         self.keyOne=true;
         self.keyOneName='公司官网';
         self.keyOneContent='公司官网页面';
-        self.keyOneURL='http://ym-b.top';
+        self.keyOneURL='https://ym-b.top';
         self.keyTwo=true;
         self.keyTwoName='产品介绍';
         self.keyTwoContent='产品介绍页面';
-        self.keyTwoURL='http://ym-b.top';
+        self.keyTwoURL='https://ym-b.top';
         self.keyThree=true;
         self.keyThreeName='取蜜视频';
         self.keyThreeContent='取蜜视频页面';
@@ -478,14 +481,13 @@
         var self=this;
         self.activityId=id
       },
-      showList:function(event){
+      showList: function (event) {
         $(event.target).parents("li").find("ul").toggleClass("hidelist");
-        $(event.target).parents("li").find('.arrow').toggleClass("upArrow");
       },
       getApp:function(){
         var self=this;
         $.ajax({
-          url:'http://project.ym-b.top/cloud_code/GET/wqapp/getAllAppInfo.do',
+          url:'https://ym-a.top/cloud_code/GET/wqapp/getAllAppInfo.do',
           type:'get',
           data:{vendorId:self.vendorId},
           datatype:'json',
@@ -504,7 +506,7 @@
       WxGzhInfo:function(url){
         var self=this;
         $.ajax({
-          url: 'http://project.ym-b.top/cloud_code/GET/wxConfig/getWxGzhInfo.do',
+          url: 'https://ym-a.top/cloud_code/GET/wxConfig/getWxGzhInfo.do',
           type:'get',
           data: {vendorId:self.vendorId},
           dataType: 'json',

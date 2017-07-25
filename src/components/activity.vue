@@ -213,7 +213,7 @@
       //初始化
       init:function(currentPage){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/GET/codeManager/getCodeManagerAll.do';
+        var url='https://ym-a.top/cloud_code/GET/codeManager/getCodeManagerAll.do';
         var type='get';
         var data={
           pageSize:10,
@@ -248,7 +248,7 @@
       //删除
       delactivity:function(){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/DELETE/codeManager/deleteCodeManager.do';
+        var url='https://ym-a.top/cloud_code/DELETE/codeManager/deleteCodeManager.do';
         var type='post';
         var data={
           id:self.delinfo
@@ -270,7 +270,7 @@
       getOrderInfo:function(){
         var self=this;
         var id=$(event.target).attr('data-order');
-        var url='http://120.77.149.115/cloud_code/GET/product/productOrderInfo.do';
+        var url='https://ym-a.top/cloud_code/GET/product/productOrderInfo.do';
         var type='get';
         var data={
           orderId:id
@@ -299,7 +299,7 @@
       //改变状态
       changeStatus:function(status,id){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/UPDATE/codeManager/updateScaPageStatus.do';
+        var url='https://ym-a.top/cloud_code/UPDATE/codeManager/updateScaPageStatus.do';
         var type='post';
         var data={
           id:parseInt(id),
@@ -326,7 +326,7 @@
       nextPage:common.nextPage,
       // 预览
       showKuang(event){
-        this.frameSrc='http://project.ym-b.top/wx/'+$(event.target).attr('data-url');
+        this.frameSrc='https://ym-a.top/wx/'+$(event.target).attr('data-url');
         $('.modelBg').removeClass('modHid');
       },
       // 隐藏预览

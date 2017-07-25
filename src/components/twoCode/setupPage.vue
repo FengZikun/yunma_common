@@ -24,7 +24,7 @@
       checkName:function(){
         var self=this;
         $.ajax({
-          url:'http://project.ym-b.top/cloud_code/POST/antiFake/htmlNameExist.do',
+          url:'https://ym-a.top/cloud_code/POST/antiFake/htmlNameExist.do',
           type:'post',
           data:{
             vendorId:self.datas.vendorId,

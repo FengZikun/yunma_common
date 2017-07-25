@@ -116,7 +116,7 @@
 		methods:{
 			init:function(currentPage){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/GET/couponRule/info.do';
+				var url='https://ym-a.top/cloud_code/GET/couponRule/info.do';
 				var type='get';
 				var data={
 					vendorId:self.vendorId,
@@ -140,7 +140,7 @@
 			//删除规则
 			delRule:function(id){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/DELETE/couponRule/info.do';
+				var url='https://ym-a.top/cloud_code/DELETE/couponRule/info.do';
 				var type='get';
 				var data={
 					id:id,

@@ -225,7 +225,7 @@
         var self=this;
         var data={vendorId:self.datas.vendorId};
         $.ajax({
-          url: 'http://120.77.149.115/cloud_code/GET/codeManager/getScaPageModel.do',
+          url: 'https://ym-a.top/cloud_code/GET/codeManager/getScaPageModel.do',
           type:'get',
           data: data,
           dataType: 'json',
@@ -246,7 +246,7 @@
         $(event.target).parent().parent().addClass('modHid');
       },
       showKuang(event){
-        this.frameSrc='http://project.ym-b.top/wx/'+$(event.target).attr('data');
+        this.frameSrc='https://ym-a.top/wx/'+$(event.target).attr('data');
         $('.modelBg').removeClass('modHid');
       }
     },

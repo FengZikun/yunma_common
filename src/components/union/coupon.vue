@@ -127,7 +127,7 @@
 			//初始化
 			init:function(currentPage){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/GET/wdCoupon/couponInfoList.do';
+				var url='https://ym-a.top/cloud_code/GET/wdCoupon/couponInfoList.do';
 				var type='get';
 				var data={
 					vendorId:self.vendorId,
@@ -159,7 +159,7 @@
 			search:function(){
 				var self=this;
 				self.showMB=true;
-				var url='http://120.77.149.115/cloud_code/GET/wd/config.do';
+				var url='https://ym-a.top/cloud_code/GET/wd/config.do';
 				var type='get';
 				var data={
 					vendorId:self.vendorId
@@ -177,7 +177,7 @@
 			//关联微店
 			connect:function(){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code//ADD/wd/config.do';
+				var url='https://ym-a.top/cloud_code//ADD/wd/config.do';
 				var type='post';
 				var data={
 					vendorId:self.vendorId,

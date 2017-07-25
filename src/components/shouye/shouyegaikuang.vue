@@ -88,7 +88,7 @@ import common from '../../common.js'
           userId:self.userId
         }
         $.ajax({
-          url:'http://120.77.149.115/cloud_code/GET/mapCount/mapAntiProCount.do',
+          url:'https://ym-a.top/cloud_code/GET/mapCount/mapAntiProCount.do',
           type:'GET',
           data:data,
           dataType:'json',

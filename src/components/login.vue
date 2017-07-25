@@ -129,7 +129,7 @@
       },
 
       changecapcha:function(){
-        $(".cap").attr("src", "http://120.77.149.115/cloud_code/GET/user/captcha.do?timestamp=" + (new Date()).valueOf());
+        $(".cap").attr("src", "https://ym-a.top/cloud_code/GET/user/captcha.do?timestamp=" + (new Date()).valueOf());
       },
       login:function(){
         var self=this;
@@ -141,7 +141,7 @@
           return
         }else{
 
-          var url='http://120.77.149.115/cloud_code/POST/user/login.do';
+          var url='https://ym-a.top/cloud_code/POST/user/login.do';
           var type='post';
           var pswd=Base64.encode(md5(self.password));
           var data={

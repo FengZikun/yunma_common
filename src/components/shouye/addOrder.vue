@@ -18,7 +18,7 @@
 					</li>
 					<li class="pro-li" v-for="pro in proInfo">
 						<span class="pro-li-span first"><span class="check-box checkshu" @click='selectThis'></span><span style="display: inline-block;vertical-align: middle">{{pro.id}}</span></span>
-						<span class="pro-li-span" style="text-align:left;"><img style="width:45px;margin-left:20px;" v-bind:src="'http://120.77.149.115/'+pro.productImg">{{pro.productName}}</span>
+						<span class="pro-li-span" style="text-align:left;"><img style="width:45px;margin-left:20px;" v-bind:src="'https://ym-a.top/'+pro.productImg">{{pro.productName}}</span>
 						<span class="pro-li-span">{{pro.productSpe}}</span>
 						<span class="pro-li-span">{{pro.rowName}}</span>
 						<span class="pro-li-span">{{pro.productPrice}}</span>
@@ -86,7 +86,7 @@
 			selectPro:function(){
 				var self=this;
 				self.showMB=true;
-				var url='http://120.77.149.115/cloud_code/GET/product/info.do';
+				var url='https://ym-a.top/cloud_code/GET/product/info.do';
 				var type='post';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -137,7 +137,7 @@
 			//提交
 			tijiao:function(){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/POST/product/productOrder.do';
+				var url='https://ym-a.top/cloud_code/POST/product/productOrder.do';
 				var type='post';
 				var data={
 					vendorId:self.datas.vendorId,

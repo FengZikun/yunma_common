@@ -351,7 +351,7 @@
 					self.warnText="请设置结束时间";
 					return
 				}
-				var url='http://120.77.149.115/cloud_code/add/wd/coupon.do'
+				var url='https://ym-a.top/cloud_code/add/wd/coupon.do'
 				var data={
 					vendorId:self.vendorId,
 					openGet:self.openGet,
@@ -401,7 +401,7 @@
 					self.warnText="请输入优惠券ID";
 					return
 				}
-				var url='http://192.168.1.103:8080/cloud_code/weChatCoupon/create.do';
+				var url='https://ym-a.top/cloud_code/weChatCoupon/create.do';
 				var type='get';
 				var data={
 					vendorId:self.vendorId,

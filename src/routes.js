@@ -65,7 +65,7 @@ import addCorporate from './components/admin/addCorporate.vue'
 import addActivity from './components/twoCode/addActivity.vue'
 import analysis from './components/twoCode/analysis.vue'
 import addAdmin from './components/admin/addAdmin.vue'
-
+import sourceCode from './components/twoCode/sourceCode.vue'
 //编写路由集合
 const routes = [
   {
@@ -241,6 +241,10 @@ const routes = [
   {
     path:'analysis',
     component:analysis
+  },
+  {
+    path:'sourceCode',
+    component:sourceCode
   }
   ]
 },

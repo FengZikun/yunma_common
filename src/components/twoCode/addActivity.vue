@@ -232,7 +232,7 @@
 			init1:function(){
 				var self=this;
 				//获取模板信息
-				var url='http://120.77.149.115/cloud_code/GET/codeManager/getScaPageModel.do';
+				var url='https://ym-a.top/cloud_code/GET/codeManager/getScaPageModel.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId
@@ -241,7 +241,7 @@
 					self.model=res.data;
 					//修改
 					if(self.datas.activityId!=null){
-						var url='http://120.77.149.115/cloud_code/GET/codeManager/getCodeManagerById.do';
+						var url='https://ym-a.top/cloud_code/GET/codeManager/getCodeManagerById.do';
 						var type='get';
 						var data={
 							id:self.datas.activityId
@@ -290,7 +290,7 @@
 			init:function(currentPage){
 				var self=this;
 				self.showMB=true;
-				var url='http://120.77.149.115/cloud_code/GET/codeManager/productInfoList.do';
+				var url='https://ym-a.top/cloud_code/GET/codeManager/productInfoList.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -337,7 +337,7 @@
 					return;
 				}
 				if(name==="modelS"){
-					this.frameSrc='http://project.ym-b.top/wx/'+$(event.target).attr('data-url');
+					this.frameSrc='https://ym-a.top/wx/'+$(event.target).attr('data-url');
 					$("[defName=modelS]").removeClass('modHid');
 					return;
 				}
@@ -396,7 +396,7 @@
 						spree:self.modelSelected.spree,
 						securityAndTraceability:self.modelSelected.securityAndTraceability
 					}
-					var url='http://120.77.149.115/cloud_code/UPDATE/codeManager/updateCodeManager.do';
+					var url='https://ym-a.top/cloud_code/UPDATE/codeManager/updateCodeManager.do';
 				}else{
 					var data={
 						orderId:self.orderId,
@@ -413,7 +413,7 @@
 						spree:self.modelSelected.spree,
 						securityAndTraceability:self.modelSelected.securityAndTraceability
 					}
-					var url='http://120.77.149.115/cloud_code/ADD/codeManager/addCodeManager.do';
+					var url='https://ym-a.top/cloud_code/ADD/codeManager/addCodeManager.do';
 				}
 				var type='post';
 				var success=function(res){

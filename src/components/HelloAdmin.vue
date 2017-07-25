@@ -274,7 +274,7 @@ import common from '../common.js'
       },
       tuichu:function(){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/POST/user/logout.do';
+        var url='https://ym-a.top/cloud_code/POST/user/logout.do';
         var type='post';
         var data={
           userId:self.vendorId

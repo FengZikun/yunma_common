@@ -130,7 +130,7 @@
           methods:{
             init:function(){
               var self=this;
-              var url='http://120.77.149.115/cloud_code/GET/vendor/balance.do';
+              var url='https://ym-a.top/cloud_code/GET/vendor/balance.do';
               var type='get';
               var data={
                 vendorId:parseInt(self.vendorId)

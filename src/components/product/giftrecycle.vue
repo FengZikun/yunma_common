@@ -35,7 +35,7 @@
                     <span class="pro-li-span">操作</span>
                   </li>
                   <li class="pro-li" v-for='gift in gifts'>
-                    <span class="pro-li-span first" v-bind:data-id='gift.id'><span class="check-box checkshu" @click='selectThis' style="margin-left:10%;margin-right:5%;"></span><span style="display: inline-block;vertical-align: middle;overflow: hidden"><img style="width:45px;margin-left:20px;" v-bind:src="'http://120.77.149.115'+gift.presentImg">{{gift.presentName}}</span></span>
+                    <span class="pro-li-span first" v-bind:data-id='gift.id'><span class="check-box checkshu" @click='selectThis' style="margin-left:10%;margin-right:5%;"></span><span style="display: inline-block;vertical-align: middle;overflow: hidden"><img style="width:45px;margin-left:20px;" v-bind:src="'https://ym-a.top'+gift.presentImg">{{gift.presentName}}</span></span>
                     <span class="pro-li-span">{{gift.rowName}}</span>
                     <span class="pro-li-span">{{gift.presentPrice}}</span>
                     <span class="pro-li-span"></span>
@@ -159,7 +159,7 @@ import common from '../../common.js'
       //初始化
       init:function(currentPage){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/GET/product/present.do';
+        var url='https://ym-a.top/cloud_code/GET/product/present.do';
         var type='get';
         var data={
             vendorId:self.vendorId,
@@ -259,7 +259,7 @@ import common from '../../common.js'
         var self=this;
         var deletedata=self.deleteArr;
         console.log(deletedata);
-        var url='http://120.77.149.115/cloud_code/DELETE/product/present.do';
+        var url='https://ym-a.top/cloud_code/DELETE/product/present.do';
         var type='post';
         var data={
             id:deletedata
@@ -279,7 +279,7 @@ import common from '../../common.js'
       huanyuan:function(){
         var self=this;
         var huanyuandata=self.huanyuanArr;
-        var url='http://120.77.149.115/cloud_code/DELETE/product/batchPresent.do';
+        var url='https://ym-a.top/cloud_code/DELETE/product/batchPresent.do';
         var type='post';
         var data={
             id:huanyuandata,

@@ -164,7 +164,7 @@
       <div class='message-box'>
         <span class='textname'>品牌代表图片：</span>
         <div class="phbox">
-          <img style="display:inline-block;width:86px;height:86px;vertical-align:top" v-for='item in imgSrcs' v-bind:src='"http://120.77.149.115"+item'></span>
+          <img style="display:inline-block;width:86px;height:86px;vertical-align:top" v-for='item in imgSrcs' v-bind:src='"https://ym-a.top"+item'></span>
           <span class="img" @click='mengban'></span>
           <!-- <input type="file" name="" style="display:none;" id="kehu">
           <label for="kehu" class="img"></label> -->
@@ -441,7 +441,7 @@ import router from '../../router.js'
         var self=this;
         var data=new FormData($('#myform2')[0]);
         $.ajax({
-          url: 'http://120.77.149.115/cloud_code/POST/vendor/uploadVendorBrandImg.do',
+          url: 'https://ym-a.top/cloud_code/POST/vendor/uploadVendorBrandImg.do',
           type:'post',
           data: data,
           cache: false,
@@ -506,7 +506,7 @@ import router from '../../router.js'
         data.append('functionType',functionType);
 
         $.ajax({
-          url: 'http://120.77.149.115/cloud_code/POST/vendor/addVendorInfo.do',
+          url: 'https://ym-a.top/cloud_code/POST/vendor/addVendorInfo.do',
           type:'post',
           data: data,
           cache: false,

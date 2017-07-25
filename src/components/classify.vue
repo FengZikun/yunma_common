@@ -320,7 +320,7 @@ import common from '../common.js'
       //获取分组数据
       getData:function(){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/GET/product/group.do';
+        var url='https://ym-a.top/cloud_code/GET/product/group.do';
         var type='get';
         var data={
           vendorId:self.vendorId
@@ -392,7 +392,7 @@ import common from '../common.js'
       //增加分组
       addclassify:function(){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/ADD/product/group.do';
+        var url='https://ym-a.top/cloud_code/ADD/product/group.do';
         var type='post';
         var data={
           vendorId:self.vendorId,
@@ -414,7 +414,7 @@ import common from '../common.js'
       delclassify:function(){
         var self=this;
         var id=$(event.target).attr('data-id');
-        var url='http://120.77.149.115/cloud_code/DELETE/product/group.do';
+        var url='https://ym-a.top/cloud_code/DELETE/product/group.do';
         var type='post';
         var data={
           id:id
@@ -432,7 +432,7 @@ import common from '../common.js'
 
         var self=this;
         console.log(self.name);
-        var url='http://120.77.149.115/cloud_code/UPDATE/product/group.do';
+        var url='https://ym-a.top/cloud_code/UPDATE/product/group.do';
         var type='post';
         if(self.savename!=self.name){
           var data={

@@ -283,7 +283,7 @@ label{
     methods:{
       init:function(currentPage){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/GET/vendor/basicInfo.do';
+        var url='https://ym-a.top/cloud_code/GET/vendor/basicInfo.do';
         var type='get';
         var data={
                   vendorId:self.vendorId,
@@ -293,7 +293,7 @@ label{
             res=res.data;
             self.vendorName=res.vendorName;
             self.brandName=res.brandName;
-            self.imgUrl=`url(http://project.ym-b.top${res.imgUrl})`;
+            self.imgUrl=`url(https://ym-a.top${res.imgUrl})`;
             self.industryName=res.industryName;
             self.contactName=res.contactName;
             self.customPhone=res.customPhone;
@@ -335,7 +335,7 @@ label{
         var self=this;
         var data=new FormData($('#formTol')[0]);
         $.ajax({
-          url: 'http://project.ym-b.top/cloud_code/ADD/vendor/basicInfo.do',
+          url: 'https://ym-a.top/cloud_code/ADD/vendor/basicInfo.do',
           type:'post',
           data: data,
           cache: false,
@@ -357,7 +357,7 @@ label{
         var self=this;
         var data=new FormData($('#formTol')[0]);
         $.ajax({
-          url: 'http://project.ym-b.top/cloud_code/UPDATE/vendor/basicInfo.do',
+          url: 'https://ym-a.top/cloud_code/UPDATE/vendor/basicInfo.do',
           type:'post',
           data: data,
           cache: false,

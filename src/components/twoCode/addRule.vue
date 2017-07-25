@@ -127,7 +127,7 @@
 			//提交
 			confirm:function(){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/ADD/redEnv/rule.do';
+				var url='https://ym-a.top/cloud_code/ADD/redEnv/rule.do';
 				var type='post';
 				var data={
 					vendorId:self.datas.vendorId,

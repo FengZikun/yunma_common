@@ -198,7 +198,7 @@ label{
         var self=this;
         var data=new FormData($('#myform1')[0]);
         $.ajax({
-          url: 'http://120.77.149.115/cloud_code/ADD/vendor/qualificationImg.do',
+          url: 'https://ym-a.top/cloud_code/ADD/vendor/qualificationImg.do',
           type:'post',
           data: data,
           cache: false,

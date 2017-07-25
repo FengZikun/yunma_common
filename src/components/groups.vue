@@ -124,7 +124,7 @@ import common from '../common.js'
         var self=this;
         $.ajax({
           type:'get',
-          url:'http://120.77.149.115/cloud_code/GET/product/presentGroup.do',
+          url:'https://ym-a.top/cloud_code/GET/product/presentGroup.do',
           dataType:'json',
           data:{
             vendorId:self.vendorId
@@ -165,13 +165,13 @@ import common from '../common.js'
       addclassify:function(){
         var self=this;
         if(self.zengjia){
-          var url='http://120.77.149.115/cloud_code/ADD/product/presentGroup.do';
+          var url='https://ym-a.top/cloud_code/ADD/product/presentGroup.do';
           var data={
               vendorId:self.vendorId,
               name:self.name
             };
         }else{
-          var url='http://120.77.149.115/cloud_code/UPDATE/product/presentGroup.do';
+          var url='https://ym-a.top/cloud_code/UPDATE/product/presentGroup.do';
           var data={
               id:self.id,
               name:self.name
@@ -189,7 +189,7 @@ import common from '../common.js'
       delclassify:function(){
         var self=this;
         self.id=$(event.target).attr('data-id');
-        var url='http://120.77.149.115/cloud_code/DELETE/product/presentGroup.do';
+        var url='https://ym-a.top/cloud_code/DELETE/product/presentGroup.do';
         var type='post';
         var data={
           id:self.id

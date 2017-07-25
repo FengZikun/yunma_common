@@ -139,7 +139,7 @@
   <!-- 再次编辑模态框 -->
 <!--     <div class="modelBg">
       <div class="modelContent">
-        <iframe src="http://120.77.149.115/cloud_code/wx/1/red.html" width="349px" height="663px"></iframe>
+        <iframe src="https://ym-a.top/cloud_code/wx/1/red.html" width="349px" height="663px"></iframe>
         <div class="tipOut" style="left: 362px;top: 270px;width:330px">
             <div class="tipArrow"></div>
             领取大礼包： <input >
@@ -399,7 +399,7 @@
             </body>
             </html>`;
             $.ajax({
-              url: 'http://120.77.149.115/cloud_code/SAVE/codeManager/saveFileFunType.do',
+              url: 'https://ym-a.top/cloud_code/SAVE/codeManager/saveFileFunType.do',
               data: {
                 html:str
               },
@@ -601,7 +601,7 @@
                           self.jumpTo($(this).attr('id'))
                         });
                         $.ajax({
-                          url: 'http://project.ym-b.top/cloud_code/GET/coupon/hasCoupon.do',
+                          url: 'https://ym-a.top/cloud_code/GET/coupon/hasCoupon.do',
                           data: {
                             vendorId:self.vendorId
                           },
@@ -733,7 +733,7 @@
                       wechatHome: function () {
                         var self = this;
                         $.ajax({
-                          url: 'http://project.ym-b.top/cloud_code/POST/weChat/antiFakeCodeHome.do',
+                          url: 'https://ym-a.top/cloud_code/POST/weChat/antiFakeCodeHome.do',
                           data: {
                             securityCode: self.securityCode,
                             openId: self.openId,
@@ -850,7 +850,7 @@
                     getRedEnv=1
                   }
                   $.ajax({
-                    url: 'http://project.ym-b.top/cloud_code/POST/antiFake/html.do',
+                    url: 'https://ym-a.top/cloud_code/POST/antiFake/html.do',
                     data: {
                       templateName:self.datas.moduleName,
                       comment:self.datas.moduleRemark,
@@ -880,7 +880,7 @@
       getApp:function(){
         var self=this;
         $.ajax({
-          url:'http://project.ym-b.top/cloud_code//GET/wqapp/getAllAppInfo.do',
+          url:'https://ym-a.top/cloud_code//GET/wqapp/getAllAppInfo.do',
           type:'get',
           data:{vendorId:self.datas.vendorId},
           datatype:'json',

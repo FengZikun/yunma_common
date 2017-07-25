@@ -178,7 +178,7 @@
 					init:function(){
 						var self=this;
 				//黑名单
-				var url='http://120.77.149.115/cloud_code/GET/couponRule/vendorOther.do';
+				var url='https://ym-a.top/cloud_code/GET/couponRule/vendorOther.do';
 				var type='get';
 				var data={
 					vendorId:self.vendorId
@@ -245,7 +245,7 @@
 			//获取所有产品
 			getProInfo:function(){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/GET/couponRule/product.do';
+				var url='https://ym-a.top/cloud_code/GET/couponRule/product.do';
 				var type='get';
 				var data={
 					vendorId:self.vendorId
@@ -260,7 +260,7 @@
 			//获取订单
 			getOrder:function(){
 				var self=this;
-				var url='http://120.77.149.115/cloud_code/GET/couponRule/order.do';
+				var url='https://ym-a.top/cloud_code/GET/couponRule/order.do';
 				var type='get';
 				var data={
 					vendorId:self.vendorId
@@ -400,7 +400,7 @@
 					self.warnText='请选择发放载体';
 					return
 				}
-				var url='http://120.77.149.115/cloud_code/ADD/couponRule/info.do';
+				var url='https://ym-a.top/cloud_code/ADD/couponRule/info.do';
 				var type='post';
 				if(self.isScope==4){
 					for(var i=0,len=$('.ul3 .has-select').length;i<len;i++){

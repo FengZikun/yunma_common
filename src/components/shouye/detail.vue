@@ -20,17 +20,18 @@
 				<div class="my-form">
 					<ul class="pro-list">
 						<li class="pro-li">
-							<span class="pro-li-span">防伪码ID</span>
+							<span class="pro-li-span" v-if='this.type===1'>防伪码ID</span>
+							<span class="pro-li-span" v-else>溯源码ID</span>
 							<span class="pro-li-span">产品ID</span>
 							<span class="pro-li-span">产品名称</span>
 							<span class="pro-li-span">操作</span>
 
 						</li>
 						<li class="pro-li" v-for='item in codeInfo'>
-							<span class="pro-li-span">{{item.securityCodeId}}</span>
+							<span class="pro-li-span">{{item.securityCodeId||item.productTracingCodeId}}</span>
 							<span class="pro-li-span">{{item.productId}}</span>
 							<span class="pro-li-span">{{item.productName}}</span>
-							<span class="pro-li-span"><a href="javascript:void(0)" @click='newCode' v-bind:data-code='item.securityCode'>生成二维码</a></span>
+							<span class="pro-li-span"><a href="javascript:void(0)" @click='newCode' v-bind:data-code='item.securityCode||item.ProductTracingCode'>生成二维码</a></span>
 
 						</li>
 					</ul>
@@ -57,6 +58,7 @@
 <script>
 	import common from '../../common.js'
 	import QRCode from 'qrcodejs2'
+  	import {mapState} from 'vuex'
 	export default{
 		data(){
 			return{
@@ -68,7 +70,8 @@
         		showMB:false,
         		options:null,
         		qrcode:null,
-        		orderId:null
+        		orderId:null,
+        		url:null
         	}
         },
         props:['datas'],
@@ -76,14 +79,21 @@
 			//初始化
 			init:function(currentPage){
 				var self=this;
+				var url;
 				self.orderId=self.datas.orderId;
-				var url='http://120.77.149.115/cloud_code/GET/securityCode/securityCodeList.do';
+				console.log(self.type)
+				if(self.type==1){
+					self.url='https://ym-a.top/cloud_code/GET/securityCode/securityCodeList.do';
+				}
+				else if(self.type==0){
+					self.url='https://ym-a.top/cloud_code/GET/productTracingcode/tracingCodeList.do';
+				}
+				console.log(self.url)
 				var type='get';
 				var data={
 					orderId:parseInt(self.orderId),
 					currentPage:currentPage,
 				};
-				console.log(data)
 				var success=function(res){
 					self.totalPage=[];
 					self.currentPage=res.currentPage;
@@ -93,7 +103,7 @@
 					self.getPage();
 
 				};
-				common.Ajax(url,type,data,success)
+				common.Ajax(self.url,type,data,success)
 			},
 
 			//生成二维码
@@ -101,7 +111,7 @@
 				var self=this;
 				self.showMB=true;
 				var securityCode=$(event.target).attr('data-code');
-				var code="http://project.ym-b.top/cloud_code/s/"+securityCode;
+				var code="https://ym-a.top/cloud_code/s/"+securityCode;
 				var qrcodeNode=document.getElementsByClassName('codeImg')[0];
 				$(qrcodeNode).html('');
 				self.qrcode = new QRCode(qrcodeNode, {
@@ -134,6 +144,9 @@
 			//下一页
 			nextPage:common.nextPage,
 		},
+		computed: mapState({
+			type: state=>state.b.type
+		}),
 		created:function(){
 			this.init();
 		}

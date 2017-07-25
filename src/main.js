@@ -9,6 +9,7 @@ import './assets/js/echarts.js'
 import './assets/js/china.js'
 import 'echarts/map/js/china'
 import VueResource from 'vue-resource'
+import store from './store.js'
 Vue.use(VueResource)
 
 
@@ -16,11 +17,11 @@ Vue.config.productionTip = false
 //开启debug模式
 Vue.config.debug = true
 
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: {App}
 })

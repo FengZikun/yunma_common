@@ -249,7 +249,7 @@
     methods:{
       init:function(){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/GET/mapCount/mapSecurityCount.do';
+        var url='https://ym-a.top/cloud_code/GET/mapCount/mapSecurityCount.do';
         var type='get';
         var data={
           userId:self.datas.userId,
@@ -265,7 +265,7 @@
 
         common.Ajax(url,type,data,success)
         $.ajax({
-          url:'http://project.ym-b.top/cloud_code/GET/mapCount/vendorWeekMapCount.do',
+          url:'https://ym-a.top/cloud_code/GET/mapCount/vendorWeekMapCount.do',
           type:'post',
           data:{
             userId:self.datas.userId,

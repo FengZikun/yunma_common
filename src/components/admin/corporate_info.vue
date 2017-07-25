@@ -132,7 +132,7 @@ import router from '../../router.js'
       //初始化
       init:function(currentPage){
         var self=this;
-        var url='http://120.77.149.115/cloud_code/GET/vendor/info.do';
+        var url='https://ym-a.top/cloud_code/GET/vendor/info.do';
         var type='get';
         var data={
                   deleteFlag:0,

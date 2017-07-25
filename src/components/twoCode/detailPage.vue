@@ -572,7 +572,7 @@
             <body>
               ${$('#baba').html()}
             </body>
-            <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js">`+"</scr" + "ipt>"+`
+            <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js">`+"</scr" + "ipt>"+`
               <script src="js/zepto_1.1.3.min.js" type="text/javascript" charset="utf-8">`+"</scr" + "ipt>"+`
                 <script type="text/javascript">
                   (function () {

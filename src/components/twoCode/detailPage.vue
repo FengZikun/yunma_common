@@ -600,22 +600,6 @@
                         $('.tap-btn').on('click', function () {
                           self.jumpTo($(this).attr('id'))
                         });
-                        $.ajax({
-                          url: 'https://ym-a.top/cloud_code/GET/coupon/hasCoupon.do',
-                          data: {
-                            vendorId:self.vendorId
-                          },
-                          type: 'get',
-                          dataType: 'json',
-                          success: function (res) {
-                            if(res.statuscode==-1){
-                              $('#btn1').addClass('hidImg')
-                            }
-                          },
-                          error: function (err) {
-                            alert(JSON.stringify(err));
-                          }
-                        })
                       },
                       jumpTo: function (id) {
                         var self = this;

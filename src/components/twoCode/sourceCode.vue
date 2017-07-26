@@ -265,6 +265,7 @@
           currentPage:currentPage,
         };
         var success=function(res){
+          console.log(res)
           var pagenum=res.totalPages;
           self.totalPage=[];
           self.resData=res;

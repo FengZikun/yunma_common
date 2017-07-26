@@ -1,5 +1,18 @@
 <template>
 	<div>
+		<div class="mengban" v-show='showWarn'>
+				<div class="warn">
+					<div class="classifyHeader">
+						<span style="display:block;height:48px;line-height:48px;">操作提示</span>
+					</div>
+					<div class="warnmain">
+						{{warnText}}
+					</div>
+					<div class="warnbottom">
+						<input type="button" name="" value="确定" @click='showWarn=false'>
+					</div>
+				</div>
+			</div>
 		<div class="mengban" v-if='showMB'>
 			<div class="choosepro" >
 				<div class="choosepro-top">
@@ -77,7 +90,9 @@
 				referencePrice:null,
 				expiryDate:null,
 				productCount:null,
-				productId:null
+				productId:null,
+				showWarn:false,
+				warnText:null
 			}
 		},
 		props:['datas'],
@@ -137,6 +152,26 @@
 			//提交
 			tijiao:function(){
 				var self=this;
+				if(self.productName===null){
+					self.showWarn=true;
+					self.warnText="请选择产品"
+					return
+				}
+				if(self.productCount===null){
+					self.showWarn=true;
+					self.warnText="请输入产品个数"
+					return
+				}
+				if(self.expiryDate===null){
+					self.showWarn=true;
+					self.warnText="请定义有效时间"
+					return
+				}
+				if(self.referencePrice===null){
+					self.showWarn=true;
+					self.warnText="请输入参考价格"
+					return
+				}
 				var url='https://ym-a.top/cloud_code/POST/product/productOrder.do';
 				var type='post';
 				var data={
@@ -151,7 +186,8 @@
 				console.log(data)
 				var success=function(res){
 					if(res.errorCode===0){
-						router.push({path:'enterprise_order'})
+						// router.push({path:'enterprise_order'})
+						router.go(-1);
 					}else{
 						alert('新增订单失败')
 					}

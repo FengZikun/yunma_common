@@ -31,7 +31,7 @@
 							<span class="pro-li-span">{{item.securityCodeId||item.productTracingCodeId}}</span>
 							<span class="pro-li-span">{{item.productId}}</span>
 							<span class="pro-li-span">{{item.productName}}</span>
-							<span class="pro-li-span"><a href="javascript:void(0)" @click='newCode' v-bind:data-code='item.securityCode||item.ProductTracingCode'>生成二维码</a></span>
+							<span class="pro-li-span"><a href="javascript:void(0)" @click='newCode' v-bind:data-code='item.securityCode||item.productTracingCode'>生成二维码</a></span>
 
 						</li>
 					</ul>
@@ -95,6 +95,7 @@
 					currentPage:currentPage,
 				};
 				var success=function(res){
+					console.log(res)
 					self.totalPage=[];
 					self.currentPage=res.currentPage;
 					self.resData=res;
@@ -110,8 +111,13 @@
 			newCode:function(){
 				var self=this;
 				self.showMB=true;
-				var securityCode=$(event.target).attr('data-code');
-				var code="https://ym-a.top/cloud_code/s/"+securityCode;
+				var code=$(event.target).attr('data-code');
+				if(self.type==1){
+					var code="https://ym-a.top/cloud_code/s/"+code;
+				}
+				else if(self.type==0){
+					var code="https://ym-a.top/cloud_code/t/"+code;
+				}
 				var qrcodeNode=document.getElementsByClassName('codeImg')[0];
 				$(qrcodeNode).html('');
 				self.qrcode = new QRCode(qrcodeNode, {

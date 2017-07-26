@@ -171,15 +171,6 @@
     top: 70px;
     text-align: center;
   }
-  .warn{
-    width: 420px;
-    height: 250px;
-    background: #fff;
-    position: relative;
-    top: 50%;
-    margin: auto;
-    margin-top: -125px;
-  }
   .classifyHeader{
     width: 100%;
     height: 48px;

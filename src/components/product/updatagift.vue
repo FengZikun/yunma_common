@@ -376,14 +376,15 @@ div{
 		display: none;
 	}
 	.imgbox{
-		margin: auto;
+		left: 50%;
+		margin-left: -342.5px;
 		top: 50%;
 		margin-top: -327.5px;
 		height: 655px;
 	    border-radius: 2px;
 	    background: #fff;
 	    width: 685px;
-	    position: relative;
+	    position: absolute;
 	}
 	.imgheader{
 		width: 100%;

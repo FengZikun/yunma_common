@@ -28,7 +28,7 @@
       <div class='two_center_tit'>
         <p><span class='p_left'>扫码总量分布图</span><span class='p_right'>(截至日期:2017-04-16)</span></p>
       </div>
-      <div class='map' id='map' style='width: 100%;height: 400px;' v-on:load="maph"></div>
+      <div class='map' id='map' style='width: 100%;height: 640px;' v-on:load="maph"></div>
     </div>
   </div>
 
@@ -141,7 +141,7 @@
   .two_center {
     width: 90%;
     margin: 0 auto;
-    height: 900px;
+    min-height: 900px;
     background-color: #fff;
     border-radius: 10px;
     margin-top: 20px;
@@ -240,10 +240,10 @@
         daylyJoinActivCount:null,
         dayTotalScanCount:null,
         edata:'',
+        emap:''
       }
     },
     mounted(){
-      this.maph();
     },
     props:['datas'],
     methods:{
@@ -279,6 +279,22 @@
           },
           error:function(res){
             console.log(res)
+          }
+        })
+        $.ajax({
+          url:'https://ym-a.top/cloud_code/GET/mapCount/count.do',
+          type:'post',
+          data:{
+            vendorId:self.datas.vendorId
+          },
+          datatype:'json',
+          success:function(res){
+            console.log(res);
+            self.emap=res;
+            self.maph();
+          },
+          error:function(res){
+            self.maph();  
           }
         })
       },
@@ -354,10 +370,20 @@
           }]
         });
         var option = {
-          tooltip: {
-            trigger: 'item',
-            formatter: '{b}'
-          },
+              tooltip: {
+                  trigger: 'item'
+              },
+              toolbox: {
+                  show: true,
+                  orient: 'vertical',
+                  left: 'right',
+                  top: 'center',
+                  feature: {
+                      dataView: {readOnly: false},
+                      restore: {},
+                      saveAsImage: {}
+                  }
+              },
           series: [
           {
             name: '中国',
@@ -372,9 +398,7 @@
                 show: true
               }
             },
-            data:[
-            {name:'广东', selected:true}
-            ]
+            data:this.emap.data
           }
           ]
         };

@@ -249,7 +249,7 @@
 		}
 		.choosepro{
 		width: 1000px;
-		height: 65%;
+		height: 620px;
 		background: #fff;
 		margin-left: 15%;
 		margin-top: 73px;

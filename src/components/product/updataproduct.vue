@@ -431,8 +431,7 @@
 	}
 	.imgbox{
 		left: 50%;
-		top: 50%;
-		margin-top: -327.5px;
+		top: 20%;
 		margin-left: -342.5px;
 		height: 655px;
 		border-radius: 2px;

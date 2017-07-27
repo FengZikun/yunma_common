@@ -165,7 +165,7 @@
           <div class="loadingCir" style="display: block;z-index: 1000">
           </div>
           <!-- 正文 -->
-          <div class="content hidImg" v-bind:style="{backgroundImage: imgSrc}">
+          <div class="content" v-bind:style="{backgroundImage: imgSrc}">
             <!-- 内码真 -->
             <div class="info innerCodeTure hideMod">
               <p style="color: #eca100;font-family:'微软雅黑';height: 15vw;line-height: 7.5vw;font-size: 4vw;font-weight: bold;">
@@ -567,9 +567,6 @@
                   left: 68%;
                   top: 91%;
                 }
-                .hidImg{
-                  display:none;
-                }
               </style>
             </head>
             <body>
@@ -742,7 +739,6 @@
                       render:function(data){
                         var self=this;
                         $('.content').siblings('div').hide();
-                        $('.content').removeClass('hidImg');
                         // 判断是真是假
                         console.log(data);
                         if (data.scanFlag=='true') {

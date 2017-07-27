@@ -532,7 +532,7 @@
   width: 420px;
   height: 250px;
   background: #fff;
-  position: relative;
+  position: absolute;
   top: 50%;
   left: 50%;
   margin-left: -210px;

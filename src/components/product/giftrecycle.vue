@@ -2,12 +2,18 @@
   <div>
     <div class="mengban" v-show='showMB'>
       <div class="proclassify" >
+      <div class="tishi">
+          确定将礼品彻底删除吗？
+        </div>
         <input class="delbutton" type="button" name="" value="确认" @click='deleteGift'>
         <input class="delbutton" type="button" name="" value="取消" @click='hide'>
       </div>
     </div>
     <div class="mengban" v-show='showMB2'>
       <div class="proclassify" >
+      <div class="tishi">
+          确定将礼品还原到列表吗？
+        </div>
         <input class="delbutton" type="button" name="" value="确认" @click='huanyuan'>
         <input class="delbutton" type="button" name="" value="取消" @click='hide'>
       </div>

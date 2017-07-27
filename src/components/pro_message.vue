@@ -3,7 +3,7 @@
     <div class="mengban" v-show='showMB'>
       <div class="proclassify" >
         <div class="tishi">
-          确定将活动删除到回收站吗？
+          确定将产品删除到回收站吗？
         </div>
         <input class="delbutton" type="button" name="" value="确认" @click='deletePro'>
         <input class="delbutton" type="button" name="" value="取消" @click='hide'>

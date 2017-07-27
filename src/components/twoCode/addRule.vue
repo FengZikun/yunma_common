@@ -1,5 +1,18 @@
 <template>
 	<div>
+		<div class="mengban" v-show='showWarn'>
+				<div class="warn">
+					<div class="classifyHeader">
+						<span style="display:block;height:48px;line-height:48px;">操作提示</span>
+					</div>
+					<div class="warnmain">
+						{{warnText}}
+					</div>
+					<div class="warnbottom">
+						<input type="button" name="" value="确定" @click='showWarn=false'>
+					</div>
+				</div>
+			</div>
 		<div class="right-main">
 			<div class="right-main-top">
 				<p class="right-main-top1">
@@ -119,7 +132,9 @@
 				fiveMinMoney:0,	//五等奖最小金额
 				fiveMaxMoney:0,		//五等奖最大金额
 				send_name:null,
-				wishing:null
+				wishing:null,
+				showWarn:false,
+				warnText:null
 			}
 		},
 		props:['datas'],
@@ -127,6 +142,16 @@
 			//提交
 			confirm:function(){
 				var self=this;
+				if(self.ruleName===null){
+					self.showWarn=true;
+					self.warnText="请输入规则名称";
+					return
+				}
+				if(self.ruleLvel===null){
+					self.showWarn=true;
+					self.warnText="请选择红包层次";
+					return
+				}
 				var url='https://ym-a.top/cloud_code/ADD/redEnv/rule.do';
 				var type='post';
 				var data={

@@ -7,10 +7,10 @@
 			</div>
 			<div class="main">
 				<ul class="ul" @click.prevent='choosed'>
-					<a href="javascript:void(0)"><li class="list">服装内衣</li></a>
+					<a href="javascript:void(0)"><li class="list">小食品</li></a>
+					<a href="javascript:void(0)"><li class="list">酒水</li></a>
+					<a href="javascript:void(0)"><li class="list">饮料</li></a>
 					<a href="javascript:void(0)"><li class="list">鞋靴箱包</li></a>
-					<a href="javascript:void(0)"><li class="list">运动户外</li></a>
-					<a href="javascript:void(0)"><li class="list">珠宝配饰</li></a>
 					<a href="javascript:void(0)"><li class="list">个护化妆</li></a>
 					<a href="javascript:void(0)"><li class="list">家居建材</li></a>
 					<a href="javascript:void(0)"><li class="list">家居家纺</li></a>
@@ -138,7 +138,7 @@
 						<span>{{selected.name}}</span><span v-if='chilselected!=undefined'>>{{chilselected.name}}</span>
 					</div>
 					<input class="message-choose" type="button" name="" value="选择分类" @click='chooseClassify'>
-					<router-link to='/goods/classify' style='text-decoration:none;'><span class="message-after">管理分类</span></router-link>
+					<router-link to='/goods/classify' style='text-decoration:none;'><span class="message-after">新增自定义分类</span></router-link>
 				</div>
 				<div class="promessage">
 					<span class="message-name star">产品图片：</span>
@@ -148,7 +148,7 @@
 					<p class="p">图片宽高要求1:1比例，建议尺寸为640px*640px以上；最多上传5张图片，您可以拖曳图片调整图片顺序。</p>
 				</div>
 				<div class="promessage">
-					<span class="message-name star">价格：</span>
+					<span class="message-name">价格：</span>
 					<input class="message-value" type="text" name="" v-model='productPrice'>
 					<span class="message-danwei">元</span>
 				</div>
@@ -158,12 +158,12 @@
 					<span class="message-danwei danwei">元</span>
 				</div>
 				<div class="promessage">
-					<span class="message-name star">总库存：</span>
+					<span class="message-name">总库存：</span>
 					<input class="message-value" type="text" name="" v-model='productTotal'>
 					<span class="message-danwei">件</span>
 				</div>
 				<div class="promessage">
-					<span class="message-name star">商品编码：</span>
+					<span class="message-name">商品编码：</span>
 					<input class="message-value" type="text" name="" placeholder="限20个字符" v-model='productCode'>
 				</div>
 				<div class="promessage">
@@ -431,8 +431,7 @@
 	}
 	.imgbox{
 		left: 50%;
-		top: 50%;
-		margin-top: -327.5px;
+		top: 20%;
 		margin-left: -342.5px;
 		height: 655px;
 		border-radius: 2px;
@@ -768,18 +767,6 @@
 				}if(self.imgId==''){
 					self.showWarn=true;
 					self.warnText='请上传图片';
-					return
-				}if(self.productPrice==''){
-					self.showWarn=true;
-					self.warnText='请填写价格';
-					return
-				}if(self.productTotal==''){
-					self.showWarn=true;
-					self.warnText='请填写总库存';
-					return
-				}if(self.productCode==''){
-					self.showWarn=true;
-					self.warnText='请填写商品编码';
 					return
 				}
 				self.onehide=true;

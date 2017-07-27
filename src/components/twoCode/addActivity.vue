@@ -493,7 +493,7 @@
 	}
 	.choosepro{
 		width: 1000px;
-		height: 80%;
+		height: 65%;
 		background: #fff;
 		margin-left: 15%;
 		margin-top: 73px;
@@ -690,5 +690,8 @@
 		z-index: 2001;
 		padding: 15px 30px;
 		font-size: 16px;
+	}
+	.mengban:nth-of-type(2){
+		overflow-y: scroll;
 	}
 </style>

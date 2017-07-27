@@ -378,8 +378,7 @@ div{
 	.imgbox{
 		left: 50%;
 		margin-left: -342.5px;
-		top: 50%;
-		margin-top: -327.5px;
+		top: 20%;
 		height: 655px;
 	    border-radius: 2px;
 	    background: #fff;

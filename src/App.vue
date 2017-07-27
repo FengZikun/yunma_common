@@ -527,6 +527,7 @@
   left: 0;
   z-index: 2000;
   background: rgba(0, 0, 0, 0.6);
+  overflow-y: scroll;
 }
 .proclassify{
   width: 420px;
@@ -660,14 +661,14 @@
   display: none;
 }
   .imgbox{
-    margin: auto;
-    top: 50%;
-    margin-top: -327.5px;
+    left: 50%;
+    top: 20%;
+    margin-left: -342.5px;
     height: 655px;
     border-radius: 2px;
     background: #fff;
     width: 685px;
-    position: relative;
+    position: absolute;
   }
   .imgheader{
     width: 100%;
@@ -751,7 +752,7 @@
 }
 .choosepro{
     width: 1000px;
-    height: 80%;
+    height: 620px;
     background: #fff;
     margin-left: 15%;
     margin-top: 73px;

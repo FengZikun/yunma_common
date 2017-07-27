@@ -481,8 +481,9 @@
         var self=this;
         self.activityId=id
       },
-      showList: function (event) {
+      showList:function(event){
         $(event.target).parents("li").find("ul").toggleClass("hidelist");
+        $(event.target).parents("li").find('.arrow').toggleClass("upArrow");
       },
       getApp:function(){
         var self=this;

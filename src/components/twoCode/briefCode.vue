@@ -204,7 +204,8 @@
   }
   .brief-list{
     width: 100%;
-    overflow: hidden;
+    height: 778px;
+    overflow-y: scroll;
     padding: 0;
     border: 1px solid #e7ebee;
     border-radius: 10px;

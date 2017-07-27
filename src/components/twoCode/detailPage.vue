@@ -104,7 +104,7 @@
  </div>
 </div>
 <!-- 产品介绍 -->
-<div class="modelBg modHid" defName="modsone">
+<div class="mengban modHid" defName="modsone">
   <div class="modelContent">
     编辑窗口 <span class="modelbackBtn" @click="hideKuang">返回</span>
     <hr style="width:540px;border-top:1px solid #d1d1d1;margin-top:5px;">

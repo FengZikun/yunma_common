@@ -139,10 +139,12 @@
     width: 18%;
     overflow-wrap: break-word;
     height: 72px;
-    line-height: 36px;
+    line-height: 24px;
     white-space: pre-wrap;
   }
-
+  .last a{
+    display: inline-flex;
+  }
   .warnbottom{
     text-align: right;
     position: relative;

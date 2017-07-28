@@ -1,19 +1,19 @@
 <template>
   <div class="right-main">
-    <div class="plzWait">
+    <!-- <div class="plzWait">
       <p class="plzp">此功能正在开发中，敬请等待......</p>
-    </div>
-            <!-- <div class='right-main-top'>
+    </div> -->
+            <div class='right-main-top'>
             <p class='right-main-top1'>
               <span class='right-main-top-icon1'></span>
-              <span style="color: #b3b3b3;">查看V3.4版防伪码扫码明细记录；默认显示近30天内的扫码记录</span>
+              <span style="color: #b3b3b3;">查看V3.4版防伪码扫码明细记录</span>
             </p>
           </div>
           <div class="right-main-bottom">
-              <div class="button-group">
+              <!-- <div class="button-group">
                 <input type="search" name="" class="search" placeholder="输入经销商名称或编号">
                 <input type="button" name="" class="search-button" value="搜索">
-              </div>
+              </div> -->
               <div class="my-form">
                 <ul class="pro-list">
                   <li class="pro-li">
@@ -21,24 +21,25 @@
                     <span class="pro-li-span">防伪码</span>
                     <span class="pro-li-span">扫码结果</span>
                     <span class="pro-li-span">商品名称</span>
-                    <span class="pro-li-span">投诉反馈</span>
+                    <!-- <span class="pro-li-span">投诉反馈</span> -->
                     <span class="pro-li-span">扫码时间</span>
-                    <span class="pro-li-span">所属经销商</span>
+                    <!-- <span class="pro-li-span">所属经销商</span> -->
                     <span class="pro-li-span">扫码地区</span>
                   </li>
-                  <li>
-                    <span class="pro-li-span">aa_Joan</span>
-                    <span class="pro-li-span span2">124556124556124556124556124556</span>
-                    <span class="pro-li-span">正确</span>
-                    <span class="pro-li-span">商品名称</span>
-                    <span class="pro-li-span">投诉反馈</span>
-                    <span class="pro-li-span">扫码时间</span>
-                    <span class="pro-li-span">所属经销商</span>
-                    <span class="pro-li-span">扫码地区</span>
+                  <li v-for="data in list">
+                    <span class="pro-li-span">{{data.nickName}}</span>
+                    <span class="pro-li-span span2">{{data.securityCode}}</span>
+                    <span class="pro-li-span" v-if="data.errorCode==1">正常</span>
+                    <span class="pro-li-span" v-if="data.errorCode==-1">扫码次数过多</span>
+                    <span class="pro-li-span">{{data.productName}}</span>
+                    <!-- <span class="pro-li-span">投诉反馈</span> -->
+                    <span class="pro-li-span">{{data.scanTime}}</span>
+                    <!-- <span class="pro-li-span">所属经销商</span> -->
+                    <span class="pro-li-span">{{data.address}}</span>
                   </li>
                 </ul>
               </div>
-            </div> -->
+            </div>
           </div>
         </template>
         <style scoped>
@@ -65,6 +66,9 @@
           margin:auto;
           text-align: left;
         }
+        .pro-li-span{
+          width: 16.6%;
+        }
         .pro-li-span:nth-of-type(2){
           width: 12%;
         }
@@ -79,7 +83,7 @@
         }
         .span2{
           height: 70px;
-          line-height: 35px;
+          line-height: 95px;
           overflow: hidden;
           
         }
@@ -92,10 +96,30 @@
           data(){
             return{
               childCon:'我是子页面',
+              list:null
             }
           },
+          props:['datas'],
           methods:{
-            
-          }
+            init:function(){
+              var self=this;
+              var data={vendorId:self.datas.vendorId};
+              $.ajax({
+                url: 'https://ym-a.top/cloud_code/GET/mapCount/countInfo.do',
+                type:'get',
+                data: data,
+                dataType: 'json',
+                success: function (res) {
+                  self.list=res.data;
+                },
+                error:function(res){
+                  console.log("error")
+                }
+              })
+            },
+          },
+          created:function(){
+              this.init()
+            }
         }
       </script>

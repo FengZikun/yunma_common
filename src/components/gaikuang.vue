@@ -405,7 +405,7 @@
         chart.setOption(option);
       }
     },
-    created:function(){
+    mounted:function(){
       this.init();
     }
   }

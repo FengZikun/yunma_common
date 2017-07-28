@@ -15,7 +15,7 @@
                 <input type="button" name="" class="search-button" value="搜索">
               </div> -->
               <div class="my-form">
-                <ul class="pro-list">
+                <ul class="pro-list" style="overflow-y:auto">
                   <li class="pro-li">
                     <span class="pro-li-span">扫码者昵称</span>
                     <span class="pro-li-span">防伪码</span>

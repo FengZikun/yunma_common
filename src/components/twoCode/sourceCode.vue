@@ -34,11 +34,14 @@
           <span style="display:block;height:48px;line-height:48px;">操作提示</span>
         </div>
         <div class="tishi">
-          <span class="message-name">生成数量：</span>
-          <input class="message-value" type="text" name="" v-model="proNum">
-          <p class="message-after">（小于等于此订单内的产品数）</p>
+          <span class="message-name">一级包装数：</span>
+          <input class="message-value" type="text" name="" v-model="rowCount"><input class="delbutton" type="button" name="" value="确认" @click='getCount'><br>
+          <span class="message-name">此订单产生一级包装数：</span>
+          <input class="message-value" type="text" name="" v-model="rowNum"><br>
+          <span class="message-name">二级包装数：</span>
+          <input class="message-value" type="text" name="" v-model="boxCount">
         </div>
-        <div style="text-align: right;margin-top: 40px;margin-right: 20px;">
+        <div style="text-align: right;margin-top: 64px;margin-right: 20px;">
           <input class="delbutton" type="button" name="" value="确认" @click='source'>
           <input class="delbutton" type="button" name="" value="取消" @click='hide'>
         </div>
@@ -181,6 +184,7 @@
   }
   .tishi{
     text-align: center;
+    line-height: 56px
   }
   .modelBg{
    position: fixed;
@@ -238,8 +242,11 @@
         warnText:null,
         showSource:false,
         orderId:null,
-        proNum:null,
-        proCount:null
+        rowCount:null,
+        rowNum:null,
+        lastRowCount:null,
+        proCount:null,
+        boxCount:null
       }
     },
     props:['datas'],
@@ -329,11 +336,12 @@
         if(parseInt(self.proNum)<=parseInt(self.proCount)){
           $('#info').removeClass('modHid')
           self.showSource=false;
-          var url='https://ym-a.top/cloud_code/POST/productTracing/createProductTracingCode.do';
+          var url='http://192.168.1.109:8080/cloud_code/POST/productTracing/createProductTracingCode.do';
           var type='post';
           var data={
             orderId:self.orderId,
-            rowCount:self.proNum
+            rowCount:self.rowCount,
+            boxCount:self.boxCount
           };
           var success=function(res){
             $('#info').addClass('modHid')
@@ -369,6 +377,22 @@
         form.append(input1);   //将查询参数控件提交到表单上  
         form.submit();   //表单提交  
         alert('正在下载请勿关闭窗口');
+      },
+      getCount:function(){
+        var self=this;
+        $.ajax({
+          url:'http://192.168.1.109:8080/cloud_code/GET/productTracingcode/getCodeDivideCount.do',
+          type:'post',
+          data:{
+            orderId:self.orderId,
+            rowCount:self.rowCount
+          },
+          dataytpe:'json',
+          success:function(res){
+              self.lastRowCount=res.lastRowCount;
+              self.rowNum=res.rowNum
+          }
+        })
       },
       //获取页数
       getPage:common.getPage,

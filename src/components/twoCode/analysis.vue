@@ -1,15 +1,15 @@
 <template>
 	<div class="right-main">
-		<!-- <div class="plzWait">
+		<div class="plzWait">
 			<p class="plzp">此功能正在开发中，敬请等待......</p>
-		</div> -->
+		</div>
 		
-		<div class="right-main-main" >
+		<!-- <div class="right-main-main" >
 			<div class='two_center_tit'>
 	        <p><span class='p_left'>ID125订单--桑基图</span><span class='p_right'>(2017-04-10至2017-04-16)</span></p>
 	      </div>
 			<div id='sankey' style='width: 100%;height: 300px;' v-on:load="showChart"></div>
-	</div>
+	</div> -->
 </div>
 </template>
 

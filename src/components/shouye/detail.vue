@@ -113,10 +113,10 @@
 				self.showMB=true;
 				var code=$(event.target).attr('data-code');
 				if(self.type==1){
-					var code="https://ym-a.top/cloud_code/s/"+code;
+					var code="https://ym-a.top/s/"+code;
 				}
 				else if(self.type==0){
-					var code="https://ym-a.top/cloud_code/t/"+code;
+					var code="https://ym-a.top/t/"+code;
 				}
 				var qrcodeNode=document.getElementsByClassName('codeImg')[0];
 				$(qrcodeNode).html('');

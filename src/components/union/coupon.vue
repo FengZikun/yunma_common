@@ -28,6 +28,15 @@
 				<img src="../../assets/img/icon_cha3.png" class="cha" @click='showMB=true;showMB2=false'>
 
 			</div>
+			<div class="mengban" v-show='showMB3'>
+		      <div class="proclassify" >
+		        <div class="tishi">
+		          确定将优惠券删除吗？
+		        </div>
+		        <input class="delbutton" type="button" name="" value="确认" @click='delcoupon'>
+		        <input class="delbutton" type="button" name="" value="取消" @click='hide'>
+		      </div>
+		    </div>
 			<div class="right-main">
 				<div class="right-main-top">
 					<p class="right-main-top1">
@@ -62,7 +71,7 @@
 								<span class="pro-li-span">优惠券价格</span>
 								<span class="pro-li-span">领取限制</span>
 								<span class="pro-li-span">适用范围</span>
-								<!-- <span class="pro-li-span">操作</span> -->
+								<span class="pro-li-span">操作</span>
 							</li>
 							<li class="pro-li" v-for="pro in proInfo">
 								<span class="pro-li-span first" style="text-align: center;">{{pro.name}}</span>
@@ -79,6 +88,10 @@
 										<span class="shanchu" @click.self='mengban2' v-bind:data-id='pro.id'></span>
 									</a>
 								</span> -->
+								<span class="pro-li-span">
+			                      <span title="删除" class="shanchu" v-bind:data-id='pro.couponId' @click='mengban3'></span>
+
+			                    </span>
 							</li>
 						</ul>
 					</div>
@@ -119,7 +132,9 @@
 		        keyword:'',
 		        appKey:null,
 		        secret:null,
-		        showMB2:false
+		        showMB2:false,
+		        showMB3:false,
+		        couponId:null,
 		    }
 		},
 		props:['vendorId'],
@@ -154,7 +169,12 @@
 				// this.showMB=true;
 				// this.deleteArr.push($(event.target).attr('data-id'));
 			},
-
+			//删除提示
+	      mengban3:function(){
+	        var self=this;
+	        self.showMB3=true;
+	        self.couponId=$(event.target).attr('data-id');
+	      },
 			//获取
 			search:function(){
 				var self=this;
@@ -197,6 +217,25 @@
 			//隐藏蒙版
 			hide:function(){
 				this.showMB=false;
+				this.showMB3=false;
+			},
+			// 删除优惠券
+			delcoupon:function(){
+				var self=this;
+				self.showMB3=false;
+				var url='https://ym-a.top/cloud_code//DELETE/coupon/info.do';
+				var type='get';
+				var data={
+					vendorId:self.vendorId,
+					couponId:self.couponId.toString()
+				};
+				var success=function(res){
+					if(res.statuscode==1){
+						alert('删除成功')
+					}
+					self.init()
+				};
+				common.Ajax(url,type,data,success)
 			},
 			//获取页数
 			getPage:common.getPage,
@@ -218,7 +257,7 @@
 <style scoped>
 	/*@import "../../assets/css/common.css";*/
 	.pro-li-span{
-		width: 19%;
+		width: 16%;
 	}
 	.top-title{
 		width: 95%;

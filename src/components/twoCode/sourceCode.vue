@@ -34,14 +34,11 @@
           <span style="display:block;height:48px;line-height:48px;">操作提示</span>
         </div>
         <div class="tishi">
-          <span class="message-name">一级包装数：</span>
-          <input class="message-value" type="text" name="" v-model="rowCount"><input class="delbutton" type="button" name="" value="确认" @click='getCount'><br>
-          <span class="message-name">此订单产生一级包装数：</span>
-          <input class="message-value" type="text" name="" v-model="rowNum"><br>
-          <span class="message-name">二级包装数：</span>
-          <input class="message-value" type="text" name="" v-model="boxCount">
+          <span class="message-name">生成数量：</span>
+          <input class="message-value" type="text" name="" v-model="proNum">
+          <p class="message-after">（小于等于此订单内的产品数）</p>
         </div>
-        <div style="text-align: right;margin-top: 64px;margin-right: 20px;">
+        <div style="text-align: right;margin-top: 40px;margin-right: 20px;">
           <input class="delbutton" type="button" name="" value="确认" @click='source'>
           <input class="delbutton" type="button" name="" value="取消" @click='hide'>
         </div>
@@ -162,7 +159,6 @@
     line-height: 36px;
     white-space: pre-wrap;
   }
-
   .warnbottom{
     text-align: right;
     position: relative;
@@ -184,7 +180,6 @@
   }
   .tishi{
     text-align: center;
-    line-height: 56px
   }
   .modelBg{
    position: fixed;
@@ -223,7 +218,6 @@
   import common from '../../common.js'
   import router from '../../router.js'
   import {mapMutations} from 'vuex'
-
   export default{
     data(){
       return{
@@ -242,11 +236,8 @@
         warnText:null,
         showSource:false,
         orderId:null,
-        rowCount:null,
-        rowNum:null,
-        lastRowCount:null,
-        proCount:null,
-        boxCount:null
+        proNum:null,
+        proCount:null
       }
     },
     props:['datas'],
@@ -282,30 +273,25 @@
         $(event.target).parents("li").find("ul").toggleClass("hidelist");
         $(event.target).parents("li").siblings().find("ul").addClass("hidelist")
       },
-
       //进入详情页
       toDetail:function(){
         var self=this;
         var id=$(event.target).attr('data-id');
         self.$emit('upOrderId',id);
         self.changeType('a');
-
         router.push({path:'detail'})
       },
-
       //隐藏蒙版
       hide:function(){
         this.showMB=false;
         this.showSource=false;
       },
-
       //显示蒙版
       mengban:function(){
         var self=this;
         self.showMB=true;
         self.delOrder=$(event.target).attr('data-id');
       },
-
       //确定删除订单
       deletOrder:function(){
         var self=this;
@@ -322,7 +308,6 @@
         }
         common.Ajax(url,type,data,success)
       },
-
       //溯源码弹窗
       sourceBox:function(){
         var self=this;
@@ -336,12 +321,11 @@
         if(parseInt(self.proNum)<=parseInt(self.proCount)){
           $('#info').removeClass('modHid')
           self.showSource=false;
-          var url='http://192.168.1.109:8080/cloud_code/POST/productTracing/createProductTracingCode.do';
+          var url='https://ym-a.top/cloud_code/POST/productTracing/createProductTracingCode.do';
           var type='post';
           var data={
             orderId:self.orderId,
-            rowCount:self.rowCount,
-            boxCount:self.boxCount
+            rowCount:self.proNum
           };
           var success=function(res){
             $('#info').addClass('modHid')
@@ -378,31 +362,12 @@
         form.submit();   //表单提交  
         alert('正在下载请勿关闭窗口');
       },
-      getCount:function(){
-        var self=this;
-        $.ajax({
-          url:'http://192.168.1.109:8080/cloud_code/GET/productTracingcode/getCodeDivideCount.do',
-          type:'post',
-          data:{
-            orderId:self.orderId,
-            rowCount:self.rowCount
-          },
-          dataytpe:'json',
-          success:function(res){
-              self.lastRowCount=res.lastRowCount;
-              self.rowNum=res.rowNum
-          }
-        })
-      },
       //获取页数
       getPage:common.getPage,
-
       //翻页
       changePage:common.changePage,
-
       //上一页
       prevPage:common.prevPage,
-
       //下一页
       nextPage:common.nextPage,
     },

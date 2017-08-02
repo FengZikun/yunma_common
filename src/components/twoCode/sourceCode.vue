@@ -159,7 +159,6 @@
     line-height: 36px;
     white-space: pre-wrap;
   }
-
   .warnbottom{
     text-align: right;
     position: relative;
@@ -219,7 +218,6 @@
   import common from '../../common.js'
   import router from '../../router.js'
   import {mapMutations} from 'vuex'
-
   export default{
     data(){
       return{
@@ -275,30 +273,25 @@
         $(event.target).parents("li").find("ul").toggleClass("hidelist");
         $(event.target).parents("li").siblings().find("ul").addClass("hidelist")
       },
-
       //进入详情页
       toDetail:function(){
         var self=this;
         var id=$(event.target).attr('data-id');
         self.$emit('upOrderId',id);
         self.changeType('a');
-
         router.push({path:'detail'})
       },
-
       //隐藏蒙版
       hide:function(){
         this.showMB=false;
         this.showSource=false;
       },
-
       //显示蒙版
       mengban:function(){
         var self=this;
         self.showMB=true;
         self.delOrder=$(event.target).attr('data-id');
       },
-
       //确定删除订单
       deletOrder:function(){
         var self=this;
@@ -315,7 +308,6 @@
         }
         common.Ajax(url,type,data,success)
       },
-
       //溯源码弹窗
       sourceBox:function(){
         var self=this;
@@ -372,13 +364,10 @@
       },
       //获取页数
       getPage:common.getPage,
-
       //翻页
       changePage:common.changePage,
-
       //上一页
       prevPage:common.prevPage,
-
       //下一页
       nextPage:common.nextPage,
     },

@@ -22,11 +22,11 @@
     </div>
     <div class='two_center'>
       <div class='two_center_tit'>
-        <p><span class='p_left'>近7天扫码量曲线图</span><span class='p_right'>(2017-04-10至2017-04-16)</span></p>
+        <p><span class='p_left'>近7天扫码量曲线图</span><span class='p_right'>({{startTime}}至{{endTime}})</span></p>
       </div>
       <div class='zhex' id='zhex' style='width: 100%;height: 300px;' v-on:load="hans"></div>
       <div class='two_center_tit'>
-        <p><span class='p_left'>扫码总量分布图</span><span class='p_right'>(截至日期:2017-04-16)</span></p>
+        <p><span class='p_left'>扫码总量分布图</span><span class='p_right'>(截至日期:{{endTime}})</span></p>
       </div>
       <div class='map' id='map' style='width: 100%;height: 640px;' v-on:load="maph"></div>
     </div>
@@ -240,7 +240,9 @@
         daylyJoinActivCount:null,
         dayTotalScanCount:null,
         edata:'',
-        emap:''
+        emap:'',
+        startTime:null,
+        endTime:null
       }
     },
     mounted(){
@@ -307,6 +309,8 @@
         for(var i=length-1;i>-1;i--){
           date.push(self.edata[i]['scanTime']);
           dateVal.push(self.edata[i]['coun']);
+          if(i==0){self.endTime=self.edata[i]['scanTime']}
+          if(i==length-1){self.startTime=self.edata[i]['scanTime']}
         }
         // console.log(date);
         // console.log(dateVal)

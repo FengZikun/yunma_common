@@ -881,5 +881,12 @@
     top: 30%;
     text-align: center;
   }
+  .right-main-top-icon1{
+    width: 18px;
+    height: 18px;
+    background: url("./assets/img/icon_tishi.png") no-repeat;
+    float: left;
+    margin-right: 8px;
+  }
 
 </style>

@@ -1,47 +1,47 @@
 <template>
 	<div class="right-main">
-	<div class="mengban" v-show='showWarn2'>
-				<div class="warn">
-					<div class="classifyHeader">
-						<span style="display:block;height:48px;line-height:48px;">操作提示</span>
-					</div>
-					<div class="warnmain">
-						{{warnText}}
-					</div>
-					<div class="warnbottom">
-						<input type="button" name="" value="确定" @click='showWarn2=false'>
-					</div>
+		<div class="mengban" v-show='showWarn2'>
+			<div class="warn">
+				<div class="classifyHeader">
+					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
+				</div>
+				<div class="warnmain">
+					{{warnText}}
+				</div>
+				<div class="warnbottom">
+					<input type="button" name="" value="确定" @click='showWarn2=false'>
 				</div>
 			</div>
-	<div class="mengban" v-show='queren'>
-		<div class="queren">
-		<p style="color:red;text-align:center;height:30px;line-height:30px;">优惠券生成后无法修改和删除，请确认输入的信息</p>
-			<div class="messagebox">
-				<span class="message-name">优惠券名称：</span>
-				<span class="message-value">{{name}}</span>
-			</div>
-			<div class="messagebox">
-				<span class="message-name">最低使用限额：</span>
-				<span class="message-value">{{leastCost}}元</span>
-			</div>
-			<div class="messagebox">
-				<span class="message-name">优惠券面值：</span>
-				<span class="message-value">{{reduce}}元</span>
-			</div>
-			<div class="messagebox">
-				<span class="message-name">优惠券总数量：</span>
-				<span class="message-value">{{stock}}张</span>
-			</div>
-			<div class="messagebox">
-				<span class="message-name">每人限领数量：</span>
-				<span class="message-value">{{buyerLimit}}张</span>
-			</div>
-			<div class="messagebox">
-				<span class="message-name">优惠券有效期：</span>
-				<span class="message-value">{{beginTime}}</span>
-				<span>至</span>
-				<span class="message-value">{{endTime}}</span>
-			</div>
+		</div>
+		<div class="mengban" v-show='queren'>
+			<div class="queren">
+				<p style="color:red;text-align:center;height:30px;line-height:30px;">优惠券生成后无法修改和删除，请确认输入的信息</p>
+				<div class="messagebox">
+					<span class="message-name">优惠券名称：</span>
+					<span class="message-value">{{name}}</span>
+				</div>
+				<div class="messagebox">
+					<span class="message-name">最低使用限额：</span>
+					<span class="message-value">{{leastCost}}元</span>
+				</div>
+				<div class="messagebox">
+					<span class="message-name">优惠券面值：</span>
+					<span class="message-value">{{reduce}}元</span>
+				</div>
+				<div class="messagebox">
+					<span class="message-name">优惠券总数量：</span>
+					<span class="message-value">{{stock}}张</span>
+				</div>
+				<div class="messagebox">
+					<span class="message-name">每人限领数量：</span>
+					<span class="message-value">{{buyerLimit}}张</span>
+				</div>
+				<div class="messagebox">
+					<span class="message-name">优惠券有效期：</span>
+					<span class="message-value">{{beginTime}}</span>
+					<span>至</span>
+					<span class="message-value">{{endTime}}</span>
+				</div>
 			<!-- <div class="messagebox2">
 				<span class="message-name">在店铺中公开领取：</span>
 				<div v-bind:class='{turnOn:ifSwitch,turnOff:!ifSwitch}' @click='switchChange'>
@@ -56,76 +56,76 @@
 				<input class="querenButton" type="button" name="" value="发布" @click='confirm'>
 				<input class="querenButton" type="button" name="" value="取消" @click='queren=false'>
 			</div>
-				
+
 
 		</div>
 	</div>
-		
-		<div class="mengban" v-show='showMB2'>
-			<div style="width: 1000px;height: 850px; overflow-y: scroll;margin: auto;position: absolute;top:100px;left: 220px;">
-				<img style="width: 1000px" src="../../assets/img/2.jpg">
-			</div>
-			<img src="../../assets/img/icon_cha3.png" class="cha" @click='showMB=true;showMB2=false'>
 
+	<div class="mengban" v-show='showMB2'>
+		<div style="width: 1000px;height: 850px; overflow-y: scroll;margin: auto;position: absolute;top:100px;left: 220px;">
+			<img style="width: 1000px" src="../../assets/img/2.jpg">
 		</div>
-		<div class="step1" v-show='step1'>
-			<div class="top">
-				<img src="../../assets/img/buzhou1.png">
-				<span class="return"><router-link to='/union/coupon' style="text-decoration: none">返回</router-link></span>
-			</div>
+		<img src="../../assets/img/icon_cha3.png" class="cha" @click='showMB=true;showMB2=false'>
 
-			<div class="main">
-				<div class="option" v-bind:class='{hasSelect:weidian}' @click='selectType'>微店优惠券</div>
-				<div class="option" v-bind:class='{hasSelect:weixin}' @click='selectType'>微信商户号优惠券</div>
-			</div>
-
-			<div class="bottom">
-				<input class="next" type="button" name="" value="下一步" @click='nextStep'>
-			</div>
+	</div>
+	<div class="step1" v-show='step1'>
+		<div class="top">
+			<img src="../../assets/img/buzhou1.png">
+			<span class="return"><router-link to='/union/coupon' style="text-decoration: none">返回</router-link></span>
 		</div>
-		<div class="step2" v-show='step2'>
-			<div class="top">
-				<img src="../../assets/img/buzhou2.png">
-				<a href="javascript:void(0)"><span class="return" @click='toStep1'>返回</span></a>
-			</div>
-			<div class="main">
+
+		<div class="main">
+			<div class="option" v-bind:class='{hasSelect:weidian}' @click='selectType'>微店优惠券</div>
+			<div class="option" v-bind:class='{hasSelect:weixin}' @click='selectType'>微信商户号优惠券</div>
+		</div>
+
+		<div class="bottom">
+			<input class="next" type="button" name="" value="下一步" @click='nextStep'>
+		</div>
+	</div>
+	<div class="step2" v-show='step2'>
+		<div class="top">
+			<img src="../../assets/img/buzhou2.png">
+			<a href="javascript:void(0)"><span class="return" @click='toStep1'>返回</span></a>
+		</div>
+		<div class="main">
 			<div class="message-name title">
-					优惠券信息：
-				</div>
-				<div class="messagebox2">
-					<span class="message-name">优惠券名称：</span>
-					<input class="message-value" type="" name="" v-model='name'>
-					<span class="message-after">（该优惠券名字会显示在大礼包页面，例：输入“蛋白粉”则显示“蛋白粉优惠券”）</span>
-				</div>
-				<div class="messagebox2">
-					<span class="message-name">最低使用限额：</span>
-					<input class="message-value" type="" name="" v-model='leastCost' @input='comparison'>
-					<span class="message-after">（必须大于优惠券面值）</span>
-				</div>
-				<div class="messagebox2">
-					<span class="message-name">优惠券面值：</span>
-					<input class="message-value" type="" name="" v-model='reduce' @input='comparison'>
-					<span class="message-after">（设置优惠券的金额）</span>
-					<span class='message-warn' v-if='showWarn'>面值必须小于最低使用限额</span>
-				</div>
-				<div class="messagebox2">
-					<span class="message-name">优惠券总数量：</span>
-					<input class="message-value" type="" name="" v-model='stock'>
-					<span class="message-after">（设置发放优惠券的总数量）</span>
-				</div>
-				<div class="messagebox2">
-					<span class="message-name">每人限领数量：</span>
-					<input class="message-value" type="" name="" v-model='buyerLimit'>
-					<span class="message-after">（每人限领张数，最多十张）</span>
-					<span class="message-warn" v-if='buyerLimit>10'>最多十张</span>
-				</div>
-				<div class="messagebox2">
-					<span class="message-name">优惠券有效期：</span>
-					<input class="message-value short2" type="date" name="" v-model='beginTime'>
-					<span>至</span>
-					<input class="message-value short2" type="date" name="" v-model='endTime'>
-					<span class="message-after">（设置开始结束时间）</span>
-				</div>
+				优惠券信息：
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">优惠券名称：</span>
+				<input class="message-value" type="" name="" v-model='name'>
+				<span class="message-after">（该优惠券名字会显示在大礼包页面，例：输入“蛋白粉”则显示“蛋白粉优惠券”）</span>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">最低使用限额：</span>
+				<input class="message-value" type="" name="" v-model='leastCost' @input='comparison'>
+				<span class="message-after">（必须大于优惠券面值）</span>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">优惠券面值：</span>
+				<input class="message-value" type="" name="" v-model='reduce' @input='comparison'>
+				<span class="message-after">（设置优惠券的金额）</span>
+				<span class='message-warn' v-if='showWarn'>面值必须小于最低使用限额</span>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">优惠券总数量：</span>
+				<input class="message-value" type="" name="" v-model='stock'>
+				<span class="message-after">（设置发放优惠券的总数量）</span>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">每人限领数量：</span>
+				<input class="message-value" type="" name="" v-model='buyerLimit'>
+				<span class="message-after">（每人限领张数，最多十张）</span>
+				<span class="message-warn" v-if='buyerLimit>10'>最多十张</span>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">优惠券有效期：</span>
+				<input class="message-value short2" type="date" name="" v-model='beginTime'>
+				<span>至</span>
+				<input class="message-value short2" type="date" name="" v-model='endTime'>
+				<span class="message-after">（设置开始结束时间）</span>
+			</div>
 				<!-- <div class="messagebox2">
 					<span class="message-name">appKey：</span>
 					<input class="message-value" type="" name="">
@@ -161,6 +161,9 @@
 					填写资料
 				</div>
 				<div class="messagebox2">
+					<span class="right-main-top-icon1"></span><span>创建优惠券需绑定公众号授权,请点击</span><a href="javascript:void(0)" class="color:#459ae9" @click='here'>此处</a>
+				</div>
+				<div class="messagebox2">
 					<span class="message-name">最低使用限额：</span>
 					<input class="message-value" type="" name="" v-model='leastCost' @input='comparison'>
 					<span class="message-after">（必须大于优惠券面值）</span>
@@ -176,6 +179,7 @@
 					<input class="message-value" type="" name="" v-model='couponStockId'>
 					<span class="message-after">（优惠券ID可以从公众号商户平台的营销中心里获取）</span>
 				</div>
+				
 			</div>
 
 			<div class="bottom">
@@ -313,6 +317,33 @@
 				}
 			},
 
+			//获取授权码
+			here:function(){
+				var self=this;
+				// var url='https://ym-a.top/cloud_code/openweixin/getauthlink.do';
+				// var type='get';
+				// var data={
+				// 	vendorId:self.vendorId,
+				// };
+				// var success=function(res){
+				// 	console.log(res)
+				// };
+				// common.Ajax(url,type,data,success)
+				$.ajax({
+					url:'https://ym-a.top/cloud_code/openweixin/getauthlink.do',
+					type:'get',
+					data:{
+						vendorId:self.vendorId,
+					},
+					success:function(res){
+						window.open(res)
+					},
+					error:function(res){
+						console.log(11)
+					}
+				})
+			},
+
 			//发布
 			confirm:function(){
 				var self=this;
@@ -386,39 +417,54 @@
 			//提交微店
 			confirm2:function(){
 				var self=this;
-				if(self.leastCost===null){
-					self.showWarn2=true;
-					self.warnText="请输入最低使用限额";
-					return
-				}
-				if(self.reduce===null){
-					self.showWarn2=true;
-					self.warnText="请输入代金券面值";
-					return
-				}
-				if(self.couponStockId===null){
-					self.showWarn2=true;
-					self.warnText="请输入优惠券ID";
-					return
-				}
-				var url='https://ym-a.top/cloud_code/weChatCoupon/create.do';
+				var url='https://ym-a.top/cloud_code/openweixin/getAuthByVendorId.do';
 				var type='get';
 				var data={
 					vendorId:self.vendorId,
-					couponStockId:self.couponStockId,
-					couponValue:self.reduce,
-					couponMininumn:self.leastCost
 				};
 				var success=function(res){
-					if(res.statuscode===1){
-						self.step3=false;
-						self.step4=true;
+					console.log(res)
+					if(res.is_auth===1){
+						if(self.leastCost===null){
+							self.showWarn2=true;
+							self.warnText="请输入最低使用限额";
+							return
+						}
+						if(self.reduce===null){
+							self.showWarn2=true;
+							self.warnText="请输入代金券面值";
+							return
+						}
+						if(self.couponStockId===null){
+							self.showWarn2=true;
+							self.warnText="请输入优惠券ID";
+							return
+						}
+						var url='https://ym-a.top/cloud_code/weChatCoupon/create.do';
+						var type='get';
+						var data={
+							vendorId:self.vendorId,
+							couponStockId:self.couponStockId,
+							couponValue:self.reduce,
+							couponMininumn:self.leastCost
+						};
+						var success=function(res){
+							if(res.statuscode===1){
+								self.step3=false;
+								self.step4=true;
+							}else{
+								self.showWarn2=true;
+								self.warnText=res.msg;
+							}
+						};
+						common.Ajax(url,type,data,success)
 					}else{
 						self.showWarn2=true;
-						self.warnText=res.msg;
+						self.warnText="请先点击授权链接";
 					}
 				};
 				common.Ajax(url,type,data,success)
+				
 			},
 
 			//返回第二阶段

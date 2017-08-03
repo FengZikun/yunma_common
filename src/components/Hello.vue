@@ -1,5 +1,18 @@
 <template>
   <div class='fixed'>
+      <div class="mengban" v-show='showWarn'>
+        <div class="warn">
+          <div class="classifyHeader">
+            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+          </div>
+          <div class="warnmain">
+            {{warnText}}
+          </div>
+          <div class="warnbottom">
+            <input type="button" name="" value="确定" @click='showWarn=false'>
+          </div>
+        </div>
+      </div>
     <!--顶部功能区-->
     <!--<div class="row navBar">
       <div class="col-md-2"></div>
@@ -326,7 +339,9 @@
     data () {
       return {
         msg: '',
-        vendorName:null
+        vendorName:null,
+        showWarn:false,
+        warnText:''
 
       }
     },
@@ -372,7 +387,8 @@
           dataType: 'json',
           success: function (res) {
             if(res.status == "-1"){
-              alert('请先绑定公众号');
+              self.showWarn=true;
+          self.warnText='请先绑定公众号'
               router.push('/enterprise/en_public');
             }
             else{

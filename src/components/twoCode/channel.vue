@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div class="mengban" v-show='showWarn'>
+        <div class="warn">
+          <div class="classifyHeader">
+            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+          </div>
+          <div class="warnmain">
+            {{warnText}}
+          </div>
+          <div class="warnbottom">
+            <input type="button" name="" value="确定" @click='showWarn=false'>
+          </div>
+        </div>
+      </div>
     <div class="mengban" v-show='showCode' @click='hide'>
       <div class="codeImg">
         
@@ -46,7 +59,7 @@
     </div>
     <div class="right-main">
       <div class='right-main-top'>
-        <svg width="1460" height="500" @click='selectTree'></svg>
+        <svg width="1060" height="500" @click='selectTree'></svg>
         
       </div>
 

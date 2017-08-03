@@ -163,21 +163,13 @@
 					<span class="message-danwei">件</span>
 				</div>
 				<div class="promessage">
-					<span class="message-name">商品编码：</span>
-					<input class="message-value" type="text" name="" placeholder="限20个字符" v-model='productCode'>
-				</div>
-				<div class="promessage">
 					<span class="message-name">产品单位：</span>
 					<input class="message-value" type="text" name="" placeholder="例：个、瓶、盒、件" v-model='productUnit'>
 				</div>
 				<div class="promessage">
-					<span class="message-name">产品条码：</span>
-					<input class="message-value" type="text" name="" v-model='productBarCode'>
-				</div>
-				<div class="promessage">
 					<span class="message-name">产品参数：</span>
 					<div class="brod">
-						<p class="fontcolor">至少3个产品参数，最多50个</p>
+						<p class="fontcolor">最多50个</p>
 						<ul class="pro-parameter" v-if='paramKey!=""'>
 							<li v-for='(item, index) in paramKey'>
 								<span>{{item}}：</span>

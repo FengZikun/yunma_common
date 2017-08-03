@@ -717,7 +717,7 @@ Vue.use(VueHtml5Editor, {
 			chooseimg:function(){
 				var self=this;
 				self.chooselist={
-					url:$(event.target).attr('src').slice(21),
+					url:$(event.target).attr('src').slice(16),
 					id:$(event.target).attr('data-id')
 				}
 				$(event.target).css('border-color','#00baff');

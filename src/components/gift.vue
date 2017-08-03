@@ -47,7 +47,7 @@
               <span class="pro-li-span first" v-bind:data-id='gift.id'><span class="check-box checkshu" @click='selectThis' style="margin-left:10%;margin-right:5%;"></span><span style="display: inline-block;vertical-align: middle;overflow: hidden"><img style="width:45px;margin-left:20px;" v-bind:src="'https://ym-a.top'+gift.presentImg">{{gift.presentName}}</span></span>
               <span class="pro-li-span">{{gift.rowName}}</span>
               <span class="pro-li-span">{{gift.presentPrice}}</span>
-              <span class="pro-li-span"></span>
+              <span class="pro-li-span">{{gift.lastUpdateTime}}</span>
               <span class="pro-li-span">
                 <router-link to='/goods/updatagift'>
                   <span class="bianji" v-bind:data-id='gift.id' @click.self='updata'></span>

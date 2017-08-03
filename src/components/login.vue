@@ -157,7 +157,8 @@
                 userType:self.userType,
                 userId:self.userId,
                 userName:res.userName,
-                passWord:pswd}
+                passWord:pswd,
+                vendorName:res.vendorName}
                 self.$emit('upvendorID',data);
                 self.isLogin=true;
                 if(res.userType===99){

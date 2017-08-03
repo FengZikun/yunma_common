@@ -47,7 +47,8 @@
       },
       getvendorid:function(data){
         var self=this;
-        sessionStorage.setItem('userName',data.userName);
+        sessionStorage.setItem('vendorName',data.vendorName);
+        console.log(data.vendorName)
         sessionStorage.setItem('userType',data.userType);
         sessionStorage.setItem('vendorId',data.vendorId);
         sessionStorage.setItem('userId',data.userId);
@@ -880,13 +881,6 @@
     position: relative;
     top: 30%;
     text-align: center;
-  }
-  .right-main-top-icon1{
-    width: 18px;
-    height: 18px;
-    background: url("./assets/img/icon_tishi.png") no-repeat;
-    float: left;
-    margin-right: 8px;
   }
 
 </style>

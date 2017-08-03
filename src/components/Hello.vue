@@ -46,17 +46,17 @@
         <!-- <span class='span_two'>Evan</span> -->
         <ul class="personal">
           <li>
-            {{userName}}
+            {{vendorName}}
           </li>
           <li class="change_color">
             个人中心
-          </li>
-          <a href="javascript:void(0)" @click='tuichu' style="text-decoration:none;"><li class="change_color">
+          </li><li class="change_color">
+          <a href="javascript:void(0)" @click='tuichu' style="text-decoration:none;">
             退出登录
-          </li></a>
+          </a></li>
         </ul>
-        <span class='span_three'></span>
-        <span class='span_four'></span>
+        <!-- <span class='span_three'></span> -->
+        <!-- <span class='span_four'></span> -->
         
       </div>
       <div class='col-ma-2'></div>
@@ -215,7 +215,7 @@
     text-decoration: none;
   }
   .logo .username {
-    width: 20%;
+    width: 23%;
     float: right;
     position: relative;
   }
@@ -262,12 +262,12 @@
   }
   .personal{
     display: inline-block;
-    width: 130px;
+    min-width: 130px;
     padding-left: 0;
     border-radius: 5px;
     overflow: hidden;
     position: absolute;
-    left: 14px;
+    left: 31px;
     top: 20px;
     z-index: 1;
     font-size: 18px;
@@ -326,7 +326,7 @@
     data () {
       return {
         msg: '',
-        userName:null
+        vendorName:null
 
       }
     },
@@ -334,7 +334,7 @@
     methods:{
       init:function(){
         var self=this;
-        self.userName=sessionStorage.getItem('userName');
+        self.vendorName=sessionStorage.getItem('vendorName');
       },
       tuichu:function(){
         var self=this;

@@ -40,7 +40,7 @@
               <input class='textvalue' type="text" v-model="customPhone" name="customPhone">
             </div>
             <div class='message-box'>
-              <span class='textname'>微信绑定：</span>
+              <span class='textname'>微信号：</span>
               <input class='textvalue' type="text" v-model="vendorWeixin" name="vendorWeixin">
             </div>
             <div class='message-box'>
@@ -49,65 +49,20 @@
             </div>
             <div class='message-box'>
               <span class='textname'>联系地址：</span>
-              <select class='textvalue' name="vendorAddress" id="select2" style='width:97px;padding-left: 10px;' v-model="vendorAddress">
-                  <option value="0">请选择</option>
-                  <option value="1">广东省</option>
-                  <option value="2">河北省</option>
-                  <option value="3">山东省</option>
-                  <option value="4">辽宁省</option>
-                  <option value="5">吉林省</option>
-                  <option value="6">甘肃省</option>
-                  <option value="7">河南省</option>
-                  <option value="8">江苏省</option>
-                  <option value="9">湖南省</option>
-                  <option value="10">浙江省</option>
-                  <option value="11">山西省</option>
-                  <option value="12">四川省</option>
-                  <option value="13">贵州省</option>
-                  <option value="14">福建省</option>
-                  <option value="15">黑龙江省</option>
-              </select>
-              <select class='textvalue' name="" id="select3" style='width:97px;padding-left: 10px;' v-model="vendorAddress">
-                  <option value="0">请选择</option>
-                  <option value="1">广州市</option>
-                  <option value="2">深圳市</option>
-                  <option value="3">珠海市</option>
-                  <option value="4">汕头市</option>
-                  <option value="5">佛山市</option>
-                  <option value="6">韶关市</option>
-                  <option value="7">湛江市</option>
-                  <option value="8">肇庆市</option>
-                  <option value="9">江门市</option>
-                  <option value="10">茂名市</option>
-                  <option value="11">惠州市</option>
-                  <option value="12">汕尾市</option>
-                  <option value="13">东莞市</option>
-                  <option value="14">中山市</option>
-                  <option value="15">潮州市</option>
-              </select>
-              <select class='textvalue' name="" id="select4" style='width:97px;padding-left: 10px;' v-model="vendorAddress">
-                  <option value="0">请选择</option>
-                  <option value="1">罗湖区</option>
-                  <option value="2">福田区</option>
-                  <option value="3">南山区</option>
-                  <option value="4">盐田区</option>
-                  <option value="5">宝安区</option>
-                  <option value="6">龙岗区</option>
-              </select><br>
-              <textarea name="" id="textarea" cols="30" rows="5" placeholder='详细地址' v-model="vendorAddress"></textarea>
+              <input class='textvalue' type="text" v-model="vendorAddress" name="vendorAddress">
+            </div>
               <div class='message-box'>
                 <span class='textname'>官网地址：</span>
                 <input class='textvalue' style='width:150px;padding-left: 10px;' type="text" v-model="link" name="link"> 
               </div>
-              <div class='message-box'>
+              <!-- <div class='message-box'>
                 <span class='textname'>关联公众号：</span>
                 <input class='textvalue' style='width:150px;padding-left: 10px;' type="text" v-model="officialAccounts" name="officialAccounts"> 
-              </div>
+              </div> -->
               <div class='message-box'>
                 <input id='submit' type="button" value='保存' @click="complete" class="hid">
                 <input id='submit1' type="button" value='更新' @click="complete1" class="hid">
               </div>
-            </div>
         <div class="mengban" v-show='showMB'>
           <div class="imgbox">
             <div class="localUp">
@@ -115,11 +70,11 @@
               <span class="message-name star">上传头像：</span>
               <span style="display:inline-block;width:86px;height:86px;background-repeat:no-repeat;background-size: contain" v-if='imgUrl!=""'  v-bind:style="{backgroundImage: imgUrl}"></span>
               <input class="hidelist" type="file" id="productImg" name="imgUrl" @change='change($event)'>
-              <input type="text" name="imgUrl" class="hidelist" value="1231564">
               <label class="productImg" for="productImg"></label>
               <input class="hidelist" type="text" name="vendorId" v-bind:value='vendorId'>
             </div>
             <div class="imgbottom">
+            <input class="delbutton" type="button" name="" value="取消" @click='mengban'>
               <input class="delbutton" type="button" name="" value="确定" @click='mengban'>
             </div>
           </div>

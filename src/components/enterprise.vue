@@ -16,7 +16,7 @@
 
               <ul class='goods_sub2 hidelist'>
                 <router-link tag='li' to="/enterprise/enterprise_message"><a>基本信息</a></router-link>
-                <router-link tag='li' to="/enterprise/enterprise_cer"><a>资质认证</a></router-link>
+                <!-- <router-link tag='li' to="/enterprise/enterprise_cer"><a>资质认证</a></router-link> -->
                 <router-link tag='li' to="/enterprise/en_public"><a>公众号设置</a></router-link>
               </ul>
             </li>
@@ -27,16 +27,16 @@
               </div>
 
               <ul class='goods_sub3 hidelist'>
-                <router-link tag='li' to="/enterprise/trade"><a>交易账户</a></router-link>
-                <router-link tag='li' to="/enterprise/safety"><a>账户安全</a></router-link>
+                <!-- <router-link tag='li' to="/enterprise/trade"><a>交易账户</a></router-link> -->
+                <!-- <router-link tag='li' to="/enterprise/safety"><a>账户安全</a></router-link> -->
                 <router-link tag='li' to="/enterprise/revise"><a>修改密码</a></router-link>
               </ul>
             </li>
 
-            <router-link tag='li' class="goods_li_1 goods_li" to="/enterprise/enterprise_news">
+            <!-- <router-link tag='li' class="goods_li_1 goods_li" to="/enterprise/enterprise_news">
                 <span class='img img5'></span><a>消息中心</a>
                 <!-- <span class='arrow'></span> -->
-            </router-link>
+            <!-- </router-link> -->
           </ul>
         </div>
       </div>

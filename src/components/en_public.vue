@@ -306,17 +306,17 @@
       },
       toWeiQing:function(url){
         console.log(url.slice(url.indexOf('web/')+4))
-        document.cookie=`_755url=.${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
+        document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
                 let aa=window.open();
         setTimeout(function(){
-        aa.location=url;
+        aa.location='http://www.ym-b.top';
         }, 100);
       },
       toWeiQing1:function(url){
         document.cookie=`_755url=;domain=ym-b.top;path=/web`;
         let aa=window.open();
         setTimeout(function(){
-        aa.location=url;
+        aa.location='http://www.ym-b.top';
         }, 100);
       },
     },

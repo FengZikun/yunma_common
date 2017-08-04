@@ -42,7 +42,7 @@
                     <span class="pro-li-span">ID</span>
                     <span class="pro-li-span">产品名称</span>
                     <span class="pro-li-span">产品类型</span>
-                    <span class="pro-li-span">产品库分类</span>
+                    <!-- <span class="pro-li-span">产品库分类</span> -->
                     <span class="pro-li-span">价格/元</span>
                     <span class="pro-li-span">排序</span>
                     <span class="pro-li-span">更新时间</span>
@@ -52,7 +52,7 @@
                     <span class="pro-li-span first"><span class="check-box checkshu" @click='selectThis'></span><span style="display: inline-block;vertical-align: middle">{{pro.id}}</span></span>
                     <span class="pro-li-span" style="text-align:left;"><img style="width:45px;margin-left:20px;" v-bind:src="'https://ym-a.top/'+pro.productImg">{{pro.productName}}</span>
                     <span class="pro-li-span">{{pro.productSpe}}</span>
-                    <span class="pro-li-span">{{pro.rowName}}</span>
+                    <!-- <span class="pro-li-span">{{pro.rowName}}</span> -->
                     <span class="pro-li-span">{{pro.productPrice}}</span>
                     <span class="pro-li-span">{{pro.sortNum}}</span>
                     <span class="pro-li-span wordbreak">{{pro.lastUpdateTime}}</span>
@@ -137,13 +137,13 @@
 .page-num-ul a{
   display: inline-block;
 }
-.pro-li:nth-of-type(1) .pro-li-span:nth-of-type(5):after{
+/*.pro-li:nth-of-type(1) .pro-li-span:nth-of-type(5):after{
   content: "";
   display: inline-block;
   width: 5px;
   height: 5px;
   background-color: #000;
-}
+}*/
 </style>
 <script>
 import common from '../common.js'

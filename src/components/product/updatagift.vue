@@ -15,7 +15,7 @@
       </div>
 		<div class="step1" v-bind:class='{hidestep:onehide}'>
 			<div class="top">
-				<img src="../../assets/img/step.png">
+				<img src="../../assets/img/chanpin_buzhou1.png">
 				<span class="return"><router-link to='/goods/gift' style="text-decoration: none">返回</router-link></span>
 			</div>
 			<div class="main">
@@ -87,7 +87,7 @@
 				</div>
 			</div>
 			<div class="top">
-				<img src="../../assets/img/step2.png">
+				<img src="../../assets/img/chanpin_buzhou2.png">
 				<span class="return"><a href="javascipt:void(0)" style="text-decoration: none"  @click='showStep1'>返回</a></span>
 			</div>
 			<div class="main">
@@ -97,14 +97,14 @@
 					<input class="message-value" type="text" name="" v-model='name'>
 					<span class="message-after">（限50个汉字/100个字符以内）</span>
 				</div>
-				<div class="promessage">
+				<!-- <div class="promessage">
 					<span class="message-name">礼品分组：</span>
 					<select v-model='selected' @change='getrowId'>
 						<option value="null" selected="selected">不分组</option>
 						<option v-for='item in giftClassify' v-bind:value='item'>{{item.name}}</option>
 					</select>
 					<router-link to='/goods/groups' style='text-decoration:none;'><span class="message-after">管理分组</span></router-link>
-				</div>
+				</div> -->
 				<div class="promessage">
 					<span class="message-name star">市面价值：</span>
 					<input class="message-value" type="text" name="" v-model='price'>
@@ -114,7 +114,7 @@
 					<span class="message-name star">礼品图片：</span>
 					<img v-for='img in selectimg' class="myimg" style="width:86px;height:86px;vertical-align:top;" v-bind:src="'https://ym-a.top'+img">
 					<span class="message-add" @click='searchphoto'></span>
-					<p class="p">图片宽高要求1:1比例，建议尺寸为640px*640px以上；最多上传5张图片，您可以拖曳图片调整图片顺序。</p>
+					<p class="p">图片宽高要求1:1比例，建议尺寸为640px*640px以上。</p>
 					<form action="/cloud_code/ADD/product/info.do" method="post" enctype="multipart/form-data" style="display:none">
 				  		<table>
 				    		<tr>
@@ -156,13 +156,13 @@
 				</div>
 				<div class="buttongroup">
 					<input class="jumpbutton" type="button" name="" value="上一步" @click='showStep1'>
-					<input class="jumpbutton" type="button" name="" value="下一步" @click='showStep3'>
+					<input class="jumpbutton" type="button" name="" value="完成" @click='complete'>
 
 				</div>
 			</div>
 		</div>
 
-		<div class="step3" v-bind:class='{hidestep:threehide}'>
+		<!-- <div class="step3" v-bind:class='{hidestep:threehide}'>
 			<div class="top">
 				<img src="../../assets/img/step3.png">
 				<span class="return" @click='showStep2'><a href="javascript:void(0)" style="text-decoration: none">返回</a></span>
@@ -179,7 +179,7 @@
 
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 </template>

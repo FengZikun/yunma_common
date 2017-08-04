@@ -21,12 +21,12 @@
                 <p>红包管理</p>
               </li>
               </router-link>
-              <router-link to='/enterprise/trade'>
+              <!-- <router-link to='/enterprise/trade'>
               <li class="right-main-li">
                 <img src="../../assets/img/icon_zhanghao.png">
                 <p>账号管理</p>
               </li>
-              </router-link>
+              </router-link> -->
               <router-link to='/goods/updataproduct'>
               <li class="right-main-li">
                 <img src="../../assets/img/icon_xinzeng.png">

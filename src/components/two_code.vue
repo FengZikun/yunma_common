@@ -402,15 +402,15 @@
         you:true,
         antifake:true,
         shop:true,
-        shopUrl:'https://www.ym-b.top/',
+        shopUrl:'http://www.cclink.xin',
         keyOne:true,
         keyOneName:'公司官网',
         keyOneContent:'公司官网页面',
-        keyOneURL:'https://ym-b.top',
+        keyOneURL:'http://www.cclink.xin',
         keyTwo:true,
         keyTwoName:'产品介绍',
         keyTwoContent:'产品介绍页面',
-        keyTwoURL:'https://ym-b.top',
+        keyTwoURL:'',
         keyThree:true,
         keyThreeName:'取蜜视频',
         keyThreeContent:'取蜜视频页面',
@@ -447,15 +447,15 @@
         self.you=true;
         self.antifake=true;
         self.shop=true;
-        self.shopUrl='https://www.ym-b.top/';
+        self.shopUrl='http://www.cclink.xin';
         self.keyOne=true;
         self.keyOneName='公司官网';
         self.keyOneContent='公司官网页面';
-        self.keyOneURL='https://ym-b.top';
+        self.keyOneURL='http://www.cclink.xin';
         self.keyTwo=true;
         self.keyTwoName='产品介绍';
         self.keyTwoContent='产品介绍页面';
-        self.keyTwoURL='https://ym-b.top';
+        self.keyTwoURL='';
         self.keyThree=true;
         self.keyThreeName='取蜜视频';
         self.keyThreeContent='取蜜视频页面';
@@ -516,10 +516,10 @@
         })
       },
       toWeiQing:function(url){
-        document.cookie=`_755url=.${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
+        document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
         let aa=window.open();
         setTimeout(function(){
-        aa.location=url;
+        aa.location='http://www.ym-b.top';
         }, 100);
       },
       WxGzhInfo:function(url){

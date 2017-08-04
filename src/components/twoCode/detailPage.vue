@@ -151,10 +151,10 @@
     <div class="test modHid">
       <h1 style="text-align: center;">仁正（烟台）商贸有限公司</h1>
       <p style="text-align: center;text-indent: 2em;">成立于2004年，公司坐落于美丽的海滨城市--山东烟台。</p>
-      <img src="../../assets/img/640.jpg" style="width: 700px;">
+      <img src="https://ym-b.top/static/img/640.dd33057.jpg" style="width: 700px;">
       <p style="text-indent: 4em;">公司自成立以来，一直专注于化妆品、美容美发产品及设备等行业的进出口贸易，与韩国、日本、越南等东亚、东南亚国家的品牌商交流合作，在东亚等国家享有较高的声誉及影响秉承“高品质、高服务、高形象”的企业文化理念，融合韩国SCABIOLA的先进技术和科学的经营管理方法，经营国际一流的、具高知名度、高品质的  “Cloud9” “SCABIOLA” “Clinie” “RopleRopler” 化妆品以适应中国市场的需求。
         仁正（烟台）商贸有限公司是斯卡贝拉、可莱丝、爱茉莉等公司在中国的唯一品牌代理商。</p>
-        <img src="../../assets/img/640(3).jpg" style="width: 700px;">
+        <img src="https://ym-b.top/static/img/640(3).becfca0.jpg" style="width: 700px;">
         <p style="text-indent: 4em;">公司团队多次访问周边国家，与各大品牌商洽谈合作只为把世界上最好的最真的美容美体产品带给您
           烟台政仁工贸有限公司--进出口株式会社，实力雄厚，重信用、守合同、保证产品质量，以多品种经营特色和薄利多销的原则，赢得了广大客户的信任。烟台政仁工贸有限公司本着“客户第一，诚信至上”的原则，与多家企业建立了长期的合作关系。</p>
           <img src="../../assets/img/640(4).jpg" style="width: 700px;">
@@ -170,7 +170,7 @@
             <div class="info innerCodeTure hideMod">
               <p style="color: #eca100;font-family:'微软雅黑';height: 15vw;line-height: 7.5vw;font-size: 4vw;font-weight: bold;">
                 <img style="width: 12vw;height: 12vw;vertical-align:middle;float: left;" src="img/icon/icon_suyuan1.png"/>&nbsp;&nbsp;
-                该产品为{{this.phoneTitle}}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请放心使用！
+                该产品为正品<br>&nbsp;&nbsp;请放心使用！
               </p>
             </div>
             <!-- 内码假 -->
@@ -418,12 +418,6 @@
           },
           tobaba(){
             var self=this;
-            var spree=0;
-            var securityAndTraceability=0;
-            var weShop=false;
-            var vendorHttp=false;
-            var productInfo=false;
-            var getRedEnv=0;
             var str=`<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -664,6 +658,10 @@
                           });
                           return  
                         }
+                        if(sessionStorage.getItem('_755wx')==1){
+                            _this.render(JSON.parse(localStorage.getItem('infodata')))
+                            return
+                        }
                         $.ajax({
                           url: "/cloud_code/POST/weChat/signature.do",
                           data: {url: window.location.href},
@@ -727,6 +725,7 @@
                           type: 'POST',
                           dataType: 'json',
                           success: function (res) {
+                            sessionStorage.setItem('_755wx',1);
                             self.render(res);
                           },
                           error: function (err) {
@@ -767,24 +766,24 @@
                         if(data.securityAndTraceability==1){
                           $('#btn2').remove();
                         }
-                        if(data.weShop==false){
+                        if(data.weShop=="false"){
                           $('#btn3').remove();
                         }
-                        if(data.weShop!=false){
+                        if(data.weShop!="false"){
                           $('#btn3').removeClass('hideMod');
                           self.urlOne=data.weShop
                         }               
-                        if(data.vendorHttp==false){
-                          $('.#btn4').remove();
+                        if(data.vendorHttp=="false"){
+                          $('#btn4').remove();
                         }
-                        if(data.vendorHttp!=false){
+                        if(data.vendorHttp!="false"){
                           $('#btn4').removeClass('hideMod');
                           self.urlTwo=data.vendorHttp
                         }   
-                        if(data.productInfo==false){
-                          $('.#btn5').remove();
+                        if(data.productInfo=="false"){
+                          $('#btn5').remove();
                         }
-                        if(data.productInfo!=false){
+                        if(data.productInfo!="false"){
                           $('#btn5').removeClass('hideMod');
                           self.urlThree=data.productInfo
                         }   

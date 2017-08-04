@@ -16,7 +16,7 @@
               
               <ul class='goods_sub2 hidelist'>
                 <router-link tag='li' to="/goods/pro_message"><a>产品管理</a></router-link>
-                <router-link tag='li' to="/goods/classify"><a>产品分类</a></router-link>
+                <!-- <router-link tag='li' to="/goods/classify"><a>产品分类</a></router-link> -->
               </ul>
             </li>
             <li class='goods_li_1'>
@@ -26,7 +26,7 @@
               
               <ul class='goods_sub3 hidelist'>
                 <router-link tag='li' to="/goods/gift"><a>礼品管理</a></router-link>
-                <router-link tag='li' to="/goods/groups"><a>分组管理</a></router-link>
+                <!-- <router-link tag='li' to="/goods/groups"><a>分组管理</a></router-link> -->
               </ul>
             </li>
           </ul>

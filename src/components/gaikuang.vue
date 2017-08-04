@@ -411,6 +411,10 @@
     },
     mounted:function(){
       this.init();
-    }
+    },
+    // updated(){
+    //   this.init();
+
+    // }
   }
 </script>

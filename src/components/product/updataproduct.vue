@@ -2,7 +2,7 @@
 	<div class="right-main">
 		<div class="step1" v-bind:class='{hidestep:onehide}'>
 			<div class="top">
-				<img src="../../assets/img/step.png">
+				<img src="../../assets/img/chanpin_buzhou1.png">
 				<span class="return"><router-link to='/goods/pro_message' style="text-decoration: none">返回</router-link></span>
 			</div>
 			<div class="main">
@@ -123,7 +123,7 @@
 				</div>
 			</div>
 			<div class="top">
-				<img src="../../assets/img/step2.png">
+				<img src="../../assets/img/chanpin_buzhou2.png">
 				<span class="return"><a href="javascipt:void(0)" style="text-decoration: none"  @click='showStep1'>返回</a></span>
 			</div>
 			<div class="main">
@@ -132,20 +132,20 @@
 					<span class="message-name star">产品名称：</span>
 					<input class="message-value" type="text" name="" v-model='productName'>
 				</div>
-				<div class="promessage">
+				<!-- <div class="promessage">
 					<span class="message-name">产品分类：</span>
 					<div v-if='selected.name!=undefined' class="choosezu">
 						<span>{{selected.name}}</span><span v-if='chilselected!=undefined'>>{{chilselected.name}}</span>
 					</div>
 					<input class="message-choose" type="button" name="" value="选择分类" @click='chooseClassify'>
 					<router-link to='/goods/classify' style='text-decoration:none;'><span class="message-after">新增自定义分类</span></router-link>
-				</div>
+				</div> -->
 				<div class="promessage">
 					<span class="message-name star">产品图片：</span>
 					<img v-for='img in selectimg' class="myimg" style="width:86px;height:86px;vertical-align:top;" v-bind:src="img" v-if='productid==""'>
 					<img class="myimg" style="width:86px;height:64px;vertical-align:top;" v-bind:src="'https://ym-a.top'+productImg" @click='delImg' v-if='productid!=""'>
 					<span class="message-add" @click='searchphoto(1)'></span>
-					<p class="p">图片宽高要求1:1比例，建议尺寸为640px*640px以上；最多上传5张图片，您可以拖曳图片调整图片顺序。</p>
+					<p class="p">图片宽高要求1:1比例，建议尺寸为640px*640px以上。</p>
 				</div>
 				<div class="promessage">
 					<span class="message-name">价格：</span>
@@ -189,13 +189,13 @@
 				</div>
 				<div class="buttongroup">
 					<input class="jumpbutton" type="button" name="" value="上一步" @click='showStep1'>
-					<input class="jumpbutton" type="button" name="" value="下一步" @click='showStep3'>
+					<input class="jumpbutton" type="button" name="" value="完成" @click='complete'>
 
 				</div>
 			</div>
 		</div>
 
-		<div class="step3" v-bind:class='{hidestep:threehide}'>
+		<!-- <div class="step3" v-bind:class='{hidestep:threehide}'>
 			<div class="top">
 				<img src="../../assets/img/step3.png">
 				<span class="return" @click='showStep2'><a href="javascript:void(0)" style="text-decoration: none">返回</a></span>
@@ -213,7 +213,7 @@
 
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
 </template>
@@ -646,7 +646,7 @@
 				onehide:false,
 				twohide:true,
 				threehide:true,
-				rowId:null,
+				// rowId:null,
 				productName:'',
 				productImg:'',
 				productPrice:'',
@@ -720,7 +720,7 @@
 						self.selectimg.push(self.productImg);
 						var savename=self.productName;
 						self.savename=savename;
-						self.rowId=res.rowId;
+						// self.rowId=res.rowId;
 						self.selected.name=res.rowName
 						self.showStep2();
 					}
@@ -793,19 +793,19 @@
 			},
 
 			//确认产品分类
-			confirmClassify:function(){
-				var self=this;
-				if(self.selected.name==undefined){
-					alert('请选择分组')
-				}else if(self.chilselected==null){
-					var id=self.selected.id;
-					self.rowId=id;
-				}else if(self.chilselected!=null){
-					var id=self.chilselected.id;
-					self.rowId=id;
-				}
-				self.hide()
-			},
+			// confirmClassify:function(){
+			// 	var self=this;
+			// 	if(self.selected.name==undefined){
+			// 		alert('请选择分组')
+			// 	}else if(self.chilselected==null){
+			// 		var id=self.selected.id;
+			// 		self.rowId=id;
+			// 	}else if(self.chilselected!=null){
+			// 		var id=self.chilselected.id;
+			// 		self.rowId=id;
+			// 	}
+			// 	self.hide()
+			// },
 			//隐藏蒙版
 			hide:function(){
 				this.showMB=false;
@@ -826,7 +826,7 @@
 						var data={
 							id:self.productid,
 							vendorId:self.vendorId,
-							rowId:self.rowId,
+							// rowId:self.rowId,
 							productName:self.productName,
 							productImg:self.imgId,
 							productPrice:self.productPrice,
@@ -845,7 +845,7 @@
 						var data={
 							id:self.productid,
 							vendorId:self.vendorId,
-							rowId:self.rowId,
+							// rowId:self.rowId,
 							productImg:self.imgId,
 							productPrice:self.productPrice,
 							productMarketPrice:self.productMarketPrice,
@@ -876,7 +876,7 @@
 				var type='post';
 				var data={
 					vendorId:self.vendorId,
-					rowId:self.rowId,
+					// rowId:self.rowId,
 					productName:self.productName,
 					productImg:self.imgId,
 					productPrice:self.productPrice,

@@ -97,14 +97,14 @@
 					<input class="message-value" type="text" name="" v-model='name'>
 					<span class="message-after">（限50个汉字/100个字符以内）</span>
 				</div>
-				<!-- <div class="promessage">
+				<div class="promessage" v-if='giftClassify!==null'>
 					<span class="message-name">礼品分组：</span>
 					<select v-model='selected' @change='getrowId'>
 						<option value="null" selected="selected">不分组</option>
 						<option v-for='item in giftClassify' v-bind:value='item'>{{item.name}}</option>
 					</select>
-					<router-link to='/goods/groups' style='text-decoration:none;'><span class="message-after">管理分组</span></router-link>
-				</div> -->
+					<!-- <router-link to='/goods/groups' style='text-decoration:none;'><span class="message-after">管理分组</span></router-link> -->
+				</div>
 				<div class="promessage">
 					<span class="message-name star">市面价值：</span>
 					<input class="message-value" type="text" name="" v-model='price'>

@@ -26,7 +26,7 @@
           </li>
         </ul>
       </div>
-  <div class="modelBg modHid">
+  <div class="mengban modHid">
       <div class="modelContent">
         <div class="phoneHeader"></div>
         <div class="phoneTitle"></div>
@@ -62,15 +62,6 @@
     line-height: 36px;
     vertical-align: middle;
     /* height: 72px */
-  }
-  .modelBg{
-   position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2000;
-    background: rgba(0, 0, 0, 0.6);
   }
   .modelContent{
      position: absolute;
@@ -248,7 +239,7 @@
       },
       showKuang(event){
         this.frameSrc='https://ym-a.top/wx/'+$(event.target).attr('data');
-        $('.modelBg').removeClass('modHid');
+        $('.mengban').removeClass('modHid');
       }
     },
     watch:{

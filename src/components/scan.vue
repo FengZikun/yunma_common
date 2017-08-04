@@ -17,6 +17,7 @@
               <div class="my-form">
                 <ul class="pro-list" style="overflow-y:auto">
                   <li class="pro-li">
+                    <span class="pro-li-span">头像</span>
                     <span class="pro-li-span">扫码者昵称</span>
                     <span class="pro-li-span">防伪码</span>
                     <span class="pro-li-span">扫码结果</span>
@@ -27,10 +28,11 @@
                     <span class="pro-li-span">扫码地区</span>
                   </li>
                   <li v-for="data in list">
+                    <span class="pro-li-span"><span class='photo1' v-bind:style="{backgroundImage: 'url(' + data.picUrl + ')'}"></span></span>
                     <span class="pro-li-span">{{data.nickName}}</span>
                     <span class="pro-li-span span2">{{data.securityCode}}</span>
-                    <span class="pro-li-span" v-if="data.errorCode==1">正常</span>
-                    <span class="pro-li-span" v-if="data.errorCode==-1">扫码次数过多</span>
+                    <span class="pro-li-span" v-if="data.count==1">正常</span>
+                    <span class="pro-li-span" v-if="data.count>1">扫码次数过多</span>
                     <span class="pro-li-span">{{data.productName}}</span>
                     <!-- <span class="pro-li-span">投诉反馈</span> -->
                     <span class="pro-li-span">{{data.scanTime}}</span>
@@ -44,6 +46,14 @@
         </template>
         <style scoped>
          /*@import "../assets/css/common.css";*/
+                 .photo1{
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+        vertical-align: middle;
+        background-size: cover;
+        background-repeat: no-repeat;
+        }
          .right-main-top{
           width: 95%;
           margin: auto;
@@ -67,7 +77,7 @@
           text-align: left;
         }
         .pro-li-span{
-          width: 16.6%;
+          width: 14.6%;
         }
         .pro-li-span:nth-of-type(2){
           width: 12%;
@@ -96,7 +106,8 @@
           data(){
             return{
               childCon:'我是子页面',
-              list:null
+              list:null,
+              urll:'http://ym-b.top/static/img/logofinalversion6.0a53eab.png'
             }
           },
           props:['datas'],

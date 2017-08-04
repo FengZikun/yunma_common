@@ -16,14 +16,14 @@
     <form class="message" id="formTol" enctype="multipart/form-data">
       <div class='message-box'>
         <span class='textname'>账号：</span>
-        <input type="text" style="display:none;" name="vendorName" model='vendorName'>
-        <span>&nbsp;&nbsp;{{vendorName}}</span>
+        <!-- <input type="text" style="display:none;" name="userName" model='userName'> -->
+        <span>&nbsp;&nbsp;{{userName}}</span>
       </div>
       <div class='message-box'>
 
         <span class='textname'><span class='xing'>*</span>品牌商名称：</span>
-        <span>{{brandName}}</span>
-        <!-- <input class='textvalue' type="text" v-model="brandName" name="brandName"> -->
+        <span>{{vendorName}}</span>
+        <!-- <input class='textvalue' type="text" v-model="vendorName" name="vendorName"> -->
       </div>
       <div class='message-box'>
         <span class='textname' >上传Logo：</span>
@@ -68,8 +68,8 @@
               <input class='textvalue' type="text" v-model="customTel" name="customTel">
             </div>
             <div class='message-box'>
-              <span class='textname'>联系地址：</span>
-              <input class='textvalue' type="text" v-model="vendorAddress" name="vendorAddress">
+              <span class='textname' style="display:inline-block;position:relative;top:-89px;">联系地址：</span>
+              <textarea rows="3" cols="20" v-model="vendorAddress" name="vendorAddress" style="width: 200px;height: 100px;position:relative;left:10px;"></textarea>
             </div>
             <div class='message-box'>
               <span class='textname'>官网地址：</span>
@@ -80,8 +80,7 @@
                 <input class='textvalue' style='width:150px;padding-left: 10px;' type="text" v-model="officialAccounts" name="officialAccounts"> 
               </div> -->
               <div class='message-box'>
-                <input id='submit' type="button" value='保存' @click="complete" class="hid">
-                <input id='submit1' type="button" value='更新' @click="complete1" class="hid">
+                <input id='submit1' type="button" value='更新' @click="complete1">
               </div>
               <div class="mengban" v-show='showMB'>
                 <div class="imgbox">
@@ -94,8 +93,9 @@
                       <input class="hidelist" type="text" name="vendorId" v-bind:value='vendorId'>
                     </div>
                     <div class="imgbottom">
-                      <input class="delbutton" type="button" name="" value="取消" @click='mengban'>
                       <input class="delbutton" type="button" name="" value="确定" @click='mengban'>
+                      <input class="delbutton" type="button" name="" value="取消" @click='mengban'>
+                      
                     </div>
                   </div>
                 </div>
@@ -245,8 +245,8 @@
             data(){
               return{
                 childCon:'我是子页面',
-        vendorName: '', //账号
-        brandName:'',//品牌商名称
+        userName: '', //账号
+        vendorName:'',//品牌商名称
         imgUrl:'',//头像地址
         industryName: '0' ,//所属行业
         contactName:'',   //联系人 
@@ -271,10 +271,9 @@
           vendorId:self.vendorId,
         };
         var success=function(res){
-          if(res.statuscode=='1'){
             res=res.data;
+            self.userName=res.userName;
             self.vendorName=res.vendorName;
-            self.brandName=res.brandName;
             self.imgUrl=`url(https://ym-a.top${res.imgUrl})`;
             self.industryName=res.industryName;
             self.contactName=res.contactName;
@@ -284,11 +283,6 @@
             self.vendorAddress=res.vendorAddress;
             self.link=res.link;
             self.officialAccounts=res.officialAccounts;
-            $('#submit1').show()
-          }
-          else{
-            $('#submit').show()
-          }
         }
         //调用ajax
         common.Ajax(url,type,data,success)
@@ -348,11 +342,17 @@
           contentType: false,
           success: function (res) {
             if(res.statuscode==1){
-              alert("保存成功")
+              self.showWarn=true;
+              self.warnText='保存成功'
+            }
+            else{
+              self.showWarn=true;
+              self.warnText=res.msg
             }
           },
           error:function(res){
-            alert("error")
+           self.showWarn=true;
+              self.warnText='更新出错'
           }
         });
       },
@@ -381,11 +381,18 @@
           contentType: false,
           success: function (res) {
             if(res.statuscode==1){
-              alert("保存成功")
+              self.showWarn=true;
+              self.warnText='保存成功';
+              self.init();
+            }
+            else{
+              self.showWarn=true;
+              self.warnText=res.msg
             }
           },
           error:function(res){
-            alert("error")
+           self.showWarn=true;
+              self.warnText='更新出错'
           }
         });
       },

@@ -6,7 +6,7 @@
           <ul class='goods_menu'>
             <li class='goods_li goods_li_1'>
             <div class="change_color">
-              <router-link to=""><span class='img img1'></span><a href="javascript:void(0)" @click="toWeiQing('http://www.ym-b.top/web/index.php?c=mc&a=fans&')"><span>粉丝管理</span></a></router-link>
+              <router-link to=""><span class='img img1'></span><a href="javascript:void(0)" @click="toWeiQing("http://www.ym-b.top/web/index.php?c=mc&a=fans&")"><span>粉丝管理</span></a></router-link>
             </div>
               
             </li>
@@ -50,7 +50,10 @@
       },
       toWeiQing:function(url){
         document.cookie=`_755url=.${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
-        window.open(url,'_blank')
+        let aa=window.open();
+        setTimeout(function(){
+        aa.location=url;
+        }, 100);
       },
     }
   }

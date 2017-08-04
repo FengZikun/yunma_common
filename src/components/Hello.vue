@@ -372,11 +372,17 @@
       },
       toWeiQing:function(url){
         document.cookie=`_755url=.${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
-        window.open(url,'_blank')
+        let aa=window.open();
+        setTimeout(function(){
+        aa.location=url;
+        }, 100);
       },
       toWeiQing1:function(url){
         document.cookie=`_755url=;domain=ym-b.top;path=/web`;
-        window.open(url,'_blank')
+                let aa=window.open();
+        setTimeout(function(){
+        aa.location=url;
+        }, 100);
       },
       WxGzhInfo:function(url,num){
         var self=this;

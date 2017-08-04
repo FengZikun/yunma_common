@@ -59,7 +59,7 @@
               <span class="pro-li-span">{{item.createDate}}</span>
               <span class="pro-li-span" v-if='item.status==2'>已生成</span>
               <span class="pro-li-span" v-else>未生成</span>
-              <span class="pro-li-span last"><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='toDetail'>详情</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='mengban'>删除订单、</a><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='two'>生成二维码</a>、<router-link to='/twoCode/briefCode'>扫码页模板</router-link>、<a href="javascript:void(0)">扫码活动管理</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='confirmDownLoad'>导出二维码</a></span>
+              <span class="pro-li-span last"><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='toDetail'>详情</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='mengban'>删除订单、</a><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='two'>生成二维码</a>、<router-link to='/twoCode/briefCode'>扫码页模板</router-link>、<router-link to='/twoCode/activity'>扫码活动管理</router-link>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='confirmDownLoad'>导出二维码</a></span>
 
             </li>
           </ul>

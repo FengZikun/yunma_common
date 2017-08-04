@@ -28,11 +28,11 @@
         <!-- <span class='span_two'>Evan</span> -->
         <ul class="personal">
           <li>
-            {{userName}}
+            admin
           </li>
-          <li class="change_color">
-            个人中心
-          </li>
+<!--           <li class="change_color">
+          个人中心
+          </li> -->
           <a href="javascript:void(0)" @click='tuichu' style="text-decoration:none;"><li class="change_color">
             退出登录
           </li></a>

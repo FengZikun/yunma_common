@@ -15,12 +15,12 @@
               </ul>
             </li>
               
-                <router-link tag='li' class='goods_li_1 goods_li' to='#'><span class='img img13'></span><a>企业广告</a></router-link>
+                <!-- <router-link tag='li' class='goods_li_1 goods_li' to='#'><span class='img img13'></span><a>企业广告</a></router-link>
               
               
               
               
-                <router-link tag='li' class='goods_li_1 goods_li' to='/union/bulletinBoard'><span class='img img14'></span><a>公告板</a></router-link>
+                <router-link tag='li' class='goods_li_1 goods_li' to='/union/bulletinBoard'><span class='img img14'></span><a>公告板</a></router-link> -->
               
           </ul>
         </div>

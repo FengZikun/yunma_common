@@ -560,9 +560,10 @@
 	}
 	.modelS{
 		position: absolute;
-		left: 23%;
+		left: 50%;
 		top: 8%;
 		width: 890px;
+		margin-left: -445px;
 		min-height: 800px;
 		background: #fff;
 		z-index: 2001;

@@ -132,14 +132,14 @@
 					<span class="message-name star">产品名称：</span>
 					<input class="message-value" type="text" name="" v-model='productName'>
 				</div>
-				<!-- <div class="promessage">
+				<div class="promessage" v-if='classifyData!==null'>
 					<span class="message-name">产品分类：</span>
 					<div v-if='selected.name!=undefined' class="choosezu">
 						<span>{{selected.name}}</span><span v-if='chilselected!=undefined'>>{{chilselected.name}}</span>
 					</div>
 					<input class="message-choose" type="button" name="" value="选择分类" @click='chooseClassify'>
-					<router-link to='/goods/classify' style='text-decoration:none;'><span class="message-after">新增自定义分类</span></router-link>
-				</div> -->
+					<!-- <router-link to='/goods/classify' style='text-decoration:none;'><span class="message-after">新增自定义分类</span></router-link> -->
+				</div>
 				<div class="promessage">
 					<span class="message-name star">产品图片：</span>
 					<img v-for='img in selectimg' class="myimg" style="width:86px;height:86px;vertical-align:top;" v-bind:src="img" v-if='productid==""'>
@@ -646,7 +646,7 @@
 				onehide:false,
 				twohide:true,
 				threehide:true,
-				// rowId:null,
+				rowId:null,
 				productName:'',
 				productImg:'',
 				productPrice:'',
@@ -680,7 +680,7 @@
 				imgSrc:'',
 				parametername:'',		//参数名
 				parametervalue:'',		//参数值
-				classifyData:'',		//分组
+				classifyData:null,		//分组
 				selected:{'children':null},
 				chilselected:null,
 				showWarn:false,
@@ -720,7 +720,7 @@
 						self.selectimg.push(self.productImg);
 						var savename=self.productName;
 						self.savename=savename;
-						// self.rowId=res.rowId;
+						self.rowId=res.rowId;
 						self.selected.name=res.rowName
 						self.showStep2();
 					}
@@ -793,19 +793,19 @@
 			},
 
 			//确认产品分类
-			// confirmClassify:function(){
-			// 	var self=this;
-			// 	if(self.selected.name==undefined){
-			// 		alert('请选择分组')
-			// 	}else if(self.chilselected==null){
-			// 		var id=self.selected.id;
-			// 		self.rowId=id;
-			// 	}else if(self.chilselected!=null){
-			// 		var id=self.chilselected.id;
-			// 		self.rowId=id;
-			// 	}
-			// 	self.hide()
-			// },
+			confirmClassify:function(){
+				var self=this;
+				if(self.selected.name==undefined){
+					alert('请选择分组')
+				}else if(self.chilselected==null){
+					var id=self.selected.id;
+					self.rowId=id;
+				}else if(self.chilselected!=null){
+					var id=self.chilselected.id;
+					self.rowId=id;
+				}
+				self.hide()
+			},
 			//隐藏蒙版
 			hide:function(){
 				this.showMB=false;
@@ -826,7 +826,7 @@
 						var data={
 							id:self.productid,
 							vendorId:self.vendorId,
-							// rowId:self.rowId,
+							rowId:self.rowId,
 							productName:self.productName,
 							productImg:self.imgId,
 							productPrice:self.productPrice,
@@ -845,7 +845,7 @@
 						var data={
 							id:self.productid,
 							vendorId:self.vendorId,
-							// rowId:self.rowId,
+							rowId:self.rowId,
 							productImg:self.imgId,
 							productPrice:self.productPrice,
 							productMarketPrice:self.productMarketPrice,
@@ -876,7 +876,7 @@
 				var type='post';
 				var data={
 					vendorId:self.vendorId,
-					// rowId:self.rowId,
+					rowId:self.rowId,
 					productName:self.productName,
 					productImg:self.imgId,
 					productPrice:self.productPrice,

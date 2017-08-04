@@ -157,11 +157,11 @@
 					<input class="message-value" type="text" name="" v-model='productMarketPrice'>
 					<span class="message-danwei danwei">元</span>
 				</div>
-				<div class="promessage">
+				<!-- <div class="promessage">
 					<span class="message-name">总库存：</span>
 					<input class="message-value" type="text" name="" v-model='productTotal'>
 					<span class="message-danwei">件</span>
-				</div>
+				</div> -->
 				<div class="promessage">
 					<span class="message-name">产品单位：</span>
 					<input class="message-value" type="text" name="" placeholder="例：个、瓶、盒、件" v-model='productUnit'>

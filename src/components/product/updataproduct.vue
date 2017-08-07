@@ -157,11 +157,11 @@
 					<input class="message-value" type="text" name="" v-model='productMarketPrice'>
 					<span class="message-danwei danwei">元</span>
 				</div>
-				<!-- <div class="promessage">
+				<div class="promessage">
 					<span class="message-name">总库存：</span>
 					<input class="message-value" type="text" name="" v-model='productTotal'>
 					<span class="message-danwei">件</span>
-				</div> -->
+				</div>
 				<div class="promessage">
 					<span class="message-name">产品单位：</span>
 					<input class="message-value" type="text" name="" placeholder="例：个、瓶、盒、件" v-model='productUnit'>
@@ -737,6 +737,8 @@
 			//进入step2
 			showStep2:function(){
 				var self=this;
+				self.chooseClassify();
+				self.showMB=false;
 				if(self.productType==''){
 					alert("请选择商品类目");
 				}else if(self.productSpe==''){
@@ -786,8 +788,11 @@
 					vendorId:self.vendorId
 				};
 				var success=function(res){
-					self.classifyData=res.result.data;
-					self.chilselected=null;
+					if(res.result.data.length!==0){
+						self.classifyData=res.result.data;
+						self.chilselected=null;
+					}
+					
 				};
 				common.Ajax(url,type,data,success)
 			},

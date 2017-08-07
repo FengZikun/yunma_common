@@ -231,6 +231,11 @@
   import '../assets/js/echarts.js'
   import '../assets/js/china.js'
   import common from '../common.js'
+  import cityMap from '../china-main-city-map.js'
+  import province from '../province.js'
+  import haha from '../hah.js'
+  // import _ from 'underscore'
+
   export default{
     data(){
       return{
@@ -293,6 +298,7 @@
           success:function(res){
             console.log(res);
             self.emap=res;
+            console.log(res)
             self.maph();
           },
           error:function(res){
@@ -310,8 +316,8 @@
           date.push(self.edata[i]['scanTime']);
           dateVal.push(self.edata[i]['coun']);
           if(i==0){self.endTime=self.edata[i]['scanTime']}
-          if(i==length-1){self.startTime=self.edata[i]['scanTime']}
-        }
+            if(i==length-1){self.startTime=self.edata[i]['scanTime']}
+          }
         // console.log(date);
         // console.log(dateVal)
         var myChart = echarts.init(document.getElementById('zhex'));
@@ -374,20 +380,9 @@
           }]
         });
         var option = {
-              tooltip: {
-                  trigger: 'item'
-              },
-              toolbox: {
-                  show: true,
-                  orient: 'vertical',
-                  left: 'right',
-                  top: 'center',
-                  feature: {
-                      dataView: {readOnly: false},
-                      restore: {},
-                      saveAsImage: {}
-                  }
-              },
+          tooltip: {
+            trigger: 'item'
+          },
           series: [
           {
             name: '中国',
@@ -403,11 +398,134 @@
               }
             },
             data:this.emap.data
+            // data:[
+            // {name:'广东', selected:true}
+            // ]
           }
-          ]
+          ],
+          toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'center',
+            feature: {
+              dataView: {readOnly: false},
+              restore: {},
+              saveAsImage: {},
+            }
+          },
+          
         };
         chart.setOption(option);
+        chart.on('click',function(params){
+          //从中国地图进省地图
+          if(params.seriesName=='中国'){
+            var thisName=params.name
+            var code=province[thisName];
+            var url='http://192.168.1.107:8080/cloud_code/GET/agent/getCityData.do';
+            var type='get';
+            var data={
+              NameOrCode:code
+            }
+            var success=function(data){
+              var cityArr=[]
+              for(var i=0,len=data.features.length;i<len;i++){
+                var cityObj={name:data.features[i].properties.name, selected:false, value:10}
+                cityArr.push(cityObj);
+              }
+              echarts.registerMap('sheng', data);
+              chart.setOption({
+                series: [{
+                  name:thisName+'省',
+                  type: 'map',
+                  mapType: 'shanxi1',
+                  map: 'sheng',
+                  data:cityArr
+                  // data:[{name:'渭南市',selected:true}]
+                }]
+              });
+            }
+            common.Ajax(url,type,data,success)
+          }
+
+          //省地图进市地图
+          if(params.seriesName.match('省')=='省'){
+            var thisName=params.name;
+            var code=cityMap[thisName];
+            var url='http://192.168.1.107:8080/cloud_code/GET/agent/getMainCityData.do';
+            var type='get';
+            var data={
+              code:code
+            }
+            var success=function(data){
+              var cityArr=[]
+              for(var i=0,len=data.features.length;i<len;i++){
+                var cityObj={name:data.features[i].properties.name, selected:false}
+                cityArr.push(cityObj);
+              }
+              echarts.registerMap('shi', data);
+              chart.setOption({
+                series: [{
+                  name:'市',
+                  type: 'map',
+                  map: 'shi',
+                  data:cityArr
+                }]
+              });
+            }
+            common.Ajax(url,type,data,success)
+          }
+
+          //热力图
+          if(params.seriesName=='市'){
+            // console.log(haha)
+
+              var points = [].concat.apply([], haha.map(function (track) {
+                return track.map(function (seg) {
+                  return seg.coord.concat([1]);
+                });
+              }));
+              chart.setOption(option = {
+                animation: false,
+                bmap: {
+                  center: [120.13066322374, 30.240018034923],
+                  zoom: 14,
+                  roam: true
+                },
+                visualMap: {
+                  show: false,
+                  top: 'top',
+                  min: 0,
+                  max: 5,
+                  seriesIndex: 0,
+                  calculable: true,
+                  inRange: {
+                    color: ['blue', 'blue', 'green', 'yellow', 'red']
+                  }
+                },
+                series: [{
+                  type: 'heatmap',
+                  coordinateSystem: 'bmap',
+                  data: points,
+                  pointSize: 5,
+                  blurSize: 6
+                }]
+              });
+              if (!app.inNode) {
+        var bmap = chart.getModel().getComponent('bmap').getBMap();
+        console.log(bmap)
+        bmap.addControl(new BMap.MapTypeControl());
       }
+          }
+          
+        });
+
+        //重置按钮
+        chart.on('restore',function(params){
+          chart.setOption(option);
+          chart.setOption(option);
+        })
+      },
     },
     mounted:function(){
       this.init();

@@ -247,7 +247,8 @@
         edata:'',
         emap:'',
         startTime:null,
-        endTime:null
+        endTime:null,
+        provinceData:null
       }
     },
     mounted(){
@@ -371,6 +372,7 @@
         myChart.setOption(option);
       },
       maph:function () {
+        var self=this;
         var echarts = require('echarts');
         var chart = echarts.init(document.getElementById('map'));
         chart.setOption({
@@ -397,7 +399,7 @@
                 show: true
               }
             },
-            data:this.emap.data
+            data:self.emap.data
             // data:[
             // {name:'广东', selected:true}
             // ]
@@ -427,23 +429,33 @@
             var data={
               NameOrCode:code
             }
-            var success=function(data){
-              var cityArr=[]
-              for(var i=0,len=data.features.length;i<len;i++){
-                var cityObj={name:data.features[i].properties.name, selected:false, value:10}
-                cityArr.push(cityObj);
+            var success=function(datas){
+              // var cityArr=[]
+
+              //请求城市扫码量
+              var url='http://192.168.1.107:8080/cloud_code/GET/mapCount/mapCountForCity.do';
+              var type='get';
+              var data={
+                vendorId:self.datas.vendorId,
+                province:thisName+'省'
               }
-              echarts.registerMap('sheng', data);
-              chart.setOption({
-                series: [{
-                  name:thisName+'省',
-                  type: 'map',
-                  mapType: 'shanxi1',
-                  map: 'sheng',
-                  data:cityArr
+              // console.log(self.datas)
+              var success=function(res){
+                self.provinceData=res.data;
+                console.log(self.provinceData)
+                echarts.registerMap('sheng', datas);
+                chart.setOption({
+                  series: [{
+                    name:thisName+'省',
+                    type: 'map',
+                    mapType: 'shanxi1',
+                    map: 'sheng',
+                    data:self.provinceData
                   // data:[{name:'渭南市',selected:true}]
                 }]
               });
+              }
+              common.Ajax(url,type,data,success)
             }
             common.Ajax(url,type,data,success)
           }
@@ -480,42 +492,42 @@
           if(params.seriesName=='市'){
             // console.log(haha)
 
-              var points = [].concat.apply([], haha.map(function (track) {
-                return track.map(function (seg) {
-                  return seg.coord.concat([1]);
-                });
-              }));
-              chart.setOption(option = {
-                animation: false,
-                bmap: {
-                  center: [120.13066322374, 30.240018034923],
-                  zoom: 14,
-                  roam: true
-                },
-                visualMap: {
-                  show: false,
-                  top: 'top',
-                  min: 0,
-                  max: 5,
-                  seriesIndex: 0,
-                  calculable: true,
-                  inRange: {
-                    color: ['blue', 'blue', 'green', 'yellow', 'red']
-                  }
-                },
-                series: [{
-                  type: 'heatmap',
-                  coordinateSystem: 'bmap',
-                  data: points,
-                  pointSize: 5,
-                  blurSize: 6
-                }]
+            var points = [].concat.apply([], haha.map(function (track) {
+              return track.map(function (seg) {
+                return seg.coord.concat([1]);
               });
-              if (!app.inNode) {
-        var bmap = chart.getModel().getComponent('bmap').getBMap();
-        console.log(bmap)
-        bmap.addControl(new BMap.MapTypeControl());
-      }
+            }));
+            chart.setOption(option = {
+              animation: false,
+              bmap: {
+                center: [120.13066322374, 30.240018034923],
+                zoom: 14,
+                roam: true
+              },
+              visualMap: {
+                show: false,
+                top: 'top',
+                min: 0,
+                max: 5,
+                seriesIndex: 0,
+                calculable: true,
+                inRange: {
+                  color: ['blue', 'blue', 'green', 'yellow', 'red']
+                }
+              },
+              series: [{
+                type: 'heatmap',
+                coordinateSystem: 'bmap',
+                data: points,
+                pointSize: 5,
+                blurSize: 6
+              }]
+            });
+            if (!app.inNode) {
+              var bmap = chart.getModel().getComponent('bmap').getBMap();
+              console.log(bmap)
+              bmap.addControl(new BMap.MapTypeControl());
+            }
           }
           
         });

@@ -13,10 +13,10 @@
     </div>
     <div class="right-main-bottom">
       <div class="button-group">
-        <span>统计时间：</span>
+        <!-- <span>统计时间：</span>
         <input class="message-value" type="text" name="">
         <span>搜索规则：</span>
-        <input class="message-value" type="text" name="">
+        <input class="message-value" type="text" name=""> -->
         <router-link to='/twoCode/addRule'>
           <div class="add-pro">
             +&nbsp;新建规则
@@ -124,7 +124,7 @@
   margin-top: 40px;
 }
 .add-pro{
-  float: right;
+  float: left;
 }
 .button-group{
   height: 36px;

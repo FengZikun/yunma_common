@@ -11,7 +11,10 @@ function resolve (dir) {
 module.exports = {
   entry: {
     app: './src/main.js',
-    vendor:['jquery','vue','vue-router','echarts','underscore','js-base64','js-md5',"qrcode","qrcodejs2","v-qrcode","d3"]
+    vendor:['jquery','vue','vue-router','echarts','underscore','js-base64','js-md5',"qrcode","qrcodejs2","v-qrcode","d3"],
+  },
+  externals: {
+  "AMap": "AMap"
   },
   plugins: [
   new webpack.optimize.CommonsChunkPlugin({

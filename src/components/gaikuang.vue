@@ -233,9 +233,7 @@
   import common from '../common.js'
   import cityMap from '../china-main-city-map.js'
   import province from '../province.js'
-  import haha from '../hah.js'
-  // import _ from 'underscore'
-
+  // import AMap from 'AMap'
   export default{
     data(){
       return{
@@ -257,6 +255,14 @@
     methods:{
       init:function(){
         var self=this;
+        var script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.src = 'https://webapi.amap.com/maps?v=1.3&key=14cd613422535548e97ba6762496e8ea'
+        document.body.appendChild(script)
+        var scriptHeat = document.createElement('script')
+        scriptHeat.type = 'text/javascript'
+        scriptHeat.src = 'http://a.amap.com/jsapi_demos/static/resource/heatmapData.js'
+        document.body.appendChild(scriptHeat)
         var url='https://ym-a.top/cloud_code/GET/mapCount/mapSecurityCount.do';
         var type='get';
         var data={
@@ -264,7 +270,6 @@
           vendorId:self.datas.vendorId
         };
         var success=function(res){
-          console.log(res);
           self.securityCodeScanCount=res.securityCodeScanCount;
           self.joinActivCount=res.joinActivCount;
           self.daylyJoinActivCount=res.daylyJoinActivCount;
@@ -281,12 +286,11 @@
           },
           datatype:'json',
           success:function(res){
-            // console.log(res.weekScanCount[1]);
             self.edata=res.weekScanCount;
             self.hans();
           },
           error:function(res){
-            console.log(res)
+            console.log('error')
           }
         })
         $.ajax({
@@ -297,9 +301,7 @@
           },
           datatype:'json',
           success:function(res){
-            console.log(res);
             self.emap=res;
-            console.log(res)
             self.maph();
           },
           error:function(res){
@@ -319,8 +321,6 @@
           if(i==0){self.endTime=self.edata[i]['scanTime']}
             if(i==length-1){self.startTime=self.edata[i]['scanTime']}
           }
-        // console.log(date);
-        // console.log(dateVal)
         var myChart = echarts.init(document.getElementById('zhex'));
 
         var option = {
@@ -439,10 +439,8 @@
                 vendorId:self.datas.vendorId,
                 province:thisName+'省'
               }
-              // console.log(self.datas)
               var success=function(res){
                 self.provinceData=res.data;
-                console.log(self.provinceData)
                 echarts.registerMap('sheng', datas);
                 chart.setOption({
                   series: [{
@@ -490,49 +488,35 @@
 
           //热力图
           if(params.seriesName=='市'){
-            // console.log(haha)
-
-            var points = [].concat.apply([], haha.map(function (track) {
-              return track.map(function (seg) {
-                return seg.coord.concat([1]);
-              });
-            }));
-            chart.setOption(option = {
-              animation: false,
-              bmap: {
-                center: [120.13066322374, 30.240018034923],
-                zoom: 14,
-                roam: true
-              },
-              visualMap: {
-                show: false,
-                top: 'top',
-                min: 0,
-                max: 5,
-                seriesIndex: 0,
-                calculable: true,
-                inRange: {
-                  color: ['blue', 'blue', 'green', 'yellow', 'red']
-                }
-              },
-              series: [{
-                type: 'heatmap',
-                coordinateSystem: 'bmap',
-                data: points,
-                pointSize: 5,
-                blurSize: 6
-              }]
+            var AMap=require('AMap')
+            console.log(AMap)
+            var map = new AMap.Map("map", {
+              resizeEnable: true,
+              center: [116.418261, 39.921984],
+              zoom: 11
             });
-            if (!app.inNode) {
-              var bmap = chart.getModel().getComponent('bmap').getBMap();
-              console.log(bmap)
-              bmap.addControl(new BMap.MapTypeControl());
+            if (!isSupportCanvas()) {
+              alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
+            }
+            var heatmap;
+            map.plugin(["AMap.Heatmap"], function() {
+              heatmap = new AMap.Heatmap(map, {
+                radius: 25,
+                opacity: [0, 0.8]
+              });
+              heatmap.setDataSet({
+                data: heatmapData,
+                max: 100
+              });
+            });
+            function isSupportCanvas() {
+              var elem = document.createElement('canvas');
+              return !!(elem.getContext && elem.getContext('2d'));
             }
           }
-          
+
         });
 
-        //重置按钮
         chart.on('restore',function(params){
           chart.setOption(option);
           chart.setOption(option);
@@ -542,9 +526,11 @@
     mounted:function(){
       this.init();
     },
-    // updated(){
-    //   this.init();
-
-    // }
+    // ready:function(){
+    //   var script = document.createElement('script')
+    //   script.type = 'text/javascript'
+    //   script.src = 'https://webapi.amap.com/maps?v=1.3&key=14cd613422535548e97ba6762496e8ea'
+    //   document.body.appendChild(script)
+    // },
   }
 </script>

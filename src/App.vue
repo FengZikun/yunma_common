@@ -532,7 +532,7 @@
 }
 .proclassify{
   width: 420px;
-  height: 250px;
+  min-height: 250px;
   background: #fff;
   position: absolute;
   top: 50%;

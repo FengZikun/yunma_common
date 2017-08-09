@@ -246,7 +246,8 @@
         emap:'',
         startTime:null,
         endTime:null,
-        provinceData:null
+        provinceData:null,
+        areaData:null
       }
     },
     mounted(){
@@ -430,7 +431,6 @@
               NameOrCode:code
             }
             var success=function(datas){
-              // var cityArr=[]
 
               //请求城市扫码量
               var url='http://192.168.1.107:8080/cloud_code/GET/mapCount/mapCountForCity.do';
@@ -449,9 +449,8 @@
                     mapType: 'shanxi1',
                     map: 'sheng',
                     data:self.provinceData
-                  // data:[{name:'渭南市',selected:true}]
-                }]
-              });
+                  }]
+                });
               }
               common.Ajax(url,type,data,success)
             }
@@ -467,52 +466,71 @@
             var data={
               code:code
             }
-            var success=function(data){
-              var cityArr=[]
-              for(var i=0,len=data.features.length;i<len;i++){
-                var cityObj={name:data.features[i].properties.name, selected:false}
-                cityArr.push(cityObj);
+            var success=function(datas){
+              //请求区扫码量
+              var url="http://192.168.1.107:8080/cloud_code/GET/mapCount/getDistrCount.do"
+              var type="get";
+              var data={
+                vendorId:self.datas.vendorId,
+                city:thisName
               }
-              echarts.registerMap('shi', data);
-              chart.setOption({
-                series: [{
-                  name:'市',
-                  type: 'map',
-                  map: 'shi',
-                  data:cityArr
-                }]
-              });
+              var success=function(res){
+                self.areaData=res.data;
+                echarts.registerMap('shi', datas);
+                chart.setOption({
+                  series: [{
+                    name:'市',
+                    type: 'map',
+                    map: 'shi',
+                    data:self.areaData
+                  }]
+                });
+              }         
+              common.Ajax(url,type,data,success)
             }
             common.Ajax(url,type,data,success)
           }
-
           //热力图
           if(params.seriesName=='市'){
-            var AMap=require('AMap')
-            console.log(AMap)
-            var map = new AMap.Map("map", {
-              resizeEnable: true,
-              center: [116.418261, 39.921984],
-              zoom: 11
-            });
-            if (!isSupportCanvas()) {
-              alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
+            var thisName=params.name;
+            //清除echart
+            chart.clear();
+            //引入高德地图
+            var url='http://192.168.1.107:8080/cloud_code/GET/mapCount/heatMapForDistr.do';
+            var type='get';
+            var data={
+              vendorId:self.datas.vendorId,
+              district:thisName
             }
-            var heatmap;
-            map.plugin(["AMap.Heatmap"], function() {
-              heatmap = new AMap.Heatmap(map, {
-                radius: 25,
-                opacity: [0, 0.8]
+            var success=function(res){
+              console.log(res)
+              var AMap=require('AMap')
+              var map = new AMap.Map("map", {
+                resizeEnable: true,
+                center: [res.data[0].lng, res.data[0].lat],
+                zoom: 11
               });
-              heatmap.setDataSet({
-                data: heatmapData,
-                max: 100
+              if (!isSupportCanvas()) {
+                alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
+              }
+              var heatmap;
+              map.plugin(["AMap.Heatmap"], function() {
+                heatmap = new AMap.Heatmap(map, {
+                  radius: 25,
+                  opacity: [0.1, 0.8]
+                });
+                heatmap.setDataSet({
+                  data: res.data,
+                  max: 100
+                });
               });
-            });
-            function isSupportCanvas() {
-              var elem = document.createElement('canvas');
-              return !!(elem.getContext && elem.getContext('2d'));
+              function isSupportCanvas() {
+                var elem = document.createElement('canvas');
+                return !!(elem.getContext && elem.getContext('2d'));
+              }
             }
+            common.Ajax(url,type,data,success)
+            
           }
 
         });

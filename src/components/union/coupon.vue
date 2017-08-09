@@ -14,6 +14,10 @@
 						<span class="message-name">secret：</span>
 						<input class="message-value" type="text" name="" v-model='secret'>
 					</div>
+					<div class="messagebox">
+						<span class="message-name">产品地址：</span>
+						<input class="message-value" type="text" name="" v-model='productUrl'>
+					</div>
 					<div class="classifyFooter">
 						<input class="delbutton" type="button" name="" value="确认" @click='connect'>
 						<input class="delbutton" type="button" name="" value="取消" @click='hide'>
@@ -135,6 +139,7 @@
 		        showMB2:false,
 		        showMB3:false,
 		        couponId:null,
+		        productUrl:null,
 		    }
 		},
 		props:['vendorId'],
@@ -188,6 +193,7 @@
 					if(res.statuscode===1){
 						self.appKey=res.appKey;
 						self.secret=res.secret;
+						self.productUrl=res.productUrl;
 					}
 					
 				};
@@ -197,12 +203,13 @@
 			//关联微店
 			connect:function(){
 				var self=this;
-				var url='https://ym-a.top/cloud_code//ADD/wd/config.do';
+				var url='https://ym-a.top/cloud_code/ADD/wd/config.do';
 				var type='post';
 				var data={
 					vendorId:self.vendorId,
 					appKey:self.appKey,
-					secret:self.secret
+					secret:self.secret,
+					productUrl:self.productUrl
 				};
 				var success=function(res){
 					if(res.statuscode===1||2){

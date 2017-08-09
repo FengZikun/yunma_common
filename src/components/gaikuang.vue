@@ -29,6 +29,7 @@
         <p><span class='p_left'>扫码总量分布图</span><span class='p_right'>(截至日期:{{endTime}})</span></p>
       </div>
       <div class='map' id='map' style='width: 100%;height: 640px;' v-on:load="maph"></div>
+      <input type="button" name="" value="重置" @click='showMap'>
     </div>
   </div>
 
@@ -247,7 +248,8 @@
         startTime:null,
         endTime:null,
         provinceData:null,
-        areaData:null
+        areaData:null,
+        aaa:null
       }
     },
     mounted(){
@@ -425,20 +427,21 @@
           if(params.seriesName=='中国'){
             var thisName=params.name
             var code=province[thisName];
-            var url='http://192.168.1.107:8080/cloud_code/GET/agent/getCityData.do';
-            var type='get';
+            var url='https://ym-a.top/cloud_code/GET/agent/getCityData.do';
+            var type='post';
             var data={
               NameOrCode:code
             }
             var success=function(datas){
 
               //请求城市扫码量
-              var url='http://192.168.1.107:8080/cloud_code/GET/mapCount/mapCountForCity.do';
-              var type='get';
+              var url='https://ym-a.top/cloud_code/GET/mapCount/mapCountForCity.do';
+              var type='post';
               var data={
                 vendorId:self.datas.vendorId,
                 province:thisName+'省'
               }
+              console.log(data)
               var success=function(res){
                 self.provinceData=res.data;
                 echarts.registerMap('sheng', datas);
@@ -461,15 +464,15 @@
           if(params.seriesName.match('省')=='省'){
             var thisName=params.name;
             var code=cityMap[thisName];
-            var url='http://192.168.1.107:8080/cloud_code/GET/agent/getMainCityData.do';
-            var type='get';
+            var url='https://ym-a.top/cloud_code/GET/agent/getMainCityData.do';
+            var type='post';
             var data={
               code:code
             }
             var success=function(datas){
               //请求区扫码量
-              var url="http://192.168.1.107:8080/cloud_code/GET/mapCount/getDistrCount.do"
-              var type="get";
+              var url="https://ym-a.top/cloud_code/GET/mapCount/getDistrCount.do"
+              var type="post";
               var data={
                 vendorId:self.datas.vendorId,
                 city:thisName
@@ -496,8 +499,8 @@
             //清除echart
             chart.clear();
             //引入高德地图
-            var url='http://192.168.1.107:8080/cloud_code/GET/mapCount/heatMapForDistr.do';
-            var type='get';
+            var url='https://ym-a.top/cloud_code/GET/mapCount/heatMapForDistr.do';
+            var type='post';
             var data={
               vendorId:self.datas.vendorId,
               district:thisName
@@ -510,6 +513,7 @@
                 center: [res.data[0].lng, res.data[0].lat],
                 zoom: 11
               });
+              self.aaa=map;
               if (!isSupportCanvas()) {
                 alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
               }
@@ -524,6 +528,7 @@
                   max: 100
                 });
               });
+              // map.destroy()
               function isSupportCanvas() {
                 var elem = document.createElement('canvas');
                 return !!(elem.getContext && elem.getContext('2d'));
@@ -540,15 +545,13 @@
           chart.setOption(option);
         })
       },
+      showMap(){
+        var self=this;
+        self.aaa.destroy();
+      }
     },
     mounted:function(){
       this.init();
     },
-    // ready:function(){
-    //   var script = document.createElement('script')
-    //   script.type = 'text/javascript'
-    //   script.src = 'https://webapi.amap.com/maps?v=1.3&key=14cd613422535548e97ba6762496e8ea'
-    //   document.body.appendChild(script)
-    // },
   }
 </script>

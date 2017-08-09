@@ -33,11 +33,18 @@
         <div class="classifyHeader">
           <span style="display:block;height:48px;line-height:48px;">操作提示</span>
         </div>
-        <div class="tishi">
+<!--         <div class="tishi">
           <span class="message-name">生成数量：</span>
           <input class="message-value" type="text" name="" v-model="proNum">
           <p class="message-after">（小于等于此订单内的产品数）</p>
-        </div>
+        </div> -->
+          <div class="tishi">
+            <span class="message-name">一级包装数：</span>
+            <input class="message-value" type="text" name="" v-model="rowCount"><br>
+            <span class="message-name">二级包装数：</span>
+            <input class="message-value" type="text" name="" v-model="boxCount">
+            <p class="message-after">（小于等于此订单内的产品数）</p>
+          </div>
         <div style="text-align: right;margin-top: 40px;margin-right: 20px;">
           <input class="delbutton" type="button" name="" value="确认" @click='source'>
           <input class="delbutton" type="button" name="" value="取消" @click='hide'>
@@ -180,6 +187,7 @@
   }
   .tishi{
     text-align: center;
+    line-height: 58px;
   }
   .modelBg{
    position: fixed;
@@ -237,7 +245,9 @@
         showSource:false,
         orderId:null,
         proNum:null,
-        proCount:null
+        proCount:null,
+        rowCount:null,
+        boxCount:null
       }
     },
     props:['datas'],
@@ -318,29 +328,32 @@
       //生成溯源码
       source:function(){
         var self=this;
-        if(parseInt(self.proNum)<=parseInt(self.proCount)){
+        // if(parseInt(self.proNum)<=parseInt(self.proCount)){
           $('#info').removeClass('modHid')
           self.showSource=false;
           var url='https://ym-a.top/cloud_code/POST/productTracing/createProductTracingCode.do';
           var type='post';
           var data={
             orderId:self.orderId,
-            rowCount:self.proNum
+            rowCount:self.rowCount,
+            boxCount:self.boxCount
           };
           var success=function(res){
-            $('#info').addClass('modHid')
+            console.log(res);
+            $('#info').addClass('modHid');
             if(res.errorCode===0){
               self.showWarn=true;
               self.warnText='已成功生成二维码';
               self.orderId=null;
-              self.proCount=null;
+              self.rowCount=null;
+              self.boxCount=null;
             }else{
               self.showWarn=true;
               self.warnText=res.msg;
             }
           };
           common.Ajax(url,type,data,success)
-        }
+        // }
         
       },
       downLoad1:function(){

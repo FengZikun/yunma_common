@@ -16,6 +16,14 @@
 					<span class="leftb"></span>
 				</div>
 			</div>
+			<div class="changeItem" v-if='type==0'>
+				<span class="item"></span>
+				<a class="item1 item1focus" data-type="block" @click='changepackType' href="javascript:void(0)">最小包装码</a>
+				<a class="item1" data-type="row" @click='changepackType' href="javascript:void(0)">一级包装码</a>
+				<a class="item1" data-type="box" @click='changepackType' href="javascript:void(0)">二级包装码</a>
+				<span class="item2"></span>
+				
+			</div>
 			<div class="right-main-bottom">
 				<div class="my-form">
 					<ul class="pro-list">
@@ -28,10 +36,10 @@
 
 						</li>
 						<li class="pro-li" v-for='item in codeInfo'>
-							<span class="pro-li-span">{{item.securityCodeId||item.productTracingCodeId}}</span>
+							<span class="pro-li-span">{{item.securityCode||item.codePrefix||item.groupCode}}</span>
 							<span class="pro-li-span">{{item.productId}}</span>
 							<span class="pro-li-span">{{item.productName}}</span>
-							<span class="pro-li-span"><a href="javascript:void(0)" @click='newCode' v-bind:data-code='item.securityCode||item.productTracingCode'>生成二维码</a></span>
+							<span class="pro-li-span"><a href="javascript:void(0)" @click='newCode' v-bind:data-code='item.securityCode||item.codePrefix||item.groupCode'>生成二维码</a></span>
 
 						</li>
 					</ul>
@@ -71,7 +79,8 @@
         		options:null,
         		qrcode:null,
         		orderId:null,
-        		url:null
+        		url:null,
+        		packType:'block'
         	}
         },
         props:['datas'],
@@ -86,7 +95,18 @@
 					self.url='https://ym-a.top/cloud_code/GET/securityCode/securityCodeList.do';
 				}
 				else if(self.type==0){
-					self.url='https://ym-a.top/cloud_code/GET/productTracingcode/tracingCodeList.do';
+					switch (self.packType) {
+						case 'block':
+							self.url='https://ym-a.top/cloud_code/GET/productTracingcode/tracingCodeList.do';
+							break;
+						case 'row':
+							self.url='https://ym-a.top/cloud_code/GET/productTracingGroupcode/tracingCodeList.do';
+						break;
+						case 'box':
+							self.url='https://ym-a.top/cloud_code/GET/productTracingBoxcode/tracingCodeList.do';
+						break;
+					}
+					
 				}
 				console.log(self.url)
 				var type='get';
@@ -128,7 +148,14 @@
 					colorLight: "#ffffff"
 				});
 			},
-
+			// 切换箱条包码
+			changepackType:function(){
+				var self=this;
+				self.packType=$(event.target).attr('data-type');
+				self.init();
+				$('.item1').removeClass('item1focus');
+				$(event.target).addClass('item1focus')
+			},
 			//隐藏蒙版
 			hide:function(){
 				var self=this;
@@ -248,5 +275,54 @@
 		left: 50%;
 		margin-left: -100px;
 		margin-top: -100px;
+	}
+	.changeItem{
+		display: -webkit-flex; /* Safari */
+  		display: flex;
+		width: 95%;
+		height: 51px;
+		margin: 0 auto;
+		margin-top: 17px;
+	}
+	.item{
+		display: inline-block;
+		flex-grow: 0;
+		box-sizing: border-box;
+		width: 26px;
+		height: 51px;
+		border-bottom: 2px solid #E3E8EB;
+		color: #28282B;	
+	}
+	.item1{
+		display: inline-block;
+		flex-grow: 0;
+		box-sizing: border-box;
+		width: 100px;
+		height: 51px;
+		line-height: 51px;
+		text-align: center;
+		border-bottom: 2px solid #E3E8EB;
+		color: #28282B;
+		text-decoration: none;
+		/* font-weight: bold; */
+	}
+	.item1focus{
+		border-bottom: 2px solid #00baff;
+		color: #00baff;
+	}
+	.item1:hover{
+		border-bottom: 2px solid #00baff;
+		color: #00baff;
+		text-decoration: none;
+	}
+	.item2{
+		display: inline-block;
+		flex-grow: 1;
+		box-sizing: border-box;
+		width: 90px;
+		height: 51px;
+		line-height: 51px;
+		border-bottom: 2px solid #E3E8EB;
+		color: #28282B;
 	}
 </style>

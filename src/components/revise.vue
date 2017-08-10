@@ -98,7 +98,7 @@ let Base64 = require('js-base64').Base64;
         checkPassword:null,
         showWarn:false,
         warnText:null,
-        passwordReg:/^\d{8,16}$/
+        passwordReg:/^([0-9]|[a-zA-Z]){8,16}$/
       }
     },
     props:['datas'],

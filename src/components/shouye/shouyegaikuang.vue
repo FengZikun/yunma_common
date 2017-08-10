@@ -1,7 +1,10 @@
 <template>
 	<div>
 		<div class='right-top'>
-            <p class="right-top-title">数据看板 <span class="gear"></span></p>
+            <p class="right-top-title">
+            数据看板
+             <!-- <span class="gear"></span> -->
+            </p>
             <ul class="right-top-ul">
               <li class="right-top-li"><p>会员总数</p><p>{{wxVipCount}}</p></li>
               <li class="right-top-li"><p>昨天新增会员</p><p>{{wxAddVipCount}}</p></li>
@@ -14,7 +17,7 @@
           </div>
 
           <div class="right-main">
-            <p class="right-top-title">常用功能 <span class="gear"></span></p>
+            <p class="right-top-title">常用功能</p>
             <ul class="right-main-ul"> 
               <router-link to='/twoCode/hongbao'><li class="right-main-li">
                 <img src="../../assets/img/icon_hongbao.png">
@@ -55,7 +58,7 @@
           </div>
             
           <div class="right-bottom">
-            <p class="right-top-title">系统公告 <span class="gear"></span></p>
+            <p class="right-top-title">系统公告</p>
             <ul class="right-bottom-ul">
               <li class="right-bottom-li">群发信息使用教程</li>
             </ul>

@@ -577,6 +577,9 @@
                         this.securityCode = this.getParams('securityCode');
                         this.orderId=this.getParams('orderId');
                         this.securityCodeId=this.getParams('securityCodeId');
+                        this.shortCode=this.getParams('shortCode');
+                        this.securityFlag=this.getParams('securityFlag');
+                        this.codeType=this.getParams('codeType');
                         window.localStorage.setItem('openId', this.openId);
                         window.localStorage.setItem('securityCode', this.securityCode);
                         window.localStorage.setItem('orderId', this.orderId);
@@ -605,7 +608,12 @@
                         }
                         if (id === 'btn2') {
                           setTimeout(function () {
-                            window.location.href = 'func/antiFake.html'
+                            if(this.securityFlag==true){
+                              window.location.href = 'func/antiFake.html'
+                            }
+                            else if(this.securityFlag==false){
+                               window.location.href = 'func/customerSuyuan.html'
+                            }
                           }, 500)
                           return
                         }
@@ -642,6 +650,7 @@
                           }, 500)
                           return
                         }
+
                       },
                       // 获取js-sdk地址签名
                       getSign: function () {
@@ -714,38 +723,67 @@
                       // 获取基本信息
                       wechatHome: function () {
                         var self = this;
-                        $.ajax({
-                          url: 'https://ym-a.top/cloud_code/POST/weChat/antiFakeCodeHome.do',
-                          data: {
-                            securityCode: self.securityCode,
-                            openId: self.openId,
-                            latitude: self.latitude,
-                            longitude: self.longitude
-                          },
-                          type: 'POST',
-                          dataType: 'json',
-                          success: function (res) {
-                            sessionStorage.setItem('_755wx',1);
-                            self.render(res);
-                          },
-                          error: function (err) {
-                            console.log(JSON.stringify(err));
-                            self.render(res);
-                          }
-                        })
+                        if(this.securityFlag==true){
+                          $.ajax({
+                            url: '/cloud_code/POST/weChat/antiFakeCodeHome.do',
+                            data: {
+                              securityCode: self.securityCode,
+                              openId: self.openId,
+                              latitude: self.latitude,
+                              longitude: self.longitude
+                            },
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function (res) {
+                              sessionStorage.setItem('_755wx',1);
+                              self.render(res);
+                            },
+                            error: function (err) {
+                              console.log(JSON.stringify(err));
+                              self.render(res);
+                            }
+                          })
+                        }
+                        else if(this.securityFlag==false){
+                          $.ajax({
+                              url:'/cloud_code/POST/weChat/productCustomerTracingHome.do',
+                              data:{
+                                  tracingCode:self.shortCode,
+                                  codeType:self.codeType,
+                                  latitude: self.latitude,
+                                  longitude: self.longitude
+                              },
+                              type: 'POST',
+                              dataType: 'json',
+                              success: function (res) {
+                                  console.log(res);
+                                  sessionStorage.setItem('_755wx',1);
+                                  self.render(res);
+                              },
+                              error: function (err) {
+                                  console.log(err);
+                                  self.render(err);
+                              }
+                          })
+                       }
                       },
                       // 渲染
                       render:function(data){
                         var self=this;
+                        if(this.securityFlag==true){
+                          if (data.scanFlag=='true') {
+                            $('.innerCodeTure').removeClass('hideMod');
+                          }
+                          else {
+                            $('.innerCodeFalse').removeClass('hideMod');
+                          }
+                        }
+                        else if(this.securityFlag==false){
+                            console.log('应该替换溯源按钮和删除红包按钮')
+                        }
                         $('.content').siblings('div').hide();
                         // 判断是真是假
                         console.log(data);
-                        if (data.scanFlag=='true') {
-                          $('.innerCodeTure').removeClass('hideMod');
-                        }
-                        else {
-                          $('.innerCodeFalse').removeClass('hideMod');
-                        }
                         self.vendorId=data.vendorId;
                         window.localStorage.setItem('vendorId', JSON.stringify(data.vendorId));
                         window.localStorage.setItem('infodata', JSON.stringify(data));
@@ -790,7 +828,7 @@
                         if(data.getRedEnv==0){
                           $('#btn6').removeClass('hideMod');
                         }
-                        if(data.getRedEnv==1){
+                        if(data.getRedEnv==1||self.securityFlag==false){
                           $('#btn6').remove();
                         }
                         self.bindEvents();

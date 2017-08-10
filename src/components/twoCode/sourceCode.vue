@@ -347,6 +347,7 @@
               self.orderId=null;
               self.rowCount=null;
               self.boxCount=null;
+              self.init();
             }else{
               self.showWarn=true;
               self.warnText=res.msg;

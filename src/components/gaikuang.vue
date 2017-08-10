@@ -28,8 +28,8 @@
       <div class='two_center_tit'>
         <p><span class='p_left'>扫码总量分布图</span><span class='p_right'>(截至日期:{{endTime}})</span></p>
       </div>
-      <div class='map' id='map' style='width: 100%;height: 640px;' v-on:load="maph" v-show='heatData==null'></div>
-      <div class='map' id='heatmap' style='width: 100%;height: 640px;' v-show='heatData!=null'></div>
+      <div class='map' id='map' style='width: 100%;height: 640px;' v-on:load="maph" v-show='heatData==null||heatData.length==0'></div>
+      <div class='map' id='heatmap' style='width: 100%;height: 640px;' v-show='heatData!=null&&heatData.length!=0'></div>
       <input class="delbutton" type="button" name="" value="返回城市地图" @click='showMap' v-show='heatData!=null'>
     </div>
   </div>
@@ -395,7 +395,7 @@
             name: '中国',
             type: 'map',
             mapType: 'china',
-            selectedMode : 'multiple',
+            // selectedMode : 'multiple',
             label: {
               normal: {
                 show: true
@@ -507,13 +507,13 @@
             }
             var success=function(res){
               self.heatData=res.data;
+              console.log(self.heatData)
               var AMap=require('AMap')
               var map = new AMap.Map("heatmap", {
                 resizeEnable: true,
                 center: [res.data[0].lng, res.data[0].lat],
                 zoom: 11
               });
-              self.aaa=map;
               if (!isSupportCanvas()) {
                 alert('热力图仅对支持canvas的浏览器适用,您所使用的浏览器不能使用热力图功能,请换个浏览器试试~')
               }

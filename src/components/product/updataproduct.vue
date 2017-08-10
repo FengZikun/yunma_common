@@ -878,7 +878,12 @@
 					}
 					
 					var success=function(res){
-						router.push({path:'/goods/pro_message'})
+						if(res.statuscode===1){
+							router.push({path:'/goods/pro_message'});
+						}else{
+							self.showWarn=true;
+							self.warnText=res.msg;
+						}
 					};
 					//调用ajax
 					common.Ajax(url,type,data,success);
@@ -907,7 +912,12 @@
 					productSpe:self.productSpe
 				};
 				var success=function(res){
-					router.push({path:'/goods/pro_message'});
+					if(res.statuscode===1){
+						router.push({path:'/goods/pro_message'});
+					}else{
+						self.showWarn=true;
+						self.warnText=res.msg;
+					}
 
 				};
 				//调用ajax

@@ -35,11 +35,6 @@
           <input class="message-value" type="text" name="" v-model='name'>
           <span class="message-after">限8个字符</span>
         </div>
-        <div class="addmessage">
-          <span class="message-name">产品数：</span>
-          <input class="message-value" type="text" name="" v-model='num'>
-          <span class="message-after">0-9999</span>
-        </div>
         <div style="margin-top: 50px;">
           <input class="delbutton" type="button" name="" value="确认" @click='addclassify'>
           <input class="delbutton" type="button" name="" value="取消" @click='hide'>
@@ -54,11 +49,6 @@
           <span class="message-name star">名称分类：</span>
           <input class="message-value" type="text" name="" v-model='name'>
           <span class="message-after">限8个字符</span>
-        </div>
-        <div class="addmessage">
-          <span class="message-name">产品数：</span>
-          <input class="message-value" type="text" name="" v-model='num'>
-          <span class="message-after">0-9999</span>
         </div>
         <input class="delbutton" type="button" name="" value="确认" @click='reviseclassify'>
         <input class="delbutton" type="button" name="" value="取消" @click='hide'>

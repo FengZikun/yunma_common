@@ -823,6 +823,15 @@
 			//提交数据
 			complete:function(){
 				var self=this;
+				if(self.productName==''){
+					self.showWarn=true;
+					self.warnText='请输入产品名';
+					return
+				}if(self.imgId==''){
+					self.showWarn=true;
+					self.warnText='请上传图片';
+					return
+				}
 				//修改
 				if(self.productid!=''){
 					var url='https://ym-a.top/cloud_code/UPDATE/product/info.do';

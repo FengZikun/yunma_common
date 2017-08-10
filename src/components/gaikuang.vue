@@ -28,8 +28,9 @@
       <div class='two_center_tit'>
         <p><span class='p_left'>扫码总量分布图</span><span class='p_right'>(截至日期:{{endTime}})</span></p>
       </div>
-      <div class='map' id='map' style='width: 100%;height: 640px;' v-on:load="maph"></div>
-      <input type="button" name="" value="重置" @click='showMap'>
+      <div class='map' id='map' style='width: 100%;height: 640px;' v-on:load="maph" v-show='heatData==null'></div>
+      <div class='map' id='heatmap' style='width: 100%;height: 640px;' v-show='heatData!=null'></div>
+      <input class="delbutton" type="button" name="" value="返回城市地图" @click='showMap' v-show='heatData!=null'>
     </div>
   </div>
 
@@ -249,7 +250,8 @@
         endTime:null,
         provinceData:null,
         areaData:null,
-        aaa:null
+        aaa:null,
+        heatData:null
       }
     },
     mounted(){
@@ -496,8 +498,6 @@
           //热力图
           if(params.seriesName=='市'){
             var thisName=params.name;
-            //清除echart
-            chart.clear();
             //引入高德地图
             var url='https://ym-a.top/cloud_code/GET/mapCount/heatMapForDistr.do';
             var type='post';
@@ -506,9 +506,9 @@
               district:thisName
             }
             var success=function(res){
-              console.log(res)
+              self.heatData=res.data;
               var AMap=require('AMap')
-              var map = new AMap.Map("map", {
+              var map = new AMap.Map("heatmap", {
                 resizeEnable: true,
                 center: [res.data[0].lng, res.data[0].lat],
                 zoom: 11
@@ -524,7 +524,7 @@
                   opacity: [0.1, 0.8]
                 });
                 heatmap.setDataSet({
-                  data: res.data,
+                  data: self.heatData,
                   max: 100
                 });
               });
@@ -547,7 +547,7 @@
       },
       showMap(){
         var self=this;
-        self.aaa.destroy();
+        self.heatData=null
       }
     },
     mounted:function(){

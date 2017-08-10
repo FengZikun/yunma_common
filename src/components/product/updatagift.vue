@@ -644,6 +644,31 @@ Vue.use(VueHtml5Editor, {
 			//submit data
 			complete:function(){
 				var self=this;
+				if(self.name===null){
+					self.showWarn=true;
+					self.warnText='请输入礼品名称';
+					return
+				}
+				if(self.price===null){
+					self.showWarn=true;
+					self.warnText='请输入市面价值';
+					return
+				}
+				if(self.imgId===null){
+					self.showWarn=true;
+					self.warnText='请选择图片';
+					return
+				}
+				if(self.weight===null){
+					self.showWarn=true;
+					self.warnText='请输入重量';
+					return
+				}
+				if(self.total===null){
+					self.showWarn=true;
+					self.warnText='请输入库存';
+					return
+				}
 				//修改
 				if(self.productid!=''){
 					var url='https://ym-a.top/cloud_code/UPDATE/product/present.do';

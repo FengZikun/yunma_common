@@ -33,7 +33,7 @@
                 <a>防伪码生成</a>
                 </router-link>
                 <router-link tag='li' to="/twoCode/briefCode">
-                  <a>扫描页模板</a>
+                  <a>防伪页模板</a>
                 </router-link>
                 <router-link tag='li' to="/twoCode/activity">
                   <a>扫码活动管理</a>
@@ -54,6 +54,12 @@
               <ul class='goods_sub3 hidelist'>
               <router-link tag='li' to="/twoCode/sourceCode">
                 <a>溯源码生成</a>
+                </router-link>
+                <router-link tag='li' to="/twoCode/briefCodeSu">
+                  <a>溯源页模板</a>
+                </router-link>
+                <router-link tag='li' to="/twoCode/activitySu">
+                  <a>溯源扫码活动管理</a>
                 </router-link>
                 <router-link tag='li' to="/twoCode/channel">
                   <a>渠道管理</a>

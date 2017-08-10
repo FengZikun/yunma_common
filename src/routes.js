@@ -20,6 +20,7 @@ import safety from './components/safety.vue'
 import en_public from './components/en_public.vue'
 import scan from './components/scan.vue'
 import activity from './components/activity.vue'
+import activitySu from './components/activitySu.vue'
 import setup from './components/setup.vue'
 import link from './components/link.vue'
 import channel from './components/twoCode/channel.vue'
@@ -32,6 +33,7 @@ import gift_recy from './components/gift_recy.vue'
 import classify from './components/classify.vue'
 import gaikuang from './components/gaikuang.vue'
 import briefCode from './components/twoCode/briefCode.vue'
+import briefCodeSu from './components/twoCode/briefCodeSu.vue'
 import chosePage from './components/twoCode/chosePage.vue'
 import setupPage from './components/twoCode/setupPage.vue'
 import detailPage from './components/twoCode/detailPage.vue'
@@ -185,6 +187,10 @@ const routes = [
     component: briefCode
   },
   {
+    path:'briefCodeSu',
+    component: briefCodeSu
+  },
+  {
     path:'setupPage',
     component: setupPage},
   {
@@ -197,6 +203,10 @@ const routes = [
   {
     path:'activity',
     component:activity
+  },
+  {
+    path:'activitySu',
+    component:activitySu
   },
   {
     path:'scan',

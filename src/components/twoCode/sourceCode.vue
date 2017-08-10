@@ -83,7 +83,7 @@
               <span class="pro-li-span">{{item.createDate}}</span>
               <span class="pro-li-span" v-if='item.tracingFlag==2'>已生成</span>
               <span class="pro-li-span" v-else>未生成</span>
-              <span class="pro-li-span last"><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='toDetail'>详情</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' v-bind:data-num='item.productCount' @click='sourceBox'>生成溯源码</a>、<router-link to='/twoCode/briefCode'>扫码页模板</router-link>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='downLoad1'>导出溯源码</a></span>
+              <span class="pro-li-span last"><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='toDetail'>详情</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' v-bind:data-num='item.productCount' @click='sourceBox'>生成溯源码</a>、<router-link to='/twoCode/briefCodeSu'>扫码页模板</router-link>、<router-link to='/twoCode/activitySu'>扫码活动管理</router-link>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='downLoad1'>导出溯源码</a></span>
 
             </li>
           </ul>
@@ -163,7 +163,7 @@
     width: 18%;
     overflow-wrap: break-word;
     height: 72px;
-    line-height: 36px;
+    line-height: 24px;
     white-space: pre-wrap;
   }
   .warnbottom{

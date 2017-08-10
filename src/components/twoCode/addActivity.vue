@@ -196,6 +196,7 @@
 <script>
 	import common from '../../common.js'
 	import router from '../../router.js'
+	import {mapState} from 'vuex'
 	export default{
 		data(){
 			return{
@@ -232,6 +233,7 @@
 			init1:function(){
 				var self=this;
 				//获取模板信息
+				console.log(self.type)
 				var url='https://ym-a.top/cloud_code/GET/codeManager/getScaPageModel.do';
 				var type='get';
 				var data={
@@ -290,7 +292,14 @@
 			init:function(currentPage){
 				var self=this;
 				self.showMB=true;
-				var url='https://ym-a.top/cloud_code/GET/codeManager/productInfoList.do';
+				if(self.type==1){
+					var url='https://ym-a.top/cloud_code/GET/codeManager/productInfoList.do';
+				}
+				else if(self.type==0){
+					var url="https://ym-a.top/cloud_code/GET/codeManager/getProductOrderTracyInfo.do";
+				}
+				// var url='https://ym-a.top/cloud_code/GET/codeManager/productInfoList.do';
+				// var url="https://ym-a.top/cloud_code/GET/codeManager/getCodeManagerAllForTracy.do";
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -396,6 +405,12 @@
 						spree:self.modelSelected.spree,
 						securityAndTraceability:self.modelSelected.securityAndTraceability
 					}
+					if(self.type==1){
+						data.funcFlag=1;
+					}
+					else if(self.type==0){
+						data.funcFlag=2;
+					}
 					var url='https://ym-a.top/cloud_code/UPDATE/codeManager/updateCodeManager.do';
 				}else{
 					var data={
@@ -413,12 +428,23 @@
 						spree:self.modelSelected.spree,
 						securityAndTraceability:self.modelSelected.securityAndTraceability
 					}
+					if(self.type==1){
+						data.funcFlag=1;
+					}
+					else if(self.type==0){
+						data.funcFlag=2;
+					}
 					var url='https://ym-a.top/cloud_code/ADD/codeManager/addCodeManager.do';
 				}
 				var type='post';
 				var success=function(res){
 					if(res.status===1){
+					if(self.type==1){
 						router.push({path:'activity'})
+					}
+					else if(self.type==0){
+						router.push({path:'activitySu'})
+					}
 					}
 				};
 				common.Ajax(url,type,data,success)
@@ -436,6 +462,9 @@
       //下一页
       nextPage:common.nextPage,
   },
+	computed: mapState({
+		type: state=>state.b.type
+	}),
   created:function(){
   	this.init1()
   }

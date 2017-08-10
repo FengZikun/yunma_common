@@ -217,7 +217,7 @@
       //初始化
       init:function(currentPage){
         var self=this;
-        var url='https://ym-a.top/cloud_code/GET/codeManager/getCodeManagerAll.do';
+        var url='https://ym-a.top/cloud_code/GET/codeManager/getCodeManagerAllForTracy.do';
         var type='get';
         var data={
           pageSize:10,
@@ -290,7 +290,7 @@
         var self=this;
         var id=$(event.target).attr('data-id');
         self.$emit('upActivityId',id);
-        self.changeType('b');
+        self.changeType('a');
         router.push({path:'addActivity'})
       },
 
@@ -298,7 +298,7 @@
       addActivity:function(){
         var self=this;
         self.$emit('upActivityId',null);
-        self.changeType('b');
+        self.changeType('a');
         router.push({path:'addActivity'})
       },
 

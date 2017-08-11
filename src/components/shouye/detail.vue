@@ -36,10 +36,10 @@
 
 						</li>
 						<li class="pro-li" v-for='item in codeInfo'>
-							<span class="pro-li-span">{{item.securityCode||item.codePrefix||item.groupCode||item.boxCode}}</span>
+							<span class="pro-li-span">{{item.securityCode||item.productTracingCode||item.groupCode||item.boxCode}}</span>
 							<span class="pro-li-span">{{item.productId}}</span>
 							<span class="pro-li-span">{{item.productName}}</span>
-							<span class="pro-li-span"><a href="javascript:void(0)" @click='newCode' v-bind:data-code='item.securityCode||item.codePrefix||item.groupCode||item.boxCode'>生成二维码</a></span>
+							<span class="pro-li-span"><a href="javascript:void(0)" @click='newCode' v-bind:data-code='item.securityCode||item.productTracingCode||item.groupCode||item.boxCode'>生成二维码</a></span>
 
 						</li>
 					</ul>

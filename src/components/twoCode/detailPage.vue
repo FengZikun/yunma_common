@@ -608,10 +608,10 @@
                         }
                         if (id === 'btn2') {
                           setTimeout(function () {
-                            if(this.securityFlag==true){
+                            if(self.securityFlag=='true'){
                               window.location.href = 'func/antiFake.html'
                             }
-                            else if(this.securityFlag==false){
+                            else if(self.securityFlag=='false'){
                                window.location.href = 'func/customerSuyuan.html'
                             }
                           }, 500)
@@ -723,7 +723,7 @@
                       // 获取基本信息
                       wechatHome: function () {
                         var self = this;
-                        if(this.securityFlag==true){
+                        if(this.securityFlag=='true'){
                           $.ajax({
                             url: '/cloud_code/POST/weChat/antiFakeCodeHome.do',
                             data: {
@@ -744,10 +744,11 @@
                             }
                           })
                         }
-                        else if(this.securityFlag==false){
+                        else if(this.securityFlag=='false'){
                           $.ajax({
                               url:'/cloud_code/POST/weChat/productCustomerTracingHome.do',
                               data:{
+                                  openId:this.openId,
                                   tracingCode:self.shortCode,
                                   codeType:self.codeType,
                                   latitude: self.latitude,
@@ -770,7 +771,7 @@
                       // 渲染
                       render:function(data){
                         var self=this;
-                        if(this.securityFlag==true){
+                        if(this.securityFlag=='true'){
                           if (data.scanFlag=='true') {
                             $('.innerCodeTure').removeClass('hideMod');
                           }
@@ -778,7 +779,7 @@
                             $('.innerCodeFalse').removeClass('hideMod');
                           }
                         }
-                        else if(this.securityFlag==false){
+                        else if(this.securityFlag=='false'){
                             console.log('应该替换溯源按钮和删除红包按钮')
                         }
                         $('.content').siblings('div').hide();
@@ -828,7 +829,7 @@
                         if(data.getRedEnv==0){
                           $('#btn6').removeClass('hideMod');
                         }
-                        if(data.getRedEnv==1||self.securityFlag==false){
+                        if(data.getRedEnv==1||self.securityFlag=='false'){
                           $('#btn6').remove();
                         }
                         self.bindEvents();

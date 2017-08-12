@@ -1,70 +1,48 @@
 <template>
-<div>
-<div class='top-title'>
-            <router-link to="/twoCode/hongbao" class='title-one'>红包</router-link>
-            <router-link to="/twoCode/rule" class='title-two'>规则</router-link>
-          </div>
-  <div class="right-main">
+  <div>
+    <div class='top-title'>
+      <router-link to="/twoCode/hongbao" class='title-one'>红包</router-link>
+      <router-link to="/twoCode/rule" class='title-two'>规则</router-link>
+    </div>
+    <div class="right-main">
       <div class="right-main-bottom">
-              <div class="button-group">
-              <router-link to='/twoCode/addHB'>
-                <div class="add-pro">
-                  +&nbsp;添加红包
-                </div>
-              </router-link>
-              </div>
-              <div class="my-form">
-                <ul class="pro-list">
-                  <li class="pro-li">
-                    <span class="pro-li-span head">订单ID</span>
-                    <span class="pro-li-span head">规则名称</span>
-                    <span class="pro-li-span head">充值金额</span>
-                    <span class="pro-li-span head">发放金额</span>
-                    <span class="pro-li-span head">有效时间</span>
-                    <span class="pro-li-span head">发放状态</span>
-                    <span class="pro-li-span head">查看详情</span>
-                  </li>
-                  <li class="pro-li" v-for='item in info'>
-                    <span class="pro-li-span">{{item.orderId}}</span>
-                    <span class="span2">{{item.ruleName}}</span>
-                    <span class="pro-li-span">{{item.consumeMoney}}</span>
-                    <span class="pro-li-span">{{item.rechargeMoney}}</span>
-                    <span class="pro-li-span" style="line-height:35px">{{item.startTime}}<br>{{item.endTime}}</span>
-                    <span class="pro-li-span"><span class="icon2"></span></span>
-                    <span class="pro-li-span"><img src="../../assets/img/icon_yulan.png"></span>
-                  </li>
-                </ul>
-              </div>
+        <div class="button-group">
+          <router-link to='/twoCode/addHB'>
+            <div class="add-pro">
+              +&nbsp;添加红包
             </div>
+          </router-link>
+        </div>
+        <div class="my-form">
+          <ul class="pro-list">
+            <li class="pro-li">
+              <span class="pro-li-span head">订单ID</span>
+              <span class="pro-li-span head">规则名称</span>
+              <span class="pro-li-span head">充值金额</span>
+              <span class="pro-li-span head">发放金额</span>
+              <span class="pro-li-span head">有效时间</span>
+              <span class="pro-li-span head">发放状态</span>
+              <span class="pro-li-span head">查看详情</span>
+            </li>
+            <li class="pro-li" v-for='item in info'>
+              <span class="pro-li-span">{{item.orderId}}</span>
+              <span class="span2">{{item.ruleName}}</span>
+              <span class="pro-li-span">{{item.consumeMoney}}</span>
+              <span class="pro-li-span">{{item.rechargeMoney}}</span>
+              <span class="pro-li-span" style="line-height:35px">{{item.startTime}}<br>{{item.endTime}}</span>
+              <span class="pro-li-span"><span class="icon2"></span></span>
+              <span class="pro-li-span"><img src="../../assets/img/icon_yulan.png"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
   
 </template>
 <style scoped>
  /*@import "../assets/css/common.css";*/
 
-.right-main-top{
-  width: 95%;
-  margin: auto;
-  padding-top: 60px;
-  text-align: left;
-}
-.right-main-top1{
-  margin-bottom: 50px;
-}
-.right-main-top-icon1{
-  width: 18px;
-  height: 18px;
-  background: url("../../assets/img/icon_tishi.png") no-repeat;
-  float: left;
-  margin-right: 8px;
-}
-.right-main-top{
-  width: 95%;
-  margin: auto;
-  padding-top: 60px;
-  text-align: left;
-}
 .right-main-bottom{
   width: 95%;
   margin:auto;

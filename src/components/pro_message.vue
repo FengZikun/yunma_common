@@ -2,10 +2,14 @@
   <div>
     <div class="mengban" v-show='showMB'>
       <div class="proclassify" >
-        <div class="tishi">
+        <div class="tishi" v-if='deleteArr.length!==0'>
           确定将产品删除到回收站吗？
         </div>
-        <input class="delbutton" type="button" name="" value="确认" @click='deletePro'>
+        <div class="tishi" v-else>
+          请先选择要删除的产品
+        </div>
+        <input v-if='deleteArr.length!==0' class="delbutton" type="button" name="" value="确认" @click='deletePro'>
+        <input v-else class="delbutton" type="button" name="" value="确认" @click='hide'>
         <input class="delbutton" type="button" name="" value="取消" @click='hide'>
       </div>
     </div>
@@ -61,7 +65,7 @@
                         <span class="bianji" @click.self='updata' v-bind:data-id='pro.id'></span>
                       </router-link>
                       <a href="javascript:void(0)">
-                        <span class="shanchu" @click.self='mengban' v-bind:data-id='pro.id'></span>
+                        <span class="shanchu" @click.self='mengban("single")' v-bind:data-id='pro.id'></span>
                       </a>
                     </span>
                   </li>
@@ -75,7 +79,7 @@
                 </span>
                 全选
               </span>
-              <input type="button" name="" value="删除" class="delbutton" @click='mengban'>
+              <input type="button" name="" value="删除" class="delbutton" @click='mengban(null)'>
             </div>
             <div class="page-num">
               <ul class="page-num-ul">
@@ -231,9 +235,12 @@ import common from '../common.js'
       },
 
       //显示蒙版
-      mengban:function(){
+      mengban:function(type){
         this.showMB=true;
-        this.deleteArr.push($(event.target).attr('data-id'));
+        if(type=='single'){
+          this.deleteArr.push($(event.target).attr('data-id'));
+        }
+        
       },
 
       //隐藏蒙版

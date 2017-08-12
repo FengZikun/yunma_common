@@ -882,5 +882,10 @@
     top: 30%;
     text-align: center;
   }
+  .time{
+    line-height:26px;
+    margin:10px 0;
+    vertical-align: top;
+  }
 
 </style>

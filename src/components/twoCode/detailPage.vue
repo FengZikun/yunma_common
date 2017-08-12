@@ -267,7 +267,7 @@
           return {
             vueReady:true,
             phoneTitle: this.datas.phoneTitle, 
-            imgSrc: require("../../assets/img/phoneBody.png"), 
+            imgSrc: require("../../assets/img/phoneBody.jpg"), 
             you:this.datas.you,
             antifake:this.datas.antifake,
             shop:this.datas.shop,
@@ -502,7 +502,7 @@
                   background-size: 100vw 100vh;
                   background-position: center;
                   overflow: hidden;
-                  background-image: url(img/phoneBody.png);
+                  background-image: url(img/phoneBody.jpg);
                 }
 
                 /*内码真图片*/
@@ -525,10 +525,14 @@
                   border: hidden;
                   position: absolute;
                   width: 30vw;
-                  height: 8vh;
+                  height: 9vw;
                   text-align: center;
-                  line-height: 8vh;
-                  background-color: rgba(170,170,170, 0.5);
+                  line-height: 9vw;
+                  color:#575757;
+                  background-image:url(img/button2.png);
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                  
                   /* display: none; */
                 }
 
@@ -1098,7 +1102,7 @@ p {
   height: 514px;
   width: 321px;
   background-size: cover;
-  background-image: url(../../assets/img/phoneBody.png);
+  background-image: url(../../assets/img/phoneBody.jpg);
   position: relative;
 }
 
@@ -1116,17 +1120,17 @@ p {
 
         .bodyBtn {
           position: relative;
-          top: -361px;
-          left: 190px;
-          width: 119px;
-          height: 55px;
+          top: -264px;
+          left: 202px;
+          width: 109px;
+          height: 39px;
           margin-bottom: 4px;
           text-align: center;
-          line-height: 55px;
+          line-height: 34px;
           z-index: 70;
           font-size: x-small;
-          color: #333;
-          background:rgba(133,133,133,0.3);
+          color: #575757;
+          background-image: url(../../assets/img/button2.png);
           background-repeat: no-repeat;
           background-size: contain;
           /* -webkit-animation: w1 2s ease-in-out infinite alternate; */

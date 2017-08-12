@@ -359,7 +359,7 @@
       },
       downLoad1:function(){
         var id=$(event.target).attr('data-id');
-        var downloadURL = "http://project.ym-b.top/cloud_code//POST/securityCode/exportProductTracingCode.do";  
+        var downloadURL = "https://ym-a.top/cloud_code//POST/securityCode/exportProductTracingCode.do";  
         var form = $("<form>");   //定义一个form表单  
         form.attr('style','display:none');   //在form表单中添加查询参数  
         form.attr('target','');  

@@ -31,7 +31,9 @@
     height: 662px;
     width: 350px;
     /* margin-left: 35px; */
-    background-image: url(../../assets/img/phoneBg.jpg)
+    background-image: url(../../assets/img/bgone.png);
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   .jingdian {

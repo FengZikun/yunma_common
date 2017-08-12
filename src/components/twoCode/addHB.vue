@@ -1,5 +1,18 @@
 <template>
 	<div class="right-main">
+		<div class="mengban" v-show='showWarn'>
+			<div class="warn">
+				<div class="classifyHeader">
+					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
+				</div>
+				<div class="warnmain">
+					{{warnText}}
+				</div>
+				<div class="warnbottom">
+					<input type="button" name="" value="确定" @click='showWarn=false'>
+				</div>
+			</div>
+		</div>
 		<div class="mengban" v-if='showMB'>
 			<div class="choosepro" >
 				<div class="choosepro-top">
@@ -307,7 +320,9 @@ import common from '../../common.js'
        			startTime:null,
        			endTime:null,
        			money:null,
-       			jine:null
+       			jine:null,
+       			showWarn:false,
+				warnText:null
 			}
 		},
 		props:['datas'],
@@ -363,7 +378,8 @@ import common from '../../common.js'
 						$('body').scrollTop(0);
 						return
 					}else{
-						console.log(res);
+						self.showWarn=true;
+						self.warnText=res.msg;
 					}
 					
 				}

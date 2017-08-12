@@ -80,6 +80,9 @@
                 <router-link tag='li' to="/twoCode/hongbao">
                   <a>发放红包</a>
                 </router-link>
+                <router-link tag='li' to="/twoCode/game">
+                  <a>集字游戏</a>
+                </router-link>
                 <li v-if='appList!=""' v-for='app in appList'>
                   <a href="javascript:void(0)"><p @click='toWeiQing(app.weqUrl)' style="color:#fff;font-size:16px;">{{app.appName}}</p></a>
                 </li>

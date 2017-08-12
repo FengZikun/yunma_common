@@ -68,6 +68,11 @@ import addActivity from './components/twoCode/addActivity.vue'
 import analysis from './components/twoCode/analysis.vue'
 import addAdmin from './components/admin/addAdmin.vue'
 import sourceCode from './components/twoCode/sourceCode.vue'
+import game from './components/twoCode/game.vue'
+import gameRule from './components/twoCode/gameRule.vue'
+import exhibitors from './components/twoCode/exhibitors.vue'
+import addGame from './components/twoCode/addGame.vue'
+import addGameRule from './components/twoCode/addGameRule.vue'
 //编写路由集合
 const routes = [
   {
@@ -255,6 +260,26 @@ const routes = [
   {
     path:'sourceCode',
     component:sourceCode
+  },
+  {
+    path:'game',
+    component:game
+  },
+  {
+    path:'gameRule',
+    component:gameRule
+  },
+  {
+    path:'exhibitors',
+    component:exhibitors
+  },
+  {
+    path:'addGame',
+    component:addGame
+  },
+  {
+    path:'addGameRule',
+    component:addGameRule
   }
   ]
 },

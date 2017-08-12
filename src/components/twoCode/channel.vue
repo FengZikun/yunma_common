@@ -297,7 +297,6 @@
         self.totalPages=res.totalPages;
         self.currentPage=res.currentPage;
         self.getPage();
-        console.log(self.proInfo);
       }
       common.Ajax(url2,type,data,success2);
 

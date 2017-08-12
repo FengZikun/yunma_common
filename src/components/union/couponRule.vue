@@ -64,7 +64,7 @@
 							<span class="pro-li-span" v-if='pro.timeType==0'>
 								<span>长期</span>
 							</span>
-							<span class="pro-li-span" v-else style="line-height:26px;margin:10px 0;vertical-align: top">
+							<span class="pro-li-span time" v-else>
 								<span>{{pro.startTime}}</span><br><span>{{pro.endTime}}</span>
 							</span>
 							<span class="pro-li-span">

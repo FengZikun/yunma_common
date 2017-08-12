@@ -2,19 +2,27 @@
   <div>
     <div class="mengban" v-show='showMB'>
       <div class="proclassify" >
-        <div class="tishi">
+        <div class="tishi" v-if='deleteArr.length!==0'>
           确定将产品彻底删除吗？
         </div>
-        <input class="delbutton" type="button" name="" value="确认" @click='deletePro'>
+        <div class="tishi" v-else>
+          请先选择要彻底删除的产品
+        </div>
+        <input v-if='deleteArr.length!==0' class="delbutton" type="button" name="" value="确认" @click='deletePro'>
+        <input v-else class="delbutton" type="button" name="" value="确认" @click='hide'>
         <input class="delbutton" type="button" name="" value="取消" @click='hide'>
       </div>
     </div>
     <div class="mengban" v-show='showMB2'>
       <div class="proclassify" >
-        <div class="tishi">
+        <div class="tishi" v-if='huanyuanArr.length!==0'>
           确定将产品还原到列表吗？
         </div>
-        <input class="delbutton" type="button" name="" value="确认" @click='huanyuan'>
+        <div class="tishi" v-else>
+          请先选择要还原的产品
+        </div>
+        <input v-if='huanyuanArr.length!==0' class="delbutton" type="button" name="" value="确认" @click='huanyuan'>
+        <input v-else class="delbutton" type="button" name="" value="确认" @click='hide'>
         <input class="delbutton" type="button" name="" value="取消" @click='hide'>
       </div>
     </div>
@@ -55,10 +63,10 @@
                     <span class="pro-li-span wordbreak">{{pro.lastUpdateTime}}</span>
                     <span class="pro-li-span">
                       <a href="javascript:void(0)">
-                        <span class="huanyuan" @click.self='mengban2' v-bind:data-id='pro.id'></span>
+                        <span class="huanyuan" @click.self='mengban2("single")' v-bind:data-id='pro.id'></span>
                       </a>
                       <a href="javascript:void(0)">
-                        <span class="totaldel" @click.self='mengban' v-bind:data-id='pro.id'></span>
+                        <span class="totaldel" @click.self='mengban("single")' v-bind:data-id='pro.id'></span>
                       </a>
                     </span>
                   </li>
@@ -72,8 +80,8 @@
                 </span>
                 全选
               </span>
-              <input type="button" name="" value="还原" class="delbutton" @click='mengban2'>
-              <input type="button" name="" value="彻底删除" class="delbutton" @click='mengban'>
+              <input type="button" name="" value="还原" class="delbutton" @click='mengban2(null)'>
+              <input type="button" name="" value="彻底删除" class="delbutton" @click='mengban(null)'>
             </div>
             <div class="page-num">
               <ul class="page-num-ul">
@@ -138,13 +146,6 @@
 
 
 
-.pro-li:nth-of-type(1) .pro-li-span:nth-of-type(5):after{
-  content: "";
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  background-color: #000;
-}
 
 </style>
 <script>
@@ -203,13 +204,11 @@ import common from '../common.js'
           self.chechednum++;
           self.deleteArr.push(checkBox.parent().text());
           self.huanyuanArr.push(checkBox.parent().text());
-          console.log(self.huanyuanArr);
         }else{
           checkBox.addClass('check-box').removeClass('has-select');
           self.chechednum--;
           self.deleteArr.pop(checkBox.parent().text());
           self.huanyuanArr.pop(checkBox.parent().text());
-          console.log(self.huanyuanArr);
 
         };
       },
@@ -230,7 +229,6 @@ import common from '../common.js'
             self.deleteArr.push(self.proInfo[i].id);
             self.huanyuanArr.push(self.proInfo[i].id);
           }
-          console.log(self.deleteArr)
         }else{
           checkall.addClass('check-box').removeClass('has-select');
           $('.checkshu').addClass('check-box').removeClass('has-select');
@@ -241,30 +239,35 @@ import common from '../common.js'
       },
 
       //显示删除蒙版
-      mengban:function(){
+      mengban:function(type){
         this.showMB=true;
-        this.deleteArr.push($(event.target).attr('data-id'));
+        if(type=='single'){
+          this.deleteArr.push($(event.target).attr('data-id'));
+        }
+        
       },
 
       //显示还原蒙版
-      mengban2:function(){
+      mengban2:function(type){
         this.showMB2=true;
-        this.huanyuanArr.push($(event.target).attr('data-id'));
+        if(type=='single'){
+          this.huanyuanArr.push($(event.target).attr('data-id'));
+        }
+        
       },
 
       //隐藏蒙版
       hide:function(){
         this.showMB=false;
         this.showMB2=false;
-        this.huanyuanArr=[];
-        this.deleteArr=[];
+        // this.huanyuanArr=[];
+        // this.deleteArr=[];
       },
 
       //删除
       deletePro:function(){
         var self=this;
         var deletedata=self.deleteArr;
-        console.log(deletedata);
         var url='https://ym-a.top/cloud_code/DELETE/product/info.do';
         var type='post';
         var data={

@@ -40,7 +40,7 @@
 		
 		<div class="step2" v-bind:class='{hidestep:twohide}'>
 			
-			<div class="mengban" v-show='showMB'>
+			<div class="mengban" v-if='showMB'>
 				
 				<div class="proclassify" >
 					<div class="classifyHeader">

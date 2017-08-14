@@ -6,6 +6,9 @@
 			</div>
 		</div>
 		<div class="right-main">
+			<p class="return">
+				<router-link to='/twoCode/enterprise_order'>返回</router-link>
+			</p>
 			<div class="right-main-top">
 				<div class="left">
 					<span class="lefta">ID：</span>
@@ -198,10 +201,11 @@
 	.right-main-top{
 		width: 95%;
 		margin: auto;
-		padding-top: 60px;
+		padding-top: 20px;
 		text-align: left;
 		display: flex;
 		justify-content: space-between;
+		clear: both;
 	}
 	.right-main-top2,
 	.right-main-top3{
@@ -324,5 +328,8 @@
 		line-height: 51px;
 		border-bottom: 2px solid #E3E8EB;
 		color: #28282B;
+	}
+	.return{
+		margin-top: 20px;
 	}
 </style>

@@ -2,7 +2,44 @@
   <div>
     <div class="mengban" v-show='showCode' @click='hide'>
       <div class="codeImg">
-        
+
+      </div>
+    </div>
+    <div class="mengban" v-if='showDetail'>
+      <div class="contentBox" style="width: 900px;margin-left: -450px;">
+        <div class="contentTop">
+          <span class="titleFont">详情</span>
+          <span class="cha" @click='showDetail=false'></span>
+        </div>
+        <div class="contentMain">
+        <ul class="choosepro-main">
+            <li class="pro-li header">
+              <span class="pro-li-span" style="width: 8%">员工ID</span>
+              <span class="pro-li-span" style="width: 8%">代理商ID</span>
+              <span class="pro-li-span">代理商名称</span>
+              <span class="pro-li-span">员工姓名</span>
+              <span class="pro-li-span" style="width: 18%">创建时间</span>
+              <span class="pro-li-span" style="width: 8%">工号</span>
+              <span class="pro-li-span">员工电话</span>
+              <span class="pro-li-span" style="width: 18%">员工身份证号码</span>
+
+            </li>
+            <li class="pro-li" v-for='item in detailInfo'>
+              <span class="pro-li-span" style="width: 8%">{{item.id}}</span>
+              <span class="pro-li-span" style="width: 8%">{{item.agentId}}</span>
+              <span class="pro-li-span">{{item.agentName}}</span>
+              <span class="pro-li-span">{{item.empName}}</span>
+              <span class="pro-li-span" style="width: 18%">{{item.createTime}}</span>
+              <span class="pro-li-span" style="width: 8%">{{item.workNum}}</span>
+              <span class="pro-li-span">{{item.empTel}}</span>
+              <span class="pro-li-span" style="width: 18%">{{item.empIdcard}}</span>
+
+            </li>
+          </ul>
+        </div>
+        <div class="contentBottom">
+          <input class="content-botton" type="button" name="" value="确定" @click='showDetail=false'>
+        </div>
       </div>
     </div>
     <div class="mengban" v-if='showMB'>
@@ -55,11 +92,11 @@
     <div class="right-main">
       <div class="right-main-bottom">
         <div class="button-group">
-        <a href="javascript:void(0)" @click='addProxy'>
-          <div class="add-pro">
-            +新增代理
-          </div>
-        </a>
+          <a href="javascript:void(0)" @click='addProxy'>
+            <div class="add-pro">
+              +新增代理
+            </div>
+          </a>
           <span style="color:#b3b3b7;">（新增代理前请选择树状图的某个节点，新增的代理将添加在选中节点的分支中）</span>
         </div>
         <div class="my-form">
@@ -84,6 +121,7 @@
               <span class="pro-li-span" v-if='pro.noData==undefined'>{{pro.agentFid}}</span>
               <span class="pro-li-span" v-else>{{pro.noData.agentFid}}</span>
               <span class="pro-li-span">
+                <a href="javascript:void(0)" v-bind:data-id='pro.id||pro.noData.id'>详情</a>
                 <a href="javascript:void(0)" v-bind:data-id='pro.id||pro.noData.id' v-bind:data-level='pro.agentLevel||pro.noData.agentLevel'>授权码</a>
                 <a href="javascript:void(0)" v-bind:data-id='pro.id||pro.noData.id'>删除</a>
               </span> 
@@ -275,7 +313,8 @@
         id:null,
         level:null,
         showCode:false,
-
+        showDetail:false,
+        detailInfo: null
       }
     },
     props:['datas'],
@@ -473,6 +512,18 @@
               self.id=null;
               self.level=null;
             }
+          };
+          common.Ajax(url,type,data,success)
+        }else if($(event.target)[0].innerText==='详情'){
+          var agentId=$(event.target).attr('data-id');
+          var url='http://192.168.1.107:8080/cloud_code/GET/AgentEmployee/getEmpInfoById.do';
+          var type='get';
+          var data={
+            agentId:agentId
+          };
+          var success=function(res){
+            self.showDetail=true;
+            self.detailInfo=res.data;
           };
           common.Ajax(url,type,data,success)
         }

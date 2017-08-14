@@ -321,7 +321,7 @@
         var length=Object.keys(self.edata).length;
         var echarts = require('echarts');
         for(var i=length-1;i>-1;i--){
-          date.push(self.edata[i]['scanTime']);
+          date.push(self.edata[i]['days']);
           dateVal.push(self.edata[i]['coun']);
           if(i==0){self.endTime=self.edata[i]['scanTime']}
             if(i==length-1){self.startTime=self.edata[i]['scanTime']}

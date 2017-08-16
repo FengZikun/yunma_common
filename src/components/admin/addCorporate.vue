@@ -3,7 +3,7 @@
     <div class="mengban" v-show='showMB'>
     <div class="imgbox">
         <form name='myform2' id="myform2" enctype="multipart/form-data">
-        <span class="message-name star">品牌代表图片：</span>
+        <span class="message-name star" style="vertical-align: middle;">品牌代表图片：</span>
         <span style="display:inline-block;width:86px;height:86px;background-repeat:no-repeat;background-size: contain" v-if='imgSrcF!=""'  v-bind:style="{backgroundImage: imgSrcF}"></span>
         <input style="display:none" type="file" id="photoF" name="brandImg" @change='change($event)'>
         <label class="productImg" for="photoF"></label>
@@ -113,17 +113,17 @@
         <p class="inputwarn hidelist">请输入符合规范的邮箱</p>
       </div>
       <div class='message-box'>
-        <span class='textname star'>官网：</span>
+        <span class='textname'>官网：</span>
         <input class='textvalue' type="text" name='link' v-model='link'>
         <span class="text-after">（请输入公司官网）</span>
       </div>
       <div class='message-box'>
-        <span class='textname star'>微商城：</span>
+        <span class='textname'>微商城：</span>
         <input class='textvalue' type="text" name="vendorMall" v-model='vendorMall'>
         <span class="text-after">（请输入企业微商城链接）</span>
       </div>
       <div class='message-box'>
-        <span class='textname star'>公众号：</span>
+        <span class='textname'>公众号：</span>
         <input class='textvalue' type="text" name='wxConfig' v-model='wxConfig'>
         <span class="text-after">（请输入企业公众号）</span>
       </div>
@@ -302,14 +302,15 @@
     background: url(../../assets/img/group7.png);
   }
   .imgbox{
-    margin: auto;
     top: 50%;
+    left: 50%;
+    margin-left: -342.5px;
     margin-top: -327.5px;
     height: 655px;
     border-radius: 2px;
     background: #fff;
     width: 685px;
-    position: relative;
+    position: absolute;
   }
   .classifyHeader{
     width: 100%;
@@ -335,6 +336,14 @@
   .inputwarn{
     color: red;
     margin-left: 200px;
+  }
+  #myform2{
+    margin-top: 40px;
+    text-align: left;
+    margin-left: 100px;
+  }
+  .imgbottom{
+    margin-top: 100px;
   }
 </style>
 <script>
@@ -483,21 +492,6 @@ import router from '../../router.js'
         if(self.Emaill==null){
           self.showWarn=true;
           self.warnText='请输入邮箱';
-          return
-        }
-        if(self.link=='http://'||self.link.length<=7){
-          self.showWarn=true;
-          self.warnText='请输入官网';
-          return
-        }
-        if(self.vendorMall==null){
-          self.showWarn=true;
-          self.warnText='请输入微商城';
-          return
-        }
-        if(self.wxConfig==null){
-          self.showWarn=true;
-          self.warnText='请输入公众号';
           return
         }
         var data=new FormData($('#myform')[0]);

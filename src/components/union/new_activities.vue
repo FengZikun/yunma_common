@@ -329,19 +329,19 @@
 				// 	console.log(res)
 				// };
 				// common.Ajax(url,type,data,success)
-				$.ajax({
-					url:'https://ym-a.top/cloud_code/openweixin/getauthlink.do',
-					type:'get',
-					data:{
-						vendorId:self.vendorId,
-					},
-					success:function(res){
-						window.open(res)
-					},
-					error:function(res){
-						console.log(11)
-					}
-				})
+				// $.ajax({
+				// 	url:'https://ym-a.top/cloud_code/openweixin/getauthlink.do',
+				// 	type:'get',
+				// 	data:{
+				// 		vendorId:self.vendorId,
+				// 	},
+				// 	success:function(res){
+						window.open("https://ym-a.top/cloud_code/testAuth.jsp")
+				// 	},
+				// 	error:function(res){
+				// 		console.log(11)
+				// 	}
+				// })
 			},
 
 			//发布

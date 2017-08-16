@@ -34,8 +34,8 @@
 			<div class="right-main-bottom">
 				<p class="title">基本信息：</p>
 				<div class="gameRuleMessage">
-					<span class="message-name">规则名：</span>
-					<input class="message-value" type="text" placeholder="请输入规则名">
+					<span class="message-name star">规则名：</span>
+					<input class="message-value" type="text" placeholder="请输入规则名" v-model='name'>
 				</div>
 				<div class="gameRuleMessage">
 					<span class="message-name">设置字数：</span>
@@ -46,8 +46,8 @@
 				<div class="gameRuleMessage">
 					<span class="message-name">设置获得率：</span>
 					<div class="characterBox" v-for='(item,index) in parseInt(fontNumText.substring(0,fontNumText.length-1))'>
-						<input class="character" type="text" name="" maxlength="1" v-model='fontArr[index].font'><br>
-						(<input class="probability" type="text" name="" v-model='fontArr[index].probability'>%)
+						<input class="character" type="text" name="" maxlength="1" v-model='fontArr[index].word'><br>
+						(<input class="probability" type="text" name="" v-model='fontArr[index].word_rate'>%)
 					</div>
 				</div>
 			</div>
@@ -55,44 +55,45 @@
 		<div class="right-main">
 			<div class="right-main-bottom">
 				<p class="title">奖项设置：</p>
-				<div>
+
+				<!-- X等奖 -->
+				<div v-for='item in awardsNum' class="awardsBox">
 					<div class="gameRuleMessage">
-						<span class="message-name">一等奖：</span>
-						<select class="message-value" style="width:127px;margin-right: 35px;" v-model='fontNumText3'>
+						<span class="message-name">{{item}}等奖：</span>
+						<!-- 选择字数 -->
+						<select class="message-value" style="width:127px;margin-right: 35px;" v-model='awards[item-1].fontNum3' @change='setPrize_item(item)'>
 							<option v-for='item in fontNum2'>{{item}}字</option>
 						</select>
-						<select v-for='item in parseInt(fontNumText3.substring(0,fontNumText3.length-1))' class="message-value" style="width: 50px;margin-right: 25px;">
-							<option v-for='(item,index) in fontArr' v-if='index<fontNum2'>{{item.font}}</option>
+						<!-- 设置具体字 -->
+						<select v-for='worditem in parseInt(awards[item-1].fontNum3.substring(0,awards[item-1].fontNum3.length-1))' class="message-value" style="width: 50px;margin-right: 25px;" v-model='awards[item-1].prize_item[worditem-1]'>
+							<option v-for='(item,index) in fontArr' v-if='index<fontNum2'>{{item.word}}</option>
 						</select>
 					</div>
 					<div class="gameRuleMessage">
+						<span class="message-name">是否有序：</span>
+						<input class="radios" type="radio" name="youxu" id="yes" v-model='awards[item-1].prize_is_sort' v-bind:value='1'><label class="radios" for="yes">有序</label>
+						<input class="radios" type="radio" name="youxu" id="no" v-model='awards[item-1].prize_is_sort' v-bind:value='0'><label class="radios" for="no">无序</label>
+					</div>
+					<div class="gameRuleMessage">
 						<span class="message-name">奖品描述：</span>
-						<input class="message-value" style="width: 515px;"></input>
+						<input class="message-value" style="width: 515px;" v-model='awards[item-1].prize_comment'></input>
 					</div>
 				</div>
-
-				<!-- <div>
-					<div class="gameRuleMessage">
-						<span class="message-name">一等奖：</span>
-						<select class="message-value" style="width:127px;margin-right: 35px;" v-model='fontNumText3'>
-							<option v-for='item in fontNum2'>{{item}}字</option>
-						</select>
-						<select v-for='item in parseInt(fontNumText3.substring(0,fontNumText3.length-1))' class="message-value" style="width: 50px;margin-right: 25px;">
-							<option v-for='(item,index) in fontArr' v-if='index<fontNum2'>{{item.font}}</option>
-						</select>
-					</div>
-					<div class="gameRuleMessage">
-						<span class="message-name">奖品描述：</span>
-						<input class="message-value" style="width: 515px;"></input>
-					</div>
-				</div> -->
 				<input class="addAwards" type="button" name="" value="+添加奖项" @click='addAwards'>
+
+				<div class="buttonGroup">
+					<input class="delbutton" type="button" name="" value="提交" @click='confirm'>
+					
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script type="text/javascript">
+	import common from '../../common.js'
+	import _ from 'underscore'
+	import router from '../../router.js'
 	export default{
 		data(){
 			return{
@@ -103,33 +104,119 @@
 				fontNum3:'5字',
 				fontNumText:'5字',
 				fontNumText3:'5字',
+				name:null,
 				fontArr:[
-				{font:"",probability:null},
-				{font:"",probability:null},
-				{font:"",probability:null},
-				{font:"",probability:null},
-				{font:"",probability:null},
-				{font:"",probability:null},
-				{font:"",probability:null},
-				{font:"",probability:null},
-				{font:"",probability:null},
-				{font:"",probability:null},
+				{word:"",word_rate:null},
+				{word:"",word_rate:null},
+				{word:"",word_rate:null},
+				{word:"",word_rate:null},
+				{word:"",word_rate:null},
+				{word:"",word_rate:null},
+				{word:"",word_rate:null},
+				{word:"",word_rate:null},
+				{word:"",word_rate:null},
+				{word:"",word_rate:null},
+				],
+				awards:[
+				{
+					prize_name:"一等奖",
+					prize_item:[],
+					prize_is_sort:0,
+					prize_comment:'',
+					fontNum3:'5字',
+				},
+				{
+					prize_name:"二等奖",
+					prize_item:[],
+					prize_is_sort:0,
+					prize_comment:'',
+					fontNum3:'5字',
+				},
+				{
+					prize_name:"三等奖",
+					prize_item:[],
+					prize_is_sort:0,
+					prize_comment:'',
+					fontNum3:'5字',
+				},
+				{
+					prize_name:"四等奖",
+					prize_item:[],
+					prize_is_sort:0,
+					prize_comment:'',
+					fontNum3:'5字',
+				},
+				{
+					prize_name:"五等奖",
+					prize_item:[],
+					prize_is_sort:0,
+					prize_comment:'',
+					fontNum3:'5字',
+				},
 				],
 				awardsNum:1
 			}
 		},
+		props:['datas'],
 		methods:{
 			//设置字数
 			setNum(){
 				var self=this;
 				self.fontNum2=parseInt(self.fontNumText.substring(0,self.fontNumText.length-1));
-				self.fontNumText3=self.fontNumText
+				for(var i=0;i<self.awards.length;i++){
+					self.awards[i].fontNum3=self.fontNumText
+				}
 			},
+			//增加奖项
 			addAwards(){
 				var self=this;
 				if(self.awardsNum<5){
 					self.awardsNum++
 				}
+			},
+			//提交
+			confirm(){
+				var self=this;
+				if(self.name===null){
+					self.showWarn=true;
+					self.warnText='请输入规则名';
+					return
+				}
+				var url="http://192.168.1.107:8080/cloud_code/ADD/CollectWord/addCollectWordRule.do";
+				var type='post';
+				var rates=self.fontArr.slice(0,self.fontNum2);
+				var items=self.awards.slice(0,self.awardsNum);
+				if(typeof(self.awards[0].prize_item)!=='string'){
+					for(var i=0;i<self.awardsNum;i++){
+						self.awards[i].prize_item=self.awards[i].prize_item.join("")
+					}
+				}
+				
+				var thisData={
+					name:self.name,
+					vendorId:self.datas.vendorId,
+					number:self.fontNum2,
+					items:items,
+					rates:rates
+					
+				}
+				var data={json:JSON.stringify(thisData)};
+				var success=function(res){
+					if(res.status===1){
+						router.push({path:'/twoCode/gameRule'})
+					}else{
+						self.showWarn=true;
+						self.warnText=res.msg;
+					}
+				}
+				common.Ajax(url,type,data,success)
+			},
+
+			//设置中奖字
+			setPrize_item(item){
+				var self=this;
+				var thisAward=self.awards[item-1];
+				self.awards[item-1].prize_item.length=parseInt(thisAward.fontNum3.substring(0,thisAward.fontNum3.length-1))
 			}
 		}
 	}
@@ -137,7 +224,12 @@
 
 <style scoped>
 	.right-main{
-		padding-bottom: 60px
+		padding-bottom: 60px;
+		
+	}
+	.right-main:last-of-type{
+		max-height: 796px;
+		overflow-y: scroll;
 	}
 	.right-main-top{
 		width: 95%;
@@ -229,5 +321,23 @@
 		outline: none;
 		color: #00baff;
 	}
-
+	.buttonGroup{
+		margin: 40px 0 0 80px;
+	}
+	.delbutton{
+		width: 100px;
+		height: 40px;
+	}
+	.radios{
+		display: inline-block;
+		vertical-align: middle;
+		margin: 0;
+	}
+	.awardsBox{
+		padding: 10px 0 50px 0;
+		border-radius: 8px;
+	}
+	.awardsBox:hover{
+		background-color: #eefaff;
+	}
 </style>

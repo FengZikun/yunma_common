@@ -516,7 +516,7 @@
           common.Ajax(url,type,data,success)
         }else if($(event.target)[0].innerText==='详情'){
           var agentId=$(event.target).attr('data-id');
-          var url='http://192.168.1.107:8080/cloud_code/GET/AgentEmployee/getEmpInfoById.do';
+          var url='http://ym-a.top/cloud_code/GET/AgentEmployee/getEmpInfoById.do';
           var type='get';
           var data={
             agentId:agentId

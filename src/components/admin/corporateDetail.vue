@@ -138,7 +138,7 @@
 				var url='https://ym-a.top/cloud_code/GET/vendor/getVendorInfo.do';
 				var type='get';
 				var data={
-					detailId:self.detailId
+					vendorId:self.detailId
 				};
 				var success=function(res){
 					console.log(res);

@@ -1,5 +1,18 @@
 <template>
 	<div>
+	    <div class="mengban" v-show='showWarn'>
+        <div class="warn">
+          <div class="classifyHeader">
+            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+          </div>
+          <div class="warnmain">
+            {{warnText}}
+          </div>
+          <div class="warnbottom">
+            <input type="button" name="" value="确定" @click='showWarn=false'>
+          </div>
+        </div>
+      </div>
 		<div class="mengban" v-show='showMB'>
 			<div class="proclassify" >
 				<div class="classifyHeader">
@@ -23,6 +36,36 @@
 						<input class="delbutton" type="button" name="" value="取消" @click='hide'>
 					</div>
 
+				</div>
+			</div>
+			<div class="mengban" v-show='showMB1'>
+				<div class="proclassify" >
+					<form id="wxd" enctype="multipart/form-data" method="post"> 
+						<div class="classifyHeader">
+							<span style="display:block;height:48px;line-height:48px;">关联微信小店</span>
+						</div>
+						<div class="messageboxwxd">
+							<span class="message-name">上传证书：</span>
+							<input class="wxd-value" type="file" name="credentials">
+						</div>
+						<div class="messageboxwxd">
+							<span class="message-name">上传证书：</span>
+							<input class="wxd-value" type="file" name="credentials">
+						</div>
+						<div class="messageboxwxd">
+							<span class="message-name">上传证书：</span>
+							<input class="wxd-value" type="file" name="credentials">
+						</div>
+						<div class="messageboxwxd">
+							<span class="message-name">上传证书：</span>
+							<input class="wxd-value" type="file" name="credentials">
+						</div>
+						<input type="text" name="vendorId" v-bind:value="vendorId" class="hidelist">
+						<div class="classifyFooter">
+							<input class="delbutton" type="button" name="" value="确认" @click='connectwxd'>
+							<input class="delbutton" type="button" name="" value="取消" @click='hide'>
+						</div>
+					</form>
 				</div>
 			</div>
 			<div class="mengban" v-show='showMB2'>
@@ -61,9 +104,15 @@
 								同步信息
 							</div>
 						</router-link>
+
 						<a href="javascript:void(0)" @click='search'>
 							<div class="add-pro3">
 								关联微店
+							</div>
+						</a>
+						<a href="javascript:void(0)" @click='wxdbind'>
+							<div class="add-pro3">
+								关联微信小店
 							</div>
 						</a>
 					</div>
@@ -136,10 +185,13 @@
 		        keyword:'',
 		        appKey:null,
 		        secret:null,
+		        showMB1:false,
 		        showMB2:false,
 		        showMB3:false,
 		        couponId:null,
 		        productUrl:null,
+		        showWarn:false,
+        		warnText:''
 		    }
 		},
 		props:['vendorId'],
@@ -199,7 +251,10 @@
 				};
 				common.Ajax(url,type,data,success)
 			},
-
+			// 微信小店蒙版
+			wxdbind:function(){
+				this.showMB1=true;
+			},
 			//关联微店
 			connect:function(){
 				var self=this;
@@ -220,10 +275,38 @@
 				};
 				common.Ajax(url,type,data,success)
 			},
-
+			connectwxd:function(){
+				var self=this;
+        		var data=new FormData($('#wxd')[0]);
+        		$.ajax({
+		          url: 'https://ym-a.top/cloud_code/openweixincredentials/upload.do',
+		          type:'post',
+		          data: data,
+		          cache: false,
+		          dataType: 'json',
+		          processData: false,
+		          contentType: false,
+		          success: function (res) {
+		            if(res.statuscode==1){
+		              self.showWarn=true;
+		              self.warnText='保存成功'
+		            }
+		            else{
+		              self.showWarn=true;
+		              self.warnText=res.msg
+		            }
+		          },
+		          error:function(res){
+		           self.showWarn=true;
+		              self.warnText='更新出错'
+		          }
+		        });
+		        self.showMB1=false;
+			},
 			//隐藏蒙版
 			hide:function(){
 				this.showMB=false;
+				this.showMB1=false;
 				this.showMB3=false;
 			},
 			// 删除优惠券
@@ -341,6 +424,10 @@
 		margin-top: 30px;
 		text-align: left;
 	}
+	.messageboxwxd{
+		margin-top: 20px;
+		text-align: left;
+	}
 	.message-name{
 		width: 100px;
 		display: inline-block;
@@ -352,6 +439,10 @@
 		padding-left: 5px;
 		border-radius: 5px;
 		text-align: left;
+	}
+	.wxd-value{
+		display: inline-block;
+		padding-left: 5px;
 	}
 	.cha{
 		position: absolute;

@@ -52,7 +52,7 @@
         document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
         let aa=window.open();
         setTimeout(function(){
-        aa.location='http://www.ym-b.top';
+        aa.location='http://mp.ym-a.top';
         }, 100);
       },
     }

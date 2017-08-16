@@ -309,14 +309,14 @@
         document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
                 let aa=window.open();
         setTimeout(function(){
-        aa.location='http://www.ym-b.top';
+        aa.location='http://mp.ym-a.top';
         }, 100);
       },
       toWeiQing1:function(url){
         document.cookie=`_755url=;domain=ym-b.top;path=/web`;
         let aa=window.open();
         setTimeout(function(){
-        aa.location='http://www.ym-b.top';
+        aa.location='http://mp.ym-a.top';
         }, 100);
       },
     },

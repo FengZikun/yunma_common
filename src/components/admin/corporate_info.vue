@@ -37,7 +37,7 @@
                     <span class="pro-li-span">{{pro.vendorEmail}}</span>
                     <span class="pro-li-span" style="line-height: 24px;text-align:left;overflow: hidden;text-overflow: ellipsis;min-width: 100px;">官网：{{pro.link}}<br>微商城：{{pro.vendor_mall}}<br>公众号：{{pro.officialAccounts}}</span>
                     <span class="pro-li-span">{{pro.comment}}</span>
-                    <span class="pro-li-span"><a href='javascript:void(0)' @click='upVendorId' v-bind:data-id='pro.detail_id'>详情</a></span>
+                    <span class="pro-li-span"><a href='javascript:void(0)' @click='upVendorId' v-bind:data-id='pro.vendorId'>详情</a></span>
                   </li>
                 </ul>
               </div>

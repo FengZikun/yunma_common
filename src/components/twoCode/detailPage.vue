@@ -94,13 +94,13 @@
 <!-- 微商城URL -->
 <div class="modelBg modHid" defName="shopUrl">
  <div class="modelContentkeyOne">
-   请输入URL <input type="text" name="keyOneURL" v-model="shopUrl"><span class="modelbackBtn" @click="hideKuang">返回</span>
+   请输入URL <input type="text" name="shopUrl" v-model="shopUrl"><span class="modelbackBtn" @click="hideKuang">返回</span>
  </div>
 </div>
 <!-- 公司官网URL -->
 <div class="modelBg modHid" defName="keyOne">
  <div class="modelContentkeyOne">
-   请输入URL <input type="text" name="shopUrl" v-model="keyOneURL"><span class="modelbackBtn" @click="hideKuang">返回</span>
+   请输入URL <input type="text" name="keyOneURL" v-model="keyOneURL"><span class="modelbackBtn" @click="hideKuang">返回</span>
  </div>
 </div>
 <!-- 产品介绍 -->

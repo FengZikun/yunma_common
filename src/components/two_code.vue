@@ -411,15 +411,15 @@
         you:true,
         antifake:true,
         shop:true,
-        shopUrl:'http://www.cclink.xin',
+        shopUrl:'http://www.ym-b.top/app/./index.php?i=4&c=entry&eid=39',
         keyOne:true,
         keyOneName:'公司官网',
         keyOneContent:'公司官网页面',
-        keyOneURL:'http://www.cclink.xin',
+        keyOneURL:'http://mp.weixin.qq.com/s?__biz=MzIwMjc5MTYwMA==&mid=2247483686&idx=1&sn=9e85cb59101730a8902527d0abd4de90&chksm=96d80ef9a1af87ef035a625131cc4b50ec3bb4075489fd9ecfac4d970336a331c74fc55d8b26&mpshare=1&scene=1&srcid=0815p2L1tbyEUoxMMetknoDH#rd',
         keyTwo:true,
         keyTwoName:'产品介绍',
         keyTwoContent:'产品介绍页面',
-        keyTwoURL:'',
+        keyTwoURL:'http://mp.weixin.qq.com/s?__biz=MzIwMjc5MTYwMA==&mid=2247483686&idx=1&sn=9e85cb59101730a8902527d0abd4de90&chksm=96d80ef9a1af87ef035a625131cc4b50ec3bb4075489fd9ecfac4d970336a331c74fc55d8b26&mpshare=1&scene=1&srcid=0815p2L1tbyEUoxMMetknoDH#rd',
         keyThree:true,
         keyThreeName:'取蜜视频',
         keyThreeContent:'取蜜视频页面',
@@ -456,15 +456,15 @@
         self.you=true;
         self.antifake=true;
         self.shop=true;
-        self.shopUrl='http://www.cclink.xin';
+        self.shopUrl='http://www.ym-b.top/app/./index.php?i=4&c=entry&eid=39';
         self.keyOne=true;
         self.keyOneName='公司官网';
         self.keyOneContent='公司官网页面';
-        self.keyOneURL='http://www.cclink.xin';
+        self.keyOneURL='http://mp.weixin.qq.com/s?__biz=MzIwMjc5MTYwMA==&mid=2247483686&idx=1&sn=9e85cb59101730a8902527d0abd4de90&chksm=96d80ef9a1af87ef035a625131cc4b50ec3bb4075489fd9ecfac4d970336a331c74fc55d8b26&mpshare=1&scene=1&srcid=0815p2L1tbyEUoxMMetknoDH#rd';
         self.keyTwo=true;
         self.keyTwoName='产品介绍';
         self.keyTwoContent='产品介绍页面';
-        self.keyTwoURL='';
+        self.keyTwoURL='http://mp.weixin.qq.com/s?__biz=MzIwMjc5MTYwMA==&mid=2247483686&idx=1&sn=9e85cb59101730a8902527d0abd4de90&chksm=96d80ef9a1af87ef035a625131cc4b50ec3bb4075489fd9ecfac4d970336a331c74fc55d8b26&mpshare=1&scene=1&srcid=0815p2L1tbyEUoxMMetknoDH#rd';
         self.keyThree=true;
         self.keyThreeName='取蜜视频';
         self.keyThreeContent='取蜜视频页面';
@@ -528,7 +528,7 @@
         document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
         let aa=window.open();
         setTimeout(function(){
-        aa.location='http://www.ym-b.top';
+        aa.location='http://mp.ym-a.top';
         }, 100);
       },
       WxGzhInfo:function(url){

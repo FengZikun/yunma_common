@@ -47,7 +47,7 @@ import common from '../../common.js'
 		methods:{
 			init(){
 				var self=this;
-				var url='http://192.168.1.107:8080/cloud_code/GET/CollectWord/getRuleList.do';
+				var url='https://ym-a.top/cloud_code/GET/CollectWord/getRuleList.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId
@@ -85,5 +85,8 @@ import common from '../../common.js'
 	}
 	.time{
 		height: 52px;
+	}
+	.pro-list{
+		overflow-y: scroll;
 	}
 </style>

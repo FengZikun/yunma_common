@@ -24,13 +24,13 @@
 							<span class="pro-li-span head">有效时间</span>
 							<span class="pro-li-span head">创建时间</span>
 						</li>
-						<li class="pro-li">
-							<span class="pro-li-span">1</span>
-							<span class="pro-li-span">啊实打实</span>
+						<li class="pro-li" v-for='item in dataInfo'>
+							<span class="pro-li-span">{{item.order_id||item.product_id}}</span>
+							<span class="pro-li-span">{{item.name}}</span>
 							<span class="pro-li-span"></span>
-							<span class="pro-li-span">集、字、兑、大、奖</span>
-							<span class="pro-li-span time"></span>
-							<span class="pro-li-span"></span>
+							<span class="pro-li-span">{{item.prize_item}}</span>
+							<span class="pro-li-span time">{{item.effect_time}}<br>{{item.invalid_time}}</span>
+							<span class="pro-li-span">{{item.create_time}}</span>
 						</li>
 					</ul>
 				</div>
@@ -41,11 +41,30 @@
 </template>
 
 <script type="text/javascript">
+import common from '../../common.js'
 	export default{
 		data(){
 			return{
-
+				dataInfo:null
 			}
+		},
+		methods:{
+			init(){
+				var self=this;
+				var url='http://192.168.1.107:8080/cloud_code/GET/CollectWord/getCollectWordGameList.do';
+				var type='get';
+				var data={
+					vendorId:self.datas.vendorId
+				};
+				var success=function(res){
+					self.dataInfo=res.data
+				};
+				common.Ajax(url,type,data,success)
+			}
+		},
+		props:['datas'],
+		mounted(){
+			this.init()
 		}
 	}
 </script>
@@ -70,6 +89,14 @@
 		line-height: 60px;
 	}
 	.time{
-		height: 52px;
+		   line-height: 26px;
+    margin: 10px 0;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    max-height: 52px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 	}
 </style>

@@ -226,7 +226,7 @@
 					self.warnText='请输入奖品描述'
 					return
 				}
-				var url="http://192.168.1.107:8080/cloud_code/ADD/CollectWord/addCollectWordRule.do";
+				var url="https://ym-a.top/cloud_code/ADD/CollectWord/addCollectWordRule.do";
 				var type='post';
 				var rates=self.fontArr.slice(0,self.fontNum2);
 				var items=self.awards.slice(0,self.awardsNum);

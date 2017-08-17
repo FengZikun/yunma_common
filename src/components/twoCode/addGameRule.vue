@@ -62,17 +62,17 @@
 						<span class="message-name">{{item}}等奖：</span>
 						<!-- 选择字数 -->
 						<select class="message-value" style="width:127px;margin-right: 35px;" v-model='awards[item-1].fontNum3' @change='setPrize_item(item)'>
-							<option v-for='item in fontNum2'>{{item}}字</option>
+							<option v-for='fontitem in fontNum2'>{{fontitem}}字</option>
 						</select>
 						<!-- 设置具体字 -->
 						<select v-for='worditem in parseInt(awards[item-1].fontNum3.substring(0,awards[item-1].fontNum3.length-1))' class="message-value" style="width: 50px;margin-right: 25px;" v-model='awards[item-1].prize_item[worditem-1]'>
-							<option v-for='(item,index) in fontArr' v-if='index<fontNum2'>{{item.word}}</option>
+							<option v-for='(optionitem,index) in fontArr' v-if='index<fontNum2'>{{optionitem.word}}</option>
 						</select>
 					</div>
 					<div class="gameRuleMessage">
 						<span class="message-name">是否有序：</span>
-						<input class="radios" type="radio" name="youxu" id="yes" v-model='awards[item-1].prize_is_sort' v-bind:value='1'><label class="radios" for="yes">有序</label>
-						<input class="radios" type="radio" name="youxu" id="no" v-model='awards[item-1].prize_is_sort' v-bind:value='0'><label class="radios" for="no">无序</label>
+						<input class="radios" type="radio" v-bind:name="'youxu'+item" v-bind:id='"yes"+item' v-model='awards[item-1].prize_is_sort' v-bind:value='1'><label class="radios" v-bind:for='"yes"+item'>有序</label>
+						<input class="radios" type="radio" v-bind:name="'youxu'+item" v-bind:id='"no"+item' v-model='awards[item-1].prize_is_sort' v-bind:value='0'><label class="radios" v-bind:for='"no"+item'>无序</label>
 					</div>
 					<div class="gameRuleMessage">
 						<span class="message-name">奖品描述：</span>
@@ -128,7 +128,7 @@
 				{
 					prize_name:"二等奖",
 					prize_item:[],
-					prize_is_sort:0,
+					prize_is_sort:1,
 					prize_comment:'',
 					fontNum3:'5字',
 				},
@@ -142,7 +142,7 @@
 				{
 					prize_name:"四等奖",
 					prize_item:[],
-					prize_is_sort:0,
+					prize_is_sort:1,
 					prize_comment:'',
 					fontNum3:'5字',
 				},
@@ -164,12 +164,27 @@
 				var self=this;
 				self.fontNum2=parseInt(self.fontNumText.substring(0,self.fontNumText.length-1));
 				for(var i=0;i<self.awards.length;i++){
-					self.awards[i].fontNum3=self.fontNumText
+					self.awards[i].fontNum3=parseInt(self.fontNumText.substring(0,self.fontNumText.length-1))-i;
+					self.awards[i].fontNum3=self.awards[i].fontNum3+"字"
 				}
 			},
 			//增加奖项
 			addAwards(){
 				var self=this;
+				var thisAward=self.awards[self.awardsNum-1];
+				var len=thisAward.prize_item.length;
+				var shouldLen=parseInt(thisAward.fontNum3.substring(0,thisAward.fontNum3.length-1))
+				//验证获奖字是否设置
+				if(len<shouldLen){
+					self.showWarn=true;
+					self.warnText='请设置完整的获奖字'
+					return
+				}
+				if(thisAward.prize_comment===''){
+					self.showWarn=true;
+					self.warnText='请输入奖品描述'
+					return
+				}
 				if(self.awardsNum<5){
 					self.awardsNum++
 				}
@@ -177,9 +192,38 @@
 			//提交
 			confirm(){
 				var self=this;
+				//输入验证
 				if(self.name===null){
 					self.showWarn=true;
 					self.warnText='请输入规则名';
+					return
+				}
+				//获得率验证
+				for(var i=0;i<self.fontNum2;i++){
+					if(self.fontArr[i].word===''){
+						self.showWarn=true;
+						self.warnText='请设置中奖字'
+						return
+					}
+					if(self.fontArr[i].word_rate===null){
+						self.showWarn=true;
+						self.warnText='请设置获得率'
+						return
+					}
+				}
+				//奖励验证
+				var thisAward=self.awards[self.awardsNum-1];
+				var len=thisAward.prize_item.length;
+				var shouldLen=parseInt(thisAward.fontNum3.substring(0,thisAward.fontNum3.length-1))
+				//验证获奖字是否设置
+				if(len<shouldLen){
+					self.showWarn=true;
+					self.warnText='请设置完整的获奖字'
+					return
+				}
+				if(thisAward.prize_comment===''){
+					self.showWarn=true;
+					self.warnText='请输入奖品描述'
 					return
 				}
 				var url="http://192.168.1.107:8080/cloud_code/ADD/CollectWord/addCollectWordRule.do";
@@ -201,6 +245,7 @@
 					
 				}
 				var data={json:JSON.stringify(thisData)};
+				console.log(thisData);
 				var success=function(res){
 					if(res.status===1){
 						router.push({path:'/twoCode/gameRule'})

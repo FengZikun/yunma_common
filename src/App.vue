@@ -62,11 +62,11 @@
         self.writeCookie('pwd',data.passWord);
       },
       toWeiQing:function(url){
-        document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
+        document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-a.top;path=/web`;
         window.open(url,'_blank')
       },
       writeCookie:function(name,val){
-        document.cookie=`_755${name}=${val};domain=ym-b.top;path=/web`;
+        document.cookie=`_755${name}=${val};domain=ym-a.top;path=/web`;
       },
     },
     components:{

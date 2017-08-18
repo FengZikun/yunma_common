@@ -6,13 +6,13 @@
           <ul class='goods_menu'>
             <li class='goods_li goods_li_1'>
             <div class="change_color">
-              <router-link to=""><span class='img img1'></span><a href="javascript:void(0)" @click="toWeiQing("http://www.ym-b.top/web/index.php?c=mc&a=fans&")"><span>粉丝管理</span></a></router-link>
+              <router-link to=""><span class='img img1'></span><a href="javascript:void(0)" @click="toWeiQing("http://mp.ym-a.top/web/index.php?c=mc&a=fans&")"><span>粉丝管理</span></a></router-link>
             </div>
               
             </li>
             <li class='goods_li_1'>
             <div class="change_color">
-              <span class='img img2'></span><a href="javascript:void(0)" @click="toWeiQing('http://www.ym-b.top/web/index.php?c=mc&a=member&')"><span>会员管理</span></a>
+              <span class='img img2'></span><a href="javascript:void(0)" @click="toWeiQing('http://mp.ym-a.top/web/index.php?c=mc&a=member&')"><span>会员管理</span></a>
             </div>
             </li>
           </ul>
@@ -49,7 +49,7 @@
         $(event.target).parents("li").siblings().find("ul").addClass("hidelist")
       },
       toWeiQing:function(url){
-        document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
+        document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-a.top;path=/web`;
         let aa=window.open();
         setTimeout(function(){
         aa.location='http://mp.ym-a.top';

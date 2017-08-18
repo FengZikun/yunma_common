@@ -43,15 +43,15 @@
               用户<span class='xiajiantou'></span>
             </li>
             <li class="change_color" style="margin-top:6px">
-              <a href="javascript:void(0)" @click="WxGzhInfo('http://www.ym-b.top/web/index.php?c=mc&a=fans&',0)"><span>粉丝管理</span></a>
+              <a href="javascript:void(0)" @click="WxGzhInfo('http://mp.ym-a.top/web/index.php?c=mc&a=fans&',0)"><span>粉丝管理</span></a>
             </li>
             <li class="change_color">
-              <a href="javascript:void(0)" @click="WxGzhInfo('http://www.ym-b.top/web/index.php?c=mc&a=member&',0)"><span>会员管理</span></a>
+              <a href="javascript:void(0)" @click="WxGzhInfo('http://mp.ym-a.top/web/index.php?c=mc&a=member&',0)"><span>会员管理</span></a>
             </li>
           </ul>
-          <li class='top_nav li_04' @click='changeColor'><a href="javascript:void(0);" @click="WxGzhInfo('http://www.ym-b.top',1)">公众号</a></li>
+          <li class='top_nav li_04' @click='changeColor'><a href="javascript:void(0);" @click="WxGzhInfo('http://mp.ym-a.top',1)">公众号</a></li>
           <li class='top_nav li_05' @click='changeColor'><router-link to="/union">企业联盟</router-link></li>
-          <li class='top_nav li_06' @click='changeColor'><a href="javascript:void(0);" @click="WxGzhInfo('http://www.ym-b.top/web/index.php?c=platform&a=cover&eid=39',0)">商城</a></li>
+          <li class='top_nav li_06' @click='changeColor'><a href="javascript:void(0);" @click="WxGzhInfo('http://mp.ym-a.top/web/index.php?c=platform&a=cover&eid=39',0)">商城</a></li>
         </ul>
       </div>
       <div class='username'>
@@ -371,14 +371,14 @@
 
       },
       toWeiQing:function(url){
-        document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
+        document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-a.top;path=/web`;
         let aa=window.open();
         setTimeout(function(){
         aa.location='http://mp.ym-a.top';
         }, 100);
       },
       toWeiQing1:function(url){
-        document.cookie=`_755url=;domain=ym-b.top;path=/web`;
+        document.cookie=`_755url=;domain=ym-a.top;path=/web`;
                 let aa=window.open();
         setTimeout(function(){
         aa.location='http://mp.ym-a.top';

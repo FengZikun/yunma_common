@@ -45,6 +45,22 @@
 							<span style="display:block;height:48px;line-height:48px;">关联微信小店</span>
 						</div>
 						<div class="messageboxwxd">
+							<span class="message-name" style="padding-left:-5px;">开发者ID(AppID)：</span>
+							<input class="wxd-value" type="text" name="appId">
+						</div>
+						<div class="messageboxwxd">
+							<span class="message-name">开发者密码：</span>
+							<input class="wxd-value" type="text" name="secret">
+						</div>
+						<div class="messageboxwxd">
+							<span class="message-name">消息加解密密钥：</span>
+							<input class="wxd-value" type="text" name="apiKey">
+						</div>
+						<div class="messageboxwxd">
+							<span class="message-name">微信商户号：</span>
+							<input class="wxd-value" type="text" name="mchId">
+						</div>
+						<div class="messageboxwxd">
 							<span class="message-name">上传证书：</span>
 							<input class="wxd-value" type="file" name="credentials">
 						</div>
@@ -279,7 +295,7 @@
 				var self=this;
         		var data=new FormData($('#wxd')[0]);
         		$.ajax({
-		          url: 'https://ym-a.top/cloud_code/openweixincredentials/upload.do',
+		          url: 'https://ym-a.top/cloud_code/wechatCouponConfig/addConfig.do',
 		          type:'post',
 		          data: data,
 		          cache: false,

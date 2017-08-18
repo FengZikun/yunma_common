@@ -411,7 +411,7 @@
         you:true,
         antifake:true,
         shop:true,
-        shopUrl:'http://www.ym-b.top/app/./index.php?i=4&c=entry&eid=39',
+        shopUrl:'http://mp.ym-a.top/app/index.php?i=4&c=entry&eid=39',
         keyOne:true,
         keyOneName:'公司官网',
         keyOneContent:'公司官网页面',
@@ -456,7 +456,7 @@
         self.you=true;
         self.antifake=true;
         self.shop=true;
-        self.shopUrl='http://www.ym-b.top/app/./index.php?i=4&c=entry&eid=39';
+        self.shopUrl='http://mp.ym-a.top/app/index.php?i=4&c=entry&eid=39';
         self.keyOne=true;
         self.keyOneName='公司官网';
         self.keyOneContent='公司官网页面';
@@ -525,7 +525,7 @@
         })
       },
       toWeiQing:function(url){
-        document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-b.top;path=/web`;
+        document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-a.top;path=/web`;
         let aa=window.open();
         setTimeout(function(){
         aa.location='http://mp.ym-a.top';

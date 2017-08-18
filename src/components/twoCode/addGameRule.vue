@@ -94,6 +94,7 @@
 	import common from '../../common.js'
 	import _ from 'underscore'
 	import router from '../../router.js'
+	import { mapState } from 'vuex'
 	export default{
 		data(){
 			return{
@@ -159,6 +160,24 @@
 		},
 		props:['datas'],
 		methods:{
+			//初始化
+			init(){
+				var self=this;
+				if(self.ruleId!==null){
+					var url='http://192.168.1.107:8080/cloud_code/GET/CollectWord/getRuleInfoById.do';
+					var type='get';
+					var data={
+						id:self.ruleId
+					};
+					var success=function(res){
+						console.log(res);
+						self.name=res.name;
+						self.fontNumText=res.number+'字';
+						self.fontArr=res.rates;
+					}
+					common.Ajax(url,type,data,success)
+				}
+			},
 			//设置字数
 			setNum(){
 				var self=this;
@@ -263,6 +282,12 @@
 				var thisAward=self.awards[item-1];
 				self.awards[item-1].prize_item.length=parseInt(thisAward.fontNum3.substring(0,thisAward.fontNum3.length-1))
 			}
+		},
+		computed:mapState({
+			ruleId:state=>state.c.ruleId
+		}),
+		created(){
+			this.init()
 		}
 	}
 </script>

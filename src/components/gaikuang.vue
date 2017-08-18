@@ -3,7 +3,7 @@
     <div class='two_top'>
       <div class='two_top_left'>
         <div class='one'>
-          <p class="p1">{{securityCodeScanCount}}</p>
+          <p class="p1">{{vendorTotalScanCount}}</p>
           <p class="p2">扫码总量</p>
         </div>
         <div class='two'>
@@ -14,9 +14,9 @@
       <div class='two_top_right'>
         <ul>
           <li>昨日扫码量：<span>{{dayTotalScanCount}}</span></li>
-          <li>标识被扫量：<span>16</span></li>
+          <li>标识被扫量：<span>{{vendorTotalScanCount}}</span></li>
           <li>昨日活动参与量：<span>{{daylyJoinActivCount}}</span></li>
-          <li>标识总量：<span>599</span></li>
+          <li>标识总量：<span>{{totalSecurityCodeCount}}</span></li>
         </ul>
       </div>
     </div>
@@ -244,6 +244,8 @@
         joinActivCount:null,
         daylyJoinActivCount:null,
         dayTotalScanCount:null,
+        vendorTotalScanCount:null,
+        totalSecurityCodeCount:null,
         edata:'',
         emap:'',
         startTime:null,
@@ -275,10 +277,13 @@
           vendorId:self.datas.vendorId
         };
         var success=function(res){
+          console.log(res);
           self.securityCodeScanCount=res.securityCodeScanCount;
           self.joinActivCount=res.joinActivCount;
           self.daylyJoinActivCount=res.daylyJoinActivCount;
           self.dayTotalScanCount=res.dayTotalScanCount;
+          self.vendorTotalScanCount=res.vendorTotalScanCount;
+          self.totalSecurityCodeCount=res.totalSecurityCodeCount;
         };
 
         common.Ajax(url,type,data,success)

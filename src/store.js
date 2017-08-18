@@ -30,10 +30,25 @@ const codeType={
 		}
 	}
 }
+const gameRule={
+	state: {
+		ruleId:null
+	},
+	mutations: {
+		getId(state,type){
+			if(type==='add'){
+				state.ruleId=null
+			}else{
+				state.ruleId=type;
+			}
+		}
+	}
+}
 const store = new Vuex.Store({
   modules: {
   	a:picAd,
-  	b:codeType
+  	b:codeType,
+  	c:gameRule
   }
 })
 

@@ -8,11 +8,11 @@
 		<div class="right-main">
 			<div class="right-main-bottom">
 				<div class="button-group">
-					<router-link to='/twoCode/addGameRule'>
+					<a href="javascript:void(0)" @click='addRule'>
 						<div class="add-pro">
 							+&nbsp;新建规则
 						</div>
-					</router-link>
+					</a>
 				</div>
 				<div class="my-form">
 					<ul class="pro-list">
@@ -21,12 +21,14 @@
 							<span class="pro-li-span head">规则名称</span>
 							<span class="pro-li-span head">中奖字</span>
 							<span class="pro-li-span head">创建时间</span>
+							<span class="pro-li-span head">查看详情</span>
 						</li>
 						<li class="pro-li" v-for='item in dataInfo'>
 							<span class="pro-li-span">{{item.id}}</span>
 							<span class="pro-li-span">{{item.name}}</span>
 							<span class="pro-li-span">{{item.prize_item}}</span>
 							<span class="pro-li-span">{{item.createTime}}</span>
+							<span class="pro-li-span"><a href="javascript:void(0)" v-bind:data-id='item.id' @click='showDetail'>详情</a></span>
 						</li>
 					</ul>
 				</div>
@@ -37,6 +39,9 @@
 
 <script type="text/javascript">
 import common from '../../common.js'
+import router from '../../router.js'
+import { mapMutations } from 'vuex'
+
 	export default{
 		data(){
 			return{
@@ -45,6 +50,9 @@ import common from '../../common.js'
 		},
 		props:['datas'],
 		methods:{
+			...mapMutations({
+				getId:'getId'
+			}),
 			init(){
 				var self=this;
 				var url='https://ym-a.top/cloud_code/GET/CollectWord/getRuleList.do';
@@ -56,6 +64,19 @@ import common from '../../common.js'
 					self.dataInfo=res.data
 				};
 				common.Ajax(url,type,data,success)
+			},
+			showDetail(){
+				var self=this;
+				var id=$(event.target).attr('data-id');
+				self.getId(id)
+				router.push({path:'/twoCode/addGameRule'})
+
+			},
+			addRule(){
+				var self=this;
+				self.getId("add");
+				router.push({path:'/twoCode/addGameRule'})
+				
 			}
 		},
 		mounted(){
@@ -74,7 +95,7 @@ import common from '../../common.js'
 		margin-top: 40px;
 	}
 	.pro-li-span{
-		width: 24%;
+		width: 19%;
 		height: 72px;
 		line-height: 72px;
 		vertical-align: middle;

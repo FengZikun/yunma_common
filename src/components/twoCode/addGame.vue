@@ -182,6 +182,7 @@
 			//选择订单
 			init:function(currentPage){
 				var self=this;
+				$('.has-select').removeClass('has-select');
 				self.showMB=true;
 				self.order=true;
 				self.product=false;
@@ -211,6 +212,7 @@
 		    //选择产品
 		    choosePro:function(currentPage){
 		    	var self=this;
+		    	$('.has-select').removeClass('has-select');
 		    	self.showMB=true;
 		    	self.product=true;
 		    	self.order=false;
@@ -277,6 +279,26 @@
 			//完成
 			complete(){
 				var self=this;
+				if(self.selectId===null||self.selectId===''){
+					self.showWarn=true;
+					self.warnText='请选择产品/订单'
+					return
+				}
+				if(self.ruleId===null){
+					self.showWarn=true;
+					self.warnText='请选择规则'
+					return
+				}
+				if(self.create_time===null){
+					self.showWarn=true;
+					self.warnText='请设置生效时间'
+					return
+				}
+				if(self.invalid_time===null){
+					self.showWarn=true;
+					self.warnText='请设置失效时间'
+					return
+				}
 		    	var url='http://192.168.1.107:8080/cloud_code/ADD/CollectWord/addCollectWordGame.do';
 		    	var type='post';
 		    	var data={

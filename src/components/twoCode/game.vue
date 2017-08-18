@@ -41,7 +41,7 @@
 </template>
 
 <script type="text/javascript">
-import common from '../../common.js'
+	import common from '../../common.js'
 	export default{
 		data(){
 			return{
@@ -89,14 +89,17 @@ import common from '../../common.js'
 		line-height: 60px;
 	}
 	.time{
-		   line-height: 26px;
-    margin: 10px 0;
-    vertical-align: top;
-    display: inline-block;
-    text-align: center;
-    max-height: 52px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+		line-height: 26px;
+		margin: 10px 0;
+		vertical-align: top;
+		display: inline-block;
+		text-align: center;
+		max-height: 52px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.pro-list{
+		overflow-y: scroll;
 	}
 </style>

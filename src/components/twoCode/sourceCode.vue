@@ -83,7 +83,7 @@
               <span class="pro-li-span">{{item.createDate}}</span>
               <span class="pro-li-span" v-if='item.tracingFlag==2'>已生成</span>
               <span class="pro-li-span" v-else>未生成</span>
-              <span class="pro-li-span last"><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='toDetail'>详情</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' v-bind:data-num='item.productCount' @click='sourceBox'>生成溯源码</a>、<router-link to='/twoCode/briefCodeSu'>扫码页模板</router-link>、<router-link to='/twoCode/activitySu'>扫码活动管理</router-link>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='downLoad1'>导出溯源码</a></span>
+              <span class="pro-li-span last"><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='toDetail'>详情</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' v-bind:data-num='item.productCount' @click='sourceBox'>生成溯源码</a>、<router-link to='/twoCode/briefCodeSu'>扫码页模板</router-link>、<router-link to='/twoCode/activitySu'>扫码活动管理</router-link>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='downLoad1'>导出溯源码</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='defined'>防窜货模式</a></span>
 
             </li>
           </ul>
@@ -376,6 +376,33 @@
         form.submit();   //表单提交  
         alert('正在下载请勿关闭窗口');
       },
+        // 升级防窜货
+        defined:function(){
+          var self=this;
+          var orderId=$(event.target).attr('data-id');
+          $.ajax({
+            url:'https://ym-a.top/cloud_code/GET/productTracingGroupcode/upperTracingDegree.do',
+            type:'POST',
+            data:{
+              orderId:orderId
+            },
+            datatype:'json',
+            success: function (res) {
+                if(res.statuscode==0){
+                  self.showWarn=true;
+                  self.warnText='此订单已升级为防窜货模式'
+                }
+                else{
+                  self.showWarn=true;
+                  self.warnText=res.msg
+                }
+              },
+              error:function(res){
+               self.showWarn=true;
+                  self.warnText='升级失败'
+              }
+          })
+        },
       //获取页数
       getPage:common.getPage,
       //翻页

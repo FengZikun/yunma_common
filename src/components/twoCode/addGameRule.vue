@@ -35,18 +35,18 @@
 				<p class="title">基本信息：</p>
 				<div class="gameRuleMessage">
 					<span class="message-name star">规则名：</span>
-					<input class="message-value" type="text" placeholder="请输入规则名" v-model='name'>
+					<input :disabled='ruleId!==null' class="message-value" type="text" placeholder="请输入规则名" v-model='name'>
 				</div>
 				<div class="gameRuleMessage">
 					<span class="message-name">设置字数：</span>
-					<select class="message-value" style="width:127px;" v-model='fontNumText' @change='setNum'>
+					<select :disabled='ruleId!==null' class="message-value" style="width:127px;" v-model='fontNumText' @change='setNum'>
 						<option v-for='item in fontNum'>{{item}}字</option>
 					</select>
 				</div>
 				<div class="gameRuleMessage">
 					<span class="message-name">设置获得率：</span>
 					<div class="characterBox" v-for='(item,index) in parseInt(fontNumText.substring(0,fontNumText.length-1))'>
-						<input class="character" type="text" name="" maxlength="1" v-model='fontArr[index].word'><br>
+						<input :disabled='ruleId!==null' class="character" type="text" name="" maxlength="1" v-model='fontArr[index].word'><br>
 						(<input class="probability" type="text" name="" v-model='fontArr[index].word_rate'>%)
 					</div>
 				</div>
@@ -61,28 +61,28 @@
 					<div class="gameRuleMessage">
 						<span class="message-name">{{item}}等奖：</span>
 						<!-- 选择字数 -->
-						<select class="message-value" style="width:127px;margin-right: 35px;" v-model='awards[item-1].fontNum3' @change='setPrize_item(item)'>
+						<select :disabled='ruleId!==null' class="message-value" style="width:127px;margin-right: 35px;" v-model='awards[item-1].fontNum3' @change='setPrize_item(item)'>
 							<option v-for='fontitem in fontNum2'>{{fontitem}}字</option>
 						</select>
 						<!-- 设置具体字 -->
-						<select v-for='worditem in parseInt(awards[item-1].fontNum3.substring(0,awards[item-1].fontNum3.length-1))' class="message-value" style="width: 50px;margin-right: 25px;" v-model='awards[item-1].prize_item[worditem-1]'>
+						<select :disabled='ruleId!==null' v-for='worditem in parseInt(awards[item-1].fontNum3.substring(0,awards[item-1].fontNum3.length-1))' class="message-value" style="width: 50px;margin-right: 25px;" v-model='awards[item-1].prize_item[worditem-1]'>
 							<option v-for='(optionitem,index) in fontArr' v-if='index<fontNum2'>{{optionitem.word}}</option>
 						</select>
 					</div>
 					<div class="gameRuleMessage">
 						<span class="message-name">是否有序：</span>
-						<input class="radios" type="radio" v-bind:name="'youxu'+item" v-bind:id='"yes"+item' v-model='awards[item-1].prize_is_sort' v-bind:value='1'><label class="radios" v-bind:for='"yes"+item'>有序</label>
-						<input class="radios" type="radio" v-bind:name="'youxu'+item" v-bind:id='"no"+item' v-model='awards[item-1].prize_is_sort' v-bind:value='0'><label class="radios" v-bind:for='"no"+item'>无序</label>
+						<input :disabled='ruleId!==null' class="radios" type="radio" v-bind:name="'youxu'+item" v-bind:id='"yes"+item' v-model='awards[item-1].prize_is_sort' v-bind:value='1'><label class="radios" v-bind:for='"yes"+item'>有序</label>
+						<input :disabled='ruleId!==null' class="radios" type="radio" v-bind:name="'youxu'+item" v-bind:id='"no"+item' v-model='awards[item-1].prize_is_sort' v-bind:value='0'><label class="radios" v-bind:for='"no"+item'>无序</label>
 					</div>
 					<div class="gameRuleMessage">
 						<span class="message-name">奖品描述：</span>
-						<input class="message-value" style="width: 515px;" v-model='awards[item-1].prize_comment'></input>
+						<input :disabled='ruleId!==null' class="message-value" style="width: 515px;" v-model='awards[item-1].prize_comment'></input>
 					</div>
 				</div>
-				<input class="addAwards" type="button" name="" value="+添加奖项" @click='addAwards'>
+				<input v-if='ruleId===null' class="addAwards" type="button" name="" value="+添加奖项" @click='addAwards'>
 
 				<div class="buttonGroup">
-					<input class="delbutton" type="button" name="" value="提交" @click='confirm'>
+					<input v-if='ruleId===null' class="delbutton" type="button" name="" value="提交" @click='confirm'>
 					
 				</div>
 			</div>
@@ -170,10 +170,16 @@
 						id:self.ruleId
 					};
 					var success=function(res){
-						console.log(res);
 						self.name=res.name;
 						self.fontNumText=res.number+'字';
 						self.fontArr=res.rates;
+						for(var i=0;i<res.items.length;i++){
+							res.items[i].prize_item=res.items[i].prize_item.split('');
+							res.items[i].fontNum3=res.items[i].prize_item.length+'字';
+						}
+						console.log(res);
+						self.awardsNum=res.items.length;
+						self.awards=res.items;
 					}
 					common.Ajax(url,type,data,success)
 				}
@@ -245,35 +251,44 @@
 					self.warnText='请输入奖品描述'
 					return
 				}
-				var url="https://ym-a.top/cloud_code/ADD/CollectWord/addCollectWordRule.do";
-				var type='post';
-				var rates=self.fontArr.slice(0,self.fontNum2);
-				var items=self.awards.slice(0,self.awardsNum);
-				if(typeof(self.awards[0].prize_item)!=='string'){
-					for(var i=0;i<self.awardsNum;i++){
-						self.awards[i].prize_item=self.awards[i].prize_item.join("")
-					}
-				}
 				
-				var thisData={
-					name:self.name,
-					vendorId:self.datas.vendorId,
-					number:self.fontNum2,
-					items:items,
-					rates:rates
-					
-				}
-				var data={json:JSON.stringify(thisData)};
-				console.log(thisData);
-				var success=function(res){
-					if(res.status===1){
-						router.push({path:'/twoCode/gameRule'})
-					}else{
-						self.showWarn=true;
-						self.warnText=res.msg;
+					self.add();
+				
+				
+			},
+
+			//新增
+			add(){
+				var self=this;
+				var url="https://ym-a.top/cloud_code/ADD/CollectWord/addCollectWordRule.do";
+					var type='post';
+					var rates=self.fontArr.slice(0,self.fontNum2);
+					var items=self.awards.slice(0,self.awardsNum);
+					if(typeof(self.awards[0].prize_item)!=='string'){
+						for(var i=0;i<self.awardsNum;i++){
+							self.awards[i].prize_item=self.awards[i].prize_item.join("")
+						}
 					}
-				}
-				common.Ajax(url,type,data,success)
+
+					var thisData={
+						name:self.name,
+						vendorId:self.datas.vendorId,
+						number:self.fontNum2,
+						items:items,
+						rates:rates
+
+					}
+					var data={json:JSON.stringify(thisData)};
+					console.log(thisData);
+					var success=function(res){
+						if(res.status===1){
+							router.push({path:'/twoCode/gameRule'})
+						}else{
+							self.showWarn=true;
+							self.warnText=res.msg;
+						}
+					}
+					common.Ajax(url,type,data,success)
 			},
 
 			//设置中奖字

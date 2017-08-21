@@ -46,42 +46,57 @@
 						</div>
 						<div class="messageboxwxd">
 							<span class="message-name" style="padding-left:-5px;">开发者ID(AppID)：</span>
-							<input class="wxd-value" type="text" name="appId">
+							<input class="wxd-value" type="text" name="appId" v-model="appIdWxd">
 						</div>
 						<div class="messageboxwxd">
 							<span class="message-name">开发者密码：</span>
-							<input class="wxd-value" type="text" name="secret">
+							<input class="wxd-value" type="text" name="secret" v-model="secretWxd">
 						</div>
 						<div class="messageboxwxd">
 							<span class="message-name">消息加解密密钥：</span>
-							<input class="wxd-value" type="text" name="apiKey">
+							<input class="wxd-value" type="text" name="apiKey" v-model="apiKeyWxd">
 						</div>
 						<div class="messageboxwxd">
 							<span class="message-name">微信商户号：</span>
-							<input class="wxd-value" type="text" name="mchId">
+							<input class="wxd-value" type="text" name="mchId" v-model="mchIdWxd">
 						</div>
 						<div class="messageboxwxd">
+							<span class="message-name">产品地址：</span>
+							<input class="wxd-value" type="text" name="productUrl" v-model='productUrlWxd'>
+						</div>
+						<div class="messageboxwxd" v-if="credentialsLocationWxd!=null">
+							<span class="message-name">证书地址：</span>
+							<span class="wxd-value">已上传至服务器</span>
+							<!-- <span class="wxd-value">{{credentialsLocationWxd}}</span> -->
+							<br>
+							<a href="javascript:void(0)" @click="credentialsLocationWxd=null" style="margin-left:109px;">重新上传证书？</a>
+						</div>
+
+						<div class="messageboxwxd" v-if="credentialsLocationWxd==null">
 							<span class="message-name">上传证书：</span>
 							<input class="wxd-value" type="file" name="credentials">
 						</div>
-						<div class="messageboxwxd">
+						<div class="messageboxwxd" v-if="credentialsLocationWxd==null">
 							<span class="message-name">上传证书：</span>
 							<input class="wxd-value" type="file" name="credentials">
 						</div>
-						<div class="messageboxwxd">
+						<div class="messageboxwxd" v-if="credentialsLocationWxd==null">
 							<span class="message-name">上传证书：</span>
 							<input class="wxd-value" type="file" name="credentials">
 						</div>
-						<div class="messageboxwxd">
+						<div class="messageboxwxd" v-if="credentialsLocationWxd==null">
 							<span class="message-name">上传证书：</span>
 							<input class="wxd-value" type="file" name="credentials">
 						</div>
+
 						<input type="text" name="vendorId" v-bind:value="vendorId" class="hidelist">
+						</form>
 						<div class="classifyFooter">
-							<input class="delbutton" type="button" name="" value="确认" @click='connectwxd'>
+							<input class="delbutton" type="button" name="" value="确认" @click='connectwxd' v-if="connectwx">
+							<input class="delbutton" type="button" name="" value="修改" @click='updatewxd' v-if="updatewx">
 							<input class="delbutton" type="button" name="" value="取消" @click='hide'>
 						</div>
-					</form>
+					
 				</div>
 			</div>
 			<div class="mengban" v-show='showMB2'>
@@ -207,7 +222,15 @@
 		        couponId:null,
 		        productUrl:null,
 		        showWarn:false,
-        		warnText:''
+        		warnText:'',
+        		productUrlWxd:null,
+        		appIdWxd:null,
+        		credentialsLocationWxd:null,
+        		secretWxd:null,
+        		mchIdWxd:null,
+        		apiKeyWxd:null,
+        		connectwx:false,
+        		updatewx:false
 		    }
 		},
 		props:['vendorId'],
@@ -267,8 +290,37 @@
 				};
 				common.Ajax(url,type,data,success)
 			},
-			// 微信小店蒙版
+			// 查询微信小店关联信息
 			wxdbind:function(){
+				var self=this;
+				$.ajax({
+					url:'https://ym-a.top/cloud_code/wechatCouponConfig/getConfig.do',
+					type:'post',
+					data:{
+						vendorId:self.vendorId,
+					},
+					dataType:'json',
+					success:function(res){
+						if(jQuery.isEmptyObject(res)){
+							self.connectwx=true;
+							self.updatewx=false;
+							return
+						}
+						else{
+							self.updatewx=true;
+							self.connectwx=false;
+							self.appIdWxd=res.appId;
+							self.credentialsLocationWxd=res.credentialsLocation;
+							self.secretWxd=res.secret;
+							self.mchIdWxd=res.mchId;
+							self.apiKeyWxd=res.apiKey;
+							self.productUrlWxd=res.productUrl;
+						}
+					},
+					error:function(res){
+						console.log(res)
+					}
+				})
 				this.showMB1=true;
 			},
 			//关联微店
@@ -291,6 +343,7 @@
 				};
 				common.Ajax(url,type,data,success)
 			},
+			// 关联微信小店
 			connectwxd:function(){
 				var self=this;
         		var data=new FormData($('#wxd')[0]);
@@ -319,6 +372,38 @@
 		        });
 		        self.showMB1=false;
 			},
+			// 修改微信小店
+			updatewxd:function(){
+				var self=this;
+				self.updatewx=true;
+				self.connectwx=false;
+				var data=new FormData($('#wxd')[0]);
+        		$.ajax({
+		          url: 'https://ym-a.top/cloud_code//wechatCouponConfig/updateConfig.do',
+		          type:'post',
+		          data: data,
+		          cache: false,
+		          dataType: 'json',
+		          processData: false,
+		          contentType: false,
+		          success: function (res) {
+		            if(res.statuscode==1){
+		              self.showWarn=true;
+		              self.warnText='保存成功'
+		            }
+		            else{
+		              self.showWarn=true;
+		              self.warnText=res.msg
+		            }
+		          },
+		          error:function(res){
+		           self.showWarn=true;
+		              self.warnText='更新出错'
+		          }
+		        });
+		        self.showMB1=false;
+			},
+
 			//隐藏蒙版
 			hide:function(){
 				this.showMB=false;

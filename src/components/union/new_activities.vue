@@ -161,9 +161,6 @@
 					填写资料
 				</div>
 				<div class="messagebox2">
-					<span class="right-main-top-icon1"></span><span>创建优惠券需绑定公众号授权,请点击</span><a href="javascript:void(0)" class="color:#459ae9" @click='here'>此处</a>
-				</div>
-				<div class="messagebox2">
 					<span class="message-name">最低使用限额：</span>
 					<input class="message-value" type="" name="" v-model='leastCost' @input='comparison'>
 					<span class="message-after">（必须大于优惠券面值）</span>
@@ -317,33 +314,6 @@
 				}
 			},
 
-			//获取授权码
-			here:function(){
-				// var self=this;
-				// var url='https://ym-a.top/cloud_code/openweixin/getauthlink.do';
-				// var type='get';
-				// var data={
-				// 	vendorId:self.vendorId,
-				// };
-				// var success=function(res){
-				// 	console.log(res)
-				// };
-				// common.Ajax(url,type,data,success)
-				// $.ajax({
-				// 	url:'https://ym-a.top/cloud_code/openweixin/getauthlink.do',
-				// 	type:'get',
-				// 	data:{
-				// 		vendorId:self.vendorId,
-				// 	},
-				// 	success:function(res){
-						window.open("https://ym-a.top/cloud_code/testAuth.jsp")
-				// 	},
-				// 	error:function(res){
-				// 		console.log(11)
-				// 	}
-				// })
-			},
-
 			//发布
 			confirm:function(){
 				var self=this;
@@ -407,7 +377,7 @@
 						self.step4=true;
 					}else if(res.statuscode===-1){
 						self.showWarn2=true;
-						self.warnText=res.msg+'，请先关联微店';
+						self.warnText=res.msg;
 					}
 				};
 				if(self.queren){

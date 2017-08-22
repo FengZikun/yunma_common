@@ -366,7 +366,7 @@
             this.$refs.editor.focus()
           },
           editOnline(event){
-            console.log($(event.target).siblings('.H5edit'));
+            //console.log($(event.target).siblings('.H5edit'));
             if($(event.target).prop('checked')===true){
               $(event.target).siblings('.H5edit').removeClass('modHid');
               $(event.target).siblings('[name=modelURL]').addClass('modHid');
@@ -743,7 +743,7 @@
                               self.render(res);
                             },
                             error: function (err) {
-                              console.log(JSON.stringify(err));
+                              //console.log(JSON.stringify(err));
                               self.render(res);
                             }
                           })
@@ -761,12 +761,12 @@
                               type: 'POST',
                               dataType: 'json',
                               success: function (res) {
-                                  console.log(res);
+                                  //console.log(res);
                                   sessionStorage.setItem('_755wx',1);
                                   self.render(res);
                               },
                               error: function (err) {
-                                  console.log(err);
+                                  //console.log(err);
                                   self.render(err);
                               }
                           })
@@ -784,11 +784,11 @@
                           }
                         }
                         else if(this.securityFlag=='false'){
-                            console.log('应该替换溯源按钮和删除红包按钮')
+                            //console.log('应该替换溯源按钮和删除红包按钮')
                         }
                         $('.content').siblings('div').hide();
                         // 判断是真是假
-                        console.log(data);
+                        //console.log(data);
                         self.vendorId=data.vendorId;
                         window.localStorage.setItem('vendorId', JSON.stringify(data.vendorId));
                         window.localStorage.setItem('infodata', JSON.stringify(data));
@@ -893,7 +893,7 @@
                     type: 'POST',
                     dataType: 'json',
                     success: function (res) {
-                      console.log(res);
+                      //console.log(res);
                       alert('创建成功')
                       router.push({path:'/twoCode/briefCode'})
                     },
@@ -914,7 +914,7 @@
             self.appList=res.data;
           },
           error:function(res){
-            console.log(res);
+            //console.log(res);
           }
         })
       },
@@ -930,13 +930,13 @@
    },
    watch: {
     datas(){
-        // console.log(this.datas)
+        // //console.log(this.datas)
       },
       phoneTitle(){
         this.$emit('sub',"phoneTitle",this.phoneTitle);
       },
       imgSrc(){
-        // console.log(this.imgSrc);
+        // //console.log(this.imgSrc);
         this.$emit('sub',"imgSrc",this.imgSrc);
       },
       you(){
@@ -950,7 +950,7 @@
       },
       keyOneURL(){
         this.$emit('sub','keyOneURL',this.keyOneURL);
-        console.log(keyOneURL)
+        //console.log(keyOneURL)
       },
       keyTwo(){
         this.$emit('sub', "keyTwo", this.keyTwo);

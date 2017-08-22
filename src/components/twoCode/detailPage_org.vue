@@ -344,7 +344,7 @@
         this.$refs.editor.focus()
       },
       editOnline(event){
-        console.log($(event.target).siblings('.H5edit'));
+        //console.log($(event.target).siblings('.H5edit'));
         if($(event.target).prop('checked')===true){
           $(event.target).siblings('.H5edit').removeClass('modHid');
           $(event.target).siblings('[name=modelURL]').addClass('modHid');
@@ -541,7 +541,7 @@ ${$('#baba').html()}
             // },
             // showPosition:function (position) {
             //     var self=this;
-            //     console.log(self);
+            //     //console.log(self);
             //     self.latitude=position.coords.latitude;
             //     self.longitude=position.coords.longitude;
             // },
@@ -572,7 +572,7 @@ ${$('#baba').html()}
             render:function(data){
                 var self=this;
                 // 判断是真是假
-                console.log(data);
+                //console.log(data);
                 if (data.reultCode==0) {
                     $('.infoImg').hide();
                     $('.innerCodeFalse').hide();
@@ -689,7 +689,7 @@ if(this.keyThree==false){
             type: 'POST',
             dataType: 'json',
              success: function (res) {
-                        console.log(res);
+                        //console.log(res);
                     },
                     error: function (err) {
                         alert(JSON.stringify(err));
@@ -699,13 +699,13 @@ if(this.keyThree==false){
     },
     watch: {
       datas(){
-        console.log(this.datas)
+        //console.log(this.datas)
       },
       phoneTitle(){
         this.$emit('sub',"phoneTitle",this.phoneTitle);
       },
       imgSrc(){
-        console.log(this.imgSrc);
+        //console.log(this.imgSrc);
         this.$emit('sub',"imgSrc",this.imgSrc);
       },
       you(){

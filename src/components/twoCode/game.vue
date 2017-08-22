@@ -51,7 +51,7 @@
 		methods:{
 			init(){
 				var self=this;
-				var url='http://192.168.1.107:8080/cloud_code/GET/CollectWord/getCollectWordGameList.do';
+				var url='https://ym-a.top/cloud_code/GET/CollectWord/getCollectWordGameList.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId

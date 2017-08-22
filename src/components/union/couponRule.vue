@@ -124,7 +124,7 @@
 					pageSize:10
 				}
 				var success=function(res){
-					console.log(res);
+					//console.log(res);
 					var pagenum=res.totalPages;
 					self.totalPage=[];
 					self.resData=res;
@@ -164,7 +164,7 @@
 				var self=this;
 				self.content=true;
 				self.contentInfo=self.proInfo[index].whiteArray;
-				console.log(self.proInfo[index]);
+				//console.log(self.proInfo[index]);
 			},
 			//翻页
 			changePage:common.changePage,

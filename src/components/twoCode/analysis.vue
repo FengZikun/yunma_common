@@ -79,15 +79,15 @@
 						self.showChart(res)
 					},
 					error:function(res){
-						console.log(error)
+						//console.log(error)
 					}
 				})
 			},
 				showChart:function(data){
 				  var self=this;
 		          var echarts = require('echarts');
-		          // console.log(date);
-		          // console.log(dateVal)
+		          // //console.log(date);
+		          // //console.log(dateVal)
 		          var myChart = echarts.init(document.getElementById('sankey'));
 
 		          var option = {
@@ -145,7 +145,7 @@
 						self.nodedata.target=0;
 						let len=self.links.length;
 						for(let i=0;i<len;i++){
-							console.log(self.links[i].target)
+							//console.log(self.links[i].target)
 							if(self.links[i].target==data){
 								self.nodedata.source+=parseInt(self.links[i].currentProCount)
 							}

@@ -126,7 +126,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="modelBg modHid" defName="modelS">
+		<div class="mengban modHid" defName="modelS">
 			<div class="modelS">
 				<div class="phoneHeader"></div>
 				<div class="phoneTitle"></div>
@@ -233,7 +233,7 @@
 			init1:function(){
 				var self=this;
 				//获取模板信息
-				console.log(self.type)
+				//console.log(self.type)
 				var url='https://ym-a.top/cloud_code/GET/codeManager/getScaPageModel.do';
 				var type='get';
 				var data={
@@ -340,7 +340,7 @@
 				$(event.target).parent().parent().addClass('modHid');
 			},
 			showKuang(event,name){
-				// console.log(event.target,name);
+				// //console.log(event.target,name);
 				if(name==="guan"){
 					$("[defName=guan]").removeClass('modHid');
 					return;

@@ -179,10 +179,10 @@ label{
     methods:{
       // init:function(){
       //   this.$http.get("../assets/img/json.json").then(function(res){
-      //     console.log("请求成功")
+      //     //console.log("请求成功")
       //   },
       //   function(res){
-      //     console.log("请求失败")
+      //     //console.log("请求失败")
       //   })
       // },
       showList:function(event){
@@ -206,11 +206,11 @@ label{
           processData: false,
           contentType: false,
           success: function (res) {
-            console.log(data);
-            console.log(res); 
+            //console.log(data);
+            //console.log(res); 
           },
           error:function(res){
-            console.log("error")
+            //console.log("error")
           }
         });
         this.showMB=!this.showMB;

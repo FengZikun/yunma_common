@@ -241,7 +241,7 @@
         common.Ajax(url,type,data,success)
       },
       showList:function(event){
-        // console.log();
+        // //console.log();
         $(event.target).parents("li").find("ul").toggleClass("hidelist");
         $(event.target).parents("li").siblings().find("ul").addClass("hidelist")
       },
@@ -276,7 +276,7 @@
           orderId:self.delOrder
         };
         var success=function(res){
-          console.log(res);
+          //console.log(res);
           self.init();
           self.delOrder=null;
           self.showMB=false;

@@ -277,7 +277,7 @@
           data: {vendorId:self.vendorId},
           dataType: 'json',
           success: function (res) {
-            console.log(res,parseInt(self.vendorId)); 
+            //console.log(res,parseInt(self.vendorId)); 
             if(res.status == "-1"){
               self.addmessage1=true;
               return
@@ -300,12 +300,12 @@
             }
           },
           error:function(res){
-            console.log("error")
+            //console.log("error")
           }
         });
       },
       toWeiQing:function(url){
-        console.log(url.slice(url.indexOf('web/')+4))
+        //console.log(url.slice(url.indexOf('web/')+4))
         document.cookie=`_755url=${url.slice(url.indexOf('web/')+4)};domain=ym-a.top;path=/web`;
                 let aa=window.open();
         setTimeout(function(){

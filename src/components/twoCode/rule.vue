@@ -187,7 +187,7 @@
           pageSize:10
         };
         var success=function(res){
-          console.log(res);
+          //console.log(res);
           self.info=res.result.data;
           self.resData=res;
           self.totalPages=res.totalPages;

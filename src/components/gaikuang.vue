@@ -277,7 +277,7 @@
           vendorId:self.datas.vendorId
         };
         var success=function(res){
-          console.log(res);
+          //console.log(res);
           self.securityCodeScanCount=res.securityCodeScanCount;
           self.joinActivCount=res.joinActivCount;
           self.daylyJoinActivCount=res.daylyJoinActivCount;
@@ -297,10 +297,12 @@
           datatype:'json',
           success:function(res){
             self.edata=res.weekScanCount;
+            for(var i=0,len=self.edata.length;i<len;i++){
+            };
             self.hans();
           },
           error:function(res){
-            console.log('error')
+            //console.log('error')
           }
         })
         $.ajax({
@@ -328,8 +330,8 @@
         for(var i=length-1;i>-1;i--){
           date.push(self.edata[i]['days']);
           dateVal.push(self.edata[i]['coun']);
-          if(i==0){self.endTime=self.edata[i]['scanTime']}
-            if(i==length-1){self.startTime=self.edata[i]['scanTime']}
+          if(i==0){self.endTime=self.edata[i]['days']}
+            if(i==length-1){self.startTime=self.edata[i]['days']}
           }
         var myChart = echarts.init(document.getElementById('zhex'));
 
@@ -448,7 +450,7 @@
                 vendorId:self.datas.vendorId,
                 province:thisName+'省'
               }
-              console.log(data)
+              //console.log(data)
               var success=function(res){
                 self.provinceData=res.data;
                 echarts.registerMap('sheng', datas);
@@ -512,7 +514,7 @@
             }
             var success=function(res){
               self.heatData=res.data;
-              console.log(self.heatData)
+              //console.log(self.heatData)
               var AMap=require('AMap')
               var map = new AMap.Map("heatmap", {
                 resizeEnable: true,

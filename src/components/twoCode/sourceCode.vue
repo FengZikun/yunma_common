@@ -264,7 +264,7 @@
           currentPage:currentPage,
         };
         var success=function(res){
-          console.log(res)
+          //console.log(res)
           var pagenum=res.totalPages;
           self.totalPage=[];
           self.resData=res;
@@ -279,7 +279,7 @@
         common.Ajax(url,type,data,success)
       },
       showList:function(event){
-        // console.log();
+        // //console.log();
         $(event.target).parents("li").find("ul").toggleClass("hidelist");
         $(event.target).parents("li").siblings().find("ul").addClass("hidelist")
       },
@@ -311,7 +311,7 @@
           orderId:self.delOrder
         };
         var success=function(res){
-          console.log(res);
+          //console.log(res);
           self.init();
           self.delOrder=null;
           self.showMB=false;
@@ -339,7 +339,7 @@
             boxCount:self.boxCount
           };
           var success=function(res){
-            console.log(res);
+            //console.log(res);
             $('#info').addClass('modHid');
             if(res.errorCode===0){
               self.showWarn=true;

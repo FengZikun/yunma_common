@@ -150,7 +150,7 @@
 					vendorId:self.vendorId
 				};
 				var success=function(res){
-					console.log(data);
+					//console.log(data);
 					if(res.errorCode==0){
 						router.push({path:'accountinfo'})
 					}

@@ -157,12 +157,12 @@
             self.addDayOrder=res.addDayOrder;//昨日增加订单数  
           },
           error:function(res){
-            console.log(res);
+            //console.log(res);
           }
         });
       },
       showList:function(event){
-        // console.log();
+        // //console.log();
         $(event.target).parents("li").find("ul").toggleClass("hidelist");
         $(event.target).parents("li").siblings().find("ul").addClass("hidelist")
       }

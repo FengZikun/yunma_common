@@ -124,7 +124,7 @@
                   self.list=res.data;
                 },
                 error:function(res){
-                  console.log("error")
+                  //console.log("error")
                 }
               })
             },

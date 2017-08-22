@@ -168,7 +168,7 @@
           self.resData=res;
           self.totalPage=[];
           self.getPage()
-          console.log(res)
+          //console.log(res)
         }
         common.Ajax(url,type,data,success)
       },
@@ -252,7 +252,7 @@
           return
         }
         var id=$(event.target).attr('data-id');
-        console.log(id);
+        //console.log(id);
         this.$emit('updata',id);
       },
 

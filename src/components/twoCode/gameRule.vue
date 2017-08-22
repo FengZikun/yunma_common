@@ -107,7 +107,6 @@
 					};
 					var success=function(res){
 						if(res.status===1){
-							console.log(11)
 							self.showMB=false;
 							self.init();
 						}

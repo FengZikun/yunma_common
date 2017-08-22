@@ -534,7 +534,7 @@ Vue.use(VueHtml5Editor, {
 				var data={
 					id:self.productid
 				};
-				console.log(data);
+				//console.log(data);
 				var success=function(res){
 					self.presentType=res.presentType;
 					self.presentSpe=res.presentSpe;
@@ -549,7 +549,7 @@ Vue.use(VueHtml5Editor, {
 					self.weight=res.weight;
 					self.editorcontent=res.detail;
 					self.imgId=res.imgId;
-					console.log(res)
+					//console.log(res)
 
 
 				}
@@ -626,7 +626,7 @@ Vue.use(VueHtml5Editor, {
 					self.presentType=$(event.target).text();
 					$(event.target).addClass('listselected');
 					$(event.target).parent().siblings().find('li').removeClass('listselected');
-					console.log(self.presentType);
+					//console.log(self.presentType);
 				}
 
 			},
@@ -686,7 +686,7 @@ Vue.use(VueHtml5Editor, {
 						weight:self.weight,
 
 					};
-					console.log(data);
+					//console.log(data);
 					var success=function(res){
 						router.push({path:'/goods/gift'})
 					};
@@ -714,7 +714,7 @@ Vue.use(VueHtml5Editor, {
 				var success=function(res){
 					router.push({path:'/goods/gift'})
 				};
-				console.log(data);
+				//console.log(data);
 				//调用ajax
 				common.Ajax(url,type,data,success)
 			},
@@ -733,7 +733,7 @@ Vue.use(VueHtml5Editor, {
 				};
 				var success=function(res){
 					self.imglist=res.result.data;
-					console.log(data);
+					//console.log(data);
 				};
 				common.Ajax(url,type,data,success);
 			},
@@ -756,7 +756,7 @@ Vue.use(VueHtml5Editor, {
 				self.imgId=self.chooselist.id;
 				$('.myimg').attr('src',"https://ym-a.top"+self.selectimg)
 				self.hide();
-				console.log(self.selectimg);
+				//console.log(self.selectimg);
 			},
 
 			//删除图片
@@ -769,7 +769,7 @@ Vue.use(VueHtml5Editor, {
 				};
 				
 				var success=function(res){
-					console.log(res);
+					//console.log(res);
 					self.imgUrl='';
 				};
 				common.Ajax(url,type,data,success);
@@ -790,8 +790,8 @@ Vue.use(VueHtml5Editor, {
 					processData: false,
 					contentType: false,
 					success: function (res) {
-						console.log(data)
-						console.log(res);	
+						//console.log(data)
+						//console.log(res);	
 						self.imgUrl=res.imgUrl;
 						self.imgWidth=res.width;
 						self.imgHeight=res.height;
@@ -800,7 +800,7 @@ Vue.use(VueHtml5Editor, {
 						self.searchphoto(1);
 					},
 					error:function(res){
-						console.log("error")
+						//console.log("error")
 					}
 				});
 			},
@@ -825,7 +825,7 @@ Vue.use(VueHtml5Editor, {
 				var self=this;
 				var id=self.selected.id
 				self.rowId=id;
-				console.log(self.rowId)
+				//console.log(self.rowId)
 			}
 		},
 		created:function(){

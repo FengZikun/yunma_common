@@ -141,7 +141,7 @@
 					vendorId:self.detailId
 				};
 				var success=function(res){
-					console.log(res);
+					//console.log(res);
 					self.imgInfo=res.brandImgs;
 					self.brandName=res.brandName;
 					self.industryName=res.industryName;
@@ -169,7 +169,7 @@
 			// 		id:self.detailId
 			// 	};
 			// 	var success=function(res){
-			// 		console.log(res)
+			// 		//console.log(res)
 			// 		self.imgInfo=res.data;
 			// 	};
 			// 	common.Ajax(url,type,data,success)

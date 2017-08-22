@@ -223,7 +223,7 @@
             userId:userid,
             passwd:parseInt(self.newPassword)
           };
-          console.log(data)
+          //console.log(data)
           var success=function(res){
             if(res.errorCode===0){
               alert('修改成功');
@@ -232,7 +232,7 @@
               self.checkPassword=null;
               self.userid=null
             }else{
-              console.log(res.errorCode)
+              //console.log(res.errorCode)
             }
           };
           common.Ajax(url,type,data,success)
@@ -246,7 +246,7 @@
       locking:function(){
         var self=this;
         var clickText=$(event.target);
-        console.log(clickText.text());
+        //console.log(clickText.text());
         if(clickText.text()=='锁定账号'){
           var url='https://ym-a.top/cloud_code/POST/user/lockUser.do';
           var type='post';
@@ -288,7 +288,7 @@
           vendorName:self.vendorName
         };
         var success=function(res){
-          console.log(res);
+          //console.log(res);
           if(res.errorCode==0){
             self.showMB=false;
             self.init();

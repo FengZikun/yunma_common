@@ -103,7 +103,7 @@ import common from '../../common.js'
             self.totalFuns=res.totalFuns;
           },
           error:function(res){
-            console.log(res);
+            //console.log(res);
           }
         });
       },

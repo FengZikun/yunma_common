@@ -457,7 +457,7 @@
             self.level=null;
             self.id=null;
           }else{
-            console.log(res);
+            //console.log(res);
           }
         }
         common.Ajax(url,type,data,success)
@@ -516,7 +516,7 @@
           common.Ajax(url,type,data,success)
         }else if($(event.target)[0].innerText==='详情'){
           var agentId=$(event.target).attr('data-id');
-          var url='http://ym-a.top/cloud_code/GET/AgentEmployee/getEmpInfoById.do';
+          var url='https://ym-a.top/cloud_code/GET/AgentEmployee/getEmpInfoById.do';
           var type='get';
           var data={
             agentId:agentId

@@ -520,7 +520,7 @@
             self.appList=res.data;
           },
           error:function(res){
-            console.log(res);
+            //console.log(res);
           }
         })
       },
@@ -549,7 +549,7 @@
             }
           },
           error:function(res){
-            console.log(res);
+            //console.log(res);
           }
         });
       },

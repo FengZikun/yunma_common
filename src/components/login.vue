@@ -118,7 +118,7 @@
       //判断登录状态
       init:function(){
         var self=this;
-        console.log(self.datas.userType);
+        //console.log(self.datas.userType);
         if(self.datas.userType==undefined||self.datas.userType==''){
           return
         }else if(self.datas.userType==99){
@@ -167,7 +167,7 @@
                   router.replace({path:'/enterprise'});
                 }
               }else{
-                console.log(res)
+                //console.log(res)
                 alert(res.msg)
               }
 

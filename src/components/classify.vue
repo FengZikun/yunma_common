@@ -337,7 +337,7 @@ import common from '../common.js'
           vendorId:self.vendorId
         };
         var success=function(res){
-          console.log(res)
+          //console.log(res)
           self.resData=res.result.data;
           self.totalPage=res.totalPages;
         };
@@ -351,7 +351,7 @@ import common from '../common.js'
         }
       },
       showList:function(event){
-        // console.log();
+        // //console.log();
         $(event.target).parents("li").find("ul").toggleClass("hidelist");
         $(event.target).parents("li").siblings().find("ul").addClass("hidelist")
       },
@@ -438,7 +438,7 @@ import common from '../common.js'
           id:id
         };
         var success=function(res){
-          console.log(res);
+          //console.log(res);
           self.getData();
         };
         common.Ajax(url,type,data,success)
@@ -449,7 +449,7 @@ import common from '../common.js'
       reviseclassify:function(){
 
         var self=this;
-        console.log(self.name);
+        //console.log(self.name);
         var url='https://ym-a.top/cloud_code/UPDATE/product/group.do';
         var type='post';
         if(self.savename!=self.name){
@@ -468,7 +468,7 @@ import common from '../common.js'
         }
         
         var success=function(res){
-          console.log(res)
+          //console.log(res)
           self.getData();
           self.showMB=false
         }

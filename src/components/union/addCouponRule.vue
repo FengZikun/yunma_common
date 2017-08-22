@@ -334,7 +334,7 @@
 			//删除已选
 			delVendor:function(){
 				var self=this;
-				console.log($(event.target).attr('data-index'))
+				//console.log($(event.target).attr('data-index'))
 			},
 
 			//清空
@@ -427,7 +427,7 @@
 				}
 
 				var success=function(res){
-					console.log(res);
+					//console.log(res);
 					if(res.statuscode===1){
 						router.push({path:'couponRule'})
 					}else{

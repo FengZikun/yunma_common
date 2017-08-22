@@ -197,13 +197,13 @@ import common from '../../common.js'
           self.chechednum++;
           self.deleteArr.push(checkBox.parent().attr('data-id'));
           self.huanyuanArr.push(checkBox.parent().attr('data-id'));
-          console.log(self.huanyuanArr);
+          //console.log(self.huanyuanArr);
         }else{
           checkBox.addClass('check-box').removeClass('has-select');
           self.chechednum--;
           self.deleteArr.pop(checkBox.parent().attr('data-id'));
           self.huanyuanArr.pop(checkBox.parent().attr('data-id'));
-          console.log(self.huanyuanArr);
+          //console.log(self.huanyuanArr);
 
         };
       },
@@ -224,7 +224,7 @@ import common from '../../common.js'
             self.deleteArr.push(self.gifts[i].id);
             self.huanyuanArr.push(self.gifts[i].id);
           }
-          console.log(self.deleteArr)
+          //console.log(self.deleteArr)
         }else{
           checkall.addClass('check-box').removeClass('has-select');
           $('.checkshu').addClass('check-box').removeClass('has-select');
@@ -264,7 +264,7 @@ import common from '../../common.js'
       deleteGift:function(){
         var self=this;
         var deletedata=self.deleteArr;
-        console.log(deletedata);
+        //console.log(deletedata);
         var url='https://ym-a.top/cloud_code/DELETE/product/present.do';
         var type='post';
         var data={

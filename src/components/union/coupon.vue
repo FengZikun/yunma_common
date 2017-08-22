@@ -246,7 +246,7 @@
 					currentPage:currentPage
 				};
 				var success=function(res){
-					console.log(res)
+					//console.log(res)
 					var pagenum=res.totalPages;
 					self.totalPage=[];
 					self.resData=res;
@@ -318,7 +318,7 @@
 						}
 					},
 					error:function(res){
-						console.log(res)
+						//console.log(res)
 					}
 				})
 				this.showMB1=true;
@@ -338,7 +338,7 @@
 					if(res.statuscode===1||2){
 						self.showMB=false
 					}else{
-						console.log(res.msg)
+						//console.log(res.msg)
 					}
 				};
 				common.Ajax(url,type,data,success)

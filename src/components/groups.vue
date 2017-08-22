@@ -149,12 +149,12 @@ import common from '../common.js'
           },
           success:function(res){
             self.resData=res.data;
-            console.log(self.resData);
+            //console.log(self.resData);
             self.showMB=false;
             self.id='';
           },
           error:function(){
-            console.log('error')
+            //console.log('error')
           }
         })
       },
@@ -219,7 +219,7 @@ import common from '../common.js'
           id:self.id
         };
         var success=function(res){
-          console.log(res);
+          //console.log(res);
           self.getData();
         };
         common.Ajax(url,type,data,success);

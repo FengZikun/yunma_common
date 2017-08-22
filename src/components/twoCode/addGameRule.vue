@@ -177,7 +177,7 @@
 							res.items[i].prize_item=res.items[i].prize_item.split('');
 							res.items[i].fontNum3=res.items[i].prize_item.length+'字';
 						}
-						console.log(res);
+						//console.log(res);
 						self.awardsNum=res.items.length;
 						self.awards=res.items;
 					}
@@ -279,7 +279,7 @@
 
 					}
 					var data={json:JSON.stringify(thisData)};
-					console.log(thisData);
+					//console.log(thisData);
 					var success=function(res){
 						if(res.status===1){
 							router.push({path:'/twoCode/gameRule'})

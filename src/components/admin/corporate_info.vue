@@ -140,7 +140,7 @@ import router from '../../router.js'
                 };
         var success=function(res){
           var pagenum=res.totalPages;
-          console.log(res);
+          //console.log(res);
           self.totalPage=[];
           self.resData=res;
           self.proInfo=res.result.data;

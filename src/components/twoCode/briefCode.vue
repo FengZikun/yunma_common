@@ -222,12 +222,12 @@
           data: data,
           dataType: 'json',
           success: function (res) {
-            console.log(data);
-            console.log(res)
+            //console.log(data);
+            //console.log(res)
             self.data1=res.data;
           },
           error:function(res){
-            console.log("error")
+            //console.log("error")
           }
         })
       },
@@ -244,10 +244,10 @@
     },
     watch:{
       data1(){
-        console.log(this.data1)
+        //console.log(this.data1)
       },
       frameSrc(){
-        console.log(this.frameSrc)
+        //console.log(this.frameSrc)
       }
     },
     created:function(){

@@ -93,7 +93,7 @@
 				var self=this;
 				var url;
 				self.orderId=self.datas.orderId;
-				console.log(self.type)
+				//console.log(self.type)
 				if(self.type==1){
 					self.url='https://ym-a.top/cloud_code/GET/securityCode/securityCodeList.do';
 				}
@@ -111,14 +111,14 @@
 					}
 					
 				}
-				console.log(self.url)
+				//console.log(self.url)
 				var type='get';
 				var data={
 					orderId:parseInt(self.orderId),
 					currentPage:currentPage,
 				};
 				var success=function(res){
-					console.log(res)
+					//console.log(res)
 					self.totalPage=[];
 					self.currentPage=res.currentPage;
 					self.resData=res;

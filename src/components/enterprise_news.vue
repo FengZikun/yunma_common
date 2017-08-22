@@ -113,7 +113,7 @@
     },
     methods:{
       showList:function(event){
-        // console.log();
+        // //console.log();
         $(event.target).parents("li").find("ul").toggleClass("hidelist");
         $(event.target).parents("li").siblings().find("ul").addClass("hidelist")
       },

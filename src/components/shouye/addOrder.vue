@@ -183,7 +183,7 @@
 					productCount:self.productCount,
 					vendorName:self.datas.vendorName
 				};
-				console.log(data)
+				//console.log(data)
 				var success=function(res){
 					if(res.errorCode===0){
 						// router.push({path:'enterprise_order'})

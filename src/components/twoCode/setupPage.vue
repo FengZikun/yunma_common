@@ -50,7 +50,7 @@
         this.$emit('sub', "moduleRemark", this.moduleRemark)
       },
       datas(){
-        console.log(this.datas)
+        //console.log(this.datas)
       }
     }
   }

@@ -42,16 +42,6 @@
 					<span>至</span>
 					<span class="message-value">{{endTime}}</span>
 				</div>
-			<!-- <div class="messagebox2">
-				<span class="message-name">在店铺中公开领取：</span>
-				<div v-bind:class='{turnOn:ifSwitch,turnOff:!ifSwitch}' @click='switchChange'>
-					<div class="cell"></div>
-				</div>
-				<span class="message-name right">显示已领完的优惠券：</span>
-				<div v-bind:class='{turnOn:ifSwitch2,turnOff:!ifSwitch2}' @click='switchChange2'>
-					<div class="cell"></div>
-				</div>
-			</div> -->
 			<div class="messagebox last">
 				<input class="querenButton" type="button" name="" value="发布" @click='confirm'>
 				<input class="querenButton" type="button" name="" value="取消" @click='queren=false'>
@@ -389,17 +379,61 @@
 				
 			},
 
+			// //提交微店
+			// confirm2:function(){
+			// 	var self=this;
+			// 	var url='https://ym-a.top/cloud_code/openweixin/getAuthByVendorId.do';
+			// 	var type='get';
+			// 	var data={
+			// 		vendorId:self.vendorId,
+			// 	};
+			// 	var success=function(res){
+			// 		//console.log(res)
+			// 		if(res.is_auth===1){
+			// 			if(self.leastCost===null){
+			// 				self.showWarn2=true;
+			// 				self.warnText="请输入最低使用限额";
+			// 				return
+			// 			}
+			// 			if(self.reduce===null){
+			// 				self.showWarn2=true;
+			// 				self.warnText="请输入代金券面值";
+			// 				return
+			// 			}
+			// 			if(self.couponStockId===null){
+			// 				self.showWarn2=true;
+			// 				self.warnText="请输入优惠券ID";
+			// 				return
+			// 			}
+			// 			var url='https://ym-a.top/cloud_code/weChatCoupon/create.do';
+			// 			var type='get';
+			// 			var data={
+			// 				vendorId:self.vendorId,
+			// 				couponStockId:self.couponStockId,
+			// 				couponValue:self.reduce,
+			// 				couponMininumn:self.leastCost
+			// 			};
+			// 			var success=function(res){
+			// 				if(res.statuscode===1){
+			// 					self.step3=false;
+			// 					self.step4=true;
+			// 				}else{
+			// 					self.showWarn2=true;
+			// 					self.warnText=res.msg;
+			// 				}
+			// 			};
+			// 			common.Ajax(url,type,data,success)
+			// 		}else{
+			// 			self.showWarn2=true;
+			// 			self.warnText="请先点击授权链接";
+			// 		}
+			// 	};
+			// 	common.Ajax(url,type,data,success)
+				
+			// },
 			//提交微店
 			confirm2:function(){
 				var self=this;
-				var url='https://ym-a.top/cloud_code/openweixin/getAuthByVendorId.do';
-				var type='get';
-				var data={
-					vendorId:self.vendorId,
-				};
-				var success=function(res){
-					console.log(res)
-					if(res.is_auth===1){
 						if(self.leastCost===null){
 							self.showWarn2=true;
 							self.warnText="请输入最低使用限额";
@@ -433,13 +467,6 @@
 							}
 						};
 						common.Ajax(url,type,data,success)
-					}else{
-						self.showWarn2=true;
-						self.warnText="请先点击授权链接";
-					}
-				};
-				common.Ajax(url,type,data,success)
-				
 			},
 
 			//返回第二阶段

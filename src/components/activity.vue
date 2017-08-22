@@ -263,7 +263,7 @@
             self.delinfo=null;
             self.init();
           }else{
-            console.log(res);
+            //console.log(res);
           }
           
         };
@@ -280,7 +280,7 @@
           orderId:id
         };
         var success=function(res){
-          console.log(res);
+          //console.log(res);
         };
         common.Ajax(url,type,data,success)
       },

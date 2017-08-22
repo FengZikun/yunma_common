@@ -299,7 +299,7 @@
 					self.warnText='请设置失效时间'
 					return
 				}
-		    	var url='http://192.168.1.107:8080/cloud_code/ADD/CollectWord/addCollectWordGame.do';
+		    	var url='https://ym-a.top/cloud_code/ADD/CollectWord/addCollectWordGame.do';
 		    	var type='post';
 		    	var data={
 		    		vendor_id:self.datas.vendorId,
@@ -309,7 +309,6 @@
 		    		effect_time:self.create_time,
 		    		invalid_time:self.invalid_time,
 		    	};
-		    	console.log(data)
 		    	var success=function(res){
 		    		if(res.status===1){
 		    			router.push({path:'/twoCode/game'})

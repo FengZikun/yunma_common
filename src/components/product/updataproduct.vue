@@ -995,7 +995,7 @@
 						self.searchphoto(1);
 					},
 					error:function(res){
-						console.log("error")
+						//console.log("error")
 					}
 				});
 			},
@@ -1071,7 +1071,7 @@
 					paramId:id
 				};
 				var success=function(res){
-					console.log(res);
+					//console.log(res);
 				}
 				common.Ajax(url,type,data,success);
 			}

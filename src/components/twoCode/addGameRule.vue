@@ -164,7 +164,7 @@
 			init(){
 				var self=this;
 				if(self.ruleId!==null){
-					var url='http://192.168.1.107:8080/cloud_code/GET/CollectWord/getRuleInfoById.do';
+					var url='https://ym-a.top/cloud_code/GET/CollectWord/getRuleInfoById.do';
 					var type='get';
 					var data={
 						id:self.ruleId

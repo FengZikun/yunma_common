@@ -33,11 +33,6 @@
         <div class="classifyHeader">
           <span style="display:block;height:48px;line-height:48px;">操作提示</span>
         </div>
-<!--         <div class="tishi">
-          <span class="message-name">生成数量：</span>
-          <input class="message-value" type="text" name="" v-model="proNum">
-          <p class="message-after">（小于等于此订单内的产品数）</p>
-        </div> -->
           <div class="tishi">
             <span class="message-name">一级包装数：</span>
             <input class="message-value" type="text" name="" v-model="rowCount"><br>
@@ -55,9 +50,11 @@
     <div class="right-main">
       <div class="right-main-bottom">
         <div class="button-group">
-          <router-link to='/twoCode/addOrder'><div class="add-pro">
+          <a href="javascript:void(0)" @click='addOrder'>
+          <div class="add-pro">
             +&nbsp;新增订单
-          </div></router-link>
+          </div>
+          </a>
         </div>
         <div class="my-form">
           <ul class="pro-list">
@@ -262,6 +259,7 @@
         var data={
           vendorId:self.datas.vendorId,
           currentPage:currentPage,
+          connecTracingAndSecurty:3
         };
         var success=function(res){
           //console.log(res)
@@ -290,6 +288,11 @@
         self.$emit('upOrderId',id);
         self.changeType('a');
         router.push({path:'detail'})
+      },
+      //新增
+      addOrder(){
+        this.changeType('a');
+        router.push({path:'/twoCode/addOrder'})
       },
       //隐藏蒙版
       hide:function(){

@@ -31,9 +31,11 @@
     <div class="right-main">
       <div class="right-main-bottom">
         <div class="button-group">
-          <router-link to='/twoCode/addOrder'><div class="add-pro">
+          <a href="javascript:void(0)" @click='addOrder'>
+          <div class="add-pro">
             +&nbsp;新增订单
-          </div></router-link>
+          </div>
+          </a>
         </div>
         <div class="my-form">
           <ul class="pro-list">
@@ -225,6 +227,7 @@
         var data={
           vendorId:self.datas.vendorId,
           currentPage:currentPage,
+          connecTracingAndSecurty:2
         };
         var success=function(res){
           var pagenum=res.totalPages;
@@ -255,6 +258,11 @@
         router.push({path:'detail'})
       },
 
+      //新增
+      addOrder(){
+        this.changeType('b');
+        router.push({path:'/twoCode/addOrder'});
+      },
       //隐藏蒙版
       hide:function(){
         this.showMB=false;

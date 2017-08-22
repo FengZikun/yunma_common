@@ -6,34 +6,34 @@
       </div>
     </div>
     <div class="mengban" v-if='showDetail'>
-      <div class="contentBox" style="width: 900px;margin-left: -450px;">
+      <div class="contentBox" style="width: 950px;margin-left: -475px;">
         <div class="contentTop">
           <span class="titleFont">详情</span>
           <span class="cha" @click='showDetail=false'></span>
         </div>
         <div class="contentMain">
-        <ul class="choosepro-main">
+          <ul class="choosepro-main">
             <li class="pro-li header">
-              <span class="pro-li-span" style="width: 8%">员工ID</span>
-              <span class="pro-li-span" style="width: 8%">代理商ID</span>
+              <span class="pro-li-span" style="width: 7%">员工ID</span>
+              <span class="pro-li-span" style="width: 7%">代理商ID</span>
               <span class="pro-li-span">代理商名称</span>
-              <span class="pro-li-span">员工姓名</span>
+              <span class="pro-li-span" style="width: 8%">员工姓名</span>
               <span class="pro-li-span" style="width: 18%">创建时间</span>
               <span class="pro-li-span" style="width: 8%">工号</span>
               <span class="pro-li-span">员工电话</span>
               <span class="pro-li-span" style="width: 18%">员工身份证号码</span>
-
+              <span class="pro-li-span" style="width: 6%">操作</span>
             </li>
             <li class="pro-li" v-for='item in detailInfo'>
-              <span class="pro-li-span" style="width: 8%">{{item.id}}</span>
-              <span class="pro-li-span" style="width: 8%">{{item.agentId}}</span>
+              <span class="pro-li-span" style="width: 7%">{{item.id}}</span>
+              <span class="pro-li-span" style="width: 7%">{{item.agentId}}</span>
               <span class="pro-li-span">{{item.agentName}}</span>
-              <span class="pro-li-span">{{item.empName}}</span>
+              <span class="pro-li-span" style="width: 8%">{{item.empName}}</span>
               <span class="pro-li-span" style="width: 18%">{{item.createTime}}</span>
               <span class="pro-li-span" style="width: 8%">{{item.workNum}}</span>
               <span class="pro-li-span">{{item.empTel}}</span>
               <span class="pro-li-span" style="width: 18%">{{item.empIdcard}}</span>
-
+              <span class="pro-li-span" style="width: 6%"><a href="javascript:void(0)" @click='delet(item.id)'>删除</a></span>
             </li>
           </ul>
         </div>
@@ -314,7 +314,8 @@
         level:null,
         showCode:false,
         showDetail:false,
-        detailInfo: null
+        detailInfo: null,
+        detailId:null
       }
     },
     props:['datas'],
@@ -413,6 +414,7 @@
       confirm:function(){
         var self=this;
         var phoneReg=/^1[34578]\d{9}$/;
+        var phone=/^0\d{2,3}-\d{7,8}(-\d{1,6})?$/;
         var maillReg=/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if(self.agentName==null){
           self.ifagentName=true;
@@ -426,7 +428,10 @@
         }else{
           self.ifagentAddress=false;
         }
-        if(self.agentTel==null||!phoneReg.test(self.agentTel)){
+        if(self.agentTel==null||!phoneReg.test(self.agentTel)&&self.agentTel.length===11){
+          self.ifagentTel=true;
+          return
+        }else if(self.agentTel.length!==11&&!phone.test(self.agentTel)){
           self.ifagentTel=true;
           return
         }else{
@@ -515,17 +520,19 @@
           };
           common.Ajax(url,type,data,success)
         }else if($(event.target)[0].innerText==='详情'){
-          var agentId=$(event.target).attr('data-id');
-          var url='https://ym-a.top/cloud_code/GET/AgentEmployee/getEmpInfoById.do';
-          var type='get';
-          var data={
-            agentId:agentId
-          };
-          var success=function(res){
-            self.showDetail=true;
-            self.detailInfo=res.data;
-          };
-          common.Ajax(url,type,data,success)
+          self.detailId=$(event.target).attr('data-id')
+          self.detail();
+          // var agentId=$(event.target).attr('data-id');
+          // var url='https://ym-a.top/cloud_code/GET/AgentEmployee/getEmpInfoById.do';
+          // var type='get';
+          // var data={
+          //   agentId:agentId
+          // };
+          // var success=function(res){
+          //   self.showDetail=true;
+          //   self.detailInfo=res.data;
+          // };
+          // common.Ajax(url,type,data,success)
         }
       },
 
@@ -566,6 +573,36 @@
           self.showCode=false;
         }
         
+      },
+      //删除代理信息
+      delet(id){
+        var url='https://ym-a.top/cloud_code/DELETE/AgentEmployee/deleteAgentEmp.do';
+        var type='get';
+        var data={
+          empId:id
+        };
+        var success=function(res){
+          if(res.status===1){
+            this.detail()
+          }
+        }
+        common.Ajax(url,type,data,success)
+      },
+
+      //详情
+      detail(){
+        var self=this;
+        var agentId=self.detailId;
+        var url='https://ym-a.top/cloud_code/GET/AgentEmployee/getEmpInfoById.do';
+        var type='get';
+        var data={
+          agentId:agentId
+        };
+        var success=function(res){
+          self.showDetail=true;
+          self.detailInfo=res.data;
+        };
+        common.Ajax(url,type,data,success)
       },
       //获取页数
       getPage:common.getPage,

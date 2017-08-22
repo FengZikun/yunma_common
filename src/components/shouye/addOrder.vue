@@ -69,10 +69,21 @@
 					<span class="message-name">参考价格：</span>
 					<input class="message-value" type="text" name="" v-model='referencePrice'>
 				</div>
+				<div class="messagebox" v-if='type===1'>
+					<span class="message-name">同步生成溯源码：</span>
+					<input style="margin-left: 30px;" class="xuan" type="radio" name="suyuan" id="suyuan1" v-model='connecTracingAndSecurty' v-bind:value='1'><label class="xuan" for="suyuan1">同步</label>
+					<input class="xuan" type="radio" name="suyuan" id="suyuan2" v-model='connecTracingAndSecurty' v-bind:value='2'><label class="xuan" for="suyuan2">不同步</label>
+				</div>
+				<div class="messagebox" v-else>
+					<span class="message-name">同步生成防伪码：</span>
+					<input style="margin-left: 30px;" class="xuan" type="radio" name="fangwei" id="fangwei1" v-model='connecTracingAndSecurty' v-bind:value='1'><label class="xuan" for="fangwei1">同步</label>
+					<input class="xuan" type="radio" name="fangwei" id="fangwei2" v-model='connecTracingAndSecurty' v-bind:value='3'><label class="xuan" for="fangwei2">不同步</label>
+				</div>
 				<div class="button-group">
 					<input class="delbutton" type="button" name="" value='确定' @click='tijiao'>
 					<router-link to='/twoCode/enterprise_order'><input class="delbutton" type="button" name="" value='取消'></router-link>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -81,6 +92,7 @@
 <script>
 	import common from '../../common.js'
 	import router from '../../router.js'
+	import {mapState} from 'vuex'
 	export default{
 		data(){
 			return{
@@ -92,10 +104,14 @@
 				productCount:null,
 				productId:null,
 				showWarn:false,
-				warnText:null
+				warnText:null,
+				connecTracingAndSecurty:1,
 			}
 		},
 		props:['datas'],
+		computed: mapState({
+			type: state=>state.b.type
+		}),
 		methods:{
 			//选择产品
 			selectPro:function(){
@@ -181,12 +197,11 @@
 					expiryDate:self.expiryDate,
 					productId:self.productId,
 					productCount:self.productCount,
-					vendorName:self.datas.vendorName
+					vendorName:self.datas.vendorName,
+					connecTracingAndSecurty:self.connecTracingAndSecurty
 				};
-				//console.log(data)
 				var success=function(res){
 					if(res.errorCode===0){
-						// router.push({path:'enterprise_order'})
 						router.go(-1);
 					}else{
 						alert('新增订单失败')
@@ -299,5 +314,9 @@
 	}
 	.mengban:nth-of-type(2){
 		overflow-y: scroll;
+	}
+	.xuan{
+		margin: 0;
+		vertical-align: middle;
 	}
 </style>

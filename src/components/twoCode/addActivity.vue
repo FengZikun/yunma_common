@@ -504,6 +504,8 @@
 	}
 	.messagebox{
 		margin-top: 20px;
+		line-height: 36px;
+		height: 36px;
 	}
 	.message-value{
 		width: 230px;

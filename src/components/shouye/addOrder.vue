@@ -112,6 +112,13 @@
 		computed: mapState({
 			type: state=>state.b.type
 		}),
+		created(){
+			if(this.type===1){
+				this.connecTracingAndSecurty=2;
+			}else{
+				this.connecTracingAndSecurty=3;
+			}
+		},
 		methods:{
 			//选择产品
 			selectPro:function(){

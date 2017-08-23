@@ -19,7 +19,7 @@
           <span style="display:block;height:48px;line-height:48px;">操作提示</span>
         </div>
         <div class="tishi">
-          删除订单同时删除根据订单创建的所有表,慎重!
+          若此订单同步生成防伪码，执行此操作会将防伪码一起删除，慎重！
         </div>
         <div style="text-align: right;margin-top: 40px;margin-right: 20px;">
           <input class="delbutton" type="button" name="" value="确认" @click='deletOrder'>
@@ -80,7 +80,7 @@
               <span class="pro-li-span">{{item.createDate}}</span>
               <span class="pro-li-span" v-if='item.tracingFlag==2'>已生成</span>
               <span class="pro-li-span" v-else>未生成</span>
-              <span class="pro-li-span last"><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='toDetail'>详情</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' v-bind:data-num='item.productCount' @click='sourceBox'>生成溯源码</a>、<router-link to='/twoCode/briefCodeSu'>扫码页模板</router-link>、<router-link to='/twoCode/activitySu'>扫码活动管理</router-link>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='downLoad1'>导出溯源码</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='defined'>防窜货模式</a></span>
+              <span class="pro-li-span last"><a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='toDetail'>详情</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='mengban'>删除订单、</a><a href="javascript:void(0)" v-bind:data-id='item.orderId' v-bind:data-num='item.productCount' @click='sourceBox'>生成溯源码</a>、<router-link to='/twoCode/briefCodeSu'>扫码页模板</router-link>、<router-link to='/twoCode/activitySu'>扫码活动管理</router-link>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='downLoad1'>导出溯源码</a>、<a href="javascript:void(0)" v-bind:data-id='item.orderId' @click='defined'>防窜货模式</a></span>
 
             </li>
           </ul>
@@ -285,9 +285,15 @@
       toDetail:function(){
         var self=this;
         var id=$(event.target).attr('data-id');
-        self.$emit('upOrderId',id);
-        self.changeType('a');
-        router.push({path:'detail'})
+        var state=$(event.target).parents('.pro-li-span').prev().text();
+        if(state==='已生成'){
+          self.$emit('upOrderId',id);
+          self.changeType('a');
+          router.push({path:'detail'})
+        }else{
+          self.showWarn=true;
+          self.warnText='请先生成二维码'
+        }
       },
       //新增
       addOrder(){

@@ -19,7 +19,7 @@
             <span style="display:block;height:48px;line-height:48px;">操作提示</span>
           </div>
         <div class="tishi">
-          删除订单同时删除根据订单创建的所有表,慎重!
+          若此订单同步生成溯源码，执行此操作会将溯源码一起删除，慎重！
         </div>
         <div style="text-align: right;margin-top: 40px;margin-right: 20px;">
           <input class="delbutton" type="button" name="" value="确认" @click='deletOrder'>
@@ -253,9 +253,16 @@
       toDetail:function(){
         var self=this;
         var id=$(event.target).attr('data-id');
-        self.$emit('upOrderId',id);
-        self.changeType('b');
-        router.push({path:'detail'})
+        var state=$(event.target).parents('.pro-li-span').prev().text();
+        if(state==='已生成'){
+          self.$emit('upOrderId',id);
+          self.changeType('b');
+          router.push({path:'detail'})
+        }else{
+          self.showWarn=true;
+          self.warnText='请先生成二维码'
+        }
+        
       },
 
       //新增

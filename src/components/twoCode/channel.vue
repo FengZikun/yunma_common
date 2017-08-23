@@ -576,6 +576,7 @@
       },
       //删除代理信息
       delet(id){
+        var self=this;
         var url='https://ym-a.top/cloud_code/DELETE/AgentEmployee/deleteAgentEmp.do';
         var type='get';
         var data={
@@ -583,7 +584,7 @@
         };
         var success=function(res){
           if(res.status===1){
-            this.detail()
+            self.detail()
           }
         }
         common.Ajax(url,type,data,success)

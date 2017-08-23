@@ -392,7 +392,7 @@
 .page-num-ul{
   height: 100px;
   margin: auto;
-  max-width: 616px;
+  max-width: 617px;
   text-align: center;
 }
 .page-num-li{

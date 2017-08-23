@@ -30,6 +30,7 @@
       </div>
       <div class='map' id='map' style='width: 100%;height: 640px;' v-on:load="maph" v-show='heatData==null||heatData.length==0'></div>
       <div class='map' id='heatmap' style='width: 100%;height: 640px;' v-show='heatData!=null&&heatData.length!=0'></div>
+      <!-- <input class="delbutton" type="button" name="" value="返回中国地图" @click='maph()'> -->
       <input class="delbutton" type="button" name="" value="返回城市地图" @click='showMap' v-show='heatData!=null&&heatData.length!=0'>
     </div>
   </div>

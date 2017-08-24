@@ -213,10 +213,16 @@
       //重置密码
       resetPassword:function(){
         var self=this;
-        // var userid=parseInt($(event.target).attr('data-id'));
+        var passwordReg=/^([0-9]|[a-zA-Z]){8,16}$/;
         if(self.newPassword==null){
           alert('请输入新密码')
-        }else if(self.newPassword===self.checkPassword){
+          return
+        }
+        if(!passwordReg.test(self.newPassword)){
+          alert('请输入至少8位密码')
+          return
+        }
+        if(self.newPassword===self.checkPassword){
           var url='https://ym-a.top/cloud_code/POST/user/updatePasswd.do';
           var type='post';
           var data={
@@ -300,7 +306,7 @@
       //验证密码
       testPswd:function(){
         var self=this;
-        var passwordReg=/^\d{8}$/;
+        var passwordReg=/^([0-9]|[a-zA-Z]){8,16}$/;
         if(!passwordReg.test(self.newPassword)){
           $('.pswWarn').removeClass('hidelist');
         }else{

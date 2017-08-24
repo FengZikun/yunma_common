@@ -332,7 +332,7 @@
 					self.warnText="请输入每人限领数量";
 					return
 				}
-				if(self.buyerLimit>=self.stock){
+				if(parseInt(self.buyerLimit)>=parseInt(self.stock)){
 					self.showWarn2=true;
 					self.warnText="限领数量必须小于总数量";
 					return

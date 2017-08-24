@@ -504,6 +504,9 @@
 	}
 	.messagebox{
 		margin-top: 20px;
+		
+	}
+	.messagebox:nth-of-type(2){
 		line-height: 36px;
 		height: 36px;
 	}

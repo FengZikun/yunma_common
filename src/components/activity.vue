@@ -50,13 +50,10 @@
                     <span class="pro-li-span">
                       <span v-if='item.activity_status==0' class="zanting" @click='changeStatus(item.activity_status,item.id)'></span>
                       <span v-else class="qidong" @click='changeStatus(item.activity_status,item.id)'></span>
-                      <!-- <img v-if='item.activity_status==0' src="../assets/img/icon_zanting-copy-3.png" @click='changeStatus(item.activity_status,item.id)'> -->
-                      <!-- <img v-else src="../assets/img/icon_kaishi-copy-7.png" @click='changeStatus(item.activity_status,item.id)'> -->
                     </span>
                     <span class="pro-li-span">
                       <a href="javascript:void(0)">
                       <span class="chakan" v-bind:data-order='item.orderId' @click='getOrderInfo'></span>
-                      <!-- <img src="../assets/img/icon_yulan.png" v-bind:data-order='item.orderId' @click='getOrderInfo'> -->
                       </a>
                     </span>
                     <span class="pro-li-span time" style="white-space:pre-wrap;">
@@ -280,7 +277,7 @@
           orderId:id
         };
         var success=function(res){
-          //console.log(res);
+          console.log(res);
         };
         common.Ajax(url,type,data,success)
       },

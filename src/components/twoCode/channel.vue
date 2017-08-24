@@ -1,5 +1,32 @@
 <template>
   <div>
+    <div class="mengban" v-show='showWarn'>
+        <div class="warn">
+          <div class="classifyHeader">
+            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+          </div>
+          <div class="warnmain">
+            {{warnText}}
+          </div>
+          <div class="warnbottom">
+            <input class="delbutton" type="button" name="" value="确定" @click='showWarn=false'>
+          </div>
+        </div>
+      </div>
+      <div class="mengban" v-show='showMB2'>
+        <div class="warn">
+          <div class="classifyHeader">
+            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+          </div>
+          <div class="warnmain">
+            删除当前代理会将其员工信息和子代理一并删除，是否确定？
+          </div>
+          <div class="warnbottom">
+            <input class="delbutton" type="button" name="" value="确定" @click='delAgent'>
+            <input class="delbutton" type="button" name="" value="取消" @click='showMB2=false'>
+          </div>
+        </div>
+      </div>
     <div class="mengban" v-show='showCode' @click='hide'>
       <div class="codeImg">
 
@@ -117,7 +144,7 @@
               <span class="pro-li-span">{{pro.agentAddress||pro.noData.agentAddress}}</span>
               <span class="pro-li-span">{{pro.agentTel||pro.noData.agentTel}}</span>
               <span class="pro-li-span">{{pro.agentEmaill||pro.noData.agentEmaill}}</span>
-              <span class="pro-li-span">{{pro.mark||pro.noData.mark}}</span>
+              <span class="pro-li-span">{{pro.mark||pro.noData.mark||null}}</span>
               <span class="pro-li-span" v-if='pro.noData==undefined'>{{pro.agentFid}}</span>
               <span class="pro-li-span" v-else>{{pro.noData.agentFid}}</span>
               <span class="pro-li-span">
@@ -315,7 +342,11 @@
         showCode:false,
         showDetail:false,
         detailInfo: null,
-        detailId:null
+        detailId:null,
+        showWarn:false,
+        warnText:null,
+        showMB2:false,
+        delId:null
       }
     },
     props:['datas'],
@@ -329,6 +360,7 @@
         currentPage:currentPage
       }
       var success2=function(res){
+        console.log(res)
         var pagenum=res.totalPages;
         self.fenye=true
         self.totalPage=[];
@@ -458,11 +490,12 @@
         var success=function(res){
           if(res.status===1){
             self.showMB=false;
-            self.init();
+            self.init(1);
             self.level=null;
             self.id=null;
           }else{
-            //console.log(res);
+            self.showWarn=true;
+            self.warnText=res.msg;
           }
         }
         common.Ajax(url,type,data,success)
@@ -504,38 +537,38 @@
           }
           common.Ajax(url,type,data,success)
         }else if($(event.target)[0].innerText==='删除'){
-          var agentId=$(event.target).attr('data-id');
-          var url='https://ym-a.top/cloud_code/DELETE/agent/deleteAgentNode.do';
+          self.delId=$(event.target).attr('data-id');
+          self.showMB2=true;
+          
+        }else if($(event.target)[0].innerText==='详情'){
+          self.detailId=$(event.target).attr('data-id')
+          self.detail();
+        }
+      },
+      //删除代理
+      delAgent(){
+        var self=this;
+        var url='https://ym-a.top/cloud_code/DELETE/agent/deleteAgentNode.do';
           var type='get';
           var data={
             vendorId:parseInt(self.datas.vendorId),
-            id:parseInt(agentId),
+            id:parseInt(self.delId),
           };
           var success=function(res){
             if(res.status===1){
               self.init();
               self.id=null;
               self.level=null;
+              self.showMB2=false,
+              self.delId=null;
+            }else{
+              self.showWarn=true;
+              self.showMB2=false;
+              self.warnText=res.msg;
             }
           };
           common.Ajax(url,type,data,success)
-        }else if($(event.target)[0].innerText==='详情'){
-          self.detailId=$(event.target).attr('data-id')
-          self.detail();
-          // var agentId=$(event.target).attr('data-id');
-          // var url='https://ym-a.top/cloud_code/GET/AgentEmployee/getEmpInfoById.do';
-          // var type='get';
-          // var data={
-          //   agentId:agentId
-          // };
-          // var success=function(res){
-          //   self.showDetail=true;
-          //   self.detailInfo=res.data;
-          // };
-          // common.Ajax(url,type,data,success)
-        }
       },
-
       //展示二维码
       showMa:function(id){
         var self=this;

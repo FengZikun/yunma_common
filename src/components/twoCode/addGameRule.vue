@@ -9,7 +9,7 @@
 					{{warnText}}
 				</div>
 				<div class="warnbottom">
-					<input type="button" name="" value="确定" @click='showWarn=false'>
+					<input class="delbutton" style="width:42px;height:24px;" type="button" name="" value="确定" @click='showWarn=false'>
 				</div>
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 					<span class="message-name">设置获得率：</span>
 					<div class="characterBox" v-for='(item,index) in parseInt(fontNumText.substring(0,fontNumText.length-1))'>
 						<input :disabled='ruleId!==null' class="character" type="text" name="" maxlength="1" v-model='fontArr[index].word'><br>
-						(<input class="probability" type="text" name="" v-model='fontArr[index].word_rate'>%)
+						(<input class="probability" type="text" name="" v-model='fontArr[index].word_rate' maxlength="2">%)
 					</div>
 				</div>
 			</div>
@@ -217,6 +217,7 @@
 			//提交
 			confirm(){
 				var self=this;
+				var checkRate=0;
 				//输入验证
 				if(self.name===null){
 					self.showWarn=true;
@@ -233,6 +234,26 @@
 					if(self.fontArr[i].word_rate===null){
 						self.showWarn=true;
 						self.warnText='请设置获得率'
+						return
+					}
+				}
+				//验证是否有重复字
+				for(var i=0;i<self.fontNum2;i++){
+					var font=self.fontArr[i].word;
+					for(var j=i+1;j<self.fontNum2;j++){
+						if(font===self.fontArr[j].word){
+							self.showWarn=true;
+							self.warnText='不可设置重复的字'
+							return
+						}
+					}
+				}
+				//验证获得率之和
+				for(var i=0;i<self.fontNum2;i++){
+					checkRate+=parseInt(self.fontArr[i].word_rate);
+					if(checkRate>100){
+						self.showWarn=true;
+						self.warnText='获奖率之和不可以大于100'
 						return
 					}
 				}

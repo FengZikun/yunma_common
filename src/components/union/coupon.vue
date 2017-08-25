@@ -162,7 +162,7 @@
 								<span class="pro-li-span" style="text-align:center;line-height:24px;margin: 12px 0;">{{pro.beginTime}}<br>{{pro.endTime}}</span>
 								<span class="pro-li-span">满 {{pro.leastCost}} 减 <span style="color:red;">{{pro.reduce}}</span></span>
 								<span class="pro-li-span" style="line-height:24px;margin:12px 0;">每人限 {{pro.buyerLimit}} 张<br><span style="color: #c3c3c6">库存{{pro.stock}}</span></span>
-								<span class="pro-li-span" v-if='pro.type==1'>微店优惠券</span>
+								<span class="pro-li-span" v-if='pro.type==2'>微店优惠券</span>
 								<span class="pro-li-span" v-else>商户号优惠券</span>
 								<!-- <span class="pro-li-span">
 									<router-link to='#'>

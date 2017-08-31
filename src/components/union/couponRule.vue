@@ -1,18 +1,32 @@
 <template>
 	<div>
+		<div class="mengban" v-show='showMB'>
+			<div class="warn">
+				<div class="classifyHeader">
+					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
+				</div>
+				<div class="warnmain">
+					是否确认删除此规则？
+				</div>
+				<div class="warnbottom">
+					<input class="delbutton" type="button" name="" value="确定" @click='delRule(delId)'>
+					<input class="delbutton" type="button" name="" value="取消" @click='showMB=false'>
+				</div>
+			</div>
+		</div>
 		<div class="mengban" v-show='showWarn'>
-        <div class="warn">
-          <div class="classifyHeader">
-            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-          </div>
-          <div class="warnmain">
-            {{warnText}}
-          </div>
-          <div class="warnbottom">
-            <input type="button" name="" value="确定" @click='showWarn=false'>
-          </div>
-        </div>
-      </div>
+			<div class="warn">
+				<div class="classifyHeader">
+					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
+				</div>
+				<div class="warnmain">
+					{{warnText}}
+				</div>
+				<div class="warnbottom">
+					<input class="delbutton" type="button" name="" value="确定" @click='showWarn=false;showMB=false'>
+				</div>
+			</div>
+		</div>
 		<div class="mengban" v-if='content'>
 			<div class="contentBox">
 				<div class="contentTop">
@@ -52,10 +66,10 @@
 							<span class="pro-li-span first" style="text-align: center;">{{pro.id}}</span>
 							<span class="pro-li-span">{{pro.ruleName}}</span>
 							<span class="pro-li-span">
-							 <span class="chakan" @click='showContent(index)'></span>
+								<span class="chakan" @click='showContent(index)'></span>
 							</span>
 							<span class="pro-li-span">
-							 <span class="chakan"></span>
+								<span class="chakan"></span>
 								
 							</span>
 							<span class="pro-li-span">
@@ -68,7 +82,7 @@
 								<span>{{pro.startTime}}</span><br><span>{{pro.endTime}}</span>
 							</span>
 							<span class="pro-li-span">
-								<span title="删除" class="shanchu" @click='delRule(pro.id)'></span>
+								<span title="删除" class="shanchu" @click='mengban(pro.id)'></span>
 							</span>
 						</li>
 					</ul>
@@ -108,7 +122,9 @@
 		        content:false,
 		        contentInfo:null,
 		        showWarn:false,
-				warnText:null
+		        warnText:null,
+		        showMB:false,
+		        delId:null,
 
 		    }
 		},
@@ -131,7 +147,7 @@
 					self.totalPages=res.totalPages;
 					self.currentPage=res.currentPage;
 					self.proInfo=res.result.data;
-          			self.getPage();
+					self.getPage();
 
 				}
 				common.Ajax(url,type,data,success)
@@ -159,6 +175,11 @@
 				common.Ajax(url,type,data,success)
 			},
 
+			//删除提示
+			mengban(id){
+				this.showMB=true;
+				this.delId=id;
+			},
 			//查看内容
 			showContent:function(index){
 				var self=this;
@@ -175,7 +196,7 @@
 			//下一页
 			nextPage:common.nextPage,
 			//获取页数
-    		getPage:common.getPage,
+			getPage:common.getPage,
 		},
 		created:function(){
 			this.init()

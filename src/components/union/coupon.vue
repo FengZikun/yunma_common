@@ -53,7 +53,7 @@
 							<input class="wxd-value" type="text" name="secret" v-model="secretWxd">
 						</div>
 						<div class="messageboxwxd">
-							<span class="message-name">消息加解密密钥：</span>
+							<span class="message-name">微信支付API秘钥：</span>
 							<input class="wxd-value" type="text" name="apiKey" v-model="apiKeyWxd">
 						</div>
 						<div class="messageboxwxd">
@@ -113,6 +113,15 @@
 		        </div>
 		        <input class="delbutton" type="button" name="" value="确认" @click='delcoupon'>
 		        <input class="delbutton" type="button" name="" value="取消" @click='hide'>
+		      </div>
+		    </div>
+			<div class="mengban" v-show='showMB4'>
+		      <div class="proclassify" >
+		        <div class="tishi">
+		          请扫码进行微信商户平台验证
+		        </div>
+		        <div class="codeImg"></div>
+		        <input class="delbutton" type="button" name="" value="完成" @click='hide'>
 		      </div>
 		    </div>
 			<div class="right-main">
@@ -201,38 +210,40 @@
 
 	<script>
 		import common from '../../common.js'
+		import QRCode from 'qrcodejs2'
 		export default{
 			data(){
 				return{
 					childCon:'我是子页面',
-		        chechednum:0,    //全选单选控制
-		        proInfo:[],      //信息数组
-		        totalPage:[],    //页码数组
-		        resData:[],      //请求回的所有数据
-		        showMB:false,    //蒙版开关
-		        deleteArr:[],    //删除数组
-		        currentPage:'',  //当前页
-		        totalPages:'',    //总页数
-		        keyword:'',
-		        appKey:null,
-		        secret:null,
-		        showMB1:false,
-		        showMB2:false,
-		        showMB3:false,
-		        couponId:null,
-		        productUrl:null,
-		        showWarn:false,
-        		warnText:'',
-        		productUrlWxd:null,
-        		appIdWxd:null,
-        		credentialsLocationWxd:null,
-        		secretWxd:null,
-        		mchIdWxd:null,
-        		apiKeyWxd:null,
-        		connectwx:false,
-        		updatewx:false
-		    }
-		},
+			        chechednum:0,    //全选单选控制
+			        proInfo:[],      //信息数组
+			        totalPage:[],    //页码数组
+			        resData:[],      //请求回的所有数据
+			        showMB:false,    //蒙版开关
+			        deleteArr:[],    //删除数组
+			        currentPage:'',  //当前页
+			        totalPages:'',    //总页数
+			        keyword:'',
+			        appKey:null,
+			        secret:null,
+			        showMB1:false,
+			        showMB2:false,
+			        showMB3:false,
+			        showMB4:false,
+			        couponId:null,
+			        productUrl:null,
+			        showWarn:false,
+	        		warnText:'',
+	        		productUrlWxd:null,
+	        		appIdWxd:null,
+	        		credentialsLocationWxd:null,
+	        		secretWxd:null,
+	        		mchIdWxd:null,
+	        		apiKeyWxd:null,
+	        		connectwx:false,
+	        		updatewx:false
+		    	}
+			},
 		props:['vendorId'],
 		methods:{
 			//初始化
@@ -357,8 +368,7 @@
 		          contentType: false,
 		          success: function (res) {
 		            if(res.statuscode==1){
-		              self.showWarn=true;
-		              self.warnText='保存成功'
+		              self.sandBox();
 		            }
 		            else{
 		              self.showWarn=true;
@@ -388,8 +398,7 @@
 		          contentType: false,
 		          success: function (res) {
 		            if(res.statuscode==1){
-		              self.showWarn=true;
-		              self.warnText='保存成功'
+		              self.sandBox();
 		            }
 		            else{
 		              self.showWarn=true;
@@ -403,12 +412,56 @@
 		        });
 		        self.showMB1=false;
 			},
-
+			// 沙河验证
+			sandBox:function(){
+				var self=this;
+		        self.showMB4=true;
+				$.ajax({
+					url:'https://ym-a.top/cloud_code/wechatCouponConfig/getConfig.do',
+					type:'post',
+					data:{
+						vendorId:self.vendorId,
+					},
+					dataType:'json',
+					success:function(res){
+						if(jQuery.isEmptyObject(res)){
+							self.showMB4=false;
+							self.showWarn=true;
+							self.warnText='请先关联微信小店';
+							return
+						}
+						else if(res.appId!=''&res.credentialsLocation!=''&res.secret!=''&res.mchId!=''&res.apiKey!=''){
+							var code=`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${res.appId}&redirect_uri=http%3a%2f%2fmp.ym-a.top%2ftransfer.html&response_type=code&scope=snsapi_base&state=${self.vendorId}funcsandbox&component_appid=wx639e8bfda5be58eb#wechat_redirect`;
+							var qrcodeNode=document.getElementsByClassName('codeImg')[0];
+							$(qrcodeNode).html('');
+							self.qrcode = new QRCode(qrcodeNode, {
+								text: code,
+								width: 400,
+								height: 400,
+								colorDark: "#000000",
+								colorLight: "#ffffff"
+							});
+							return
+						}
+						else {
+							self.showMB4=false;
+							self.showWarn=true;
+							self.warnText='请补全关联微信小店信息';
+							return
+						}
+					},
+					error:function(res){
+						console.log(res)
+					}
+				})
+			},
 			//隐藏蒙版
 			hide:function(){
 				this.showMB=false;
 				this.showMB1=false;
 				this.showMB3=false;
+				this.showMB4=false;
+
 			},
 			// 删除优惠券
 			delcoupon:function(){
@@ -555,5 +608,21 @@
 	}
 	a:hover{
 		text-decoration: none;
+	}
+	.codeImg{
+		width: 400px;
+		height: 400px;
+		background: #fff;
+		margin: -33px auto 0;
+	}
+	.proclassify1 {
+	    width: 420px;
+	    min-height: 500px;
+	    background: #fff;
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    margin-left: -250px;
+	    margin-top: -250px;
 	}
 </style>

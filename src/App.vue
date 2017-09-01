@@ -443,7 +443,7 @@
   border-color: #fff; 
 }
 .hidelist{
-  display: none;
+  display: none!important;
 }
 .photo{
   display: inline-block;
@@ -886,6 +886,39 @@
     line-height:26px;
     margin:10px 0;
     vertical-align: top;
+  }
+  .border{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border: 2px dashed rgba(255,0,0,0.5);
+  }
+  .pic-ad{
+    width: 100%;
+    border-left: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    background-color: #fff;
+  }
+  .moduleDelButton{
+    position: absolute;
+    right: 50px;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    outline: none;
+  }
+  .modulerRedactButton{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    outline: none;
   }
 
 </style>

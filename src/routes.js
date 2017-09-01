@@ -37,6 +37,7 @@ import briefCodeSu from './components/twoCode/briefCodeSu.vue'
 import chosePage from './components/twoCode/chosePage.vue'
 import setupPage from './components/twoCode/setupPage.vue'
 import detailPage from './components/twoCode/detailPage.vue'
+import detailPage2 from './components/twoCode/detailPage2.vue'
 import progaikuang from './components/product/gaikuang.vue'
 import updataproduct from './components/product/updataproduct.vue'
 import proinfo from './components/product/proinfo.vue'
@@ -200,10 +201,15 @@ const routes = [
     component: setupPage},
   {
     path:'chosePage',
-    component:chosePage},
+    component:chosePage
+  },
   {
     path:'detailPage',
     component:detailPage
+  },
+  {
+    path:'detailPage2',
+    component:detailPage2
   },
   {
     path:'activity',

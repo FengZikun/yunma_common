@@ -1,22 +1,47 @@
 <template>
   <div class="two_top">
-    <div class="progressBar"></div>
-    <div class="phoneModule"></div>
-    <span class="jingdian">经典模板</span><br><br><br>
-    <span class="pay_list_c1 on">
-          <input type="radio" checked="checked" name="paylist" value="1" class="radioclass">
-          </span><br>
+  <div class="main">
+    <div>
+      <div class="progressBar"></div>
+      <div class="phoneModule"></div>
+      <span class="jingdian">经典模板</span><br><br><br>
+      <input class="chooseModule" name='chooseModule' v-model='muban' :value='1' type="radio">
+    </div>
+    <div>
+      <div class="progressBar"></div>
+      <div class="phoneModule2"></div>
+      <span class="jingdian">自定义模板</span><br><br><br>
+      <input class="chooseModule" name='chooseModule' v-model='muban' :value='2' type="radio">
+    </div>
+  </div>
+    
     <router-link to='/twoCode/setupPage' class="nextBtn">上一步</router-link>
-    <router-link to='/twoCode/detailPage' class="nextBtn">下一步</router-link>
+    <a href='javascript:void(0)' @click='next' class="nextBtn">下一步</a>
   </div>
 </template>
 <script>
+import router from '../../router.js'
+import {mapMutations} from 'vuex'
   export default{
     data(){
       return {
         childCon: '我是子页面',
+        muban:1,
       }
     },
+    methods:{
+      ...mapMutations([
+        'reset'
+        ]),
+      next(){
+        if(this.muban===1){
+          router.push({path:'/twoCode/detailPage'});
+        }else{
+          this.reset();
+          router.push({path:'/twoCode/detailPage2'});
+        }
+      }
+    }
 
   }
 </script>
@@ -26,12 +51,23 @@
   .progressBar {
     background-image: url("../../assets/img/progressBar2.png");
   }
-
+  .main{
+    display: flex;
+    justify-content: space-around;
+  }
   .phoneModule {
     height: 662px;
     width: 350px;
     /* margin-left: 35px; */
     background-image: url(../../assets/img/bgone.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .phoneModule2 {
+    height: 662px;
+    width: 350px;
+    /* margin-left: 35px; */
+    background-image: url(../../assets/img/150416507.jpg);
     background-size: contain;
     background-repeat: no-repeat;
   }
@@ -93,5 +129,11 @@
     background: #fff;
     color: #00baff;
     border: 1px solid #00baff;
+  }
+  .chooseModule{
+    width: 20px;
+    display: block;
+    height: 40px;
+    margin-left: 155px;
   }
 </style>

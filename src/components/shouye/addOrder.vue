@@ -81,7 +81,7 @@
 				</div>
 				<div class="button-group">
 					<input class="delbutton" type="button" name="" value='确定' @click='tijiao'>
-					<router-link to='/twoCode/enterprise_order'><input class="delbutton" type="button" name="" value='取消'></router-link>
+					<a href='javascript:void(0)' @click='cancel'><input class="delbutton" type="button" name="" value='取消'></a>
 				</div>
 				
 			</div>
@@ -171,7 +171,10 @@
 				self.showMB=false;
 				self.proInfo=[];
 			},
-
+			//取消
+			cancel(){
+				router.go(-1);
+			},
 			//提交
 			tijiao:function(){
 				var self=this;

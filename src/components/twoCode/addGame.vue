@@ -187,12 +187,12 @@
 				self.order=true;
 				self.product=false;
 				self.rule=false;
-				var url='https://ym-a.top/cloud_code/GET/product/productEnvInfoList.do';
+				var url='https://ym-a.top/cloud_code/GET/CollectWord/getCollectWordOrder.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
 					currentPage:currentPage,
-					envFlag:0
+					pageSize:10,
 				};
 				var success=function(res){
 					var pagenum=res.totalPages;
@@ -217,7 +217,7 @@
 		    	self.product=true;
 		    	self.order=false;
 		    	self.rule=false;
-		    	var url='https://ym-a.top/cloud_code/GET/product/info.do';
+		    	var url='https://ym-a.top/cloud_code/GET/CollectWord/getProductForCollectWord.do';
 		    	var type='get';
 		    	var data={
 		    		vendorId:parseInt(self.datas.vendorId),

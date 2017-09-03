@@ -8,7 +8,7 @@ const picAd={
 		test1: "a",
 		test2: "b",
 		test3: "c",
-		test4: "d"
+		test4: "d",
 	},
 }
 const codeType={
@@ -46,6 +46,9 @@ const gameRule={
 }
 const banner1={
 	state:{
+		isNew:false,
+		vendorId:null,
+		actionId:null,
 		data:{
 			picAd1:false,
 			showModule:false,
@@ -98,6 +101,9 @@ const banner1={
 	},
 	mutations:{
 		reset(state){
+			state.isNew=true,
+			state.actionId=null,
+			state.vendorId=null,
 			state.data={
 				picAd1:false,
 				showModule:false,
@@ -143,6 +149,17 @@ const banner1={
 				videoSrc:null
 			};
 		},
+		compile(state,data){
+			state.continueData=data.continueData;
+			state.couponData=data.couponData;
+			state.data=data.data;
+			state.fastTrackData=data.fastTrackData;
+			state.isNew=data.isNew;
+			state.promotionVedioData=data.promotionVedioData;
+			state.verifyData=data.verifyData;
+			state.actionId=data.actionId;
+			state.vendorId=data.vendorId;
+		},
 		showPicAd1(state){
 			console.log(state)
 			state.data.picAd1=true;
@@ -165,6 +182,9 @@ const banner1={
 		delThis5(state){
 			state.promotionVedioData.showModule=false;
 			state.promotionVedioData.promotionVedio=false;
+		},
+		delThis6(state){
+			state.couponData.coupon=false;
 		},
 		module(state,type){
 			if(type=='picAd1'){

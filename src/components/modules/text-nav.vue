@@ -19,7 +19,7 @@
 				</a>
 			</div>
 		</div>
-		<div class="pic-ad" style="margin-bottom: 12px;padding: 0 10px;" v-if='d'>
+		<div class="pic-ad" style="padding: 0 10px;" v-if='d'>
 			<div class="messageBox" v-if="e">
 				<p>企业名称：
 					<span class="messageBoxE">{{vendorName}}</span>

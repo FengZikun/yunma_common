@@ -1,5 +1,18 @@
 <template>
   <div class="right-main">
+    <div class="mengban" v-show='showWarn'>
+      <div class="warn">
+        <div class="classifyHeader">
+          <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+        </div>
+        <div class="warnmain">
+          {{warnText}}
+        </div>
+        <div class="warnbottom">
+          <input class="delbutton" type="button" name="" value="确定" @click='showWarn=false'>
+        </div>
+      </div>
+    </div>
     <div style="min-height: 500px;padding: 45px 0 0 70px;">
       <div class="muban">
         <div class="header">
@@ -22,20 +35,24 @@
 
           </fast-track>
           <!-- 继续扫码 -->
-          <!-- <is-continue class='template' data-type='continue' v-if='acontinue'>
+          <is-continue class='template' data-type='continue' v-if='acontinue'>
 
-          </is-continue> -->
+          </is-continue>
           <!-- 宣传视频 -->
           <promotion-vedio class='template' data-type='promotionVedio' v-if='promotionVedio'>
 
           </promotion-vedio>
+          <!-- 优惠券 -->
+          <coupon class='template' data-type='coupon' v-if='coupon'>
+
+          </coupon>
         </div>
         <ul class="muban-list" @click='addmuban'>
           <li><a class="muban-button" data-type='picAd'>轮播图</a></li>
           <li><a class="muban-button" data-type='verify'>防伪验证</a></li>
           <li><a class="muban-button" data-type='proInfo'>自定义链接</a></li>
           <li><a class="muban-button" data-type='fastTrack'>快速通道</a></li>
-          <!-- <li><a class="muban-button" data-type='continue'>继续扫码</a></li> -->
+          <li><a class="muban-button" data-type='continue'>继续扫码</a></li>
           <li><a class="muban-button" data-type='promotionVedio'>宣传视频</a></li>
           <li><a class="muban-button" data-type='coupon'>优惠券</a></li>
         </ul>
@@ -50,19 +67,21 @@
 
     
     <p style="text-align:center;">
-      <router-link to='/twoCode/chosePage' class="nextBtn">上一步</router-link>
+      <router-link v-if='isNew===true' to='/twoCode/chosePage' class="nextBtn">上一步</router-link>
       <button type="button" class="nextBtn" @click="save">保存</button>
     </p>
   </div>
 </template>
 
 <script>
+  import router from '../../router.js'
   import displayAd from '../modules/display-advertising.vue'
   import textNav from '../modules/text-nav.vue'
   import detailModule from '../modules/detailModule.vue'
   import fastTrack from '../modules/fastTrack.vue'
   import isContinue from '../modules/isContinue.vue'
   import promotionVedio from '../modules/promotionVedio.vue'
+  import coupon from '../modules/coupon.vue'
   import {mapState} from 'vuex'
   import {mapActions} from 'vuex'
   import {mapMutations} from 'vuex'
@@ -70,6 +89,8 @@
     data(){
       return{
         isPicAd:false,
+        showWarn:false,
+        warnText:null,
       }
     },
     props:['datas'],
@@ -79,14 +100,27 @@
       'detail-module':detailModule,
       'fast-track':fastTrack,
       'is-continue':isContinue,
-      'promotion-vedio':promotionVedio
+      'promotion-vedio':promotionVedio,
+      coupon
     },
+    computed:mapState({
+      picAd1:state=>state.banner1.data.picAd1,
+      verify:state=>state.banner1.verifyData.verify,
+      fastTrack:state=>state.banner1.fastTrackData.fastTrack,
+      acontinue:state=>state.banner1.continueData.continue,
+      promotionVedio:state=>state.banner1.promotionVedioData.promotionVedio,
+      coupon:state=>state.banner1.couponData.coupon,
+      storeData:state=>state.banner1,
+      isNew:state=>state.banner1.isNew,
+      actionId:state=>state.banner1.actionId,
+      vendorId:state=>state.banner1.vendorId,
+    }),
     methods:{
       ...mapMutations([
         'addFastTrack',
         'addContinue',
         'addPromotionVedio',
-        'addCoupon'
+        'addCoupon',
         ]),
       ...mapActions([
         'showPicAd1',
@@ -95,16 +129,19 @@
         ]),
       init(event){
         var self=this;
+
+        // self.vendorId=self.datas.vendorId;
+        //事件绑定
         $('.template').mouseenter(function(e){
           $(e.delegateTarget).find('.border').removeClass('hidelist')
         })
         $('.template').mouseleave(function(e){
-          // console.log($(e.delegateTarget).hasClass('editor'))
           if(!$(e.delegateTarget).hasClass('editor')){
             $(e.delegateTarget).find('.border').addClass('hidelist')
 
           }
         })
+
       },
       //添加模板
       addmuban:function(){
@@ -190,6 +227,8 @@
       //保存
       save(){
         var self=this;
+        self.storeData.isNew=false;
+        var a=JSON.stringify(self.storeData);
         var str=`<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -426,7 +465,7 @@
                     timestamp: params.timestamp, // 必填，生成签名的时间戳
                     nonceStr: params.noncestr, // 必填，生成签名的随机串
                     signature: params.signature,// 必填，签名，见附录1
-                    jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    jsApiList: ['getLocation','scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                   });
                   wx.ready(function () {
                     wx.getLocation({
@@ -445,6 +484,15 @@
                         _this.latitude = ''; // 纬度，浮点数，范围为90 ~ -90
                         _this.longitude = ''; // 经度，浮点数，范围为180 ~ -180。
                         _this.wechatHome();
+                      }
+                    });
+                  });
+                  $('.BackToQr').on('click',function(){
+                    wx.scanQRCode({
+                      needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                      scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                      success: function (res) {
+                        var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
                       }
                     });
                   });
@@ -605,8 +653,8 @@
             `+"</scr" + "ipt>"+`
             </html>
             `;
-
-            $.ajax({
+            if(self.isNew===true){
+              $.ajax({
               url: 'https://ym-a.top/cloud_code/POST/antiFake/html.do',
               data: {
                 templateName:self.datas.moduleName,
@@ -619,28 +667,42 @@
                 weShop: 'test',
                 spree: 1,
                 securityAndTraceability: 1,
-
+                storeData: a,
+                tempType: 2,
               },
               type: 'POST',
               dataType: 'json',
               success: function (res) {
-                console.log(res);
-                alert('创建成功')
                 router.push({path:'/twoCode/briefCode'})
               },
               error: function (err) {
                 alert(JSON.stringify(err));
               }
             })
+            }else{
+              console.log(self.actionId);
+              $.ajax({
+              url: 'https://ym-a.top/cloud_code/POST/antiFake/updateHtml.do',
+              data: {
+                vendorId: self.vendorId,
+                html:str,
+                storeData: a,
+                tempType: 2,
+                actionId: self.actionId,
+              },
+              type: 'POST',
+              dataType: 'json',
+              success: function (res) {
+                alert('保存成功')
+              },
+              error: function (err) {
+                alert(JSON.stringify(err));
+              }
+            })
+            }
+            
           }
         },
-        computed:mapState({
-          picAd1:state=>state.banner1.data.picAd1,
-          verify:state=>state.banner1.verifyData.verify,
-          fastTrack:state=>state.banner1.fastTrackData.fastTrack,
-          acontinue:state=>state.banner1.continueData.continue,
-          promotionVedio:state=>state.banner1.promotionVedioData.promotionVedio,
-        }),
         mounted(){
           this.init();
         },

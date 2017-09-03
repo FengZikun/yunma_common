@@ -1,18 +1,18 @@
 <template>
 	<div>
-	<div class="mengban" v-show='showWarn'>
-        <div class="warn">
-          <div class="classifyHeader">
-            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-          </div>
-          <div class="warnmain">
-            {{warnText}}
-          </div>
-          <div class="warnbottom">
-            <input type="button" name="" value="确定" @click='showWarn=false'>
-          </div>
-        </div>
-      </div>
+		<div class="mengban" v-show='showWarn'>
+			<div class="warn">
+				<div class="classifyHeader">
+					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
+				</div>
+				<div class="warnmain">
+					{{warnText}}
+				</div>
+				<div class="warnbottom">
+					<input type="button" name="" value="确定" @click='showWarn=false'>
+				</div>
+			</div>
+		</div>
 		<div class="mengban" v-if='showMB'>
 			<div class="choosepro" >
 				<div class="choosepro-top">
@@ -109,7 +109,7 @@
 						（模板功能：公司官网、防伪、溯源、红包）
 					</div>
 					<div>
-						<span v-if='modelSelected' style="margin-left:165px;color: red;" class="editModel" @click="showKuang($event,'modelS')" v-bind:data-url='modelSelected.urlName'>预览/编辑</span>
+						<span v-if='modelSelected' style="margin-left:165px;color: red;" class="editModel" @click="showKuang($event,'modelS')" v-bind:data-url='modelSelected.urlName' :data-id='modelSelected.actionId'>预览/编辑</span>
 					</div>
 				</div>
 				<div class="messagebox">
@@ -127,7 +127,7 @@
 			</div>
 		</div>
 		<div class="mengban modHid" defName="modelS">
-			<div class="modelS">
+			<div class="modelS" v-if='classics===1'>
 				<div class="phoneHeader"></div>
 				<div class="phoneTitle"></div>
 				<img src="../../assets/img/icon_cha3.png" class="cha3" @click="hideKuang">
@@ -174,6 +174,12 @@
 					</p>
 				</div>
 			</div>
+			<div class="modelS" v-if='classics===2'>
+				<img src="../../assets/img/icon_cha3.png" class="cha3" @click="hideKuang">
+				<detail-page2>
+					
+				</detail-page2>
+			</div>
 		</div>
 		<div class="modelBg modHid" defName="shop">
 			<div class="modelContentkeyOne">
@@ -197,6 +203,8 @@
 	import common from '../../common.js'
 	import router from '../../router.js'
 	import {mapState} from 'vuex'
+	import detailPage2 from './detailPage2.vue'
+	import {mapMutations} from 'vuex'
 	export default{
 		data(){
 			return{
@@ -223,12 +231,19 @@
         		ifChangeMode:null,
         		myTime:1,
         		showWarn:null,
-				warnText:null,
-				frameSrc:''
+        		warnText:null,
+        		frameSrc:'',
+        		classics:null,
         	}
         },
         props:['datas'],
+        components:{
+        	'detail-page2':detailPage2
+        },
         methods:{
+        	...mapMutations([
+        		'compile'
+        		]),
 			//初始化
 			init1:function(){
 				var self=this;
@@ -252,11 +267,10 @@
 							self.ifChangeMode=data.mode_id;
 							self.anti_fake_name=data.anti_fake_name;
 							if(data.start_time!==null){
-							self.startTime=data.start_time.split(" ")[0];
-							self.endTime=data.end_time.split(" ")[0];
-							self.myTime=2;
+								self.startTime=data.start_time.split(" ")[0];
+								self.endTime=data.end_time.split(" ")[0];
+								self.myTime=2;
 							}
-							
 							self.modelSelected=data.httpName;
 							self.orderId=data.orderId;
 							self.mark=data.mark;
@@ -340,15 +354,43 @@
 				$(event.target).parent().parent().addClass('modHid');
 			},
 			showKuang(event,name){
+				var self=this;
 				// //console.log(event.target,name);
 				if(name==="guan"){
 					$("[defName=guan]").removeClass('modHid');
 					return;
 				}
 				if(name==="modelS"){
-					this.frameSrc='https://ym-a.top/wx/'+$(event.target).attr('data-url');
-					$("[defName=modelS]").removeClass('modHid');
-					return;
+					//查询
+					var id=$(event.target).attr('data-id');
+					var url='https://ym-a.top/cloud_code/POST/antiFake/htmlStoreDate.do'
+					var data={
+						actionId:id
+					}
+					var type='post';
+					var success=function(res){
+						console.log(res)
+						if(res.storeData===null){
+
+							self.classics=1;
+							console.log(self.classics)
+							self.frameSrc='https://ym-a.top/wx/'+$(event.target).attr('data-url');
+							$("[defName=modelS]").removeClass('modHid');
+							return;
+						}else{
+							self.classics=2;
+							var data=JSON.parse(res.storeData)
+							data.isNew=false;
+							data.actionId=id;
+							data.vendorId=self.datas.vendorId;
+							console.log(data)
+							self.compile(data)
+							$("[defName=modelS]").removeClass('modHid');
+
+						}
+					}
+					common.Ajax(url,type,data,success);
+					
 				}
 				if(name==="shop"){
 					$("[defName=shop]").removeClass('modHid');
@@ -403,7 +445,8 @@
 						vendorHttp:self.modelSelected.vendorHttp,
 						weShop:self.modelSelected.weShop,
 						spree:self.modelSelected.spree,
-						securityAndTraceability:self.modelSelected.securityAndTraceability
+						securityAndTraceability:self.modelSelected.securityAndTraceability,
+						tempType:1
 					}
 					if(self.type==1){
 						data.funcFlag=1;
@@ -439,12 +482,12 @@
 				var type='post';
 				var success=function(res){
 					if(res.status===1){
-					if(self.type==1){
-						router.push({path:'activity'})
-					}
-					else if(self.type==0){
-						router.push({path:'activitySu'})
-					}
+						if(self.type==1){
+							router.push({path:'activity'})
+						}
+						else if(self.type==0){
+							router.push({path:'activitySu'})
+						}
 					}
 				};
 				common.Ajax(url,type,data,success)
@@ -462,9 +505,9 @@
       //下一页
       nextPage:common.nextPage,
   },
-	computed: mapState({
-		type: state=>state.b.type
-	}),
+  computed: mapState({
+  	type: state=>state.b.type
+  }),
   created:function(){
   	this.init1()
   }

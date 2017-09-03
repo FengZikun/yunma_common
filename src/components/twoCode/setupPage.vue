@@ -1,5 +1,18 @@
 <template>
   <div class="two_top">
+    <div class="mengban" v-show='showWarn'>
+      <div class="warn">
+        <div class="classifyHeader">
+          <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+        </div>
+        <div class="warnmain">
+          {{warnText}}
+        </div>
+        <div class="warnbottom">
+          <input class="delbutton" type="button" name="" value="确定" @click='showWarn=false'>
+        </div>
+      </div>
+    </div>
     <div class="progressBar"></div>
     <span class="titleSpan"><font color='red'>*</font>模板名称：</span>
     <input type="text" v-model="moduleName" class="titleInput" name="titleInput" required autofocus><br>
@@ -15,7 +28,10 @@
   export default{
     data(){
       return {
-        moduleName: this.datas.moduleName, moduleRemark: this.datas.moduleRemark
+        moduleName: null,
+        moduleRemark: this.datas.moduleRemark,
+        showWarn: false,
+        warnText: null,
       }
     },
     props: ['datas'],
@@ -23,6 +39,11 @@
       // 检查模板名称
       checkName:function(){
         var self=this;
+        if(self.moduleName===null||self.moduleName===''){
+          self.showWarn=true;
+          self.warnText='请填写模板名称';
+          return
+        }
         $.ajax({
           url:'https://ym-a.top/cloud_code/POST/antiFake/htmlNameExist.do',
           type:'post',
@@ -33,7 +54,8 @@
           datatype:'json',
           success:function(res){
             if(res.errorCode=='-1'){
-              alert('模板名称存在')
+              self.showWarn=true;
+              self.warnText='模板名称存在';
             }
             else if(res.errorCode=='0'){
               router.push({path:'/twoCode/chosePage'});

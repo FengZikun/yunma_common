@@ -888,6 +888,7 @@
                       weShop: weShop,
                       spree: spree,
                       securityAndTraceability:securityAndTraceability,
+                      tempType: 1,
                       
                     },
                     type: 'POST',

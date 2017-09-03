@@ -129,8 +129,7 @@
         ]),
       init(event){
         var self=this;
-
-        // self.vendorId=self.datas.vendorId;
+        console.log(self.isNew)
         //事件绑定
         $('.template').mouseenter(function(e){
           $(e.delegateTarget).find('.border').removeClass('hidelist')
@@ -227,7 +226,6 @@
       //保存
       save(){
         var self=this;
-        self.storeData.isNew=false;
         var a=JSON.stringify(self.storeData);
         var str=`<!DOCTYPE html>
         <html lang="en">
@@ -653,7 +651,9 @@
             `+"</scr" + "ipt>"+`
             </html>
             `;
+            console.log(self.isNew);
             if(self.isNew===true){
+              console.log(self.datas.vendorId)
               $.ajax({
               url: 'https://ym-a.top/cloud_code/POST/antiFake/html.do',
               data: {
@@ -673,6 +673,7 @@
               type: 'POST',
               dataType: 'json',
               success: function (res) {
+                // self.storeData.isNew=false;
                 router.push({path:'/twoCode/briefCode'})
               },
               error: function (err) {
@@ -680,7 +681,6 @@
               }
             })
             }else{
-              console.log(self.actionId);
               $.ajax({
               url: 'https://ym-a.top/cloud_code/POST/antiFake/updateHtml.do',
               data: {

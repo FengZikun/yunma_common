@@ -46,7 +46,7 @@ const gameRule={
 }
 const banner1={
 	state:{
-		isNew:false,
+		isNew:true,
 		vendorId:null,
 		actionId:null,
 		data:{

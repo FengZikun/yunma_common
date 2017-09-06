@@ -639,7 +639,7 @@
 		position: absolute;
 		left: 50%;
 		top: 8%;
-		width: 890px;
+		width: 920px;
 		margin-left: -445px;
 		min-height: 800px;
 		background: #fff;

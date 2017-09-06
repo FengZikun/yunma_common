@@ -11,7 +11,7 @@
 				<iframe :src='videoSrc' controls="controls"></iframe>
 			</div>
 			<div v-if='videoSrc===null||videoSrc===""'>
-				<img style="width: 318px;" src="../../assets/img/s8.jpg">
+				<img style="width: 100%;" src="../../assets/img/s8.jpg">
 			</div>
 			<div class="footer">
 				温馨提示：请在wifi环境下观看。

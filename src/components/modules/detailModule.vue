@@ -11,22 +11,31 @@
 				<input class="hidelist" id="productImg1" type="file" name="productImg" @change='change($event)'>
 				<label v-if='bannerPic[0].src==null' class="productImg" for="productImg1"></label>
 				<label v-else class="productImg" v-bind:style="{backgroundImage: imgSrc}" for="productImg1"></label>
-				<span>链接：</span>
-				<input type="text" name="" v-model='address1'>
+				<div class="linkBox">
+					<span>链接：</span>
+					<input type="text" name="" v-model='address1'>
+				</div>
+				
 			</div>
 			<div class="picture" v-if='picNum>=2'>
 				<input class="hidelist" id="productImg2" type="file" name="productImg" @change='change($event)'>
 				<label v-if='bannerPic[1].src==null' class="productImg" for="productImg2"></label>
 				<label v-else class="productImg" v-bind:style="{backgroundImage: imgSrc2}" for="productImg2"></label>
-				<span>链接：</span>
-				<input type="text" name="" v-model='address2'>
+				<div class="linkBox">
+					<span>链接：</span>
+					<input type="text" name="" v-model='address2'>
+				</div>
+				
 			</div>
 			<div class="picture" v-if='picNum>=3'>
 				<input class="hidelist" id="productImg3" type="file" name="productImg" @change='change($event)'>
 				<label v-if='bannerPic[2].src==null' class="productImg" for="productImg3"></label>
 				<label v-else class="productImg" v-bind:style="{backgroundImage: imgSrc3}" for="productImg3"></label>
-				<span>链接：</span>
-				<input type="text" name="" v-model='addres3'>
+				<div class="linkBox">
+					<span>链接：</span>
+					<input type="text" name="" v-model='address3'>
+				</div>
+				
 			</div>
 			<div class="addPicture">
 				<a href="javascript:void(0)" @click='addPicNum'>添加图片</a>
@@ -397,6 +406,7 @@
 		background: #fff;
 		padding: 10px 15px;
 		margin-top: 10px;
+		position: relative;
 	}
 	.addPicture{
 		padding: 10px 15px;
@@ -416,6 +426,7 @@
 		width: 100px;
 		text-align: right;
 		margin-left: 40px;
+		font-size: 14px;
 	}
 	.fastTrackUl{
 		width: 100%;
@@ -429,5 +440,11 @@
 	}
 	.message-value{
 		height: 26px;
+	}
+	.linkBox{
+		display: inline-block;
+		position: absolute;
+		top: 40px;
+		left: 125px;
 	}
 </style>

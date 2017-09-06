@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div style="min-height: 500px;padding: 45px 0 0 70px;">
+    <div :class="{basicBox:isNew}">
       <div class="muban">
         <div class="header">
 
@@ -38,14 +38,19 @@
           <is-continue class='template' data-type='continue' v-if='acontinue'>
 
           </is-continue>
-          <!-- 宣传视频 -->
-          <promotion-vedio class='template' data-type='promotionVedio' v-if='promotionVedio'>
-
-          </promotion-vedio>
           <!-- 优惠券 -->
           <coupon class='template' data-type='coupon' v-if='coupon'>
 
           </coupon>
+          <!-- 红包 -->
+          <hongbao class='template' data-type='hongbao' v-if='hongbao'>
+            
+          </hongbao>
+          <!-- 宣传视频 -->
+          <promotion-vedio class='template' data-type='promotionVedio' v-if='promotionVedio'>
+
+          </promotion-vedio>
+          
         </div>
         <ul class="muban-list" @click='addmuban'>
           <li><a class="muban-button" data-type='picAd'>轮播图</a></li>
@@ -55,6 +60,7 @@
           <li><a class="muban-button" data-type='continue'>继续扫码</a></li>
           <li><a class="muban-button" data-type='promotionVedio'>宣传视频</a></li>
           <li><a class="muban-button" data-type='coupon'>优惠券</a></li>
+          <li><a class="muban-button" data-type='hongbao'>红包</a></li>
         </ul>
       </div>
       <div class="box hidelist">
@@ -82,6 +88,7 @@
   import isContinue from '../modules/isContinue.vue'
   import promotionVedio from '../modules/promotionVedio.vue'
   import coupon from '../modules/coupon.vue'
+  import hongbao from '../modules/hongbao.vue'
   import {mapState} from 'vuex'
   import {mapActions} from 'vuex'
   import {mapMutations} from 'vuex'
@@ -101,7 +108,8 @@
       'fast-track':fastTrack,
       'is-continue':isContinue,
       'promotion-vedio':promotionVedio,
-      coupon
+      coupon,
+      hongbao
     },
     computed:mapState({
       picAd1:state=>state.banner1.data.picAd1,
@@ -110,6 +118,7 @@
       acontinue:state=>state.banner1.continueData.continue,
       promotionVedio:state=>state.banner1.promotionVedioData.promotionVedio,
       coupon:state=>state.banner1.couponData.coupon,
+      hongbao:state=>state.banner1.hongbaoData.hongbao,
       storeData:state=>state.banner1,
       isNew:state=>state.banner1.isNew,
       actionId:state=>state.banner1.actionId,
@@ -121,6 +130,7 @@
         'addContinue',
         'addPromotionVedio',
         'addCoupon',
+        'addHongbao',
         ]),
       ...mapActions([
         'showPicAd1',
@@ -166,6 +176,9 @@
         if(elementType==='coupon'){
           self.addCoupon()
         }
+        if(elementType==='hongbao'){
+          self.addHongbao()
+        }
 
         
       },
@@ -192,7 +205,7 @@
         var self=this;
         var bianji=$(event.target);
         var element=$(event.target).parents('.border');
-        if(bianji[0].className==='modulerRedactButton'){
+        if(bianji[0].className==='modulerRedactButton'&&bianji.attr('data-type')===undefined){
           //显示删除键
           bianji.next().removeClass('hidelist');
           //显示操作框
@@ -207,6 +220,11 @@
           //根据模块名称显示相应组件
           var type=$(thisElement).attr('data-type')
           self.module(type);
+        }else{
+          //显示删除键
+          bianji.next().removeClass('hidelist');
+          //其余模块隐藏操作框
+          $(element).parent().siblings().find('.border').addClass('hidelist').find('.moduleDelButton').addClass('hidelist');
         }
 
 
@@ -233,7 +251,7 @@
           <meta charset="UTF-8">
           <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-          <title>${this.phoneTitle}</title>
+          <title>扫码活动</title>
           <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
           <style>
             * {
@@ -835,5 +853,9 @@
         position: relative;
         top: 33px;
         border: 1px solid transparent;
+      }
+      .basicBox{
+        min-height: 500px;
+        padding: 45px 0 0 70px;
       }
     </style>

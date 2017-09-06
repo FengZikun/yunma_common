@@ -54,8 +54,8 @@ const banner1={
 			showModule:false,
 			picNum:2,
 			bannerPic:[
-				{src:null,img:'https://ym-a.top/wx/img/tu2.jpg',address:'func/you.html'},
-				{src:null,img:'https://ym-a.top/wx/img/tu1.jpg',address:'func/red.html'},
+				{src:null,img:'https://ym-a.top/wx/img/banner_hongbao.jpg',address:'func/you.html'},
+				{src:null,img:'https://ym-a.top/wx/img/banner_youhuiquan.jpg',address:'func/red.html'},
 				{src:null,img:'https://ym-a.top/wx/img/tu1.jpg',address:'func/red.html'},
 			]
 		},
@@ -97,6 +97,9 @@ const banner1={
 		},
 		couponData: {
 			coupon:true,
+		},
+		hongbaoData: {
+			hongbao:false,
 		}
 	},
 	mutations:{
@@ -109,8 +112,8 @@ const banner1={
 				showModule:false,
 				picNum:2,
 				bannerPic:[
-				{src:null,img:'https://ym-a.top/wx/img/tu2.jpg',address:'func/you.html'},
-				{src:null,img:'https://ym-a.top/wx/img/tu1.jpg',address:'func/red.html'},
+				{src:null,img:'https://ym-a.top/wx/img/banner_hongbao.jpg',address:'func/you.html'},
+				{src:null,img:'https://ym-a.top/wx/img/banner_youhuiquan.jpg',address:'func/red.html'},
 				{src:null,img:'https://ym-a.top/wx/img/tu1.jpg',address:'func/red.html'},
 				]
 			};
@@ -186,6 +189,9 @@ const banner1={
 		delThis6(state){
 			state.couponData.coupon=false;
 		},
+		delThis7(state){
+			state.hongbaoData.hongbao=false;
+		},
 		module(state,type){
 			if(type=='picAd1'){
 				state.verifyData.showModule=false;
@@ -251,6 +257,11 @@ const banner1={
 		addCoupon(state){
 			if(!state.couponData.coupon){
 				state.couponData.coupon=true;
+			}
+		},
+		addHongbao(state){
+			if(!state.hongbaoData.hongbao){
+				state.hongbaoData.hongbao=true;
 			}
 		},
 		updateMessage(state,type){

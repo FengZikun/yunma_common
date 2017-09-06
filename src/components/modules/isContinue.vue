@@ -4,7 +4,8 @@
 			继续扫码
 		</div>
 		<div class="border hidelist">
-			<input class="moduleDelButton" style="right: 0;" type="button" name="" value="删除" @click='delContinue'>
+			<input class="modulerRedactButton" data-type='1' type="button" name="" value="编辑">
+			<input class="moduleDelButton hidelist" type="button" name="" value="删除" @click='delContinue'>
 		</div>
 	</div>
 </template>

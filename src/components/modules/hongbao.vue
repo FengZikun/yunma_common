@@ -1,13 +1,11 @@
 <template>
 	<div>
-	<a href="func/you.html">
+		<a href="func/red.html">
 		<div class="pic-ad myCoupon" style="height: 140px;line-height: 140px;text-align: center;">
-			<img style="width: 100%" src="https://ym-a.top/wx/img/banner_youhuiquan.jpg">
+			<img style="width: 100%" src="https://ym-a.top/wx/img/banner_hongbao.jpg">
 		</div>
 	</a>
-		
-
-		<div class="border hidelist">
+	<div class="border hidelist">
 			<input class="modulerRedactButton" data-type='1' type="button" name="" value="编辑">
 			<input class="moduleDelButton hidelist" type="button" name="" value="删除" @click='delCoupon'>
 		</div>
@@ -24,10 +22,10 @@ import {mapMutations} from 'vuex'
 		},
 		methods:{
 			...mapMutations([
-				'delThis6'
+				'delThis7'
 				]),
 			delCoupon(){
-				this.delThis6();
+				this.delThis7();
 			}
 		}
 	}

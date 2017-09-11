@@ -56,6 +56,8 @@ import bulletinBoard from './components/union/bulletin_board.vue'
 import newActivities from './components/union/new_activities.vue'
 import couponRule from './components/union/couponRule.vue'
 import addCouponRule from './components/union/addCouponRule.vue'
+import bill from './components/union/bill.vue'
+import wdBill from './components/union/wdBill.vue'
 import addOrder from './components/shouye/addOrder.vue'
 import shouyegaikuang from './components/shouye/shouyegaikuang.vue'
 import detail from './components/shouye/detail.vue'
@@ -63,10 +65,12 @@ import hongbao from './components/twoCode/hongbao.vue'
 import addHB from './components/twoCode/addHB.vue'
 import rule from './components/twoCode/rule.vue'
 import addRule from './components/twoCode/addRule.vue'
+import addIntegralRule from './components/twoCode/addIntegralRule.vue'
 import corporateDetail from './components/admin/corporateDetail.vue'
 import addCorporate from './components/admin/addCorporate.vue'
 import addActivity from './components/twoCode/addActivity.vue'
 import analysis from './components/twoCode/analysis.vue'
+import signIn from './components/twoCode/signIn.vue'
 import addAdmin from './components/admin/addAdmin.vue'
 import sourceCode from './components/twoCode/sourceCode.vue'
 import game from './components/twoCode/game.vue'
@@ -286,6 +290,14 @@ const routes = [
   {
     path:'addGameRule',
     component:addGameRule
+  },
+  {
+    path:'signIn',
+    component:signIn
+  },
+  {
+    path:'addIntegralRule',
+    component:addIntegralRule
   }
   ]
 },
@@ -374,6 +386,14 @@ const routes = [
     {
       path:'addCouponRule',
       component:addCouponRule
+    },
+    {
+      path:'bill',
+      component:bill
+    },
+    {
+      path:'wdBill',
+      component:wdBill
     }
     ]
   },

@@ -89,6 +89,9 @@
                 <li @click="WxGzhInfo('https://www.ym-b.top/web/index.php?c=profile&a=module&')" style="color:#fff;font-size:16px;" >
                 <a href="javascript:void(0)">更多应用</a>
                 </li>
+                <router-link tag='li' to="/twoCode/signIn">
+                  <a>签到积分</a>
+                </router-link>
               </ul>
             </li>
 

@@ -105,7 +105,7 @@
 					{{warnText}}
 				</div>
 				<div class="warnbottom">
-					<input type="button" name="" value="确定" @click='showWarn=false'>
+					<input class="delbutton" type="button" name="" value="确定" @click='showWarn=false'>
 				</div>
 			</div>
 		</div>

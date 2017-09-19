@@ -1,50 +1,50 @@
 /**
  * Created by LUO on 2017/3/21.
  */
-import enterprise from './components/enterprise.vue'
-import child from './components/child.vue'
-import twoCode from './components/two_code.vue'
-import goods from './components/goods.vue'
-import user from './components/user.vue'
-import union from './components/union.vue'
-import mall from './components/mall.vue'
-import enterprise_order from './components/enterprise_order.vue'
-import enterprise_message from './components/enterprise_message.vue'
-import enterprise_cer from './components/enterprise_cer.vue'
-import enterprise_news from './components/enterprise_news.vue'
-import account from './components/account.vue'
-import trade from './components/trade.vue'
-import passward from './components/passward.vue'
-import revise from './components/revise.vue'
-import safety from './components/safety.vue'
-import en_public from './components/en_public.vue'
-import scan from './components/scan.vue'
-import activity from './components/activity.vue'
-import activitySu from './components/activitySu.vue'
-import setup from './components/setup.vue'
-import link from './components/link.vue'
-import channel from './components/twoCode/channel.vue'
-import material from './components/material.vue'
-import pro_message from './components/pro_message.vue'
-import recycle from './components/recycle.vue'
-import groups from './components/groups.vue'
-import gift from './components/gift.vue'
-import gift_recy from './components/gift_recy.vue'
-import classify from './components/classify.vue'
-import gaikuang from './components/gaikuang.vue'
-import briefCode from './components/twoCode/briefCode.vue'
-import briefCodeSu from './components/twoCode/briefCodeSu.vue'
-import chosePage from './components/twoCode/chosePage.vue'
-import setupPage from './components/twoCode/setupPage.vue'
-import detailPage from './components/twoCode/detailPage.vue'
-import detailPage2 from './components/twoCode/detailPage2.vue'
-import progaikuang from './components/product/gaikuang.vue'
-import updataproduct from './components/product/updataproduct.vue'
-import proinfo from './components/product/proinfo.vue'
-import prodetail from './components/product/prodetail.vue'
-import giftrecycle from './components/product/giftrecycle.vue'
-import updatagift from './components/product/updatagift.vue'
-import login from './components/login.vue'
+ import enterprise from './components/enterprise.vue'
+ import child from './components/child.vue'
+ import twoCode from './components/two_code.vue'
+ import goods from './components/goods.vue'
+ import user from './components/user.vue'
+ import union from './components/union.vue'
+ import mall from './components/mall.vue'
+ import enterprise_order from './components/enterprise_order.vue'
+ import enterprise_message from './components/enterprise_message.vue'
+ import enterprise_cer from './components/enterprise_cer.vue'
+ import enterprise_news from './components/enterprise_news.vue'
+ import account from './components/account.vue'
+ import trade from './components/trade.vue'
+ import passward from './components/passward.vue'
+ import revise from './components/revise.vue'
+ import safety from './components/safety.vue'
+ import en_public from './components/en_public.vue'
+ import scan from './components/scan.vue'
+ import activity from './components/activity.vue'
+ import activitySu from './components/activitySu.vue'
+ import setup from './components/setup.vue'
+ import link from './components/link.vue'
+ import channel from './components/twoCode/channel.vue'
+ import material from './components/material.vue'
+ import pro_message from './components/pro_message.vue'
+ import recycle from './components/recycle.vue'
+ import groups from './components/groups.vue'
+ import gift from './components/gift.vue'
+ import gift_recy from './components/gift_recy.vue'
+ import classify from './components/classify.vue'
+ import gaikuang from './components/gaikuang.vue'
+ import briefCode from './components/twoCode/briefCode.vue'
+ import briefCodeSu from './components/twoCode/briefCodeSu.vue'
+ import chosePage from './components/twoCode/chosePage.vue'
+ import setupPage from './components/twoCode/setupPage.vue'
+ import detailPage from './components/twoCode/detailPage.vue'
+ import detailPage2 from './components/twoCode/detailPage2.vue'
+ import progaikuang from './components/product/gaikuang.vue'
+ import updataproduct from './components/product/updataproduct.vue'
+ import proinfo from './components/product/proinfo.vue'
+ import prodetail from './components/product/prodetail.vue'
+ import giftrecycle from './components/product/giftrecycle.vue'
+ import updatagift from './components/product/updatagift.vue'
+ import login from './components/login.vue'
 // import app from './App.vue'
 import admin from './components/admin.vue'
 import admingaikuang from './components/admin/admingaikuang.vue'
@@ -66,6 +66,9 @@ import addHB from './components/twoCode/addHB.vue'
 import rule from './components/twoCode/rule.vue'
 import addRule from './components/twoCode/addRule.vue'
 import addIntegralRule from './components/twoCode/addIntegralRule.vue'
+import IntegralUseRule from './components/twoCode/IntegralUseRule.vue'
+import addIntegralUseRule from './components/twoCode/addIntegralUseRule.vue'
+import userInfomation from './components/twoCode/userInfomation.vue'
 import corporateDetail from './components/admin/corporateDetail.vue'
 import addCorporate from './components/admin/addCorporate.vue'
 import addActivity from './components/twoCode/addActivity.vue'
@@ -78,13 +81,15 @@ import gameRule from './components/twoCode/gameRule.vue'
 import exhibitors from './components/twoCode/exhibitors.vue'
 import addGame from './components/twoCode/addGame.vue'
 import addGameRule from './components/twoCode/addGameRule.vue'
+import userDetail from './components/twoCode/userDetail.vue'
+import exchange from './components/twoCode/exchange.vue'
 //编写路由集合
 const routes = [
-  {
-    path:'/',
-    redirect:'login'
-  },
-  {
+{
+  path:'/',
+  redirect:'login'
+},
+{
     path:'/login', //路由路径这里是根路径
     component:login  //模板
   },
@@ -123,7 +128,21 @@ const routes = [
     {
       path:'addAdmin',
       component:addAdmin
-    }
+    },
+    {
+      path:'coupon',
+      component:coupon
+    },
+
+    {
+      path:'couponRule',
+      component:couponRule
+    },
+
+    {
+      path:'addCouponRule',
+      component:addCouponRule
+    },
     ]
   },
   {
@@ -180,54 +199,54 @@ const routes = [
     path:'/child', //路由路径这里是根路径
     component:child  //模板
   },
- {
-  path:'/twoCode',
-  component:twoCode,
-  children:[
   {
-    path:'',
-    component:gaikuang
-  },
-  {
-    path:'gaikuang',
-    component:gaikuang
-  },
-  {
-    path:'briefCode',
-    component: briefCode
-  },
-  {
-    path:'briefCodeSu',
-    component: briefCodeSu
-  },
-  {
-    path:'setupPage',
-    component: setupPage},
-  {
-    path:'chosePage',
-    component:chosePage
-  },
-  {
-    path:'detailPage',
-    component:detailPage
-  },
-  {
-    path:'detailPage2',
-    component:detailPage2
-  },
-  {
-    path:'activity',
-    component:activity
-  },
-  {
-    path:'activitySu',
-    component:activitySu
-  },
-  {
-    path:'scan',
-    component:scan
-  },
-  {
+    path:'/twoCode',
+    component:twoCode,
+    children:[
+    {
+      path:'',
+      component:gaikuang
+    },
+    {
+      path:'gaikuang',
+      component:gaikuang
+    },
+    {
+      path:'briefCode',
+      component: briefCode
+    },
+    {
+      path:'briefCodeSu',
+      component: briefCodeSu
+    },
+    {
+      path:'setupPage',
+      component: setupPage},
+      {
+        path:'chosePage',
+        component:chosePage
+      },
+      {
+        path:'detailPage',
+        component:detailPage
+      },
+      {
+        path:'detailPage2',
+        component:detailPage2
+      },
+      {
+        path:'activity',
+        component:activity
+      },
+      {
+        path:'activitySu',
+        component:activitySu
+      },
+      {
+        path:'scan',
+        component:scan
+      },
+      {
     path:'channel', //路由路径这里是根路径
     component:channel  //模板
   },
@@ -298,10 +317,30 @@ const routes = [
   {
     path:'addIntegralRule',
     component:addIntegralRule
+  },
+  {
+    path:'IntegralUseRule',
+    component:IntegralUseRule
+  },
+  {
+    path:'addIntegralUseRule',
+    component:addIntegralUseRule
+  },
+  {
+    path:'userInfomation',
+    component:userInfomation
+  },
+  {
+    path:'userDetail',
+    component:userDetail
+  },
+  {
+    path:'exchange',
+    component:exchange
   }
   ]
 },
-  {
+{
     path:'/goods', //路由路径这里是根路径
     component:goods,  //模板
     children:[
@@ -365,11 +404,7 @@ const routes = [
     children:[
     {
       path:'',
-      component:coupon
-    },
-    {
-      path:'coupon',
-      component:coupon
+      component:bill
     },
     {
       path:'bulletinBoard',
@@ -378,14 +413,6 @@ const routes = [
     {
       path:'newActivities',
       component:newActivities
-    },
-    {
-      path:'couponRule',
-      component:couponRule
-    },
-    {
-      path:'addCouponRule',
-      component:addCouponRule
     },
     {
       path:'bill',
@@ -421,6 +448,6 @@ const routes = [
     path:'/classify', //路由路径这里是根路径
     component:classify  //模板
   },
-]
+  ]
 //导出路由集合
 export default routes

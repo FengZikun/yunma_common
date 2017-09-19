@@ -15,45 +15,45 @@
 			</div>
 		</div>
 		<div class="top-title">
-			<a href="javascript:void(0)" class='title-one'>积分获取规则</a>
-			<router-link to='/twoCode/IntegralUseRule' class='title-two'>积分使用规则</router-link>
+			<router-link to='/twoCode/signIn' class='title-two'>积分获取规则</router-link>
+			<a href="javascript:void(0)" class='title-one'>积分使用规则</a>
 			<router-link to='/twoCode/userInfomation' class='title-two'>用户信息</router-link>
 			<router-link to='/twoCode/exchange' class='title-two'>兑换记录</router-link>
 		</div>
 		<div class="right-main">
 			<div class="right-main-bottom">
 				<div class="button-group">
-					<a href="javascript:void(0)" @click='addRule'>
+					<router-link to='/twoCode/addIntegralUseRule'>
 						<div class="add-pro">
-							+新建积分获取规则
+							+新建积分使用规则
 						</div>
-					</a>
+					</router-link>
 				</div>
 				<div class="my-form">
 					<ul class="pro-list">
 						<li class="pro-li">
-							<span class="pro-li-span">规则ID</span>
-							<span class="pro-li-span">规则名称</span>
-							<span class="pro-li-span">绑定产品/订单ID</span>
+							<span class="pro-li-span">使用规则ID</span>
+							<span class="pro-li-span">绑定规则ID</span>
+							<span class="pro-li-span">兑换礼品</span>
+							<span class="pro-li-span">所需积分</span>
 							<span class="pro-li-span">状态</span>
-							<span class="pro-li-span">积分方式</span>
-							<span class="pro-li-span">兑换次数</span>
+							<span class="pro-li-span">库存</span>
 							<span class="pro-li-span">有效时间</span>
 							<span class="pro-li-span">创建时间</span>
 							<span class="pro-li-span">操作</span>
 						</li>
 						<li class="pro-li" v-for='item in list'>
-							<span class="pro-li-span">{{item.inteRuleId}}</span>
-							<span class="pro-li-span">{{item.ruleName}}</span>
-							<span class="pro-li-span">{{item.productId}}</span>
-							<span class="pro-li-span">{{item.isUseing}}</span>
-							<span class="pro-li-span">{{item.ruleType}}</span>
-							<span class="pro-li-span">{{item.eveGetExchangesCount}}</span>
+							<span class="pro-li-span">{{item.inteExchangeId}}</span>
+							<span class="pro-li-span">{{item.ruleId}}</span>
+							<span class="pro-li-span">{{item.exchangesName }}</span>
+							<span class="pro-li-span">{{item.integralExchangeCostCount}}</span>
+							<span class="pro-li-span">{{item.status}}</span>
+							<span class="pro-li-span">{{item.exchangesCount}}</span>
 							<span class="pro-li-span">{{item.expireTime}}</span>
 							<span class="pro-li-span">{{item.createTime}}</span>
 							<span class="pro-li-span">
-								<span class="bianji" @click='compile(item.inteRuleId)'></span>
-								<span class="shanchu" @click='delInfo(item.inteRuleId)'></span>
+								<span class="bianji" @click='compile(item.inteExchangeId)'></span>
+								<span class="shanchu" @click='delInfo(item.inteExchangeId)'></span>
 							</span>
 						</li>
 					</ul>
@@ -97,12 +97,12 @@
 		props:['datas'],
 		methods:{
 			...mapMutations({
-				reset:'signIn/reset',
-				addNew:'signIn/addNew'
+				reset:'IntegralUseRule/reset',
+				addNew:'IntegralUseRule/addNew'
 			}),
 			init(currentPage){
 				var self=this;
-				var url='https://ym-a.top/cloud_code/GET/vendorIntegral/vendorIntegralRuleList.do';
+				var url='https://project.ym-b.top/cloud_code/GET/vendorIntegral/vendorIntegralExchangesHistoryList.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -110,7 +110,6 @@
 					pageSize:10
 				};
 				var success=function(res){
-					console.log(res)
 					self.list=res.result.data;
 					self.totalPages=res.totalPages;
 					self.currentPage=res.currentPage;
@@ -122,13 +121,7 @@
 			//编辑
 			compile(id){
 				this.reset(id);
-				router.push({path:'/twoCode/addIntegralRule'})
-			},
-
-			//新建规则
-			addRule(){
-				this.addNew();
-				router.push({path:'/twoCode/addIntegralRule'})
+				router.push({path:'/twoCode/addIntegralUseRule'})
 			},
 
 			//删除
@@ -141,11 +134,11 @@
 			//确定删除
 			delThis(){
 				var self=this;
-				var url='http://192.168.1.106:8080/cloud_code/GET/vendorIntegral/deleteVendorIntegral.do';
+				var url='http://192.168.1.106:8080/cloud_code/GET/vendorIntegral/deleteExchangesInfo.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
-					inteRuleId:self.delId
+					inteExchangeId:self.delId
 				};
 				var success=function(res){
 					if(res.errorCode===0){
@@ -191,6 +184,6 @@
 		margin-top: 40px;
 	}
 	.pro-li-span{
-		width: 10.5%;
+		width: 10.6%;
 	}
 </style>

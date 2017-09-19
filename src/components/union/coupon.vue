@@ -155,8 +155,13 @@
 								关联微信小店
 							</div>
 						</a>
+						<a href="javascript:void(0)" @click='jdbind'>
+							<div class="add-pro3">
+								关联京东
+							</div>
+						</a>
 					</div>
-					<div class="my-form">
+					<div class="my-form" v-if='proInfo!=null'>
 						<ul class="pro-list">
 							<li class="pro-li">
 								<span class="pro-li-span">优惠券名称</span>
@@ -188,6 +193,43 @@
 							</li>
 						</ul>
 					</div>
+					<div class="my-form" v-if='jdList!=null'>
+						<ul class="pro-list">
+							<li class="pro-li">
+								<span class="pro-li-span">京东优惠券</span>
+								<span class="pro-li-span pro-li-span1">类型</span>
+								<span class="pro-li-span">优惠券数量</span>
+								<span class="pro-li-span">优惠券价格</span>
+								<span class="pro-li-span">优惠券有效期</span>
+								<span class="pro-li-span">领券有效期</span>
+								<span class="pro-li-span pro-li-span2">领取限制</span>
+							</li>
+							<li class="pro-li" v-for="jd in jdList">
+								<span class="pro-li-span first" style="text-align: center;">{{jd.name}}</span>
+								<span class="pro-li-span  pro-li-span1" v-if='jd.type==0' >京券</span>
+								<span class="pro-li-span  pro-li-span1" v-if='jd.type==1'>东券</span>
+								<span class="pro-li-span">{{jd.num}}</span>
+								<span class="pro-li-span">满 {{jd.quota}} 减 <span style="color:red;">{{jd.discount}}</span></span>
+								<span class="pro-li-span" style="text-align:center;line-height:24px;margin: 12px 0;">{{jd.beginTime}}<br>{{jd.endTime}}</span>
+								<span class="pro-li-span" style="text-align:center;line-height:24px;margin: 12px 0;">{{jd.takeBeginTime}}<br>{{jd.takeEndTime}}</span>
+								<span class="pro-li-span  pro-li-span2" v-if='jd.takeRule==3'>每人限 {{jd.takeNum}} 张</span>
+								<span class="pro-li-span  pro-li-span2" v-if='jd.takeRule==4'>每天限领一张</span>
+								<span class="pro-li-span  pro-li-span2" v-if='jd.takeRule==5'>限领一张</span>
+								<!-- <span class="pro-li-span">
+									<router-link to='#'>
+										<span class="bianji" @click.self='updata' v-bind:data-id='pro.id'></span>
+									</router-link>
+									<a href="javascript:void(0)">
+										<span class="shanchu" @click.self='mengban2' v-bind:data-id='pro.id'></span>
+									</a>
+								</span> -->
+<!-- 								<span class="pro-li-span">
+			                      <span title="删除" class="shanchu" v-bind:data-id='jd.couponId' @click='mengban3'></span>
+
+			                    </span> -->
+							</li>
+						</ul>
+					</div>
 				</div>
 				<div class="page-button">
 					<div class="page-num">
@@ -216,7 +258,7 @@
 				return{
 					childCon:'我是子页面',
 			        chechednum:0,    //全选单选控制
-			        proInfo:[],      //信息数组
+			        proInfo:null,      //信息数组
 			        totalPage:[],    //页码数组
 			        resData:[],      //请求回的所有数据
 			        showMB:false,    //蒙版开关
@@ -241,7 +283,8 @@
 	        		mchIdWxd:null,
 	        		apiKeyWxd:null,
 	        		connectwx:false,
-	        		updatewx:false
+	        		updatewx:false,
+	        		jdList:null
 		    	}
 			},
 		props:['vendorId'],
@@ -257,17 +300,31 @@
 					currentPage:currentPage
 				};
 				var success=function(res){
-					//console.log(res)
-					var pagenum=res.totalPages;
-					self.totalPage=[];
-					self.resData=res;
-					self.proInfo=res.result.data;
-					self.totalPages=res.totalPages;
-					self.currentPage=res.currentPage;
-					self.getPage();
+					if(res.result.data.length!=0){
+						var pagenum=res.totalPages;
+						self.totalPage=[];
+						self.resData=res;
+						self.proInfo=res.result.data;
+						self.totalPages=res.totalPages;
+						self.currentPage=res.currentPage;
+						self.getPage();
+					}
 				}
 		        //调用ajax
 		        common.Ajax(url,type,data,success)
+		        $.ajax({
+		        	url:'https://ym-a.top/cloud_code/GET/JDCoupon/getJDCouponList.do',
+		        	type:'post',
+		        	data:{vendorId:self.vendorId},
+		        	dataType:'json',
+		        	success:function(res){
+		        		if($.isEmptyObject(res)){
+		        			self.jdList=null
+		        		}else{	
+		        			self.jdList=res.data;
+		        		}
+		        	}
+		        })
 		    },
 
 
@@ -455,6 +512,11 @@
 					}
 				})
 			},
+			// 查询微信小店关联信息
+			jdbind:function(){
+				var self=this;
+				window.location.href=`https://auth.360buy.com/oauth/authorize?response_type=code&client_id=10BA26253A1DC058653DB0EC06069639&redirect_uri=https://ym-a.top/cloud_code/GET/JDCoupon/getAccessTokenByCode.do&state=${self.vendorId}`;
+			},
 			//隐藏蒙版
 			hide:function(){
 				this.showMB=false;
@@ -502,6 +564,12 @@
 	/*@import "../../assets/css/common.css";*/
 	.pro-li-span{
 		width: 16%;
+	}
+	.pro-li-span1{
+		width: 5%;
+	}
+	.pro-li-span2{
+		width: 12%;
 	}
 	.top-title{
 		width: 95%;

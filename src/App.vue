@@ -616,6 +616,16 @@
 .totaldel:hover{
   background: url(./assets/img/icon_chedishanchu2.png);
 }
+.beizhu{
+  width: 20px;
+  height: 19px;
+  display: inline-block;
+  background: url(./assets/img/icon_beizhu.png);
+  vertical-align: middle;
+}
+.beizhu:hover{
+  background: url(./assets/img/icon_beizhu2.png);
+}
 .bianji2{
   width: 19px;
   height: 20px;
@@ -782,6 +792,7 @@
     padding: 0 20px;
     box-sizing: border-box;
     position: relative;
+    border-radius: 10px;
   }
   .classifyFooter{
     width: 100%;
@@ -802,6 +813,7 @@
     left: 50%;
     margin-left: -210px;
     margin-top: -125px;
+    border-radius: 10px;
   }
   .warnmain{
     position: relative;

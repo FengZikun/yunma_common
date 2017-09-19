@@ -73,7 +73,7 @@
 				<div class="phbox">
 					<img v-if='imgSrcA!=null' class="photo1" v-bind:src="'https://ym-a.top'+imgSrcA"></img>
 					<span v-else class='photo' v-bind:style="{backgroundImage: imgSrcA}"></span>
-					<p class="p">客户证书</p>
+					<p class="p">客户资质证书</p>
 				</div>
 				<div class="phbox">
 					<img v-if='imgSrcB!=null' class="photo1" v-bind:src="'https://ym-a.top'+imgSrcB"></img>

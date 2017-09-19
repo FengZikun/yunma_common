@@ -1,60 +1,38 @@
 <template>
 	<div>
-		<div class="mengban" v-show='showWarn'>
-			<div class="warn">
-				<div class="classifyHeader">
-					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
-				</div>
-				<div class="warnmain">
-					{{warnText}}
-				</div>
-				<div class="warnbottom">
-					<input class="delbutton" type="button" name="" value="确定" @click='delThis'>
-					<input class="delbutton" type="button" name="" value="取消" @click='showWarn=false'>
-				</div>
-			</div>
-		</div>
 		<div class="top-title">
-			<a href="javascript:void(0)" class='title-one'>积分获取规则</a>
+			<router-link to='/twoCode/signIn' class='title-two'>积分获取规则</router-link>
 			<router-link to='/twoCode/IntegralUseRule' class='title-two'>积分使用规则</router-link>
-			<router-link to='/twoCode/userInfomation' class='title-two'>用户信息</router-link>
+			<router-link to='/twoCode/userInfomation' class='title-one'>用户信息</router-link>
 			<router-link to='/twoCode/exchange' class='title-two'>兑换记录</router-link>
 		</div>
 		<div class="right-main">
 			<div class="right-main-bottom">
+				<p class="right-main-top1">
+					<span class="right-main-top-icon1"></span>
+					<span class="after">查看用户积分信息，可以输入关键字搜索</span>
+				</p>
 				<div class="button-group">
-					<a href="javascript:void(0)" @click='addRule'>
-						<div class="add-pro">
-							+新建积分获取规则
-						</div>
-					</a>
+					<input class="message-value" placeholder="请输入用户名" type="text" name="">
+					<input class="search-button" type="button" name="" value="搜索">
 				</div>
 				<div class="my-form">
 					<ul class="pro-list">
 						<li class="pro-li">
-							<span class="pro-li-span">规则ID</span>
-							<span class="pro-li-span">规则名称</span>
-							<span class="pro-li-span">绑定产品/订单ID</span>
-							<span class="pro-li-span">状态</span>
-							<span class="pro-li-span">积分方式</span>
-							<span class="pro-li-span">兑换次数</span>
-							<span class="pro-li-span">有效时间</span>
-							<span class="pro-li-span">创建时间</span>
+							<span class="pro-li-span">参与者ID</span>
+							<span class="pro-li-span">微信昵称</span>
+							<span class="pro-li-span">已累计积分</span>
+							<span class="pro-li-span">手机号码</span>
+							<span class="pro-li-span">收货地址</span>
 							<span class="pro-li-span">操作</span>
 						</li>
 						<li class="pro-li" v-for='item in list'>
-							<span class="pro-li-span">{{item.inteRuleId}}</span>
-							<span class="pro-li-span">{{item.ruleName}}</span>
-							<span class="pro-li-span">{{item.productId}}</span>
-							<span class="pro-li-span">{{item.isUseing}}</span>
-							<span class="pro-li-span">{{item.ruleType}}</span>
-							<span class="pro-li-span">{{item.eveGetExchangesCount}}</span>
-							<span class="pro-li-span">{{item.expireTime}}</span>
-							<span class="pro-li-span">{{item.createTime}}</span>
-							<span class="pro-li-span">
-								<span class="bianji" @click='compile(item.inteRuleId)'></span>
-								<span class="shanchu" @click='delInfo(item.inteRuleId)'></span>
-							</span>
+							<span class="pro-li-span">{{item.playerId}}</span>
+							<span class="pro-li-span"><img style="width: 65px;height: 65px;" :src="item.headImgurl">{{item.nickName}}</span>
+							<span class="pro-li-span">{{item.integral}}</span>
+							<span class="pro-li-span">{{item.recipientPhone}}</span>
+							<span class="pro-li-span">{{item.address}}</span>
+							<span class="pro-li-span"><a href="javascript:void(0)" @click='getDetail(item.playerId)'>详情</a></span>
 						</li>
 					</ul>
 				</div>
@@ -89,20 +67,16 @@
 				totalPage:[],    //页码数组
 				currentPage:'',  //当前页
 				totalPages:'',    //总页数
-				showWarn:false,
-				warnText:null,
-				delId:null
 			}
 		},
 		props:['datas'],
 		methods:{
 			...mapMutations({
-				reset:'signIn/reset',
-				addNew:'signIn/addNew'
+				checkDetail:'userDetail/checkDetail'
 			}),
 			init(currentPage){
 				var self=this;
-				var url='https://ym-a.top/cloud_code/GET/vendorIntegral/vendorIntegralRuleList.do';
+				var url='https://project.ym-b.top/cloud_code/GET/vendorIntegral/vendorIntegralPlayerList.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -110,49 +84,17 @@
 					pageSize:10
 				};
 				var success=function(res){
-					console.log(res)
 					self.list=res.result.data;
 					self.totalPages=res.totalPages;
 					self.currentPage=res.currentPage;
 					self.getPage();
-				};
+				}
 				common.Ajax(url,type,data,success)
 			},
-
-			//编辑
-			compile(id){
-				this.reset(id);
-				router.push({path:'/twoCode/addIntegralRule'})
-			},
-
-			//新建规则
-			addRule(){
-				this.addNew();
-				router.push({path:'/twoCode/addIntegralRule'})
-			},
-
-			//删除
-			delInfo(id){
-				this.delId=id;
-				this.showWarn=true;
-				this.warnText='是否确定删除此规则？'
-			},
-
-			//确定删除
-			delThis(){
-				var self=this;
-				var url='http://192.168.1.106:8080/cloud_code/GET/vendorIntegral/deleteVendorIntegral.do';
-				var type='get';
-				var data={
-					vendorId:self.datas.vendorId,
-					inteRuleId:self.delId
-				};
-				var success=function(res){
-					if(res.errorCode===0){
-						self.showWarn=false;
-					}
-				};
-				common.Ajax(url,type,data,success)
+			//获取详情
+			getDetail(id){
+				this.checkDetail(id);
+				router.push({path:'/twoCode/userDetail'})
 			},
 			//获取页数
 			getPage:common.getPage,
@@ -191,6 +133,24 @@
 		margin-top: 40px;
 	}
 	.pro-li-span{
-		width: 10.5%;
+		width: 16%;
+	}
+	.right-main-top-icon1{
+		width: 18px;
+		height: 18px;
+		background: url("../../assets/img/icon_tishi.png") no-repeat;
+		float: left;
+		margin-right: 8px;
+	}
+	.after{
+		display: inline-block;
+		color:#b3b3b7;
+	}
+	.right-main-top1{
+		margin-top: 40px;
+	}
+	.search-button{
+		width: 54px;
+		height: 30px;
 	}
 </style>

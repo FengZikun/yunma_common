@@ -67,6 +67,7 @@
 		<div class="main">
 			<div class="option" v-bind:class='{hasSelect:weidian}' @click='selectType'>微店优惠券</div>
 			<div class="option" v-bind:class='{hasSelect:weixin}' @click='selectType'>微信商户号优惠券</div>
+			<div class="option" v-bind:class='{hasSelect:jingdong}' @click='selectType'>京东优惠券</div>
 		</div>
 
 		<div class="bottom">
@@ -184,6 +185,92 @@
 				</div>
 			</div>
 		</div>
+	<div class="step5" v-show='step5'>
+		<div class="top">
+			<img src="../../assets/img/buzhou2.png">
+			<a href="javascript:void(0)"><span class="return" @click='toStep1'>返回</span></a>
+		</div>
+		<div class="main">
+			<div class="message-name title">
+				优惠券信息：
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">优惠券名称：</span>
+				<input class="message-value" type="" name="" v-model='name'>
+				<span class="message-after">（该优惠券名字会显示在大礼包页面，例：输入“蛋白粉”则显示“蛋白粉优惠券”）</span>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">优惠券类型：</span>
+				<input class="mid" type="radio" name="jdtype" id="a" v-model='typeArr' value="0">
+				<label class="mid" for="a">京券</label>
+				<input class="mid" type="radio" name="jdtype" id="b" v-model='typeArr' value="1">
+				<label class="mid" for="b">东券</label>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">优惠券面值：</span>
+				<input class="message-value" type="" name="" v-model='reduce' @input='jdcomparison'>
+				<span class="message-after">（设置优惠券的金额）</span>
+				<span class='message-warn' v-if='showWarn'>面值必须小于最低使用限额</span>
+			</div>
+			<div class="messagebox2" v-if='typeArr==1'>
+				<span class="message-name">最低使用限额：</span>
+				<input class="message-value" type="" name="" v-model='jdleastCost' @input='jdcomparison'>
+				<span class="message-after">（必须大于优惠券面值）</span>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">优惠券总数量：</span>
+				<input class="message-value" type="" name="" v-model='stock'>
+				<span class="message-after">（设置发放优惠券的总数量）</span>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">每人限领数量：</span>
+				<input class="mid" type="radio" name="jdrule" id="c" v-model='jdrule' value="5">
+				<label class="mid" for="c">限领一张</label>
+				<input class="mid" type="radio" name="jdrule" id="d" v-model='jdrule' value="4">
+				<label class="mid" for="d">每天限领一张</label>
+				<input class="mid" type="radio" name="jdrule" id="e" v-model='jdrule' value="3">
+				<label class="mid" for="e">自定义每天限领数量</label>
+				<input class="message-value" type="" name="" v-model='jdbuyerLimit' v-if='jdrule==3'>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">优惠券有效期：</span>
+				<input class="message-value short2" type="date" name="" v-model='beginTime'>
+				<span>至</span>
+				<input class="message-value short2" type="date" name="" v-model='endTime'>
+				<span class="message-after">（设置开始结束时间）</span>
+			</div>
+			<div class="messagebox2">
+				<span class="message-name">领券开始时间：</span>
+				<input class="message-value short2" type="date" name="" v-model='quanbeginTime'>
+				<span>至</span>
+				<input class="message-value short2" type="date" name="" v-model='quanendTime'>
+				<span class="message-after">（设置开始结束时间）</span>
+			</div>
+				<!-- <div class="messagebox2">
+					<span class="message-name">appKey：</span>
+					<input class="message-value" type="" name="">
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">secret：</span>
+					<input class="message-value" type="" name="">
+				</div>
+				<span class="right-main-top-icon1"></span>
+				<a href="javascript:void(0)" style="display: block;margin-left: 115px;" @click='showMB2=true'>如何获取appKey和secret</a> -->
+				<div class="messagebox">
+					<span class="message-name">在店铺中公开：</span>
+					<div v-bind:class='{turnOn:ifSwitch,turnOff:!ifSwitch}' @click='switchChange'>
+						<div class="cell"></div>
+					</div>
+<!-- 					<span class="message-name right">显示已领完的优惠券：</span>
+					<div v-bind:class='{turnOn:ifSwitch2,turnOff:!ifSwitch2}' @click='switchChange2'>
+						<div class="cell"></div>
+					</div> -->
+				</div>
+			</div>
+			<div class="bottom">
+				<input class="next" type="button" name="" value="发布" @click='jDconfirm'>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -196,8 +283,10 @@
 				step2:false,
 				step3:false,
 				step4:false,
+				step5:false,
 				weidian:false,
 				weixin:false,
+				jingdong:false,
 				ifSwitch:false,
 				openGet:0,
 				ifSwitch2:false,
@@ -208,13 +297,21 @@
 				stock:null,
 				buyerLimit:null,
 				beginTime:null,
-				endTime:null,
+				endTime:null,				
+				quanbeginTime:null,
+				quanendTime:null,
 				showWarn:false,
 				showMB2:false,
 				queren:false,
 				showWarn2:false,
 				warnText:null,
-				couponStockId:null
+				couponStockId:null,
+				jdUid:null,
+				typeArr:0,
+				jdrule:4,
+				jdbuyerLimit:1,
+				jdleastCost:0,
+				jdisplay:1
 			}
 		},
 		props:['vendorId'],
@@ -224,8 +321,15 @@
 				var self=this;
 				if($(event.target).text()=='微店优惠券'){
 					self.weidian=true;
+					self.jingdong=false;
 					self.weixin=false;
-				}else{
+				}else if($(event.target).text()=='京东优惠券'){
+					self.weidian=false;
+					self.weixin=false;
+					self.jingdong=true;
+				}
+				else{
+					self.jingdong=false;
 					self.weidian=false;
 					self.weixin=true;
 				}
@@ -252,6 +356,31 @@
 					self.reduce=null;
 					return
 				}
+				if(self.jingdong){
+					$.ajax({
+						url:'https://ym-a.top/cloud_code/GET/JDCoupon/isAccessTokenExpiresIn.do',
+						type:'post',
+						data:{vendorId:self.vendorId},
+						datatype:'json',
+						success:function(res){
+							if(res.status==1){
+								self.jdUid=res.jdUid;
+								self.step1=false;
+								self.step5=true;
+								self.leastCost=null;
+								self.buyerLimit=null;
+								self.name=null;
+								self.reduce=null;
+							}
+							else{
+								self.showWarn2=true;
+								self.warnText=res.msg;
+								return
+							}
+						},
+					})
+					return
+				}
 			},
 
 			//回到第一步
@@ -269,9 +398,11 @@
 				if(self.ifSwitch){
 					$('.cell').eq(0).css('margin-left','30px')
 					self.openGet=1;
+					self.jdisplay=3;
 
 				}else{
 					$('.cell').eq(0).css('margin-left','0')
+					self.jdisplay=1;
 					self.openGet=0;
 				}
 			},
@@ -303,7 +434,19 @@
 					self.showWarn=false;
 				}
 			},
-
+			//比较
+			jdcomparison:function(){
+				var self=this;
+				self.jdleastCost=self.jdleastCost.replace(/\D/g,'');
+				self.reduce=self.reduce.replace(/\D/g,'');
+				var leastCost=parseInt(self.jdleastCost);
+				var reduce=parseInt(self.reduce);
+				if(leastCost<=reduce){
+					self.showWarn=true;
+				}else{
+					self.showWarn=false;
+				}
+			},
 			//发布
 			confirm:function(){
 				var self=this;
@@ -468,7 +611,100 @@
 						};
 						common.Ajax(url,type,data,success)
 			},
+			//京东发布
+			jDconfirm:function(){
+				var self=this;
+				if(self.name===null){
+					self.showWarn2=true;
+					self.warnText="请输入优惠券名称";
+					return
+				}
+				if(self.typeArr==1&&self.jdleastCost===0){
+					self.showWarn2=true;
+					self.warnText="请输入最低使用限额";
+					return
+				}
+				if(self.reduce===null){
+					self.showWarn2=true;
+					self.warnText="请输入优惠券面值";
+					return
+				}
+				if(self.stock===null){
+					self.showWarn2=true;
+					self.warnText="请输入优惠券总数量";
+					return
+				}
+				// if(self.jdrule==3&&self.buyerLimit===1){
+				// 	self.showWarn2=true;
+				// 	self.warnText="请输入每人限领数量";
+				// 	return
+				// }
+				if(parseInt(self.buyerLimit)>=parseInt(self.stock)){
+					self.showWarn2=true;
+					self.warnText="限领数量必须小于总数量";
+					return
+				}
+				if(self.beginTime===null){
+					self.showWarn2=true;
+					self.warnText="请设置开始时间";
+					return
+				}
+				if(self.endTime===null){
+					self.showWarn2=true;
+					self.warnText="请设置结束时间";
+					return
+				}
+				if(self.quanbeginTime===null){
+					self.showWarn2=true;
+					self.warnText="请设置领券开始时间";
+					return
+				}
+				if(self.quanendTime===null){
+					self.showWarn2=true;
+					self.warnText="请设置领券结束时间";
+					return
+				}
+				var url='https://ym-a.top/cloud_code/ADD/JDCoupon/addJDCouponinfo.do'
+				var data={
+					vendorId:self.vendorId,
+					jdUid:self.jdUid,
+					display:self.jdisplay,
+					name:self.name,
+					type:self.typeArr,
+					bindType:1,
+					grantType:3,
+					num:self.stock,
+					discount:self.reduce,
+					quota:self.jdleastCost,
+					beginTime:self.beginTime+' 00:00:00',
+					endTime:self.endTime+' 00:00:00',
+					member:50,
+					takeBeginTime:self.quanbeginTime+' 00:00:00',
+					takeEndTime:self.quanendTime+' 00:00:00',
+					endTime:self.quanendTime+' 00:00:00',
+					takeRule:self.jdrule,
+					takeNum:self.jdbuyerLimit,
+					shareType:2
+				}
+				var type='post';
+				var success=function(res){
+					if(res.statuscode===1){
+						self.step2=false;
+						self.step4=true;
+					}else if(res.statuscode===-1){
+						self.showWarn2=true;
+						self.warnText=res.msg;
+					}
+				};
+				common.Ajax(url,type,data,success);
 
+				// if(self.queren){
+				// 	self.queren=false;
+				// }else{
+				// 	self.queren=true;
+				// }
+				
+			},
 			//返回第二阶段
 			comeBack:function(){
 				var self=this;

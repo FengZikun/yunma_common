@@ -10,6 +10,10 @@
 					<span>筛选时间：</span>
 					<input class="message-value" type="date" name="">
 					<input type="button" class="search-button" name="" value="搜索">
+					<div class="count">
+						<span>实付合计：￥</span>
+						<span v-if='resData!==null'>{{resData.sum}}</span>
+					</div>
 				</div>
 				<div class="my-form">
 					<ul class="pro-list">
@@ -30,7 +34,9 @@
 							<span class="pro-li-span">{{item.name}}</span>
 							<span class="pro-li-span">{{item.leastCost}}</span>
 							<span class="pro-li-span">{{item.reduce}}</span>
-							<span class="pro-li-span">{{item.realMoney}}</span>
+							<span class="pro-li-span">{{item.price}}</span>
+							<span class="pro-li-span">{{item.payTime}}</span>
+
 						</li>
 					</ul>
 				</div>
@@ -46,6 +52,8 @@
 		data(){
 			return{
 				list:null,
+				resData:null,
+
 			}
 		},
 		props:['vendorId'],
@@ -77,6 +85,7 @@
 				}
 				var success2=function(res){
 					console.log(res);
+					self.resData=res;
 					self.list=res.data;
 				};
 				common.Ajax(url2,type2,data2,success2)
@@ -102,5 +111,9 @@
 	    height: 30px;
 	    padding-left: 5px;
 	    border-radius: 5px;
+	}
+	.count{
+		display: inline-block;
+		float: right;
 	}
 </style>

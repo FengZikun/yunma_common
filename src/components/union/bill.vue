@@ -12,6 +12,10 @@
 					<span>至</span>
 					<input class="message-value" type="date" name="">
 					<input type="button" class="search-button" name="" value="搜索">
+					<div class="count">
+						<span>实付合计：￥</span>
+						<span v-if='resData!==null'>{{resData.sum}}</span>
+					</div>
 				</div>
 				<div class="my-form">
 					<ul class="pro-list">
@@ -32,7 +36,8 @@
 							<span class="pro-li-span">{{item.couponName}}</span>
 							<span class="pro-li-span">{{item.leastCost}}</span>
 							<span class="pro-li-span">{{item.reduce}}</span>
-							<span class="pro-li-span">{{item.realMoney}}</span>
+							<span class="pro-li-span">{{item.price}}</span>
+							<span class="pro-li-span">{{item.payTime}}</span>
 						</li>
 					</ul>
 				</div>
@@ -48,6 +53,7 @@
 		data(){
 			return{
 				list:null,
+				resData:null,
 			}
 		},
 		props:['vendorId'],
@@ -78,7 +84,8 @@
 				endTime:lastDay,
 			}
 			var success=function(res){
-				self.list=res.data
+				self.list=res.data;
+				self.resData=res;
 				console.log(res);
 			};
 			common.Ajax(url,type,data,success)
@@ -107,5 +114,9 @@
 	}
 	.button-group{
 		margin-top: 20px;
+	}
+	.count{
+		display: inline-block;
+		float: right;
 	}
 </style>

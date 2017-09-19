@@ -41,7 +41,21 @@
 						<option>定量红包</option>
 					</select>
 				</div> -->
-				<div class="messagebox">
+				<div class="messagebox" style="position:relative">
+					<span class="message-name">限制地区：</span>
+					<div id="mapContainer" v-show='false'></div>
+					<div id="tip">
+					    省：<select id='province' style="width:100px" @change='search'></select>
+					    市：<select id='city' style="width:100px" @change='search'></select>
+					    区：<select id='district' style="width:100px" @change='search'></select>
+					    <select id='street' style="width:100px" onchange= 'setCenter(this)' v-show='false'></select>
+					    <br>
+						<a href="javascript:void(0)" class="queding" @click='areacomplete'>确定</a>
+						<span style="margin-left:5px;color:#999;">已确定的区域</span><span style="margin-left:5px;" v-for="area in cityName">{{area}}</span>
+
+					</div>
+				</div>
+				<div class="messagebox" style="margin-top:58px">
 					<span class="message-name">红包层次：</span>
 					<select class="message-value" v-model='ruleLvel'>
 						<option>1</option>
@@ -134,11 +148,174 @@
 				send_name:null,
 				wishing:null,
 				showWarn:false,
-				warnText:null
+				warnText:null,
+				map:null,
+				district:null,
+				polygons:[],
+				citycode:null,
+				adcode:[],
+				province:[],
+				province2:'',
+				city:[],
+				city2:'',
+				district2:[],
+				district3:'',
+				temp:'',
+				citySelect:null,
+				districtSelect:null,
+				areaSelect:null,
+				citySelect:null,
+				initData:null,
+				cityN:'',
+				cityName:[],
+			}
+		},
+		watch:{
+			citycode:function(){
+				console.log(this.citycode)
 			}
 		},
 		props:['datas'],
 		methods:{
+      		init:function(){
+      			var self=this;
+      			$.getScript('https://webapi.amap.com/maps?v=1.4.0&key=7dea085abd95f70637b9359db6780585&plugin=AMap.DistrictSearch',self.area)
+      			$.getScript('https://webapi.amap.com/demos/js/liteToolbar.js');
+      		},
+      		// 省市区
+      		area:function(){
+      			var self=this;
+              	var AMap=require('AMap');
+              	// console.log(AMap)
+			    self.citySelect = document.getElementById('city');
+			    self.districtSelect = document.getElementById('district');
+			    self.areaSelect = document.getElementById('street');
+			    self.map = new AMap.Map('mapContainer', {
+			        resizeEnable: true,
+			        center: [116.30946, 39.937629],
+			        zoom: 3
+			    });
+			    AMap.service('AMap.DistrictSearch',function(){//回调函数
+				    //实例化DistrictSearch
+				    self.district = new AMap.DistrictSearch({
+					        level : 1,   //返回下一级行政区
+					        subdistrict :false  //最后一级返回街道信息  
+						});
+				    //TODO: 使用districtSearch对象调用行政区查询的功能
+				    self.district.search('中国', function(status, result) {
+				        if(status=='complete'){
+				        	self.initData=result.districtList[0];
+				            self.getData(result.districtList[0]);
+				        }
+				    });
+				})
+			},
+			areacomplete:function(){
+				var self=this;
+				self.adcode.push(self.citycode);
+				self.province.push(self.province2);
+				self.city.push(self.city2);
+				self.district2.push(self.district3);
+				self.cityName.push(self.cityN);
+				self.cityN='';
+				self.polygons=[];
+				document.getElementById('province').innerHTML='';
+				self.getData(self.initData,'province');
+			},
+			    //注意：需要使用插件同步下发功能才能这样直接使用
+			getData:function(data,level) {
+				var self=this;
+				// console.log(data)
+		        var bounds = data.boundaries;
+		        if (bounds) {
+		            for (var i = 0, l = bounds.length; i < l; i++) {
+		                var polygon = new AMap.Polygon({
+		                    map: self.map,
+		                    strokeWeight: 1,
+		                    strokeColor: '#CC66CC',
+		                    fillColor: '#CCF3FF',
+		                    fillOpacity: 0.5,
+		                    path: bounds[i]
+		                });
+		                // console.log(polygon);
+		                self.polygons.push(polygon);
+		            }
+		            self.map.setFitView();//地图自适应
+		        }
+		       
+		       
+		        
+		        //清空下一级别的下拉列表
+		        if (level === 'province') {
+		            self.citySelect.innerHTML = '';
+		            self.districtSelect.innerHTML = '';
+		            self.areaSelect.innerHTML = '';
+		        } else if (level === 'city') {
+		            self.districtSelect.innerHTML = '';
+		            self.areaSelect.innerHTML = '';
+		        } else if (level === 'district') {
+		            self.areaSelect.innerHTML = '';
+		        }
+
+		        var subList = data.districtList;
+		        // console.log(data.districtList)
+		        if (subList) {
+		            var contentSub = new Option('--请选择--');
+		            var curlevel = subList[0].level;
+		            var curList =  document.querySelector('#' + curlevel);
+		            curList.add(contentSub);
+		            for (var i = 0, l = subList.length; i < l; i++) {
+		                var name = subList[i].name;
+		                var levelSub = subList[i].level;
+		                // self.cityCode = subList[i].citycode;
+		                // console.log(self.citycode);
+		                contentSub = new Option(name);
+		                contentSub.setAttribute("value", levelSub);
+		                contentSub.center = subList[i].center;
+		                contentSub.adcode = subList[i].adcode;
+		                curList.add(contentSub);
+		            }
+		        }
+		    },
+		    search:function(obj) {
+		    	var self=this;
+		    	obj=obj.target;
+		        //清除地图上所有覆盖物
+		        for (var i = 0, l =  self.polygons.length; i < l; i++) {
+		            self.polygons[i].setMap(null);
+		        }
+		        var option = obj[obj.options.selectedIndex];
+		        var keyword = option.text; //关键字
+		        var adcode = option.adcode;
+		        self.district.setLevel(option.value); //行政区级别
+		        self.district.setExtensions('all');
+		        //行政区查询
+		        //按照adcode进行查询可以保证数据返回的唯一性
+		        self.temp=keyword;
+		        self.district.search(adcode, function(status, result) {
+		        	if(result.districtList[0].districtList[0].level=='city'){
+		        		self.province2=self.temp;
+		        		self.cityN=self.temp;
+		        		self.temp='';
+		        	}else if(result.districtList[0].districtList[0].level=='district'){
+		        		self.city2=self.temp;
+		        		self.cityN+=self.temp;
+		        		self.temp='';
+
+		        	}else if(result.districtList[0].districtList[0].level=='street'){
+		        		self.district3=self.temp;
+		        		self.cityN+=self.temp;
+		        		self.temp='';
+
+		        	}
+		        	self.citycode=result.districtList[0].adcode;
+		        	// self.cityN+=result.districtList[0].name;
+		        	console.log(result);
+		            if(status === 'complete'){
+		                self.getData(result.districtList[0],obj.id);
+		            }
+		        });
+		    },
 			//提交
 			confirm:function(){
 				var self=this;
@@ -152,7 +329,7 @@
 					self.warnText="请选择红包层次";
 					return
 				}
-				var url='https://ym-a.top/cloud_code/ADD/redEnv/rule.do';
+				var url='http://192.168.1.108:8080/cloud_code/ADD/redEnv/rule.do';
 				var type='post';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -174,18 +351,25 @@
 					fiveMinMoney:self.fiveMinMoney,
 					fiveMaxMoney:self.fiveMaxMoney,
 					send_name:self.send_name,
-					wishing:self.wishing
+					wishing:self.wishing,
+					adcode:self.adcode,
+					province:self.province,
+					city:self.city,
+					district:self.district2
 				};
 
 				var success=function(res){
 					if(res.statuscode===1){
 						router.push({path:'rule'});
 					}
-
 				};
 				common.Ajax(url,type,data,success)
-			}
-		}
+			},
+
+		},
+	    mounted:function(){
+		      this.init();
+		    },
 	}
 </script>
 
@@ -323,4 +507,39 @@
 		margin-left: 30px;
 		vertical-align: top;
 	}
+	#mapContainer{
+		width: 60%;
+		height: 500px
+	}
+    #tip {
+        background-color: #fff;
+        padding:0 10px;
+        border-radius: 5px;
+    	border: 1px solid #e7e7eb;
+        position: absolute;
+        font-size: 12px;
+        left: 148px;
+        top: -9px;
+        border-radius: 3px;
+        line-height: 36px;
+    }
+    #tip>select{
+        border-radius: 5px;
+   		border: 1px solid #e7e7eb;
+    }
+    .queding{
+    	text-align: center;
+    	text-decoration: none;
+    	display: inline-block;
+    	width: 40px;
+    	line-height: 20px;
+	    color: #00baff;
+	    border: 1px solid #00baff;
+	    -webkit-appearance: none;
+	    -moz-appearance: none;
+	    appearance: none;
+	    background-color: #fff;
+	    outline: none;
+	    border-radius: 3px;
+    }
 </style>

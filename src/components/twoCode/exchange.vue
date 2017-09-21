@@ -97,7 +97,7 @@ export default{
 			}),
 			init(currentPage){
 				var self=this;
-				var url='http://192.168.1.106:8080/cloud_code/GET/vendorIntegral/getExchangeHistoryInfoList.do';
+				var url='https://ym-a.top/cloud_code/GET/vendorIntegral/getExchangeHistoryInfoList.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -129,7 +129,7 @@ export default{
 			//备注
 			commit(){
 				var self=this;
-				var url='http://192.168.1.106:8080/cloud_code/POST/vendorIntegral/updateVendorIntegralPlayer.do';
+				var url='https://ym-a.top/cloud_code/POST/vendorIntegral/updateVendorIntegralPlayer.do';
 				var type='post';
 				var data={
 					vendorId:self.datas.vendorId,

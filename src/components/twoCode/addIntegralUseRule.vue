@@ -66,7 +66,7 @@
 						<span class="pro-li-span">更新时间</span>
 					</li>
 					<li class="pro-li" v-for='item in gifts'>
-						<span class="pro-li-span first" v-bind:data-id='item.id'><span class="check-box checkshu" @click='selectThis' style="margin-left:10%;margin-right:5%;"></span><span style="display: inline-block;vertical-align: middle;overflow: hidden"><img style="width:45px;margin-left:20px;" v-bind:src="'https://project.ym-b.top'+item.presentImg">{{item.presentName}}</span></span>
+						<span class="pro-li-span first" v-bind:data-id='item.id'><span class="check-box checkshu" @click='selectThis' style="margin-left:10%;margin-right:5%;"></span><span style="display: inline-block;vertical-align: middle;overflow: hidden"><img style="width:45px;margin-left:20px;" v-bind:src="'https://ym-a.top'+item.presentImg">{{item.presentName}}</span></span>
 						<span class="pro-li-span">{{item.rowName}}</span>
 						<span class="pro-li-span">{{item.presentPrice}}</span>
 						<span class="pro-li-span">{{item.lastUpdateTime}}</span>
@@ -186,7 +186,7 @@ export default{
 			star(){
 				var self=this;
 				if(!self.isNew){
-					var url='https://project.ym-b.top/cloud_code/GET/vendorIntegral/getVendorSingleIntegralExchange.do';
+					var url='https://ym-a.top/cloud_code/GET/vendorIntegral/getVendorSingleIntegralExchange.do';
 					var type='get';
 					var data={
 						vendorId:self.datas.vendorId,
@@ -211,7 +211,7 @@ export default{
 				self.showMB=true;
 				self.rule=true;
 				self.gift=false;
-				var url='https://project.ym-b.top/cloud_code/GET/vendorIntegral/vendorIntegralRuleList.do';
+				var url='https://ym-a.top/cloud_code/GET/vendorIntegral/vendorIntegralRuleList.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -240,7 +240,7 @@ export default{
 				self.showMB=true;
 				self.rule=false;
 				self.gift=true;
-				var url='https://project.ym-b.top/cloud_code/GET/product/present.do';
+				var url='https://ym-a.top/cloud_code/GET/product/present.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -294,7 +294,7 @@ export default{
 					return
 				}
 				if(!self.isNew){
-					var url='http://192.168.1.106:8080/cloud_code/GET/vendorIntegral/updateExchangesInfo.do';
+					var url='https://ym-a.top/cloud_code/GET/vendorIntegral/updateExchangesInfo.do';
 					var type='post';
 					var data={
 						ruleId:self.ruleId,
@@ -318,7 +318,7 @@ export default{
 					common.Ajax(url,type,data,success)
 					return
 				}
-				var url='https://project.ym-b.top/cloud_code/GET/vendorIntegral/addExchangesInfo.do';
+				var url='https://ym-a.top/cloud_code/GET/vendorIntegral/addExchangesInfo.do';
 				var type='post';
 				var data={
 					ruleId:self.ruleId,

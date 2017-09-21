@@ -8,10 +8,10 @@
 			<div class="right-main-bottom">
 				<div class="button-group">
 					<span>筛选时间：</span>
-					<input class="message-value" type="date" name="">
+					<input class="message-value" type="date" name="" v-model='startTime'>
 					<span>至</span>
-					<input class="message-value" type="date" name="">
-					<input type="button" class="search-button" name="" value="搜索">
+					<input class="message-value" type="date" name="" v-model='endTime' :max='maxDate'>
+					<input type="button" class="search-button" name="" value="搜索" @click='search'>
 					<div class="count">
 						<span>实付合计：￥</span>
 						<span v-if='resData!==null'>{{resData.sum}}</span>
@@ -54,6 +54,9 @@
 			return{
 				list:null,
 				resData:null,
+				startTime:null,
+				endTime:null,
+				maxDate:null
 			}
 		},
 		props:['vendorId'],
@@ -74,6 +77,8 @@
 				var firstDay = year + "-" + month + "-" + "01";
 				var myDate = new Date(year, month, 0);
 				var lastDay = year + "-" + month + "-" + myDate.getDate();
+				var thisMonth='0'+(parseInt(month)+1);
+				self.maxDate=year+'-'+thisMonth+'-'+(nowdays.getDate()-1);
 			//微信小店
 			var url='https://ym-a.top/cloud_code/wechatcouponorder/getBillV2.do';
 			var type='post';
@@ -82,6 +87,24 @@
 				type:5,
 				startTime:firstDay,
 				endTime:lastDay,
+			}
+			var success=function(res){
+				self.list=res.data;
+				self.resData=res;
+				console.log(res);
+			};
+			common.Ajax(url,type,data,success)
+		},
+
+		//搜索
+		search(){
+			var url='https://ym-a.top/cloud_code/wechatcouponorder/getBillV2.do';
+			var type='post';
+			var data={
+				vendorId:self.vendorId,
+				type:5,
+				startTime:startTime,
+				endTime:endTime,
 			}
 			var success=function(res){
 				self.list=res.data;

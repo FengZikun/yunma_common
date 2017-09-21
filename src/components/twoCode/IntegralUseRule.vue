@@ -102,7 +102,7 @@
 			}),
 			init(currentPage){
 				var self=this;
-				var url='https://project.ym-b.top/cloud_code/GET/vendorIntegral/vendorIntegralExchangesHistoryList.do';
+				var url='https://ym-a.top/cloud_code/GET/vendorIntegral/vendorIntegralExchangesHistoryList.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -134,7 +134,7 @@
 			//确定删除
 			delThis(){
 				var self=this;
-				var url='http://192.168.1.106:8080/cloud_code/GET/vendorIntegral/deleteExchangesInfo.do';
+				var url='https://ym-a.top/cloud_code/GET/vendorIntegral/deleteExchangesInfo.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,

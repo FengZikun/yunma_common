@@ -599,6 +599,13 @@
   background: url(./assets/img/icon_zanting-copy-3.png) no-repeat;
   vertical-align: middle;
 }
+.zanting2{
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url(./assets/img/icon_zanting_lan.png) no-repeat;
+  vertical-align: middle;
+}
 .qidong{
   width: 20px;
   height: 20px;

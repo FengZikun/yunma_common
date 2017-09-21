@@ -69,7 +69,7 @@
   .pro-li .pro-li-span:nth-of-type(6),
   .pro-li .pro-li-span:nth-of-type(7){
     height: 60px;
-    line-height: 30px;
+    line-height: 60px;
   }
   .top-title{
     width: 95%;
@@ -118,6 +118,7 @@
     position: absolute;
     z-index: 100;
     box-shadow: 0 0 50px rgba(175,186,203,0.23);
+    word-wrap: break-word;
   }
 </style>
 <script>

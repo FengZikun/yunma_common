@@ -46,7 +46,10 @@
 							<span class="pro-li-span">{{item.inteRuleId}}</span>
 							<span class="pro-li-span">{{item.ruleName}}</span>
 							<span class="pro-li-span">{{item.productId}}</span>
-							<span class="pro-li-span">{{item.isUseing}}</span>
+							<span class="pro-li-span">
+								<span v-if='item.isUseing===2' class="qidong" @click='changeState(item.inteRuleId)'></span>
+								<span v-if='item.isUseing===1' class="zanting2" @click='changeState(item.inteRuleId)'></span>
+							</span>
 							<span class="pro-li-span">{{item.ruleType}}</span>
 							<span class="pro-li-span">{{item.eveGetExchangesCount}}</span>
 							<span class="pro-li-span">{{item.expireTime}}</span>
@@ -79,13 +82,13 @@
 </template>
 
 <script type="text/javascript">
-	import common from '../../common.js'
-	import router from '../../router.js'
-	import {mapMutations} from 'vuex'
-	export default{
-		data(){
-			return{
-				list:null,
+import common from '../../common.js'
+import router from '../../router.js'
+import {mapMutations} from 'vuex'
+export default{
+	data(){
+		return{
+			list:null,
 				totalPage:[],    //页码数组
 				currentPage:'',  //当前页
 				totalPages:'',    //总页数
@@ -141,7 +144,7 @@
 			//确定删除
 			delThis(){
 				var self=this;
-				var url='http://192.168.1.106:8080/cloud_code/GET/vendorIntegral/deleteVendorIntegral.do';
+				var url='https://ym-a.top/cloud_code/GET/vendorIntegral/deleteVendorIntegral.do';
 				var type='get';
 				var data={
 					vendorId:self.datas.vendorId,
@@ -151,6 +154,21 @@
 					if(res.errorCode===0){
 						self.showWarn=false;
 					}
+				};
+				common.Ajax(url,type,data,success)
+			},
+
+			//改变规则状态
+			changeState(id){
+				var self=this;
+				var url='https://ym-a.top/cloud_code/GET/vendorIntegral/updateRuleStatus.do';
+				var type='get';
+				var data={
+					vendorId:self.datas.vendorId,
+					inteRuleId:id
+				};
+				var success=(res)=>{
+					console.log(res);
 				};
 				common.Ajax(url,type,data,success)
 			},
@@ -170,9 +188,9 @@
 			this.init();
 		}
 	}
-</script>
+	</script>
 
-<style scoped>
+	<style scoped>
 	.right-main-bottom{
 		width: 95%;
 		margin:auto;
@@ -193,4 +211,4 @@
 	.pro-li-span{
 		width: 10.5%;
 	}
-</style>
+	</style>

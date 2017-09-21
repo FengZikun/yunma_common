@@ -508,14 +508,11 @@ import router from '../../router.js'
           processData: false,
           contentType: false,
           success: function (res) {
-            //console.log(data);
             if(res.statuscode===1){
               router.push({path:'corporate'});
-              //console.log(data.get('imgIds'));
             }
           },
           error:function(res){
-            //console.log("error")
           }
         });
       },

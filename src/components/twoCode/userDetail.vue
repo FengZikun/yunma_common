@@ -206,7 +206,7 @@ export default{
     methods:{
       init(){
         var self=this;
-        var url='https://project.ym-b.top/cloud_code/GET/vendorIntegral/findPlayerByPlayerId.do';
+        var url='https://ym-a.top/cloud_code/GET/vendorIntegral/findPlayerByPlayerId.do';
         var type='get';
         var data={
           vendorId:self.datas.vendorId,

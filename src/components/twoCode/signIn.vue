@@ -42,7 +42,7 @@
 							<span class="pro-li-span">创建时间</span>
 							<span class="pro-li-span">操作</span>
 						</li>
-						<li class="pro-li" v-for='item in list'>
+						<li class="pro-li turn-off" v-for='item in list'>
 							<span class="pro-li-span">{{item.inteRuleId}}</span>
 							<span class="pro-li-span">{{item.ruleName}}</span>
 							<span class="pro-li-span">{{item.productId}}</span>
@@ -210,5 +210,8 @@ export default{
 	}
 	.pro-li-span{
 		width: 10.5%;
+	}
+	.turn-off{
+		color: #666;
 	}
 	</style>

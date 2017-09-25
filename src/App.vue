@@ -618,7 +618,7 @@
   height: 20px;
   display: inline-block;
   background: url(./assets/img/icon_chedishanchu.png);
-  vertical-align: middle;
+  vertical-align: middle; 
 }
 .totaldel:hover{
   background: url(./assets/img/icon_chedishanchu2.png);

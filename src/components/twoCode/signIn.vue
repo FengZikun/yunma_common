@@ -42,13 +42,13 @@
 							<span class="pro-li-span">创建时间</span>
 							<span class="pro-li-span">操作</span>
 						</li>
-						<li class="pro-li turn-off" v-for='item in list'>
+						<li class="pro-li" v-for='item in list' v-bind:class="{'turn-off':item.isUseing===1}">
 							<span class="pro-li-span">{{item.inteRuleId}}</span>
 							<span class="pro-li-span">{{item.ruleName}}</span>
 							<span class="pro-li-span">{{item.productId}}</span>
 							<span class="pro-li-span">
-								<span v-if='item.isUseing===2' class="qidong" @click='changeState(item.inteRuleId)'></span>
-								<span v-if='item.isUseing===1' class="zanting2" @click='changeState(item.inteRuleId)'></span>
+								<span v-if='item.isUseing===1' class="qidong" @click='changeState(item.inteRuleId)'></span>
+								<span v-if='item.isUseing===2' class="zanting2" @click='changeState(item.inteRuleId)'></span>
 							</span>
 							<span class="pro-li-span">{{item.ruleType}}</span>
 							<span class="pro-li-span">{{item.eveGetExchangesCount}}</span>
@@ -168,7 +168,7 @@ export default{
 					inteRuleId:id
 				};
 				var success=(res)=>{
-					console.log(res);
+					self.init(self.currentPage);
 				};
 				common.Ajax(url,type,data,success)
 			},
@@ -212,6 +212,6 @@ export default{
 		width: 10.5%;
 	}
 	.turn-off{
-		color: #666;
+		color: #d0d0d0;
 	}
 	</style>

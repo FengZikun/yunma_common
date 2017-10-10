@@ -10,8 +10,8 @@
               </div>
 
               <ul class='goods_sub2 hidelist'>
-                <!-- <router-link tag='li' to="/union/coupon"><a>新建优惠券</a></router-link>
-                <router-link tag='li' to="/union/couponRule"><a>发放规则</a></router-link> -->
+                <router-link tag='li' to="/union/coupon" class='hidelist'><a>新建优惠券</a></router-link>
+                <router-link tag='li' to="/union/couponRule" class='hidelist'><a>发放规则</a></router-link>
                 <router-link tag='li' to="/union/bill"><a>企业账单</a></router-link>
               </ul>
             </li>

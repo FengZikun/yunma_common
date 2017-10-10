@@ -128,21 +128,7 @@ const routes = [
     {
       path:'addAdmin',
       component:addAdmin
-    },
-    {
-      path:'coupon',
-      component:coupon
-    },
-
-    {
-      path:'couponRule',
-      component:couponRule
-    },
-
-    {
-      path:'addCouponRule',
-      component:addCouponRule
-    },
+    }
     ]
   },
   {
@@ -421,6 +407,19 @@ const routes = [
     {
       path:'wdBill',
       component:wdBill
+    },
+    {
+      path:'couponRule',
+      component:couponRule
+    },
+
+    {
+      path:'addCouponRule',
+      component:addCouponRule
+    },
+    {
+      path:'coupon',
+      component:coupon
     }
     ]
   },

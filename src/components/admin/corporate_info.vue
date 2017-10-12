@@ -24,8 +24,10 @@
                     <span class="pro-li-span">联系方式</span>
                     <span class="pro-li-span">功能需求</span>
                     <span class="pro-li-span">邮箱</span>
-                    <span class="pro-li-span">官网/微商城/公众号</span>
+                    <!-- <span class="pro-li-span">官网/微商城/公众号</span> -->
                     <span class="pro-li-span">备注</span>
+                    <span class="pro-li-span">优惠券</span>
+                    <span class="pro-li-span">发放规则</span>
                     <span class="pro-li-span">查看更多</span>
                   </li>
                   <li class="pro-li" v-for="pro in proInfo">
@@ -35,8 +37,10 @@
                     <span class="pro-li-span">{{pro.customPhone}}</span>
                     <span class="pro-li-span">{{pro.functionType}}</span>
                     <span class="pro-li-span">{{pro.vendorEmail}}</span>
-                    <span class="pro-li-span" style="line-height: 24px;text-align:left;overflow: hidden;text-overflow: ellipsis;min-width: 100px;">官网：{{pro.link}}<br>微商城：{{pro.vendor_mall}}<br>公众号：{{pro.officialAccounts}}</span>
+                    <!-- <span class="pro-li-span" style="line-height: 24px;text-align:left;overflow: hidden;text-overflow: ellipsis;min-width: 100px;">官网：{{pro.link}}<br>微商城：{{pro.vendor_mall}}<br>公众号：{{pro.officialAccounts}}</span> -->
                     <span class="pro-li-span">{{pro.comment}}</span>
+                    <span class="pro-li-span"><a href="javascript:void(0)" @click='checkCoupon(pro.vendorId)'>查看</a></span>
+                    <span class="pro-li-span"><a href="javascript:void(0)" @click='checkCouponRule(pro.vendorId)'>查看</a></span>
                     <span class="pro-li-span"><a href='javascript:void(0)' @click='upVendorId' v-bind:data-id='pro.vendorId'>详情</a></span>
                   </li>
                 </ul>
@@ -69,7 +73,7 @@
 }
 .pro-li-span{
   text-align: center;
-  width: 13%;
+  width: 11%;
   vertical-align: top;
 }
 .pro-li{
@@ -116,6 +120,7 @@
 <script>
 import common from '../../common.js'
 import router from '../../router.js'
+import {mapMutations} from 'vuex'
   export default{
     data(){ 
       return{
@@ -129,6 +134,11 @@ import router from '../../router.js'
       }
     },
     methods:{
+
+      ...mapMutations({
+        getVendorId: 'vendorId/getVendorId'
+      }),
+
       //初始化
       init:function(currentPage){
         var self=this;
@@ -172,6 +182,18 @@ import router from '../../router.js'
         var id=$(event.target).attr('data-id');
         self.$emit('upId',id);
         router.push({path:'corporateDetail'})
+      },
+
+      //查看优惠券
+      checkCoupon(id){
+        this.getVendorId(id);
+        router.push({path:'/admin/coupon'})
+      },
+
+      //查看发放规则
+      checkCouponRule(id){
+        this.getVendorId(id);
+        router.push({path:'/admin/couponRule'})
       },
 
       //翻页

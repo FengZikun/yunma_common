@@ -8,7 +8,6 @@ const signIn={
 		reset(state,id){
 			state.isNew=false;
 			state.ruleId=id;
-			console.log(id)
 		},
 		addNew(state){
 			state.isNew=true;

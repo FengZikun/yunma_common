@@ -1,6 +1,10 @@
 *{
   font-family: 'Microsoft YaHei'!important;
 }
+body{
+  width: 100%;
+  overflow-x: hidden;
+}
   #app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -165,7 +169,9 @@
   height: 1617px;
 }
 .footer{
-  position: relative;
+  position: absolute;
+  bottom: 0px;
+  left: 20%;
 
 }
 .footer_p{

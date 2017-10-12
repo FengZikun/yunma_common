@@ -329,7 +329,7 @@
 					self.warnText="请选择红包层次";
 					return
 				}
-				var url='http://192.168.1.108:8080/cloud_code/ADD/redEnv/rule.do';
+				var url='https://ym-a.top/cloud_code/ADD/redEnv/rule.do';
 				var type='post';
 				var data={
 					vendorId:self.datas.vendorId,

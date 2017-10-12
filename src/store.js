@@ -7,6 +7,7 @@ import gameRule from './vuex/gameRule.js'
 import signIn from './vuex/signIn.js'
 import IntegralUseRule from './vuex/IntegralUseRule.js'
 import userDetail from './vuex/userDetail.js'
+import vendorId from './vuex/vendorId.js'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
 		signIn:signIn,
 		banner1:banner1,
 		IntegralUseRule:IntegralUseRule,
-		userDetail:userDetail
+		userDetail:userDetail,
+		vendorId:vendorId
 	}
 })
 

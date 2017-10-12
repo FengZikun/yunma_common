@@ -10,16 +10,16 @@
             </ul>
           </div>
 
-          <div class="right-main">
+          <!-- <div class="right-main">
           
-          </div>
+          </div> -->
             
-          <div class="right-bottom">
+          <!-- <div class="right-bottom">
             <p class="right-top-title">系统公告 <span class="gear"></span></p>
             <ul class="right-bottom-ul">
               <li class="right-bottom-li">群发信息使用教程</li>
             </ul>
-          </div>
+          </div> -->
           </div>
 </template>
 <style scoped>

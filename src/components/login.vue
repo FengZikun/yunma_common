@@ -13,7 +13,7 @@
       <div class="promessage">
         <span class="message-name star">密码：</span>
         <input class="message-value" type="password" name="" v-model='password' @blur='passwdTest'>
-        <p class="pswWarn hidelist">密码长度至少为8位</p>
+        <p class="pswWarn hidelist">密码长度为8~16位</p>
       </div>
       <div class="buttongroup">
         <input class="jumpbutton" type="button" name="" value="登录" @click='login'>
@@ -100,6 +100,7 @@
   import common from '../common.js'
   import md5 from 'js-md5'
   import router from '../router'
+  import {mapMutations} from 'vuex'
   let Base64 = require('js-base64').Base64;
 
   export default{
@@ -115,6 +116,11 @@
     },
     props:['datas'],
     methods:{
+
+      ...mapMutations({
+        getVendorId:'vendorId/getVendorId'
+      }),
+
       //判断登录状态
       init:function(){
         var self=this;
@@ -164,6 +170,7 @@
                 if(res.userType===99){
                   router.replace({path:'/admin'});
                 }else{
+                  self.getVendorId(self.vendorId);
                   router.replace({path:'/enterprise'});
                 }
               }else{
@@ -180,7 +187,7 @@
         //验证密码
         passwdTest:function(){
           var self=this;
-          var passwordReg=/^\d{8,16}$/;
+          var passwordReg=/^([0-9]|[a-zA-Z]){8,16}$/;
           if(!passwordReg.test(self.password)){
             $('.pswWarn').removeClass('hidelist');
           }else{

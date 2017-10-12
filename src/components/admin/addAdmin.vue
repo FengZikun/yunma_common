@@ -126,6 +126,7 @@
 			//新增管理员
 			addNew:function(){
 				var self=this;
+				var passwdReg=/^([0-9]|[a-zA-Z]){8,16}$/;
 				if(self.userName===null){
 					self.showWarn=true;
 					self.warnText='请输入用户名';
@@ -134,6 +135,11 @@
 				if(self.passwd===null){
 					self.showWarn=true;
 					self.warnText='请输入8~16位的密码';
+					return;
+				}
+				if(!passwdReg.test(self.passwd)){
+					self.showWarn=true;
+					self.warnText='密码不符合规范，请重新设置';
 					return;
 				}
 				if(self.vendorName===null){
@@ -196,7 +202,7 @@
 			//验证密码
 			checkInput:function(){
 				var self=this;
-				var passwdReg=/^\d{8}$/;
+				var passwdReg=/^([0-9]|[a-zA-Z]){8,16}$/;
 				if(!passwdReg.test(self.passwd)){
 					$(event.target).next().removeClass('hidelist');
 				}else{

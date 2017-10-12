@@ -61,7 +61,7 @@
 	<div class="step1" v-show='step1'>
 		<div class="top">
 			<img src="../../assets/img/buzhou1.png">
-			<span class="return"><router-link to='/union/coupon' style="text-decoration: none">返回</router-link></span>
+			<span class="return"><router-link to='/admin/coupon' style="text-decoration: none">返回</router-link></span>
 		</div>
 
 		<div class="main">
@@ -181,7 +181,7 @@
 			</div>
 			<div class="main">
 				<div class="bottom">
-					<router-link to='/union/coupon'><input class="next" type="button" name="" value="完成"></router-link>
+					<router-link to='/admin/coupon'><input class="next" type="button" name="" value="完成"></router-link>
 				</div>
 			</div>
 		</div>

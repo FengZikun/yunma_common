@@ -16,7 +16,7 @@
     <div class="row logo">
       <div class="col-md-3">
         <div class="img-responsive">
-          <router-link to="/enterprise"><img src="../assets/img/logofinalversion6.png"></router-link>
+          <router-link to="/admin/admingaikuang"><img src="../assets/img/logofinalversion6.png"></router-link>
           <!--<span class='logoR'>打造一流平台</span>-->
         </div>
       </div>

@@ -25,7 +25,7 @@
                 <span class='img img3'></span><a href="javascript:void(0)"><span>微信公众号信息</span></a>
               </div></router-link>
             </li>
-            <li class='goods_li_1'>
+            <!-- <li class='goods_li_1'>
               <div class="change_color" @click="showList">
                 <a href="javascript:void(0)"><span class='img img12'></span><span>企业优惠券</span><span class='arrow'></span></a>
               </div>
@@ -34,7 +34,7 @@
                 <router-link tag='li' to="/admin/coupon"><a>新建优惠券</a></router-link>
                 <router-link tag='li' to="/admin/couponRule"><a>发放规则</a></router-link>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>

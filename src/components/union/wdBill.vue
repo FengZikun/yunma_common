@@ -25,6 +25,7 @@
 							<span class="pro-li-span">最低消费</span>
 							<span class="pro-li-span">优惠金额</span>
 							<span class="pro-li-span">实付</span>
+							<span class="pro-li-span">状态</span>
 							<span class="pro-li-span">交易时间</span>
 						</li>
 						<li class="pro-li" v-for='item in list'>
@@ -35,6 +36,7 @@
 							<span class="pro-li-span">{{item.leastCost}}</span>
 							<span class="pro-li-span">{{item.reduce}}</span>
 							<span class="pro-li-span">{{item.price}}</span>
+							<span class="pro-li-span">{{item.status_ori}}</span>
 							<span class="pro-li-span">{{item.payTime}}</span>
 
 						</li>
@@ -74,7 +76,7 @@ export default{
 			var firstDay = year + "-" + month + "-" + "01";
 			var myDate = new Date(year, month, 0);
 			var lastDay = year + "-" + month + "-" + myDate.getDate();
-
+			self.searchMonth=year + "-" + month;
 				//微店
 				var url2='https://ym-a.top/cloud_code/wdcouponorder/getBill.do';
 				var type2='post';
@@ -82,6 +84,7 @@ export default{
 					vendorId:this.vendorId,
 					startTime:firstDay,
 					endTime:lastDay,
+					type:5
 				}
 				var success2=function(res){
 					console.log(res);
@@ -104,6 +107,7 @@ export default{
 				var data2={
 					vendorId:this.vendorId,
 					startTime:firstDay,
+					type:5,
 					endTime:lastDay,
 				}
 				var success2=function(res){
@@ -141,5 +145,8 @@ export default{
 }
 .button-group{
 	margin-top: 20px;
+}
+.pro-li-span{
+	width: 10.6%;
 }
 </style>

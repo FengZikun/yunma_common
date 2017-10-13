@@ -180,6 +180,7 @@ export default{
 .count{
 	display: inline-block;
 	float: right;
+	margin-right: 30px;
 }
 .button-group{
 	margin-top: 20px;

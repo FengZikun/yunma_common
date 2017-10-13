@@ -179,6 +179,8 @@ export default{
 .count{
 	display: inline-block;
 	float: right;
+	margin-right: 30px;
+	margin-top: 10px;
 }
 .button-group{
 	margin-top: 20px;

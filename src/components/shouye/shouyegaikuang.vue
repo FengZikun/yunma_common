@@ -48,21 +48,21 @@
                 <p>修改密码</p>
               </li>
               </router-link>
-              <router-link to='/union/newActivities'>
+              <!-- <router-link to='/union/newActivities'>
               <li class="right-main-li">
                 <img src="../../assets/img/icon_youhuiquan (2).png">
                 <p>新建优惠券</p>
               </li>
-              </router-link>
+              </router-link> -->
             </ul>
           </div>
             
-          <div class="right-bottom">
+          <!-- <div class="right-bottom">
             <p class="right-top-title">系统公告</p>
             <ul class="right-bottom-ul">
               <li class="right-bottom-li">群发信息使用教程</li>
             </ul>
-          </div>
+          </div> -->
 	</div>
 </template>
 

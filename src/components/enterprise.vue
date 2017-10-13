@@ -35,7 +35,7 @@
 
             <!-- <router-link tag='li' class="goods_li_1 goods_li" to="/enterprise/enterprise_news">
                 <span class='img img5'></span><a>消息中心</a>
-                <!-- <span class='arrow'></span> -->
+                <span class='arrow'></span> -->
             <!-- </router-link> -->
           </ul>
         </div>

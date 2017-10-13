@@ -137,13 +137,14 @@
                         orderId:this.orderId,
                         activityId:this.activityId,
                         userId:this.userId}"></router-view>
-          <div class='gongz'>
-            <p>版权所有©2017 深圳市云码互联数字技术有限公司 All Rights Reserved. 粤ICP备17040526号</p>
+          <div class="footer">
+            <p class="footer_p">
+              版权所有©2017 深圳市云码互联数字技术有限公司 All Rights Reserved. 粤ICP备17040526号
+            </p>
           </div>
         </div>
       </div>
     </div>
-    <div class='space3'></div>
   </div>
 </template>
 <style scoped>

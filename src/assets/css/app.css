@@ -154,6 +154,10 @@ body{
   background: url(../img/icon_gonggaolan.png) 15px 0 no-repeat;
   height: 25px;
 }
+.goods_menu li .img15 {
+  background: url(../img/icon_zhangdan.png) 20px 0 no-repeat;
+  height: 25px;
+}
 .rig {
   width: 100%;
   margin:0;

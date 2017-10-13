@@ -50,12 +50,14 @@ import admin from './components/admin.vue'
 import admingaikuang from './components/admin/admingaikuang.vue'
 import corporate from './components/admin/corporate_info.vue'
 import accountinfo from './components/admin/account_info.vue'
+import detailBill from './components/admin/detailBill.vue'
 import weixin from './components/admin/weixin.vue'
 import coupon from './components/admin/coupon.vue'
 import bulletinBoard from './components/union/bulletin_board.vue'
 import newActivities from './components/admin/new_activities.vue'
 import couponRule from './components/admin/couponRule.vue'
 import addCouponRule from './components/admin/addCouponRule.vue'
+import enterpriseBill from './components/admin/enterprise_bill.vue'
 import bill from './components/union/bill.vue'
 import wdBill from './components/union/wdBill.vue'
 import addOrder from './components/shouye/addOrder.vue'
@@ -145,6 +147,14 @@ const routes = [
     {
       path:'newActivities',
       component:newActivities
+    },
+    {
+      path:'enterpriseBill',
+      component:enterpriseBill
+    },
+    {
+      path:'detailBill',
+      component:detailBill
     },
     ]
   },

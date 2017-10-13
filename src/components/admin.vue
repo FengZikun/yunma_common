@@ -25,16 +25,16 @@
                 <span class='img img3'></span><a href="javascript:void(0)"><span>微信公众号信息</span></a>
               </div></router-link>
             </li>
-            <!-- <li class='goods_li_1'>
-              <div class="change_color" @click="showList">
-                <a href="javascript:void(0)"><span class='img img12'></span><span>企业优惠券</span><span class='arrow'></span></a>
-              </div>
+            <li class='goods_li_1'>
+              <router-link to="/admin/enterpriseBill"><div class="change_color">
+                <span class='img img15'></span><a href="javascript:void(0)"><span>企业账单</span></a>
+              </div></router-link>
 
-              <ul class='goods_sub2 hidelist'>
+              <!-- <ul class='goods_sub2 hidelist'>
                 <router-link tag='li' to="/admin/coupon"><a>新建优惠券</a></router-link>
                 <router-link tag='li' to="/admin/couponRule"><a>发放规则</a></router-link>
-              </ul>
-            </li> -->
+              </ul> -->
+            </li>
           </ul>
         </div>
       </div>

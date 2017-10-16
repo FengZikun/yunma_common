@@ -231,6 +231,7 @@ body{
   border-radius: 8px;
   border: 1px solid #e7ebee;
   margin-right: 10px;
+  padding-left: 10px;
 }
 .search-button{
   float: right;

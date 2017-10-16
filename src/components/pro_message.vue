@@ -62,10 +62,10 @@
               <span class="pro-li-span wordbreak">{{pro.lastUpdateTime}}</span>
               <span class="pro-li-span">
                 <router-link to='/goods/updataproduct'>
-                  <span class="bianji" @click.self='updata' v-bind:data-id='pro.id'></span>
+                  <span class="bianji" title="编辑" @click.self='updata' v-bind:data-id='pro.id'></span>
                 </router-link>
                 <a href="javascript:void(0)">
-                  <span class="shanchu" @click.self='mengban("single")' v-bind:data-id='pro.id'></span>
+                  <span class="shanchu" title="删除到回收站" @click.self='mengban("single")' v-bind:data-id='pro.id'></span>
                 </a>
               </span>
             </li>

@@ -63,10 +63,10 @@
                     <span class="pro-li-span wordbreak">{{pro.lastUpdateTime}}</span>
                     <span class="pro-li-span">
                       <a href="javascript:void(0)">
-                        <span class="huanyuan" @click.self='mengban2("single")' v-bind:data-id='pro.id'></span>
+                        <span class="huanyuan" title="还原" @click.self='mengban2("single")' v-bind:data-id='pro.id'></span>
                       </a>
                       <a href="javascript:void(0)">
-                        <span class="totaldel" @click.self='mengban("single")' v-bind:data-id='pro.id'></span>
+                        <span class="totaldel" title="彻底删除" @click.self='mengban("single")' v-bind:data-id='pro.id'></span>
                       </a>
                     </span>
                   </li>

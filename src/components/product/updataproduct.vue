@@ -149,17 +149,17 @@
 				</div>
 				<div class="promessage">
 					<span class="message-name">价格：</span>
-					<input class="message-value" type="text" name="" v-model='productPrice'>
+					<input class="message-value" type="number" name="" v-model='productPrice'>
 					<span class="message-danwei">元</span>
 				</div>
 				<div class="promessage">
 					<span class="message-name">市场定价：</span>
-					<input class="message-value" type="text" name="" v-model='productMarketPrice'>
+					<input class="message-value" type="number" name="" v-model='productMarketPrice'>
 					<span class="message-danwei danwei">元</span>
 				</div>
 				<div class="promessage">
 					<span class="message-name">总库存：</span>
-					<input class="message-value" type="text" name="" v-model='productTotal'>
+					<input class="message-value" type="number" name="" v-model='productTotal'>
 					<span class="message-danwei">件</span>
 				</div>
 				<div class="promessage">

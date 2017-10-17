@@ -9,6 +9,7 @@ import IntegralUseRule from './vuex/IntegralUseRule.js'
 import userDetail from './vuex/userDetail.js'
 import vendorId from './vuex/vendorId.js'
 import detailBill from './vuex/detailBill.js'
+import checkQualification from './vuex/checkQualification.js'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -21,7 +22,8 @@ const store = new Vuex.Store({
 		IntegralUseRule:IntegralUseRule,
 		userDetail:userDetail,
 		vendorId:vendorId,
-		detailBill:detailBill
+		detailBill:detailBill,
+		checkQualification:checkQualification
 	}
 })
 

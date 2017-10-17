@@ -53,6 +53,8 @@ import accountinfo from './components/admin/account_info.vue'
 import detailBill from './components/admin/detailBill.vue'
 import weixin from './components/admin/weixin.vue'
 import coupon from './components/admin/coupon.vue'
+import checkQualification from './components/admin/checkQualification.vue'
+import checkPending from './components/admin/checkPending.vue'
 import bulletinBoard from './components/union/bulletin_board.vue'
 import newActivities from './components/admin/new_activities.vue'
 import couponRule from './components/admin/couponRule.vue'
@@ -155,6 +157,14 @@ const routes = [
     {
       path:'detailBill',
       component:detailBill
+    },
+    {
+      path:'checkPending',
+      component:checkPending
+    },
+    {
+      path:'checkQualification',
+      component:checkQualification
     },
     ]
   },

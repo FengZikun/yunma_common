@@ -1,11 +1,15 @@
 const vendorId={
 	namespaced: true,
 	state:{
-		vendorId:null
+		vendorId:null,
+		checkComment:null
 	},
 	mutations:{
 		getVendorId(state,id){
 			state.vendorId=id;
+		},
+		getCheckComment(state,data){
+			state.checkComment=data;
 		}
 	}
 }

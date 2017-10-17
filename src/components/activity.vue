@@ -1,6 +1,6 @@
 <template>
   <div class="right-main">
-  <div class="mengban" v-show='showMB'>
+    <div class="mengban" v-show='showMB'>
       <div class="proclassify" >
         <div class="tishi">
           确定将活动删除吗？
@@ -9,61 +9,99 @@
         <input class="delbutton" type="button" name="" value="取消" @click='hide'>
       </div>
     </div>
-          <div class='right-main-top'>
-            <p class='right-main-top1'>
-              <span class='right-main-top-icon1'></span>
-              <span class='top_two'>创建扫码活动时，您可以根据需要设置扫码活动的主题、活动时间、活动3.4防伪码范围以及活动奖项等；</span>
-            </p>
-            <p class='right-main-top2'>
-              <span style="color:red">重要提示：</span><br>
-              <span>1、扫码活动创建成功后默认为禁用状态，请在列表中开启活动。</span><br>
-              <span>2、为保证活动正常进行，请确保相关的码批次为开启状态（在【基础设置】-【码批次管理】中开启码批次）</span><br>
-              <span>3、扫码活动开启后，当扫码记录为0时，可修改或删除整个活动；当扫码记录≥1时，被分配的活动码不能删除或修改，也不能参加其他活动，请谨慎操作！</span>
-            </p>
+    <div class="mengban" v-if='showRange'>
+      <div class="contentBox" style="width: 950px;margin-left: -475px;">
+        <div class="contentTop">
+          <span class="titleFont">详情</span>
+          <span class="cha" @click='showRange=false'></span>
+        </div>
+        <div class="contentMain">
+          <ul class="choosepro-main">
+            <li class="pro-li header">
+              <span class="pro-li-span" style="width: 7%">产品ID</span>
+              <span class="pro-li-span" style="width: 7%">产品名</span>
+              <span class="pro-li-span">产品库存</span>
+              <span class="pro-li-span" style="width: 8%">员工姓名</span>
+              <span class="pro-li-span" style="width: 18%">创建时间</span>
+              <span class="pro-li-span" style="width: 8%">工号</span>
+              <span class="pro-li-span">员工电话</span>
+              <span class="pro-li-span" style="width: 18%">员工身份证号码</span>
+              <span class="pro-li-span" style="width: 6%">操作</span>
+            </li>
+            <li class="pro-li">
+              <span class="pro-li-span" style="width: 7%">{{detailInfo.productId}}</span>
+              <span class="pro-li-span" style="width: 7%">{{detailInfo.productName}}</span>
+              <span class="pro-li-span">{{detailInfo.productCount}}</span>
+              <span class="pro-li-span" style="width: 8%">{{detailInfo.empName}}</span>
+              <span class="pro-li-span" style="width: 18%">{{detailInfo.createTime}}</span>
+              <span class="pro-li-span" style="width: 8%">{{detailInfo.workNum}}</span>
+              <span class="pro-li-span">{{detailInfo.empTel}}</span>
+              <span class="pro-li-span" style="width: 18%">{{detailInfo.empIdcard}}</span>
+              <span class="pro-li-span" style="width: 6%"><a href="javascript:void(0)" @click='delet(detailInfo.id)'>删除</a></span>
+            </li>
+          </ul>
+        </div>
+        <div class="contentBottom">
+          <input class="content-botton" type="button" name="" value="确定" @click='showDetail=false'>
+        </div>
+      </div>
+    </div>
+
+    <div class='right-main-top'>
+      <p class='right-main-top1'>
+        <span class='right-main-top-icon1'></span>
+        <span class='top_two'>创建扫码活动时，您可以根据需要设置扫码活动的主题、活动时间、活动3.4防伪码范围以及活动奖项等；</span>
+      </p>
+      <p class='right-main-top2'>
+        <span style="color:red">重要提示：</span><br>
+        <span>1、扫码活动创建成功后默认为禁用状态，请在列表中开启活动。</span><br>
+        <span>2、为保证活动正常进行，请确保相关的码批次为开启状态（在【基础设置】-【码批次管理】中开启码批次）</span><br>
+        <span>3、扫码活动开启后，当扫码记录为0时，可修改或删除整个活动；当扫码记录≥1时，被分配的活动码不能删除或修改，也不能参加其他活动，请谨慎操作！</span>
+      </p>
+    </div>
+    <div class="right-main-bottom">
+      <div class="button-group">
+        <a href="javascript:void(0)">
+          <div class="add-pro" @click='addActivity'>
+            +&nbsp;创建扫码活动
           </div>
-          <div class="right-main-bottom">
-              <div class="button-group">
-              <a href="javascript:void(0)">
-                <div class="add-pro" @click='addActivity'>
-                  +&nbsp;创建扫码活动
-                </div>
-                </a>
+        </a>
 <!--                 <input type="button" name="" class="search-button" value="搜索">
-                <input type="search" name="" class="search" placeholder="输入关键字"> -->
-              </div>
-              <div class="my-form">
-                <ul class="pro-list">
-                  <li class="pro-li">
-                    <span class="pro-li-span">ID</span>
-                    <span class="pro-li-span">扫码页名称</span>
-                    <span class="pro-li-span">起止时间</span>
-                    <span class="pro-li-span">状态</span>
-                    <span class="pro-li-span">订单范围</span>
-                    <span class="pro-li-span">功能需求</span>
-                    <span class="pro-li-span">备注</span>
-                    <span class="pro-li-span">操作</span>
-                  </li>
-                  <li class="pro-li" v-for='item in proInfo'>
-                    <span class="pro-li-span">{{item.id}}</span>
-                    <span class="pro-li-span">{{item.anti_fake_name}}</span>
-                    <span class="pro-li-span time">{{item.start_time}}<br>{{item.end_time}}</span>
-                    <span class="pro-li-span">
-                      <span v-if='item.activity_status==0' class="zanting" @click='changeStatus(item.activity_status,item.id)'></span>
-                      <span v-else class="qidong" @click='changeStatus(item.activity_status,item.id)'></span>
-                    </span>
-                    <span class="pro-li-span">
-                      <a href="javascript:void(0)">
-                      <span class="chakan" v-bind:data-order='item.orderId' @click='getOrderInfo'></span>
-                      </a>
-                    </span>
-                    <span class="pro-li-span time" style="white-space:pre-wrap;">
-                      <span v-if='item.vendorHttp!="false"'> 公司官网 </span><span v-if='item.securityAndTraceability==0'> 防伪 溯源 </span><span v-if='item.getRedEnv==0'> 红包 </span><span v-if='item.spree==0'> 大礼包 </span><span v-if='item.weShop!="false"'> 微商城 </span><span v-if='item.productInfo!="false"'> 产品简介 </span>
-                    </span>
-                    <span class="pro-li-span" v-bind:title="item.mark">{{item.mark}}</span>
-                    <span class="pro-li-span">
-                      <span title="编辑" class="bianji" v-bind:data-id='item.id' @click.self='revise'></span>
-                      <span title="删除" class="shanchu" v-bind:data-id='item.id' @click.self='mengban'></span>
-                      <span title="预览" class="chakan" v-bind:data-url='item.urlName' @click.self='showKuang($event)'></span>
+  <input type="search" name="" class="search" placeholder="输入关键字"> -->
+</div>
+<div class="my-form">
+  <ul class="pro-list">
+    <li class="pro-li">
+      <span class="pro-li-span">ID</span>
+      <span class="pro-li-span">扫码页名称</span>
+      <span class="pro-li-span">起止时间</span>
+      <span class="pro-li-span">状态</span>
+      <span class="pro-li-span">订单范围</span>
+      <span class="pro-li-span">功能需求</span>
+      <span class="pro-li-span">备注</span>
+      <span class="pro-li-span">操作</span>
+    </li>
+    <li class="pro-li" v-for='item in proInfo'>
+      <span class="pro-li-span">{{item.id}}</span>
+      <span class="pro-li-span">{{item.anti_fake_name}}</span>
+      <span class="pro-li-span time">{{item.start_time}}<br>{{item.end_time}}</span>
+      <span class="pro-li-span">
+        <span v-if='item.activity_status==0' class="zanting" @click='changeStatus(item.activity_status,item.id)'></span>
+        <span v-else class="qidong" @click='changeStatus(item.activity_status,item.id)'></span>
+      </span>
+      <span class="pro-li-span">
+        <a href="javascript:void(0)">
+          <span class="chakan" v-bind:data-order='item.orderId' @click='getOrderInfo'></span>
+        </a>
+      </span>
+      <span class="pro-li-span time" style="white-space:pre-wrap;">
+        <span v-if='item.vendorHttp!="false"'> 公司官网 </span><span v-if='item.securityAndTraceability==0'> 防伪 溯源 </span><span v-if='item.getRedEnv==0'> 红包 </span><span v-if='item.spree==0'> 大礼包 </span><span v-if='item.weShop!="false"'> 微商城 </span><span v-if='item.productInfo!="false"'> 产品简介 </span>
+      </span>
+      <span class="pro-li-span" v-bind:title="item.mark">{{item.mark}}</span>
+      <span class="pro-li-span">
+        <span title="编辑" class="bianji" v-bind:data-id='item.id' @click.self='revise'></span>
+        <span title="删除" class="shanchu" v-bind:data-id='item.id' @click.self='mengban'></span>
+        <span title="预览" class="chakan" v-bind:data-url='item.urlName' @click.self='showKuang($event)'></span>
                       <!-- <a href="javascript:void(0)"><img src="../assets/img/editHui.png" v-bind:data-id='item.id' @click='revise'></a>
                       <a href="javascript:void(0)"><img src="../assets/img/icon_chedishanchu.png" @click='mengban' v-bind:data-id='item.id'></a>
                       <a href="javascript:void(0)"><img src="../assets/img/icon_yulan.png" v-bind:data-url='item.urlName' @click='showKuang($event)'></a> -->
@@ -86,116 +124,116 @@
 
               </ul>
             </div>
-                <div class="modelBg modHid">
-                  <div class="modelContent">
-                    <div class="phoneHeader"></div>
-                    <div class="phoneTitle"></div>
-                    <img src="../assets/img/icon_cha3.png" class="cha3" @click="hideKuang">
-                    <iframe v-bind:src="frameSrc" width="349px" height="663px"></iframe>
-                  </div>
-                </div>
-  </div>
-</template>
-<style scoped>
-/*@import "../assets/css/common.css";*/
-.right-main-top{
-  width: 95%;
-  margin: auto;
-  padding-top: 60px;
-  text-align: left;
-}
-.right-main-top-icon1{
-  width: 18px;
-  height: 18px;
-  background: url("../assets/img/icon_tishi.png") no-repeat;
-  float: left;
-  margin-right: 8px;
-}
-.right-main-top2{
-  margin-left: 25px;
-  color: #b3b3b3;
-}
-.proclassify{
-  text-align: center;
-}
-.right-main-bottom{
-  width: 95%;
-  margin:auto;
-  text-align: left;
-}
-.pro-li-span:nth-of-type(2){
-  width: 12%;
-}
-.pro-li-span:nth-of-type(7){
-  width: 12%;
-  white-space: nowrap;
-}
-.time{
-  line-height: 26px;
-  overflow: hidden;
-  height: 52px;
-  margin: 10px 0;
-}
-.time:nth-of-type(2){
-  white-space:pre-wrap; 
-}
-  .modelBg{
-   position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2000;
-    background: rgba(0, 0, 0, 0.6);
-  }
-  .modelContent{
-     position: absolute;
-    left: 33%;
-    top: 5%;
-    width: 384px;
-    min-height: 708px;
-    background: #fff;
-    z-index: 2001;
-    font-size: 16px;
-    padding: 0 14px;
-    border: 1px solid #ededed;
-    border-radius: 15px;
-  }
-    .phoneHeader {
-    height: 75px;
-    width: 349px;
-    background: url(../assets/img/phoneHeader.png) no-repeat center center;
-  }
+            <div class="modelBg modHid">
+              <div class="modelContent">
+                <div class="phoneHeader"></div>
+                <div class="phoneTitle"></div>
+                <img src="../assets/img/icon_cha3.png" class="cha3" @click="hideKuang">
+                <iframe v-bind:src="frameSrc" width="349px" height="663px"></iframe>
+              </div>
+            </div>
+          </div>
+        </template>
+        <style scoped>
+        /*@import "../assets/css/common.css";*/
+        .right-main-top{
+          width: 95%;
+          margin: auto;
+          padding-top: 60px;
+          text-align: left;
+        }
+        .right-main-top-icon1{
+          width: 18px;
+          height: 18px;
+          background: url("../assets/img/icon_tishi.png") no-repeat;
+          float: left;
+          margin-right: 8px;
+        }
+        .right-main-top2{
+          margin-left: 25px;
+          color: #b3b3b3;
+        }
+        .proclassify{
+          text-align: center;
+        }
+        .right-main-bottom{
+          width: 95%;
+          margin:auto;
+          text-align: left;
+        }
+        .pro-li-span:nth-of-type(2){
+          width: 12%;
+        }
+        .pro-li-span:nth-of-type(7){
+          width: 12%;
+          white-space: nowrap;
+        }
+        .time{
+          line-height: 26px;
+          overflow: hidden;
+          height: 52px;
+          margin: 10px 0;
+        }
+        .time:nth-of-type(2){
+          white-space:pre-wrap; 
+        }
+        .modelBg{
+         position: fixed;
+         top: 0;
+         right: 0;
+         bottom: 0;
+         left: 0;
+         z-index: 2000;
+         background: rgba(0, 0, 0, 0.6);
+       }
+       .modelContent{
+         position: absolute;
+         left: 33%;
+         top: 5%;
+         width: 384px;
+         min-height: 708px;
+         background: #fff;
+         z-index: 2001;
+         font-size: 16px;
+         padding: 0 14px;
+         border: 1px solid #ededed;
+         border-radius: 15px;
+       }
+       .phoneHeader {
+        height: 75px;
+        width: 349px;
+        background: url(../assets/img/phoneHeader.png) no-repeat center center;
+      }
 
-  .phoneTitle {
-    height: 55px;
-    width: 349px;
-    border: 1px solid transparent;
-    padding-top: 1px;
-    background-image: url(../assets/img/phoneTitle.png);
-    background-size: cover;
-    position: relative;
-  }
-  .cha3{
-  position: absolute;
-  top: 2px;
-  right: -93px;
-}
-  .modHid{
-    display: none
-  }
-</style>
-<!--<script src='../assets/js/china.js'></script>-->
-<script>
-  import '../assets/js/echarts.js'
-  import '../assets/js/china.js'
-  import common from '../common.js'
-  import router from '../router.js'
-  import {mapMutations} from 'vuex'
-  export default{
-    data(){
-      return{
-        childCon:'我是子页面',
+      .phoneTitle {
+        height: 55px;
+        width: 349px;
+        border: 1px solid transparent;
+        padding-top: 1px;
+        background-image: url(../assets/img/phoneTitle.png);
+        background-size: cover;
+        position: relative;
+      }
+      .cha3{
+        position: absolute;
+        top: 2px;
+        right: -93px;
+      }
+      .modHid{
+        display: none
+      }
+      </style>
+      <!--<script src='../assets/js/china.js'></script>-->
+      <script>
+      import '../assets/js/echarts.js'
+      import '../assets/js/china.js'
+      import common from '../common.js'
+      import router from '../router.js'
+      import {mapMutations} from 'vuex'
+      export default{
+        data(){
+          return{
+            childCon:'我是子页面',
         totalPage:[],    //页码数组
         resData:[],      //请求回的所有数据
         currentPage:'',  //当前页
@@ -203,14 +241,16 @@
         proInfo:null,
         showMB:false,
         delinfo:null,
-        frameSrc:''
+        frameSrc:'',
+        showRange:false,
+        detailInfo:null,
       }
     },
     props:['datas'],
     methods:{
       ...mapMutations([
         'changeType'
-      ]),
+        ]),
       //初始化
       init:function(currentPage){
         var self=this;
@@ -278,6 +318,8 @@
         };
         var success=function(res){
           console.log(res);
+          self.detailInfo=res;
+          self.showRange=true;
         };
         common.Ajax(url,type,data,success)
       },
@@ -341,4 +383,4 @@
       this.init();
     }
   }
-</script>
+  </script>

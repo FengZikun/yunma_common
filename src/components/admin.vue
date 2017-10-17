@@ -35,6 +35,11 @@
                 <router-link tag='li' to="/admin/couponRule"><a>发放规则</a></router-link>
               </ul> -->
             </li>
+            <li class='goods_li_1'>
+              <router-link to="/admin/checkPending"><div class="change_color">
+                <span class='img img16'></span><a href="javascript:void(0)"><span>待审核</span></a>
+              </div></router-link>
+            </li>
           </ul>
         </div>
       </div>

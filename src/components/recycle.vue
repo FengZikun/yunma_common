@@ -39,7 +39,7 @@
                 </div>
               </router-link>
                 <input type="button" name="" class="search-button" value="搜索">
-                <input type="search" name="" class="search" placeholder="输入关键字">
+                <input type="search" name="" class="search" placeholder="输入关键字" v-model='keyword' @input='search'>
               </div>
               <div class="my-form">
                 <ul class="pro-list">
@@ -165,6 +165,7 @@ import common from '../common.js'
         currentPage:'',  //当前页
         totalPages:'',   //总页数
         huanyuanArr:[],
+        keyword:null
       }
     },
     props:['vendorId'],
@@ -238,6 +239,28 @@ import common from '../common.js'
         }
       },
 
+      //搜索
+      search:function(){
+        var self=this;
+        var url='https://ym-a.top/cloud_code/GET/product/info.do';
+        var type='post';
+        var data={
+          vendorId:self.vendorId,
+          deleteFlag:0,
+          keyword:self.keyword
+        };
+        var success=function(res){
+          var pagenum=res.totalPages;
+          self.totalPage=[];
+          self.resData=res;
+          self.proInfo=res.result.data;
+          self.totalPages=res.totalPages;
+          self.currentPage=res.currentPage;
+          self.getPage();
+        }
+        //调用ajax
+        common.Ajax(url,type,data,success)
+      },
       //显示删除蒙版
       mengban:function(type){
         this.showMB=true;

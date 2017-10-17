@@ -38,7 +38,6 @@
     methods:{
       logout:function(){
         var self=this;
-        
         self.vendorId=null;
         self.userType=null;
         self.userId=null;
@@ -48,7 +47,6 @@
       getvendorid:function(data){
         var self=this;
         sessionStorage.setItem('vendorName',data.vendorName);
-        console.log(data.vendorName)
         sessionStorage.setItem('userType',data.userType);
         sessionStorage.setItem('vendorId',data.vendorId);
         sessionStorage.setItem('userId',data.userId);

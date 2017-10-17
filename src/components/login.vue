@@ -118,7 +118,8 @@
     methods:{
 
       ...mapMutations({
-        getVendorId:'vendorId/getVendorId'
+        getVendorId:'vendorId/getVendorId',
+        getCheckComment:'vendorId/getCheckComment'
       }),
 
       //判断登录状态
@@ -169,9 +170,13 @@
                 self.isLogin=true;
                 if(res.userType===99){
                   router.replace({path:'/admin'});
-                }else{
+                }else if(res.userType===1){
                   self.getVendorId(self.vendorId);
                   router.replace({path:'/enterprise'});
+                }else if(res.userType===2){
+                  self.getVendorId(self.vendorId);
+                  router.replace({path:'/enterprise'});
+                  self.getCheckComment(res.checkComment);
                 }
               }else{
                 //console.log(res)

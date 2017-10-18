@@ -72,7 +72,7 @@
     height: 25px;
     vertical-align: middle;
     float: right;
-    background: url(../assets/img/icon_qiye_shezhi.png);
+    background: url(../../assets/img/icon_qiye_shezhi.png);
     background-size: cover;
   }
   .right-top p,
@@ -133,22 +133,22 @@
     line-height: 32px;
   }
   .right-top-li:nth-of-type(1){
-    background: url(../assets/img/png_1.png);
+    background: url(../../assets/img/png_1.png);
   }
   .right-top-li:nth-of-type(2){
-    background: url(../assets/img/png_2.png);
+    background: url(../../assets/img/png_2.png);
   }
   .right-top-li:nth-of-type(3){
-    background: url(../assets/img/png_3.png);
+    background: url(../../assets/img/png_3.png);
   }
   .right-top-li:nth-of-type(4){
-    background: url(../assets/img/png_4.png);
+    background: url(../../assets/img/png_4.png);
   }
   .right-top-li:nth-of-type(5){
-    background: url(../assets/img/png_5.png);
+    background: url(../../assets/img/png_5.png);
   }
   .right-top-li:nth-of-type(6){
-    background: url(../assets/img/png_6.png);
+    background: url(../../assets/img/png_6.png);
   }
   .pro-li:nth-of-type(1) .pro-li-span:nth-of-type(5):after{
     content: "";

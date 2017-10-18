@@ -1,29 +1,26 @@
 /**
  * Created by LUO on 2017/3/21.
  */
- import enterprise from './components/enterprise.vue'
+ import enterprise from './components/shouye/enterprise.vue'
  import child from './components/child.vue'
- import twoCode from './components/two_code.vue'
+ import twoCodeRouter from './routers/twoCode.js'
  import goods from './components/goods.vue'
  import user from './components/user.vue'
  import union from './components/union.vue'
  import mall from './components/mall.vue'
- import enterprise_order from './components/enterprise_order.vue'
- import enterprise_message from './components/enterprise_message.vue'
- import enterprise_cer from './components/enterprise_cer.vue'
- import enterprise_news from './components/enterprise_news.vue'
+ import enterprise_message from './components/shouye/enterprise_message.vue'
+ import enterprise_cer from './components/shouye/enterprise_cer.vue'
+ import enterprise_news from './components/shouye/enterprise_news.vue'
+ import shouyegaikuang from './components/shouye/shouyegaikuang.vue'
+ import complete from './components/shouye/complete.vue'
  import account from './components/account.vue'
  import trade from './components/trade.vue'
  import passward from './components/passward.vue'
  import revise from './components/revise.vue'
  import safety from './components/safety.vue'
  import en_public from './components/en_public.vue'
- import scan from './components/scan.vue'
- import activity from './components/activity.vue'
- import activitySu from './components/activitySu.vue'
  import setup from './components/setup.vue'
  import link from './components/link.vue'
- import channel from './components/twoCode/channel.vue'
  import material from './components/material.vue'
  import pro_message from './components/pro_message.vue'
  import recycle from './components/recycle.vue'
@@ -31,13 +28,6 @@
  import gift from './components/gift.vue'
  import gift_recy from './components/gift_recy.vue'
  import classify from './components/classify.vue'
- import gaikuang from './components/gaikuang.vue'
- import briefCode from './components/twoCode/briefCode.vue'
- import briefCodeSu from './components/twoCode/briefCodeSu.vue'
- import chosePage from './components/twoCode/chosePage.vue'
- import setupPage from './components/twoCode/setupPage.vue'
- import detailPage from './components/twoCode/detailPage.vue'
- import detailPage2 from './components/twoCode/detailPage2.vue'
  import progaikuang from './components/product/gaikuang.vue'
  import updataproduct from './components/product/updataproduct.vue'
  import proinfo from './components/product/proinfo.vue'
@@ -45,48 +35,11 @@
  import giftrecycle from './components/product/giftrecycle.vue'
  import updatagift from './components/product/updatagift.vue'
  import login from './components/login.vue'
-// import app from './App.vue'
-import admin from './components/admin.vue'
-import admingaikuang from './components/admin/admingaikuang.vue'
-import corporate from './components/admin/corporate_info.vue'
-import accountinfo from './components/admin/account_info.vue'
-import detailBill from './components/admin/detailBill.vue'
-import weixin from './components/admin/weixin.vue'
-import coupon from './components/admin/coupon.vue'
-import checkQualification from './components/admin/checkQualification.vue'
-import checkPending from './components/admin/checkPending.vue'
-import bulletinBoard from './components/union/bulletin_board.vue'
-import newActivities from './components/admin/new_activities.vue'
-import couponRule from './components/admin/couponRule.vue'
-import addCouponRule from './components/admin/addCouponRule.vue'
-import enterpriseBill from './components/admin/enterprise_bill.vue'
-import bill from './components/union/bill.vue'
-import wdBill from './components/union/wdBill.vue'
-import addOrder from './components/shouye/addOrder.vue'
-import shouyegaikuang from './components/shouye/shouyegaikuang.vue'
-import detail from './components/shouye/detail.vue'
-import hongbao from './components/twoCode/hongbao.vue'
-import addHB from './components/twoCode/addHB.vue'
-import rule from './components/twoCode/rule.vue'
-import addRule from './components/twoCode/addRule.vue'
-import addIntegralRule from './components/twoCode/addIntegralRule.vue'
-import IntegralUseRule from './components/twoCode/IntegralUseRule.vue'
-import addIntegralUseRule from './components/twoCode/addIntegralUseRule.vue'
-import userInfomation from './components/twoCode/userInfomation.vue'
-import corporateDetail from './components/admin/corporateDetail.vue'
-import addCorporate from './components/admin/addCorporate.vue'
-import addActivity from './components/twoCode/addActivity.vue'
-import analysis from './components/twoCode/analysis.vue'
-import signIn from './components/twoCode/signIn.vue'
-import addAdmin from './components/admin/addAdmin.vue'
-import sourceCode from './components/twoCode/sourceCode.vue'
-import game from './components/twoCode/game.vue'
-import gameRule from './components/twoCode/gameRule.vue'
-import exhibitors from './components/twoCode/exhibitors.vue'
-import addGame from './components/twoCode/addGame.vue'
-import addGameRule from './components/twoCode/addGameRule.vue'
-import userDetail from './components/twoCode/userDetail.vue'
-import exchange from './components/twoCode/exchange.vue'
+ import adminrouter from './routers/admin.js'
+ import bulletinBoard from './components/union/bulletin_board.vue'
+ import bill from './components/union/bill.vue'
+ import wdBill from './components/union/wdBill.vue'
+
 //编写路由集合
 const routes = [
 {
@@ -94,83 +47,16 @@ const routes = [
   redirect:'login'
 },
 {
-    path:'/login', //路由路径这里是根路径
-    component:login  //模板
+    path:'/login',
+    component:login
   },
-  {
-    path:'/admin', //路由路径这里是根路径
-    component:admin,  //模板
-    children:[
-    {
-      path:'',
-      component:admingaikuang
-    },
-    {
-      path:'admingaikuang',
-      component:admingaikuang
-    },
-    {
-      path:'corporate',
-      component:corporate
-    },
-    {
-      path:'accountinfo',
-      component:accountinfo
-    },
-    {
-      path:'weixin',
-      component:weixin
-    },
-    {
-      path:'corporateDetail',
-      component:corporateDetail
-    },
-    {
-      path:'addCorporate',
-      component:addCorporate
-    },
-    {
-      path:'addAdmin',
-      component:addAdmin
-    },
-    {
-      path:'couponRule',
-      component:couponRule
-    },
 
-    {
-      path:'addCouponRule',
-      component:addCouponRule
-    },
-    {
-      path:'coupon',
-      component:coupon
-    },
-    {
-      path:'newActivities',
-      component:newActivities
-    },
-    {
-      path:'enterpriseBill',
-      component:enterpriseBill
-    },
-    {
-      path:'detailBill',
-      component:detailBill
-    },
-    {
-      path:'checkPending',
-      component:checkPending
-    },
-    {
-      path:'checkQualification',
-      component:checkQualification
-    },
-    ]
-  },
+
+  adminrouter,
+
   {
-    path:'/enterprise', //路由路径这里是根路径
-    component:enterprise,  //模板
+    path:'/enterprise',
+    component:enterprise,
     children:[
     {
       path:'',
@@ -181,191 +67,55 @@ const routes = [
       component:shouyegaikuang
     },
     {
-      path:'enterprise_message', //路由路径这里是根路径
-      component:enterprise_message  //模板
+      path:'enterprise_message',
+      component:enterprise_message
     },
     {
-      path:'enterprise_cer', //路由路径这里是根路径
-      component:enterprise_cer  //模板
+      path:'enterprise_cer',
+      component:enterprise_cer
     },
     {
-      path:'en_public', //路由路径这里是根路径
-      component:en_public  //模板
+      path:'en_public',
+      component:en_public
     },
     {
-      path:'trade', //路由路径这里是根路径
-      component:trade  //模板
+      path:'trade',
+      component:trade
     },
     {
-      path:'safety', //路由路径这里是根路径
-      component:safety  //模板
+      path:'safety',
+      component:safety
     },
     {
-      path:'revise', //路由路径这里是根路径
-      component:revise  //模板
+      path:'revise',
+      component:revise
     },
     {
-      path:'enterprise_news', //路由路径这里是根路径
-      component:enterprise_news  //模板
+      path:'enterprise_news',
+      component:enterprise_news
     },
     {
-      path:'passward', //路由路径这里是根路径
-      component:passward  //模板
+      path:'passward',
+      component:passward
     },
     {
-      path:'account', //路由路径这里是根路径
-      component:account  //模板
+      path:'account',
+      component:account
+    },
+    {
+      path:'complete',
+      component:complete
     },
     ]
   },
   {
-    path:'/child', //路由路径这里是根路径
-    component:child  //模板
+    path:'/child',
+    component:child
   },
+  twoCodeRouter,
   {
-    path:'/twoCode',
-    component:twoCode,
-    children:[
-    {
-      path:'',
-      component:gaikuang
-    },
-    {
-      path:'gaikuang',
-      component:gaikuang
-    },
-    {
-      path:'briefCode',
-      component: briefCode
-    },
-    {
-      path:'briefCodeSu',
-      component: briefCodeSu
-    },
-    {
-      path:'setupPage',
-      component: setupPage},
-      {
-        path:'chosePage',
-        component:chosePage
-      },
-      {
-        path:'detailPage',
-        component:detailPage
-      },
-      {
-        path:'detailPage2',
-        component:detailPage2
-      },
-      {
-        path:'activity',
-        component:activity
-      },
-      {
-        path:'activitySu',
-        component:activitySu
-      },
-      {
-        path:'scan',
-        component:scan
-      },
-      {
-    path:'channel', //路由路径这里是根路径
-    component:channel  //模板
-  },
-  {
-    path:'hongbao',
-    component:hongbao
-  },
-  {
-    path:'addHB',
-    component:addHB
-  },
-  {
-    path:'rule',
-    component:rule
-  },
-  {
-    path:'addRule',
-    component:addRule
-  },
-  {
-    path:'enterprise_order', //路由路径这里是根路径
-    component:enterprise_order  //模板
-  },
-  {
-    path:'addOrder',
-    component:addOrder
-  },
-  {
-    path:'detail',
-    component:detail
-  },
-  {
-    path:'addActivity',
-    component:addActivity
-  },
-  {
-    path:'analysis',
-    component:analysis
-  },
-  {
-    path:'sourceCode',
-    component:sourceCode
-  },
-  {
-    path:'game',
-    component:game
-  },
-  {
-    path:'gameRule',
-    component:gameRule
-  },
-  {
-    path:'exhibitors',
-    component:exhibitors
-  },
-  {
-    path:'addGame',
-    component:addGame
-  },
-  {
-    path:'addGameRule',
-    component:addGameRule
-  },
-  {
-    path:'signIn',
-    component:signIn
-  },
-  {
-    path:'addIntegralRule',
-    component:addIntegralRule
-  },
-  {
-    path:'IntegralUseRule',
-    component:IntegralUseRule
-  },
-  {
-    path:'addIntegralUseRule',
-    component:addIntegralUseRule
-  },
-  {
-    path:'userInfomation',
-    component:userInfomation
-  },
-  {
-    path:'userDetail',
-    component:userDetail
-  },
-  {
-    path:'exchange',
-    component:exchange
-  }
-  ]
-},
-{
-    path:'/goods', //路由路径这里是根路径
-    component:goods,  //模板
+    path:'/goods',
+    component:goods,
     children:[
     {
       path:'',
@@ -400,12 +150,12 @@ const routes = [
       component:recycle
     },
     {
-      path:'gift', //路由路径这里是根路径
-      component:gift  //模板
+      path:'gift',
+      component:gift
     },
     {
-      path:'groups', //路由路径这里是根路径
-      component:groups  //模板
+      path:'groups',
+      component:groups
     },
     {
       path:'giftrecycle',
@@ -418,12 +168,12 @@ const routes = [
     ]
   },
   {
-    path:'/user', //路由路径这里是根路径
-    component:user  //模板
+    path:'/user',
+    component:user
   },
   {
-    path:'/union', //路由路径这里是根路径
-    component:union,  //模板
+    path:'/union',
+    component:union,
     children:[
     {
       path:'',
@@ -444,28 +194,28 @@ const routes = [
     ]
   },
   {
-    path:'/mall', //路由路径这里是根路径
-    component:mall  //模板
+    path:'/mall',
+    component:mall
   },
   {
-    path:'/setup', //路由路径这里是根路径
-    component:setup  //模板
+    path:'/setup',
+    component:setup
   },
   {
-    path:'/link', //路由路径这里是根路径
-    component:link  //模板
+    path:'/link',
+    component:link
   },
   {
-    path:'/material', //路由路径这里是根路径
-    component:material  //模板
+    path:'/material',
+    component:material
   },
   {
-    path:'/gift_recy', //路由路径这里是根路径
-    component:gift_recy  //模板
+    path:'/gift_recy',
+    component:gift_recy
   },
   {
-    path:'/classify', //路由路径这里是根路径
-    component:classify  //模板
+    path:'/classify',
+    component:classify
   },
   ]
 //导出路由集合

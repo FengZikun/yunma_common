@@ -119,7 +119,9 @@
 
       ...mapMutations({
         getVendorId:'vendorId/getVendorId',
-        getCheckComment:'vendorId/getCheckComment'
+        getUserId:'vendorId/getUserId',
+        getCheckComment:'vendorId/getCheckComment',
+        ifTest:'vendorId/ifTest',
       }),
 
       //判断登录状态
@@ -173,10 +175,13 @@
                 }else if(res.userType===1){
                   self.getVendorId(self.vendorId);
                   router.replace({path:'/enterprise'});
+                  self.ifTest(false)
                 }else if(res.userType===2){
                   self.getVendorId(self.vendorId);
+                  self.getUserId(self.userId);
                   router.replace({path:'/enterprise'});
                   self.getCheckComment(res.checkComment);
+                  self.ifTest(true)
                 }
               }else{
                 //console.log(res)

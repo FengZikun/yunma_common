@@ -43,8 +43,8 @@
             <span class="pro-li-span"></span>
             <span class="pro-li-span">{{item.ruleLvel}}</span>
             <span class="pro-li-span"></span>
-            <span class="pro-li-span"></span>
-            <span class="pro-li-span"></span>
+            <span class="pro-li-span">{{item.send_name}}</span>
+            <span class="pro-li-span">{{item.wishing}}</span>
             <span class="pro-li-span">{{item.createTime}}</span>
             <span class="pro-li-span"><img v-bind:data='index' src="../../assets/img/icon_yulan.png" @click='getposition'></span>
           </li>
@@ -187,7 +187,7 @@
           pageSize:10
         };
         var success=function(res){
-          //console.log(res);
+          console.log(res);
           self.info=res.result.data;
           self.resData=res;
           self.totalPages=res.totalPages;

@@ -9,7 +9,7 @@
 					{{warnText}}
 				</div>
 				<div class="warnbottom">
-					<input type="button" name="" value="确定" @click='showWarn=false'>
+					<input type="button" class="delbutton" name="" value="确定" @click='showWarn=false'>
 				</div>
 			</div>
 		</div>
@@ -83,7 +83,7 @@
 					</ul>
 				</div>
 				<div style="text-align:center;">
-					<input type="button" class="delbutton" name="" value="确定" @click='confirm'>
+					<input type="button" class="delbutton delbutton2" name="" value="确定" @click='confirm'>
 				</div>
 			</div>
 		</div>
@@ -280,7 +280,7 @@ div{
 	margin-top: 100px;
 	margin-bottom: 40px;
 }
-.delbutton{
+.delbutton2{
 	width: 90px;
 	height: 34px;
 }
@@ -342,6 +342,16 @@ export default{
 			showStep2:function(){
 				var self=this;
 				//获取金额信息
+				if(self.orderId===null){
+					self.showWarn=true;
+					self.warnText='请选择订单';
+					return
+				}
+				if(self.ruleId===null){
+					self.showWarn=true;
+					self.warnText='请选择规则';
+					return
+				}
 				var url='https://ym-a.top/cloud_code/GET/redEnv/moneyScope.do';
 				var type='get';
 				var data={
@@ -364,6 +374,21 @@ export default{
 			//进入step3
 			showStep3:function(){
 				var self=this;
+				if(self.money===null||self.money===''){
+					self.showWarn=true;
+					self.warnText='请填写金额';
+					return
+				}
+				if(self.startTime===null){
+					self.showWarn=true;
+					self.warnText='请选择开始时间';
+					return
+				}
+				if(self.endTime===null){
+					self.showWarn=true;
+					self.warnText='请选择结束时间';
+					return
+				}
 				var url='https://ym-a.top/cloud_code/ADD/redEnv/info.do';
 				var type='post';
 				var data={

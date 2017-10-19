@@ -8,9 +8,9 @@
 			<div class="right-main-bottom">
 				<div class="button-group">
 					<span>筛选时间：</span>
-					<input class="message-value" type="date" name="" v-model='startTime'>
+					<input class="message-value" type="date" name="" v-model='startTime' @input='setTime'>
 					<span>至</span>
-					<input class="message-value" type="date" name="" v-model='endTime' :max='maxDate'>
+					<input class="message-value" type="date" name="" v-model='endTime' :min='maxDate'>
 					<input type="button" class="search-button" name="" value="搜索" @click='search'>
 					<div class="count">
 						<span>实付合计：￥</span>
@@ -103,8 +103,8 @@
 			var data={
 				vendorId:self.vendorId,
 				type:5,
-				startTime:startTime,
-				endTime:endTime,
+				startTime:self.startTime,
+				endTime:self.endTime,
 			}
 			var success=function(res){
 				self.list=res.data;
@@ -112,6 +112,11 @@
 				console.log(res);
 			};
 			common.Ajax(url,type,data,success)
+		},
+
+		//设置日期
+		setTime(){
+			this.maxDate=this.startTime;
 		}
 	},
 	mounted(){

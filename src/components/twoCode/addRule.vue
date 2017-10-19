@@ -9,7 +9,7 @@
 						{{warnText}}
 					</div>
 					<div class="warnbottom">
-						<input type="button" name="" value="确定" @click='showWarn=false'>
+						<input type="button" class="delbutton " name="" value="确定" @click='showWarn=false'>
 					</div>
 				</div>
 			</div>
@@ -31,7 +31,7 @@
 			</div>
 			<div class="right-main-bottom">
 				<div class="messagebox">
-					<span class="message-name">规则名称：</span>
+					<span class="message-name star">规则名称：</span>
 					<input class="message-value" type="text" name="" v-model='ruleName'>
 				</div>
 				<!-- <div class="messagebox">
@@ -56,7 +56,7 @@
 					</div>
 				</div>
 				<div class="messagebox" style="margin-top:58px">
-					<span class="message-name">红包层次：</span>
+					<span class="message-name star">红包层次：</span>
 					<select class="message-value" v-model='ruleLvel'>
 						<option>1</option>
 						<option>2</option>
@@ -67,43 +67,43 @@
 				</div>
 				<div class="messagebox" v-show='ruleLvel>=1'>
 					<span class="message-name">一等奖中奖率(%)</span>
-					<input class="short" type="text" name="" v-model='oneRate'>
+					<input class="short" type="number" name="" v-model='oneRate'>
 					<span class="message-name">最小金额：</span>
-					<input class="short" type="text" name="" v-model='oneMinMoney'>
+					<input class="short" type="number" name="" v-model='oneMinMoney'>
 					<span class="message-name">最大金额：</span>
-					<input class="short" type="text" name="" v-model='oneMaxMoney'>
+					<input class="short" type="number" name="" v-model='oneMaxMoney'>
 				</div>
 				<div class="messagebox" v-show='ruleLvel>=2'>
 					<span class="message-name">二等奖中奖率(%)</span>
-					<input class="short" type="text" name="" v-model='twoRate'>
+					<input class="short" type="number" name="" v-model='twoRate'>
 					<span class="message-name">最小金额：</span>
-					<input class="short" type="text" name="" v-model='twoMinMoney'>
+					<input class="short" type="number" name="" v-model='twoMinMoney'>
 					<span class="message-name">最大金额：</span>
-					<input class="short" type="text" name="" v-model='twoMaxMoney'>
+					<input class="short" type="number" name="" v-model='twoMaxMoney'>
 				</div>
 				<div class="messagebox" v-show='ruleLvel>=3'>
 					<span class="message-name">三等奖中奖率(%)</span>
-					<input class="short" type="text" name="" v-model='threeRate'>
+					<input class="short" type="number" name="" v-model='threeRate'>
 					<span class="message-name">最小金额：</span>
-					<input class="short" type="text" name="" v-model='threeMinMoney'>
+					<input class="short" type="number" name="" v-model='threeMinMoney'>
 					<span class="message-name">最大金额：</span>
-					<input class="short" type="text" name="" v-model='threeMaxMoney'>
+					<input class="short" type="number" name="" v-model='threeMaxMoney'>
 				</div>
 				<div class="messagebox" v-show='ruleLvel>=4'>
 					<span class="message-name">四等奖中奖率(%)</span>
-					<input class="short" type="text" name="" v-model='fourRate'>
+					<input class="short" type="number" name="" v-model='fourRate'>
 					<span class="message-name">最小金额：</span>
-					<input class="short" type="text" name="" v-model='fourMinMoney'>
+					<input class="short" type="number" name="" v-model='fourMinMoney'>
 					<span class="message-name">最大金额：</span>
-					<input class="short" type="text" name="" v-model='fourMaxMoney'>
+					<input class="short" type="number" name="" v-model='fourMaxMoney'>
 				</div>
 				<div class="messagebox" v-show='ruleLvel>=5'>
 					<span class="message-name">五等奖中奖率(%)</span>
-					<input class="short" type="text" name="" v-model='fiveRate'>
+					<input class="short" type="number" name="" v-model='fiveRate'>
 					<span class="message-name">最小金额：</span>
-					<input class="short" type="text" name="" v-model='fiveMinMoney'>
+					<input class="short" type="number" name="" v-model='fiveMinMoney'>
 					<span class="message-name">最大金额：</span>
-					<input class="short" type="text" name="" v-model='fiveMaxMoney'>
+					<input class="short" type="number" name="" v-model='fiveMaxMoney'>
 				</div>
 				<div class="messagebox">
 					<span class="message-name">发放者名称：</span>
@@ -114,8 +114,8 @@
 					<textarea class="" v-model='wishing'></textarea>
 				</div>
 				<div class="button-group">
-					<input class="delbutton" type="button" name="" value='确定' @click='confirm'>
-					<router-link to='/twoCode/rule'><input class="delbutton" type="button" name="" value='取消'></router-link>
+					<input class="delbutton delbutton2" type="button" name="" value='确定' @click='confirm'>
+					<router-link to='/twoCode/rule'><input class="delbutton delbutton2" type="button" name="" value='取消'></router-link>
 				</div>
 			</div>
 		</div>
@@ -329,6 +329,36 @@
 					self.warnText="请选择红包层次";
 					return
 				}
+				if(self.oneRate<0||self.twoRate<0||self.threeRate<0||self.fourRate<0||self.fiveRate<0){
+					self.showWarn=true;
+					self.warnText='中奖概率应大于0';
+					return
+				}
+				if(self.oneMaxMoney<self.oneMinMoney){
+					self.showWarn=true;
+					self.warnText="红包的最大金额不能小于最小金额";
+					return
+				}
+				if(self.twoMaxMoney<self.twoMinMoney){
+					self.showWarn=true;
+					self.warnText="红包的最大金额不能小于最小金额";
+					return
+				}
+				if(self.threeMaxMoney<self.threeMinMoney){
+					self.showWarn=true;
+					self.warnText="红包的最大金额不能小于最小金额";
+					return
+				}
+				if(self.fourMaxMoney<self.fourMinMoney){
+					self.showWarn=true;
+					self.warnText="红包的最大金额不能小于最小金额";
+					return
+				}
+				if(self.fiveMaxMoney<self.fiveMinMoney){
+					self.showWarn=true;
+					self.warnText="红包的最大金额不能小于最小金额";
+					return
+				}
 				var url='https://ym-a.top/cloud_code/ADD/redEnv/rule.do';
 				var type='post';
 				var data={
@@ -476,7 +506,7 @@
 		margin-top: 100px;
 		margin-bottom: 40px;
 	}
-	.delbutton{
+	.delbutton2{
 		width: 90px;
 		height: 34px;
 		margin-right: 40px;

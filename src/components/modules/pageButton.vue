@@ -17,15 +17,28 @@
 </template>
 
 <script type="text/javascript">
+import {mapState} from 'vuex'
+
 export default{
 	data(){
 		return{
 
 		}
 	},
+    computed:{
+      ...mapState({
+        resData:state=>state.pageButton.resData,
+        currentPage:state=>state.pageButton.currentPage,
+        totalPages:state=>state.pageButton.totalPages,
+        totalPage:state=>state.pageButton.totalPage,
+      })
+    },
+    mounted(){
+    	console.log(this.resData)
+    },
 	methods:{
 
-		获取页数
+		//获取页数
 		getPage:function(){
 			var self=this;
 			var lastpage=self.totalPages-2;

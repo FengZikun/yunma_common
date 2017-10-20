@@ -65,6 +65,7 @@
 		</div>
 
 		<div class="main">
+			<div class="option" v-bind:class='{hasSelect:ymShop}' @click='selectType'>云码优惠券</div>
 			<div class="option" v-bind:class='{hasSelect:weidian}' @click='selectType'>微店优惠券</div>
 			<div class="option" v-bind:class='{hasSelect:weixin}' @click='selectType'>微信商户号优惠券</div>
 			<div class="option" v-bind:class='{hasSelect:jingdong}' @click='selectType'>京东优惠券</div>
@@ -271,6 +272,31 @@
 				<input class="next" type="button" name="" value="发布" @click='jDconfirm'>
 			</div>
 		</div>
+		<div class="step3" v-show='step6'>
+			<div class="top">
+				<img src="../../assets/img/buzhou2.png">
+				<a href="javascript:void(0)"><span class="return" @click='toStep1'>返回</span></a>
+			</div>
+			<div class="main">
+				<div class="title">
+					填写资料
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券领取链接：</span>
+					<input class="message-value" type="" name="" v-model='ymCouponId'>
+					<span class="message-after">（优惠券领取链接可以从云码商城的营销管理中获取）</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">产品地址：</span>
+					<input class="message-value" type="text" name="" v-model='productUrl'>
+				</div>
+				
+			</div>
+
+			<div class="bottom">
+				<input class="next" type="button" name="" value="发布" @click='ymConfirm'>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -285,6 +311,8 @@
 				step3:false,
 				step4:false,
 				step5:false,
+				step6:false,
+				ymShop:false,
 				weidian:false,
 				weixin:false,
 				jingdong:false,
@@ -306,13 +334,15 @@
 				queren:false,
 				showWarn2:false,
 				warnText:null,
+				ymCouponId:null,
 				couponStockId:null,
 				jdUid:null,
 				typeArr:0,
 				jdrule:4,
 				jdbuyerLimit:1,
 				jdleastCost:0,
-				jdisplay:1
+				jdisplay:1,
+				productUrl:null
 			}
 		},
 		computed:{
@@ -324,16 +354,24 @@
 			//选择优惠券类型
 			selectType:function(){
 				var self=this;
-				if($(event.target).text()=='微店优惠券'){
+				if($(event.target).text()=='云码优惠券'){
+					self.ymShop=true;
+					self.weidian=false;
+					self.jingdong=false;
+					self.weixin=false;
+				}else if($(event.target).text()=='微店优惠券'){
 					self.weidian=true;
+					self.ymShop=false;
 					self.jingdong=false;
 					self.weixin=false;
 				}else if($(event.target).text()=='京东优惠券'){
 					self.weidian=false;
+					self.ymShop=false;
 					self.weixin=false;
 					self.jingdong=true;
 				}
 				else{
+					self.ymShop=false;
 					self.jingdong=false;
 					self.weidian=false;
 					self.weixin=true;
@@ -343,6 +381,27 @@
 			//下一步
 			nextStep:function(){
 				var self=this;
+				if(self.ymShop){
+					$.ajax({
+						url:'https://ym-a.top/cloud_code/wqcoupon/getCouponPorudctUrl.do',
+						type:'post',
+						data:{vendorId:self.vendorId},
+						datatype:'json',
+						success:function(res){
+							console.log(res.data)
+							if(res.data!='null'){
+								self.productUrl=res.data;
+							}
+						}
+					})
+					self.step1=false;
+					self.step6=true;
+					self.leastCost=null;
+					self.buyerLimit=null;
+					self.name=null;
+					self.reduce=null;
+					return
+				}
 				if(self.weidian){
 					self.step1=false;
 					self.step2=true;
@@ -393,6 +452,9 @@
 				var self=this;
 				self.step2=false;
 				self.step3=false;
+				self.step4=false;
+				self.step5=false;
+				self.step6=false;
 				self.step1=true;
 			},
 
@@ -579,7 +641,7 @@
 			// 	common.Ajax(url,type,data,success)
 				
 			// },
-			//提交微店
+			//提交微小店
 			confirm2:function(){
 				var self=this;
 						if(self.leastCost===null){
@@ -694,7 +756,7 @@
 				var type='post';
 				var success=function(res){
 					if(res.statuscode===1){
-						self.step2=false;
+						self.step5=false;
 						self.step4=true;
 					}else if(res.statuscode===-1){
 						self.showWarn2=true;
@@ -710,6 +772,34 @@
 				// }
 				
 			},
+			//云码优惠券发布
+			ymConfirm:function(){
+				var self=this;
+				$.ajax({
+					url:'https://ym-a.top/cloud_code/wqcoupon/addcoupon.do',
+					type:'post',
+					data:{
+						vendorId:self.vendorId,
+						getUrl:self.ymCouponId,
+						productUrl:self.productUrl,
+						wqId:parseInt(self.ymCouponId.substring(self.ymCouponId.indexOf('id=')+3))
+					},
+					datatype:'json',
+					success:function(res){
+						if(res.statuscode===1){
+							self.step6=false;
+							self.step4=true;
+						}else if(res.statuscode===2){
+							self.step6=false;
+							self.step4=true;
+						}else if(res.statuscode===-1){
+							self.showWarn2=true;
+							self.warnText='res.msg';
+						}
+					}
+				})
+
+			},
 			//返回第二阶段
 			comeBack:function(){
 				var self=this;
@@ -720,7 +810,7 @@
 					self.step3=true;
 				}
 			}
-		}
+		},
 	}
 </script>
 

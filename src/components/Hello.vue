@@ -43,15 +43,15 @@
               用户<span class='xiajiantou'></span>
             </li>
             <li class="change_color" style="margin-top:6px">
-              <a href="javascript:void(0)" @click="WxGzhInfo('http://mp.ym-a.top/web/index.php?c=mc&a=fans&',0)"><span>粉丝管理</span></a>
+              <a href="http://mp.ym-a.top/web/index.php?c=mc&a=fans&" target="blank"><span>粉丝管理</span></a>
             </li>
             <li class="change_color">
-              <a href="javascript:void(0)" @click="WxGzhInfo('http://mp.ym-a.top/web/index.php?c=mc&a=member&',0)"><span>会员管理</span></a>
+              <a href="http://mp.ym-a.top/web/index.php?c=mc&a=member&" target="blank"><span>会员管理</span></a>
             </li>
           </ul>
-          <li class='top_nav li_04' @click='changeColor'><a href="javascript:void(0);" @click="WxGzhInfo('http://mp.ym-a.top',1)">公众号</a></li>
+          <li class='top_nav li_04' @click='changeColor'><a href="http://mp.ym-a.top" target="blank">公众号</a></li>
           <li class='top_nav li_05' @click='changeColor'><router-link to="/union">企业联盟</router-link></li>
-          <li class='top_nav li_06' @click='changeColor'><a href="javascript:void(0);" @click="WxGzhInfo('http://mp.ym-a.top/web/index.php?c=platform&a=cover&eid=39',0)">商城</a></li>
+          <li class='top_nav li_06' @click='changeColor'><a href="http://mp.ym-a.top/web/index.php?c=site&a=entry&m=ewei_shopv2&do=web&r=shop" target="blank">商城</a></li>
         </ul>
       </div>
       <div class='username'>

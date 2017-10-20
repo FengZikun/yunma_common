@@ -31,6 +31,10 @@
 						<span class="message-name">产品地址：</span>
 						<input class="message-value" type="text" name="" v-model='productUrl'>
 					</div>
+					<div class="messagebox">
+						<span class="message-name">企业文化：</span>
+						<input class="message-value" type="text" name="" v-model='wenUrl'>
+					</div>
 					<div class="classifyFooter">
 						<input class="delbutton" type="button" name="" value="确认" @click='connect'>
 						<input class="delbutton" type="button" name="" value="取消" @click='hide'>
@@ -161,7 +165,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="my-form" v-if='proInfo!=null'>
+					<div class="my-form" >
 						<ul class="pro-list">
 							<li class="pro-li">
 								<span class="pro-li-span">优惠券名称</span>
@@ -171,7 +175,7 @@
 								<span class="pro-li-span">适用范围</span>
 								<span class="pro-li-span">操作</span>
 							</li>
-							<li class="pro-li" v-for="pro in proInfo">
+							<li class="pro-li" v-for="pro in proInfo" v-if='proInfo!=null'>
 								<span class="pro-li-span first" style="text-align: center;">{{pro.name}}</span>
 								<span class="pro-li-span" style="text-align:center;line-height:24px;margin: 12px 0;">{{pro.beginTime}}<br>{{pro.endTime}}</span>
 								<span class="pro-li-span">满 {{pro.leastCost}} 减 <span style="color:red;">{{pro.reduce}}</span></span>
@@ -190,6 +194,13 @@
 			                      <span title="删除" class="shanchu" v-bind:data-id='pro.couponId' @click='mengban3'></span>
 
 			                    </span>
+							</li>
+							<li class="pro-li" v-for="ym in ymInfo" v-if='ymInfo!=null'>
+								<span class="pro-li-span first" style="text-align: center;">{{ym.couponname}}</span>
+								<span class="pro-li-span" style="text-align:center;line-height:24px;margin: 12px 0;">{{ym.timestart}}<br>{{ym.timeend}}</span>
+								<span class="pro-li-span">满 {{ym.enough}} 减 <span style="color:red;">{{ym.deduct}}</span></span>
+								<span class="pro-li-span" style="line-height:24px;margin:12px 0;"><br><span style="color: #c3c3c6">库存{{ym.total}}</span></span>
+								<span class="pro-li-span">云码优惠券</span>
 							</li>
 						</ul>
 					</div>
@@ -260,6 +271,7 @@
 					childCon:'我是子页面',
 			        chechednum:0,    //全选单选控制
 			        proInfo:null,      //信息数组
+			        ymInfo:null,      //云码优惠券数组
 			        totalPage:[],    //页码数组
 			        resData:[],      //请求回的所有数据
 			        showMB:false,    //蒙版开关
@@ -275,6 +287,7 @@
 			        showMB4:false,
 			        couponId:null,
 			        productUrl:null,
+			        wenUrl:null,
 			        showWarn:false,
 	        		warnText:'',
 	        		productUrlWxd:null,
@@ -330,6 +343,19 @@
 		        		}
 		        	}
 		        })
+		        $.ajax({
+		        	url:'https://ym-a.top/cloud_code/wqcoupon/getcoupon.do',
+		        	type:'post',
+		        	data:{vendorId:self.vendorId},
+		        	dataType:'json',
+		        	success:function(res){
+		        		if($.isEmptyObject(res)){
+		        			self.ymInfo=null
+		        		}else{	
+		        			self.ymInfo=res;
+		        		}
+		        	}
+		        })		        
 		    },
 
 
@@ -358,6 +384,7 @@
 						self.appKey=res.appKey;
 						self.secret=res.secret;
 						self.productUrl=res.productUrl;
+						self.wenUrl=res.wenUrl;
 					}
 					
 				};
@@ -405,7 +432,8 @@
 					vendorId:self.vendorId,
 					appKey:self.appKey,
 					secret:self.secret,
-					productUrl:self.productUrl
+					productUrl:self.productUrl,
+					wenUrl:self.wenUrl,
 				};
 				var success=function(res){
 					if(res.statuscode===1||2){

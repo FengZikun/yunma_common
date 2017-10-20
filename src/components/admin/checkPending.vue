@@ -16,7 +16,10 @@
 							<span class="pro-li-span">{{item.userId}}</span>
 							<span class="pro-li-span">{{item.vendorId}}</span>
 							<span class="pro-li-span">{{item.vendorName}}</span>
-							<span class="pro-li-span">{{item.checkStatus}}</span>
+							<span class="pro-li-span">
+								<span v-if="item.checkStatus===1">未通过审核用户</span>
+								<span v-else>通过审核用户</span>
+							</span>
 							<span class="pro-li-span">{{item.createTime}}</span>
 							<span class="pro-li-span"><a href="javascript:void(0)" @click='detail(item.userId)'>查看</a></span>
 

@@ -97,7 +97,7 @@
 				</div>
 
 			</div>
-			<div class="messagebox">
+			<!-- <div class="messagebox">
 				<div class="mid">
 					<p>相关图片资料</p>
 					<a href="javascript:void(0)"><span class="button">图片批量下载</span></a>
@@ -105,7 +105,7 @@
 				<div class="phbox" v-for='item in imgInfo'>
 					<img class="photo1" v-bind:src="'https://ym-a.top'+item.imgUrl"></img>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>

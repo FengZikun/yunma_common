@@ -16,8 +16,45 @@
 					<a href="javascript:void(0)"><li class="list">家居家纺</li></a>
 					<a href="javascript:void(0)"><li class="list">居家日用</li></a>
 					<a href="javascript:void(0)"><li class="list">母婴用品</li></a>
+					<a href="javascript:void(0)"><li class="list">农药</li></a>
 					<a href="javascript:void(0)"><li class="list">其他</li></a>
 				</ul>
+				<div class="nongyao" v-if='pesticide'>
+					<div class="pesticideMessage">
+						<span class="pesticide-name star">产品农药登记类别代码：</span>
+						<input id="PD" class="pesticide-value" type="radio" name="pesticide1" v-bind:value='1'>
+						<label for="PD">
+							<span>PD</span>
+						</label>
+						<input id="WP" class="pesticide-value" type="radio" name="pesticide1" v-bind:value='2'>
+						<label for="WP">
+							<span>WP</span>
+						</label>
+					</div>
+					<div class="pesticideMessage">
+						<span class="pesticide-name star">生产类型：</span>
+						<input id="typeA" class="pesticide-value" type="radio" name="pesticide2" v-bind:value='1'>
+						<label for="typeA">
+							<span>农药登记证持有人生产</span>
+						</label>
+						<input id="typeB" class="pesticide-value" type="radio" name="pesticide2" v-bind:value='2'>
+						<label for="typeB">
+							<span>委托加工</span>
+						</label>
+						<input id="typeC" class="pesticide-value" type="radio" name="pesticide2" v-bind:value='3'>
+						<label for="typeC">
+							<span>委托分装</span>
+						</label>
+					</div>
+					<div class="pesticideMessage">
+						<span class="pesticide-name star">农药登记证号：</span>
+						<input class="pesticide-value" type="text" name="" placeholder="后六位数字">
+					</div>
+					<div class="pesticideMessage">
+						<span class="pesticide-name">产品规格码：</span>
+						<input class="pesticide-value" type="text" name="" placeholder="企业自行编制">
+					</div>
+				</div>
 				<div class="radio">
 					<span><span style="color: red">*</span>选择产品类型：</span>
 					<input id="shiwu" type="radio" name="protype" style="margin-left: 0" v-model='productSpe' v-bind:value='1'>
@@ -138,7 +175,6 @@
 						<span>{{selected.name}}</span><span v-if='chilselected!=undefined'>>{{chilselected.name}}</span>
 					</div>
 					<input class="message-choose" type="button" name="" value="选择分类" @click='chooseClassify'>
-					<!-- <router-link to='/goods/classify' style='text-decoration:none;'><span class="message-after">新增自定义分类</span></router-link> -->
 				</div>
 				<div class="promessage">
 					<span class="message-name star">产品图片：</span>
@@ -194,484 +230,394 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- <div class="step3" v-bind:class='{hidestep:threehide}'>
-			<div class="top">
-				<img src="../../assets/img/step3.png">
-				<span class="return" @click='showStep2'><a href="javascript:void(0)" style="text-decoration: none">返回</a></span>
-				<div class="texteditor">
-					<vue-html5-editor :content="editorcontent" :height="500" :show-module-name="showModuleName" @change="updateData" ref="editor" :auto-height="false" >
-					</vue-html5-editor>
-				</div>
-				
-				
-			</div>
-			<div class="main" style="margin-top:70px">
-				<div class="buttongroup">
-					<input class="jumpbutton" type="button" name="" value="上一步" @click='showStep2'>
-					<input class="jumpbutton" type="button" name="" value="完成" @click='complete'>
-
-				</div>
-			</div>
-		</div> -->
 	</div>
 
 </template>
 
 <script>
-	
+
 </script>
 
 <style scoped>
-	@import "goodscommon.css";
-	*{
-		font-family: 'Microsoft YaHei';
-		text-decoration: none;
-	}
-	div{
-		text-align: left;
-	}
-	.right-main{
-		/*height: 1417px;*/
-	}
-	.ul{
-		width: 717px;
-		height: 180px;
-		padding-left: 0;
-		margin: 160px 0 0 58px;
-	}
-	.ul a{
-		display: inline-block;
-		text-decoration: none;
-		margin: 0;
-		padding: 0;
-		color: #000;
-	}
-	.list{
-		width: 120px;
-		height: 46px;
-		border: 1px solid #e7e7eb;
-		margin: 0 20px 20px 0;
-		float: left;
-		text-align: center;
-	}
-	.list:hover{
-		border-color: #00baff;
-	}
-	.listselected{
-		border-color: #00baff;
+@import "goodscommon.css";
+*{
+	font-family: 'Microsoft YaHei';
+	text-decoration: none;
+}
+div{
+	text-align: left;
+}
+.right-main{
+	/*height: 1417px;*/
+}
+.ul{
+	width: 717px;
+	height: 180px;
+	padding-left: 0;
+	margin: 160px 0 0 58px;
+}
+.ul a{
+	display: inline-block;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+.list{
+	width: 120px;
+	height: 46px;
+	border: 1px solid #e7e7eb;
+	margin: 0 20px 20px 0;
+	float: left;
+	text-align: center;
+}
+.list:hover{
+	border-color: #00baff;
+}
+.listselected{
+	border-color: #00baff;
 
-	}
-	.list:nth-of-type(5),
-	.list:nth-of-type(10){
-		margin-right: 0;
-	}
-	.radio{
-		margin-left: 58px;
-	}
-	.radio span{
-		display: inline-block;
-	}
-	.proname{
-		/*margin-left: 10px;*/
-	}
-	.next{
-		width: 189px;
-		height: 36px;
-		display: block;
-		color: #fff;
-		background-color: #00baff;
-		outline: none;
-		border: none;
-		border-radius: 3px;
-		padding: 0 10px;
-		margin: auto;
-		margin-top: 80px;
-		margin-bottom: 34px;
-	}
-	.main{
-		/*width: 740px;*/
-	}
-	.message-name{
-		display: inline-block;
-		width: 120px;
-		margin-left: 60px;
-		text-align: right;
-		color: #666;
-		vertical-align: top;
-	}
-	.message-choose{
-		width: 70px;
-		height: 32px;
-		appearance: none;
-		background-color: #fff;
-		border: 1px solid #cccccc;
-		border-radius: 3px;
-	}
-	.message-value{
-		border: 1px solid #ccc;
-		height: 30px;
-		padding-left: 5px;
-	}
-	.brod{
-		display: inline-block;
-		width: 760px;
-		border: 1px solid #ccc;
-		padding-bottom: 20px;
-	}
-	textarea{
-		width: 760px;
-		height: 95px;
-		resize: none;
-		border: 1px solid #ccc;
+}
+.list:nth-of-type(5),
+.list:nth-of-type(10){
+	margin-right: 0;
+}
+.radio{
+	margin-left: 58px;
+}
+.radio span{
+	display: inline-block;
+}
+.proname{
+	/*margin-left: 10px;*/
+}
+.next{
+	width: 189px;
+	height: 36px;
+	display: block;
+	color: #fff;
+	background-color: #00baff;
+	outline: none;
+	border: none;
+	border-radius: 3px;
+	padding: 0 10px;
+	margin: auto;
+	margin-top: 80px;
+	margin-bottom: 34px;
+}
+.main{
+	/*width: 740px;*/
+}
+.message-name{
+	display: inline-block;
+	width: 120px;
+	margin-left: 60px;
+	text-align: right;
+	color: #666;
+	vertical-align: top;
+}
+.message-choose{
+	width: 70px;
+	height: 32px;
+	appearance: none;
+	background-color: #fff;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+}
+.message-value{
+	border: 1px solid #ccc;
+	height: 30px;
+	padding-left: 5px;
+}
+.brod{
+	display: inline-block;
+	width: 760px;
+	border: 1px solid #ccc;
+	padding-bottom: 20px;
+}
+textarea{
+	width: 760px;
+	height: 95px;
+	resize: none;
+	border: 1px solid #ccc;
 
-	}
-	.fontcolor{
-		color: #999;
-		margin-left: 20px;
-		margin-top: 20px;
-	}
-	.jumpbutton{
-		color: #00baff;
-		border: 1px solid #00baff;
-		appearance: none;
-		background-color: #fff;
-		outline: none;
-		border-radius: 3px;
-		padding: 9px 38px;
-		margin-right: 26px;
-	}
-	.buttongroup{
-		margin: 85px 0 34px 185px;
-	}
-	.jumpbutton:hover{
-		background-color: #00baff;
-		color: #fff;
-	}
-	.proclassify{
-		width: 420px;
-		height: 250px;
-		background: #fff;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		margin-left: -210px;
-		margin-top: -125px;
-	}
-	.warn{
-		width: 420px;
-		height: 250px;
-		background: #fff;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		margin-left: -210px;
-		margin-top: -125px;
-	}
-	.p{
-		color: #999999;
-	}
-	.danwei:after{
-		content: '(吊牌价)';
-		color: #999999;
-	}
-	.description:after{
-		content: '/100(限100字内，产品描述将显示在产品码的推荐信息上)';
-		color: #999999;
-	}
-	.miaoshu{
-		color: red;
-	}
-	.mengban{
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: 2000;
-		background: rgba(0, 0, 0, 0.6);
-	}
-	.message-photo{
-		display: inline-block;
-		width: 86px;
-		height: 64px;
-		vertical-align: top;
-	}
-	.message-add{
-		width: 86px;
-		height: 86px;
-		display: inline-block;
-		background: url(../../assets/img/group7.png);
-	}
-	.hidemengban{
-		display: none;
-	}
-	.title{
-		margin-top: 60px;
-		margin-left: 50px;
-		font-size: 18px;
-	}
-	.p,
-	.description{
-		margin-left: 182px;
-	}
-	.promessage{
-		margin-top: 40px;
-	}
-	.hidestep{
-		display: none;
-	}
-	.imgbox{
-		left: 50%;
-		top: 20%;
-		margin-left: -342.5px;
-		height: 655px;
-		border-radius: 2px;
-		background: #fff;
-		width: 685px;
-		position: absolute;
-	}
-	.imgheader{
-		width: 100%;
-		height: 48px;
-		background: #f6f8fc;
-		padding: 0 20px;
-		box-sizing: border-box;
-		position: relative;
-	}
-	.single-img{
-		float: left;
-		width: 110px;
-		height: 110px;
-		margin: 15px;
-		position: relative;
-	}
-	.proimg{
-		border: 2px solid transparent;
-	}
-	.proimg:hover{
-		border-color: #00baff;
-	}
-	.imgmain{
-		height: 500px;
-	}
-	.imgbottom{
-		text-align: center;
-		width: 100%;
-		height: 48px;
-		background: #f6f8fc;
-		padding: 0 20px;
-		box-sizing: border-box;
-		position: relative;
-		top: 35px;
-	}
-	.size{
-		display: block;
-		width: 106px;
-		height: 25px;
-		line-height: 25px;
-		position: absolute;
-		top: 83px;
-		left: 2px;
-		text-align: center;
-		background-color: rgba(0,0,0,.2);
-		color: #fff;
-	}
-	.imgname{
-		display: block;
-		height: 25px;
-		line-height: 25px;
-		width: 110px;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	.shangchuan{
-		display: block;
-		clear: both;
-		margin-left: 55px;
-	}
-	.localUp{
-		height: 450px;
-	}
-	#productImg{
-		display: none;
-	}
-	.productImg{
-		display: inline-block;
-		width: 86px;
-		height: 86px;
-		background: url(../../assets/img/group7.png);
-	}
-	.pro-parameter{
-		width: 95%;
-		padding: 10px 20px;
-		margin: 20px;
-		color: #333;
-		background-color: #f4f5f9;
-		max-height: 120px;
-		overflow-y: scroll
-	}
-	.choosezu{
-		display: inline-block;
-	}
-	.classifyHeader{
-		width: 100%;
-		height: 48px;
-		background: #f6f8fc;
-		padding: 0 20px;
-		box-sizing: border-box;
-		position: relative;
-	}
-	.classifyFooter{
-		width: 100%;
-		height: 48px;
-		background: #f6f8fc;
-		padding: 0 20px;
-		box-sizing: border-box;
-		position: relative;
-		top: 68px;
-		text-align: center;
-	}
-	.select{
-		display: block;
-		text-align: center;
-		margin-top: 20px;
-	}
-	.delbutton{
-		margin-top: 13px;
-	}
-	.imgPage{
-		text-align: right;
-		padding: 0 100px;
-	}
-	.warnbottom{
-		text-align: right;
-		position: relative;
-		top: 140px;
-		right: 50px;
-	}
-	.warnmain{
-		position: relative;
-		top: 70px;
-		text-align: center;
-	}
+}
+.fontcolor{
+	color: #999;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+.jumpbutton{
+	color: #00baff;
+	border: 1px solid #00baff;
+	appearance: none;
+	background-color: #fff;
+	outline: none;
+	border-radius: 3px;
+	padding: 9px 38px;
+	margin-right: 26px;
+}
+.buttongroup{
+	margin: 85px 0 34px 185px;
+}
+.jumpbutton:hover{
+	background-color: #00baff;
+	color: #fff;
+}
+.proclassify{
+	width: 420px;
+	height: 250px;
+	background: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -210px;
+	margin-top: -125px;
+}
+.warn{
+	width: 420px;
+	height: 250px;
+	background: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -210px;
+	margin-top: -125px;
+}
+.p{
+	color: #999999;
+}
+.danwei:after{
+	content: '(吊牌价)';
+	color: #999999;
+}
+.description:after{
+	content: '/100(限100字内，产品描述将显示在产品码的推荐信息上)';
+	color: #999999;
+}
+.miaoshu{
+	color: red;
+}
+.mengban{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2000;
+	background: rgba(0, 0, 0, 0.6);
+}
+.message-photo{
+	display: inline-block;
+	width: 86px;
+	height: 64px;
+	vertical-align: top;
+}
+.message-add{
+	width: 86px;
+	height: 86px;
+	display: inline-block;
+	background: url(../../assets/img/group7.png);
+}
+.hidemengban{
+	display: none;
+}
+.title{
+	margin-top: 60px;
+	margin-left: 50px;
+	font-size: 18px;
+}
+.p,
+.description{
+	margin-left: 182px;
+}
+.promessage{
+	margin-top: 40px;
+}
+.hidestep{
+	display: none;
+}
+.imgbox{
+	left: 50%;
+	top: 20%;
+	margin-left: -342.5px;
+	height: 655px;
+	border-radius: 2px;
+	background: #fff;
+	width: 685px;
+	position: absolute;
+}
+.imgheader{
+	width: 100%;
+	height: 48px;
+	background: #f6f8fc;
+	padding: 0 20px;
+	box-sizing: border-box;
+	position: relative;
+}
+.single-img{
+	float: left;
+	width: 110px;
+	height: 110px;
+	margin: 15px;
+	position: relative;
+}
+.proimg{
+	border: 2px solid transparent;
+}
+.proimg:hover{
+	border-color: #00baff;
+}
+.imgmain{
+	height: 500px;
+}
+.imgbottom{
+	text-align: center;
+	width: 100%;
+	height: 48px;
+	background: #f6f8fc;
+	padding: 0 20px;
+	box-sizing: border-box;
+	position: relative;
+	top: 35px;
+}
+.size{
+	display: block;
+	width: 106px;
+	height: 25px;
+	line-height: 25px;
+	position: absolute;
+	top: 83px;
+	left: 2px;
+	text-align: center;
+	background-color: rgba(0,0,0,.2);
+	color: #fff;
+}
+.imgname{
+	display: block;
+	height: 25px;
+	line-height: 25px;
+	width: 110px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.shangchuan{
+	display: block;
+	clear: both;
+	margin-left: 55px;
+}
+.localUp{
+	height: 450px;
+}
+#productImg{
+	display: none;
+}
+.productImg{
+	display: inline-block;
+	width: 86px;
+	height: 86px;
+	background: url(../../assets/img/group7.png);
+}
+.pro-parameter{
+	width: 95%;
+	padding: 10px 20px;
+	margin: 20px;
+	color: #333;
+	background-color: #f4f5f9;
+	max-height: 120px;
+	overflow-y: scroll
+}
+.choosezu{
+	display: inline-block;
+}
+.classifyHeader{
+	width: 100%;
+	height: 48px;
+	background: #f6f8fc;
+	padding: 0 20px;
+	box-sizing: border-box;
+	position: relative;
+}
+.classifyFooter{
+	width: 100%;
+	height: 48px;
+	background: #f6f8fc;
+	padding: 0 20px;
+	box-sizing: border-box;
+	position: relative;
+	top: 68px;
+	text-align: center;
+}
+.select{
+	display: block;
+	text-align: center;
+	margin-top: 20px;
+}
+.delbutton{
+	margin-top: 13px;
+}
+.imgPage{
+	text-align: right;
+	padding: 0 100px;
+}
+.warnbottom{
+	text-align: right;
+	position: relative;
+	top: 140px;
+	right: 50px;
+}
+.warnmain{
+	position: relative;
+	top: 70px;
+	text-align: center;
+}
+.nongyao{
+	margin-left: 58px;
+}
+.pesticideMessage{
+	margin: 10px 0;
+}
 </style>
 <script>
-	import common from '../../common.js'
-	import VueHtml5Editor from 'vue-html5-editor'
-	import Vue from 'vue'
-	import router from '../../router.js'
-	// Vue.use(VueHtml5Editor, {
-	// 	showModuleName: true,
-	// 	image: {
-	// 		sizeLimit: 512 * 1024,
-	// 		compress: true,
-	// 		width: 500,
-	// 		height: 500,
-	// 		quality: 80,
-      // upload: {
-      //       url: 'https://ym-a.top/imageContent/',
-      //       headers: {},
-      //       params: {},
-      //       fieldName: {}
-      //   },
-      // compress: {
-      //       width: 300,
-      //       height: 300,
-      //       quality: 40
-      //   },
-      // uploadHandler(responseText){
-      //       var json = JSON.parse(responseText)
-      //       if (!json.ok) {
-      //           alert(json.msg)
-      //       } else {
-      //           return json.data
-      //       }
-      //   }
-  // },
-  // language: "zh-cn",
-    // 自定义语言
-    // i18n: {
-      //specify your language here
-      // "zh-cn": {
-      // 	"align": "对齐方式",
-      // 	"image": "图片",
-      // 	"list": "列表",
-      // 	"link": "链接",
-      // 	"unlink": "去除链接",
-      // 	"table": "表格",
-      // 	"font": "文字",
-      // 	"full screen": "全屏",
-      // 	"text": "排版",
-      // 	"eraser": "格式清除",
-      // 	"info": "关于",
-      // 	"color": "颜色",
-      // 	"please enter a url": "请输入地址",
-      // 	"create link": "创建链接",
-      // 	"bold": "加粗",
-      // 	"italic": "倾斜",
-      // 	"underline": "下划线",
-      // 	"strike through": "删除线",
-      // 	"subscript": "上标",
-      // 	"superscript": "下标",
-      // 	"heading": "标题",
-      // 	"font name": "字体",
-      // 	"font size": "文字大小",
-      // 	"left justify": "左对齐",
-      // 	"center justify": "居中",
-      // 	"right justify": "右对齐",
-      // 	"ordered list": "有序列表",
-      // 	"unordered list": "无序列表",
-      // 	"fore color": "前景色",
-      // 	"background color": "背景色",
-      // 	"row count": "行数",
-      // 	"column count": "列数",
-      // 	"save": "确定",
-      // 	"upload": "上传",
-      // 	"progress": "进度",
-      // 	"unknown": "未知",
-      // 	"please wait": "请稍等",
-      // 	"error": "错误",
-      // 	"abort": "中断",
-      // 	"reset": "重置"
-      // }
-  // },
-// });
-	export default{
-		data(){
-			return{
-				type:'',
-				showMB:false,
-				productBewrite:'',
-				onehide:false,
-				twohide:true,
-				threehide:true,
-				rowId:null,
-				productName:'',
-				productImg:'',
-				productPrice:'',
-				productMarketPrice:'',
-				productTotal:'',
-				productCode:'',
-				productUnit:'',
-				productBarCode:'',
-				paramKey:[],
-				paramValue:[],
-				productBewrite:'',
-				productDetail:'',
-				productType:'',
-				productSpe:1,
-				paramId:[1],
-				showMBimg:false,
-				imglist:[],
-				imgUrl:'',
-				imgWidth:'',
-				imgHeight:'',
-				imgId:'',
-				showModuleName:true,
-				savename:'',
-				editorcontent:'',
-				selectimg:[],
+import common from '../../common.js'
+import VueHtml5Editor from 'vue-html5-editor'
+import Vue from 'vue'
+import router from '../../router.js'
+export default{
+	data(){
+		return{
+			type:'',
+			showMB:false,
+			productBewrite:'',
+			onehide:false,
+			twohide:true,
+			threehide:true,
+			rowId:null,
+			productName:'',
+			productImg:'',
+			productPrice:'',
+			productMarketPrice:'',
+			productTotal:'',
+			productCode:'',
+			productUnit:'',
+			productBarCode:'',
+			paramKey:[],
+			paramValue:[],
+			productBewrite:'',
+			productDetail:'',
+			productType:'',
+			productSpe:1,
+			paramId:[1],
+			showMBimg:false,
+			imglist:[],
+			imgUrl:'',
+			imgWidth:'',
+			imgHeight:'',
+			imgId:'',
+			showModuleName:true,
+			savename:'',
+			editorcontent:'',
+			selectimg:[],
 				imgtotalPages:'',		//图片总页数
 				imgcurrentPage:'',		//图片当前页
 				chooselist:{},			//已选中图片
@@ -684,7 +630,8 @@
 				selected:{'children':null},
 				chilselected:null,
 				showWarn:false,
-				warnText:null
+				warnText:null,
+				pesticide:false
 			}
 		},
 		props:['productid','vendorId'],
@@ -767,7 +714,7 @@
 			// 	self.twohide=true;
 			// 	self.threehide=false;
 			// 	$('body').scrollTop(0);
-				
+
 			// },
 			choosed:function(){
 				var self=this;
@@ -775,9 +722,15 @@
 					self.productType=$(event.target).text();
 					$(event.target).addClass('listselected');
 					$(event.target).parent().siblings().find('li').removeClass('listselected');
-				}
+						// console.log(11)
+						if(self.productType==='农药'){
+							self.pesticide=true;
+						}else{
+							self.pesticide=false;
+						}
+					}
 
-			},
+				},
 			//选择产品分类
 			chooseClassify:function(){
 				var self=this;
@@ -1088,4 +1041,4 @@
 			this.init();
 		}
 	}
-</script>
+	</script>

@@ -29,7 +29,7 @@
                   +&nbsp;上传礼品
                 </div>
                 <input type="button" name="" class="search-button" value="搜索">
-                <input type="search" name="" class="search" placeholder="输入关键字">
+                <input type="search" name="" class="search" placeholder="输入关键字" v-model='keyword' @input='search'>
               </div>
               <div class="my-form">
                 <ul class="pro-list">
@@ -132,13 +132,6 @@
 }
 
 
-.pro-li:nth-of-type(1) .pro-li-span:nth-of-type(5):after{
-  content: "";
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  background-color: #000;
-}
 
 </style>
 <script>
@@ -158,6 +151,7 @@ import common from '../../common.js'
         currentPage:'',  //当前页
         totalPages:'',   //总页数
         huanyuanArr:[],
+        keyword:null
       }
     },
     props:['vendorId'],
@@ -186,6 +180,29 @@ import common from '../../common.js'
       },
       //获取页数
       getPage:common.getPage,
+
+      //搜索
+      search(){
+        var self=this;
+        var url='https://ym-a.top/cloud_code/GET/product/present.do';
+        var type='post';
+        var data={
+          vendorId:self.vendorId,
+          deleteFlag:1,
+          keyword:self.keyword
+        };
+        var success=function(res){
+          var pagenum=res.totalPages;
+          self.totalPage=[];
+          self.resData=res;
+          self.gifts=res.result.data;
+          self.totalPages=res.totalPages;
+          self.currentPage=res.currentPage;
+          self.getPage();
+        }
+        //调用ajax
+        common.Ajax(url,type,data,success)
+      },
 
       //单选
       selectThis:function(event){

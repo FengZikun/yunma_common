@@ -26,7 +26,6 @@
               <span class="pro-li-span" style="width: 8%">工号</span>
               <span class="pro-li-span">员工电话</span>
               <span class="pro-li-span" style="width: 18%">员工身份证号码</span>
-              <span class="pro-li-span" style="width: 6%">操作</span>
             </li>
             <li class="pro-li">
               <span class="pro-li-span" style="width: 7%">{{detailInfo.productId}}</span>
@@ -37,12 +36,8 @@
               <span class="pro-li-span" style="width: 8%">{{detailInfo.workNum}}</span>
               <span class="pro-li-span">{{detailInfo.empTel}}</span>
               <span class="pro-li-span" style="width: 18%">{{detailInfo.empIdcard}}</span>
-              <span class="pro-li-span" style="width: 6%"><a href="javascript:void(0)" @click='delet(detailInfo.id)'>删除</a></span>
             </li>
           </ul>
-        </div>
-        <div class="contentBottom">
-          <input class="content-botton" type="button" name="" value="确定" @click='showDetail=false'>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@
             {{warnText}}
           </div>
           <div class="warnbottom">
-            <input type="button" name="" value="确定" @click='showWarn=false'>
+            <input type="button" class="delbutton" name="" value="确定" @click='showWarn=false'>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
 
         <div class="addmessage">
           <span class="message-name star">分组名称：</span>
-          <input class="message-value" type="text" name="" v-model='name'>
+          <input class="message-value" type="text" name="" v-model='name' maxlength="8">
           <span class="message-after">限8个字符</span>
         </div>
         <div style="margin-top: 80px;">
@@ -182,6 +182,12 @@ import common from '../../common.js'
       //增加分组
       addclassify:function(){
         var self=this;
+        if(self.name===null||self.name===''){
+          self.showWarn=true;
+          self.showMB=false;
+          self.warnText='分组名不能为空';
+          return
+        }
         if(self.zengjia){
           var url='https://ym-a.top/cloud_code/ADD/product/presentGroup.do';
           var data={

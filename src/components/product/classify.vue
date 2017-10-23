@@ -9,7 +9,7 @@
             {{warnText}}
           </div>
           <div class="warnbottom">
-            <input type="button" name="" value="确定" @click='showWarn=false'>
+            <input type="button" class="delbutton" name="" value="确定" @click='showWarn=false'>
           </div>
         </div>
       </div>
@@ -18,7 +18,7 @@
         <p class="mbtitle">新增一级分类</p>
         <div class="addmessage">
           <span class="message-name star">名称分类：</span>
-          <input class="message-value" type="text" name="" v-model='name'>
+          <input class="message-value" type="text" name="" v-model='name' maxlength="8">
           <span class="message-after">限8个字符</span>
         </div>
         <div style="margin-top: 80px;">
@@ -93,52 +93,6 @@
 </template>
 <style scoped>
 /*@import "../../assets/css/common.css";*/
-  .img {
-    display: inline-block;
-    width: 30%;
-    height: 20px;
-    vertical-align: middle;
-  }
-  .img2 {
-    background: url(../../assets/img/icon_qiye_xinxi.png) no-repeat;
-  }
-  .img3 {
-    background: url(../../assets/img/icon_dingdan.png) no-repeat;
-  }
-  .goods_menu .two_sub2 {
-    width: 100%;
-  }
-  .goods_menu .two_sub2 li {
-    line-height: 100%;
-    margin-top: 10px;
-  }
-  .goods_menu .sub3 {
-    width: 100%;
-  }
-  .goods_menu .sub3 li {
-    line-height: 100%;
-    margin-top: 10px;
-  }
-  .goods_menu .goods_li_2 .goods_sub2 {
-    width: 100%;
-    display: none;
-  }
-  .goods_menu .goods_li_3 .goods_sub3 {
-    width: 100%;
-    display: none;
-  }
-  .rig_main{
-    width: 95%;
-    margin:40px auto;
-    background-color: #fff;
-    border-radius: 8px;
-  }
-  .gongz {
-    width: 60%;
-    margin:0 auto;
-    margin-top: 40px;
-    padding-top: 20px;
-  }
   .center2 {
     width: 90%;
     height: 100px;
@@ -213,9 +167,6 @@
   }
   .order_center li.li_two span.span_bottom a {
     color:#000;
-  }
-  .gongz p {
-    color:#6d7776;
   }
   a:hover {
     text-decoration: none;
@@ -343,18 +294,7 @@ import common from '../../common.js'
         };
         common.Ajax(url,type,data,success)
       },
-      //获取页数
-      getPage:function(){
-        var self=this;
-        for(var i=0;i<=self.totalPage;i++){
-          totalPage.push(i);
-        }
-      },
-      showList:function(event){
-        // //console.log();
-        $(event.target).parents("li").find("ul").toggleClass("hidelist");
-        $(event.target).parents("li").siblings().find("ul").addClass("hidelist")
-      },
+
       showSec:function(event){
         $(event.target).next().toggleClass("hidelist");
 
@@ -403,6 +343,12 @@ import common from '../../common.js'
       //增加分组
       addclassify:function(){
         var self=this;
+        if(self.name===null||self.name===''){
+          self.showWarn=true;
+          self.showMB=false;
+          self.warnText='分组名不能为空';
+          return
+        }
         var url='https://ym-a.top/cloud_code/ADD/product/group.do';
         var type='post';
         var data={

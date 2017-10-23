@@ -150,7 +150,7 @@
 				</div>
 				<div class="messagebox">
 					<span class="message-name star">失效时间：</span>
-					<input class="message-value" type="date" maxlength="20" name="" v-model='expireTime'>
+					<input class="message-value" type="date" maxlength="20" name="" v-model='expireTime' :min="startTime">
 				</div>
 				<div class="button-group">
 					<input class="delbutton" style="width: 90px;height: 34px;" type="button" name="" value='完成' @click='complete'>

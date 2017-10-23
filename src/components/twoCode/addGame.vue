@@ -141,7 +141,7 @@
 				</div>
 				<div class="gameMessage">
 					<span class="message-name">失效时间：</span>
-					<input class="message-value" type="date" v-model='invalid_time'>
+					<input class="message-value" type="date" v-model='invalid_time' :min='create_time'>
 				</div>
 				<input class="next" type="button" name="" value="完成" @click='complete'>
 			</div>

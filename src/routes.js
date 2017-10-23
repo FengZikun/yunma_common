@@ -18,40 +18,40 @@ const routes = [
   redirect:'login'
 },
 {
-    path:'/login',
-    component:login
-  },
-
-
-  adminrouter,
-
-  shouye,
-
-  twoCodeRouter,
-
-  product,
+  path:'/login',
+  component:login
+},
+{
+  path:'/union',
+  component:union,
+  children:[
   {
-    path:'/union',
-    component:union,
-    children:[
-    {
-      path:'',
-      component:bill
-    },
-    {
-      path:'bulletinBoard',
-      component:bulletinBoard
-    },
-    {
-      path:'bill',
-      component:bill
-    },
-    {
-      path:'wdBill',
-      component:wdBill
-    }
-    ]
+    path:'',
+    component:bill
+  },
+  {
+    path:'bulletinBoard',
+    component:bulletinBoard
+  },
+  {
+    path:'bill',
+    component:bill
+  },
+  {
+    path:'wdBill',
+    component:wdBill
   }
   ]
+},
+
+adminrouter,
+
+shouye,
+
+twoCodeRouter,
+
+product,
+
+]
 //导出路由集合
 export default routes

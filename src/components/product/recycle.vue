@@ -246,7 +246,7 @@ import common from '../../common.js'
         var type='post';
         var data={
           vendorId:self.vendorId,
-          deleteFlag:0,
+          deleteFlag:1,
           keyword:self.keyword
         };
         var success=function(res){

@@ -9,7 +9,7 @@
 					{{warnText}}
 				</div>
 				<div class="warnbottom">
-					<input type="button" name="" value="确定" @click='showWarn=false'>
+					<input type="button" class="delbutton" name="" value="确定" @click='showWarn=false'>
 				</div>
 			</div>
 		</div>
@@ -56,7 +56,7 @@
 					</ul>
 				</div>
 				<div style="text-align:center;">
-					<input type="button" class="delbutton" name="" value="确定" @click='confirm'>
+					<input type="button" class="delbutton delbutton2" name="" value="确定" @click='confirm'>
 				</div>
 			</div>
 		</div>
@@ -121,8 +121,8 @@
 					<input class="message-value" type="text" name="" v-model='mark'>
 				</div>
 				<div class="button-group">
-					<input class="delbutton" type="button" name="" value='确定' @click='submit'>
-					<router-link to='/twoCode/activity'><input class="delbutton" type="button" name="" value='取消'></router-link>
+					<input class="delbutton delbutton2" type="button" name="" value='确定' @click='submit'>
+					<router-link to='/twoCode/activity'><input class="delbutton delbutton2" type="button" name="" value='取消'></router-link>
 				</div>
 			</div>
 		</div>
@@ -419,7 +419,7 @@
 					self.warnText='请选择模板'
 					return
 				}
-				if(self.orderId===null){
+				if(self.orderId===null||self.orderId===''){
 					self.showWarn=true;
 					self.warnText='请选择订单'
 					return
@@ -610,7 +610,7 @@
 		margin-top: 100px;
 		margin-bottom: 40px;
 	}
-	.delbutton{
+	.delbutton2{
 		width: 90px;
 		height: 34px;
 	}

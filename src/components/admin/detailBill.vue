@@ -1,6 +1,9 @@
 <template>
 	<div>
 		<div class="right-main">
+			<div class="return">
+				<router-link to='/admin/enterpriseBill'>返回</router-link>
+			</div>
 			<div class="right-main-bottom">
 				<div class="button-group">
 					<span>筛选时间：</span>
@@ -183,9 +186,15 @@ export default{
 	margin-top: 10px;
 }
 .button-group{
-	margin-top: 20px;
+	margin-top: 40px;
 }
 .pro-li-span{
 	width: 10.6%;
+}
+.return{
+	position: absolute;
+	top: 4%;
+	right: 5%;
+	margin: 0;
 }
 </style>

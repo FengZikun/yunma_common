@@ -204,7 +204,6 @@
 						vendorId:self.datas.vendorId
 					};
 					var success=function(res){
-						console.log(res);
 						self.ruleName=res.ruleName;
 						self.selectId=res.productId||res.orderId;
 						self.ruleType=res.ruleType;
@@ -351,7 +350,6 @@
 		    			eveAddIntegralCount:self.eveAddIntegralCount,
 		    			eveGetExchangesCount:self.eveGetExchangesCount
 		    		}
-		    		console.log(data)
 		    		var success=function(res){
 		    			if(res.errorCode===0){
 		    				router.push({path:'/twoCode/signIn'})
@@ -378,7 +376,6 @@
 		    		eveAddIntegralCount:self.eveAddIntegralCount,
 		    		eveGetExchangesCount:self.eveGetExchangesCount
 		    	}
-		    	console.log(data)
 		    	var success=function(res){
 		    		if(res.errorCode===0){
 		    			router.push({path:'/twoCode/signIn'})

@@ -58,7 +58,7 @@
 							<span class="pro-li-span">规则名</span>
 							<span class="pro-li-span">发放内容</span>
 							<span class="pro-li-span">发放载体</span>
-							<span class="pro-li-span">状态</span>
+							<!-- <span class="pro-li-span">状态</span> -->
 							<span class="pro-li-span">发放周期</span>
 							<span class="pro-li-span">操作</span>
 						</li>
@@ -72,9 +72,9 @@
 								<span class="chakan"></span>
 								
 							</span>
-							<span class="pro-li-span">
+							<!-- <span class="pro-li-span">
 								<span class="zanting"></span>
-							</span>
+							</span> -->
 							<span class="pro-li-span" v-if='pro.timeType==0'>
 								<span>长期</span>
 							</span>
@@ -218,7 +218,7 @@
 		margin-top: 55px;
 	}
 	.pro-li-span{
-		width: 13.7%;
+		width: 15.7%;
 	}
 	.yulan1{
 		position: relative;

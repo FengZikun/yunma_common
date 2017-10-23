@@ -154,8 +154,8 @@
 </style>
 <!--<script src='../assets/js/china.js'></script>-->
 <script>
-  import '../../assets/js/echarts.js'
-  import '../../assets/js/china.js'
+  // import '../../assets/js/echarts.js'
+  // import '../../assets/js/china.js'
   import common from '../../common.js'
   export default{
     data(){

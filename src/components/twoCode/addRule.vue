@@ -123,6 +123,7 @@
 </template>
 
 <script>
+	import AMap from 'AMap'
 	import common from '../../common.js'
 	import router from '../../router.js'
 	export default{
@@ -168,6 +169,7 @@
 				initData:null,
 				cityN:'',
 				cityName:[],
+				tests:0
 			}
 		},
 		watch:{
@@ -178,15 +180,19 @@
 		props:['datas'],
 		methods:{
       		init:function(){
+      			var self=this;self.area()
+      		},
+      		test:function(){
       			var self=this;
-      			$.getScript('https://webapi.amap.com/maps?v=1.4.0&key=7dea085abd95f70637b9359db6780585&plugin=AMap.DistrictSearch',self.area)
-      			$.getScript('https://webapi.amap.com/demos/js/liteToolbar.js');
+      			self.tests+=1;
+      			if(self.tests==2){
+      				self.area();
+      			}
       		},
       		// 省市区
       		area:function(){
       			var self=this;
               	var AMap=require('AMap');
-              	// console.log(AMap)
 			    self.citySelect = document.getElementById('city');
 			    self.districtSelect = document.getElementById('district');
 			    self.areaSelect = document.getElementById('street');
@@ -397,7 +403,7 @@
 			},
 
 		},
-	    mounted:function(){
+	    created:function(){
 		      this.init();
 		    },
 	}

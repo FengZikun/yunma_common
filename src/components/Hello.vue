@@ -343,6 +343,7 @@
       ...mapMutations({
         getVendorId:'vendorId/getVendorId',
         getCheckComment:'vendorId/getCheckComment',
+        logOut:'vendorId/logOut'
       }),
       init:function(){
         var self=this;
@@ -362,7 +363,8 @@
         var success=function(res){
           self.$emit('tuichu');
           self.getVendorId(null);
-          self.getCheckComment(null)
+          self.getCheckComment(null);
+          self.logOut();
 
         };
         common.Ajax(url,type,data,success)

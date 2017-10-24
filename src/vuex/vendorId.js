@@ -18,6 +18,12 @@ const vendorId={
 		},
 		ifTest(state,data){
 			state.isTest=data;
+		},
+		logOut(state){
+			state.vendorId=null;
+			state.checkComment=null;
+			state.userId=null;
+			state.isTest=null;
 		}
 	}
 }

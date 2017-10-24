@@ -9,7 +9,7 @@
             {{warnText}}
           </div>
           <div class="warnbottom">
-            <input type="button" class="delbutton" name="" value="确定" @click='showWarn=false'>
+            <input type="button" name="" value="确定" @click='showWarn=false'>
           </div>
         </div>
       </div>
@@ -138,7 +138,7 @@
 				</div>
 				<div class="right-main-bottom">
 					<div class="button-group">
-						<router-link to='/admin/newActivities'>
+						<router-link to='/union/newActivities'>
 							<div class="add-pro">
 								+&nbsp;新建领券活动
 							</div>

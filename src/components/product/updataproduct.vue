@@ -1,5 +1,19 @@
 <template>
 	<div class="right-main">
+
+		<div class="mengban" v-show='showWarn'>
+			<div class="warn">
+				<div class="classifyHeader">
+					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
+				</div>
+				<div class="warnmain">
+					{{warnText}}
+				</div>
+				<div class="warnbottom">
+					<input type="button" class="delbutton" name="" value="确定" @click='showWarn=false'>
+				</div>
+			</div>
+		</div>
 		<div class="step1" v-bind:class='{hidestep:onehide}'>
 			<div class="top">
 				<img src="../../assets/img/chanpin_buzhou1.png">
@@ -22,37 +36,41 @@
 				<div class="nongyao" v-if='pesticide'>
 					<div class="pesticideMessage">
 						<span class="pesticide-name star">产品农药登记类别代码：</span>
-						<input id="PD" class="pesticide-value" type="radio" name="pesticide1" v-bind:value='1'>
+						<input id="PD" class="pesticide-value" type="radio" name="pesticide1" v-bind:value='1' v-model='pesticideType'>
 						<label for="PD">
 							<span>PD</span>
 						</label>
-						<input id="WP" class="pesticide-value" type="radio" name="pesticide1" v-bind:value='2'>
+						<input id="WP" class="pesticide-value" type="radio" name="pesticide1" v-bind:value='2' v-model='pesticideType'>
 						<label for="WP">
 							<span>WP</span>
 						</label>
+						<input id="sf" class="pesticide-value" type="radio" name="pesticide1" v-bind:value='3' v-model='pesticideType'>
+						<label for="sf">
+							<span>临时登记</span>
+						</label>
+					</div>
+					<div class="pesticideMessage">
+						<span class="pesticide-name star">农药登记证号：</span>
+						<input class="pesticide-value" type="text" name="" placeholder="后六位数字" v-model='pesticideNum' maxlength="6">
 					</div>
 					<div class="pesticideMessage">
 						<span class="pesticide-name star">生产类型：</span>
-						<input id="typeA" class="pesticide-value" type="radio" name="pesticide2" v-bind:value='1'>
+						<input id="typeA" class="pesticide-value" type="radio" name="pesticide2" v-bind:value='1' v-model='pesticideProduceType'>
 						<label for="typeA">
 							<span>农药登记证持有人生产</span>
 						</label>
-						<input id="typeB" class="pesticide-value" type="radio" name="pesticide2" v-bind:value='2'>
+						<input id="typeB" class="pesticide-value" type="radio" name="pesticide2" v-bind:value='2' v-model='pesticideProduceType'>
 						<label for="typeB">
 							<span>委托加工</span>
 						</label>
-						<input id="typeC" class="pesticide-value" type="radio" name="pesticide2" v-bind:value='3'>
+						<input id="typeC" class="pesticide-value" type="radio" name="pesticide2" v-bind:value='3' v-model='pesticideProduceType'>
 						<label for="typeC">
 							<span>委托分装</span>
 						</label>
 					</div>
 					<div class="pesticideMessage">
-						<span class="pesticide-name star">农药登记证号：</span>
-						<input class="pesticide-value" type="text" name="" placeholder="后六位数字">
-					</div>
-					<div class="pesticideMessage">
 						<span class="pesticide-name">产品规格码：</span>
-						<input class="pesticide-value" type="text" name="" placeholder="企业自行编制">
+						<input class="pesticide-value" type="number" name="" placeholder="企业自行编制" v-model='pesticideProductCode'>
 					</div>
 				</div>
 				<div class="radio">
@@ -143,19 +161,6 @@
 							<input class="delbutton" type="button" name="" value="提交" v-else @click='upLoad1'>
 							<input class="delbutton" type="button" name="" value="返回" @click='local=true'>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="mengban" v-show='showWarn'>
-				<div class="warn">
-					<div class="classifyHeader">
-						<span style="display:block;height:48px;line-height:48px;">操作提示</span>
-					</div>
-					<div class="warnmain">
-						{{warnText}}
-					</div>
-					<div class="warnbottom">
-						<input type="button" name="" value="确定" @click='showWarn=false'>
 					</div>
 				</div>
 			</div>
@@ -618,24 +623,28 @@ export default{
 			savename:'',
 			editorcontent:'',
 			selectimg:[],
-				imgtotalPages:'',		//图片总页数
-				imgcurrentPage:'',		//图片当前页
-				chooselist:{},			//已选中图片
-				chooselist2:{},			//已选中图片2
-				local:true,				//本地上传开关
-				imgSrc:'',
-				parametername:'',		//参数名
-				parametervalue:'',		//参数值
-				classifyData:null,		//分组
-				selected:{'children':null},
-				chilselected:null,
-				showWarn:false,
-				warnText:null,
-				pesticide:false
-			}
-		},
-		props:['productid','vendorId'],
-		methods:{
+			imgtotalPages:'',		//图片总页数
+			imgcurrentPage:'',		//图片当前页
+			chooselist:{},			//已选中图片
+			chooselist2:{},			//已选中图片2
+			local:true,				//本地上传开关
+			imgSrc:'',
+			parametername:'',		//参数名
+			parametervalue:'',		//参数值
+			classifyData:null,		//分组
+			selected:{'children':null},
+			chilselected:null,
+			showWarn:false,
+			warnText:null,
+			pesticide:false,
+			pesticideType:null,
+			pesticideNum:null,
+			pesticideProduceType:null,
+			pesticideProductCode:null
+		}
+	},
+	props:['productid','vendorId'],
+	methods:{
 			//进入step1
 			init:function(){
 				var self=this;
@@ -668,7 +677,11 @@ export default{
 						var savename=self.productName;
 						self.savename=savename;
 						self.rowId=res.rowId;
-						self.selected.name=res.rowName
+						self.selected.name=res.rowName;
+						self.pesticideType=res.pesticideType;
+						self.pesticideNum=res.pesticideNum;
+						self.pesticideProduceType=res.pesticideProduceType;
+						self.pesticideProductCode=res.pesticideProductCode;
 						self.showStep2();
 					}
 				//调用ajax
@@ -686,36 +699,40 @@ export default{
 				var self=this;
 				self.chooseClassify();
 				self.showMB=false;
-				if(self.productType==''){
-					alert("请选择商品类目");
-				}else if(self.productSpe==''){
-					alert("请选择商品类型");
-				}else{
-					this.onehide=true;
-					this.twohide=false;
-					this.threehide=true;
-					$('body').scrollTop(0);
+				if(self.pesticide){
+					if(self.pesticideType===null){
+						self.showWarn=true;
+						self.warnText="请选择农药登记类别代码"
+						return
+					}
+					if(self.pesticideNum===null){
+						self.showWarn=true;
+						self.warnText="请输入农药登记证号的后六位数字"
+						return
+					}
+					if(self.pesticideProduceType===null){
+						self.showWarn=true;
+						self.warnText="请选择生产类型"
+						return
+					}
 				}
+				if(self.productType==''){
+					self.showWarn=true;
+					self.warnText="请选择商品类目"
+					return
+				}
+				if(self.productSpe==''){
+					self.showWarn=true;
+					self.warnText="请选择商品类型"
+					return
+				}
+				this.onehide=true;
+				this.twohide=false;
+				this.threehide=true;
+				$('body').scrollTop(0);
 				
 			},
-			//进入step3
-			// showStep3:function(){
-			// 	var self=this;
-			// 	if(self.productName==''){
-			// 		self.showWarn=true;
-			// 		self.warnText='请输入产品名';
-			// 		return
-			// 	}if(self.imgId==''){
-			// 		self.showWarn=true;
-			// 		self.warnText='请上传图片';
-			// 		return
-			// 	}
-			// 	self.onehide=true;
-			// 	self.twohide=true;
-			// 	self.threehide=false;
-			// 	$('body').scrollTop(0);
 
-			// },
 			choosed:function(){
 				var self=this;
 				if($(event.target)[0].className!=="ul"){
@@ -862,7 +879,11 @@ export default{
 					productBewrite:self.productBewrite,
 					productDetail:self.editorcontent,
 					productType:self.productType,
-					productSpe:self.productSpe
+					productSpe:self.productSpe,
+					pesticideType:self.pesticideType,
+					pesticideNum:self.pesticideNum,
+					pesticideProduceType:self.pesticideProduceType,
+					pesticideProductCode:self.pesticideProductCode
 				};
 				var success=function(res){
 					if(res.statuscode===1){

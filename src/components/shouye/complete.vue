@@ -48,6 +48,12 @@
 		<div class="button-group">
 			<input type="button" class="delbutton delbutton2" name="" value='提交' @click='commit'>
 		</div>
+		<div v-if='checkComment!==null'>
+			<p>
+				<span>审核未通过原因：</span>
+				<span>{{checkComment}}</span>
+			</p>
+		</div>
 	</div>
 </template>
 
@@ -70,6 +76,7 @@ export default{
 		...mapState({
 			vendorId:state=>state.vendorId.vendorId,
 			userId:state=>state.vendorId.userId,
+			checkComment:state=>state.vendorId.checkComment
 		})
 	},
 	methods:{

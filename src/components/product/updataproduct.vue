@@ -739,7 +739,6 @@ export default{
 					self.productType=$(event.target).text();
 					$(event.target).addClass('listselected');
 					$(event.target).parent().siblings().find('li').removeClass('listselected');
-						// console.log(11)
 						if(self.productType==='农药'){
 							self.pesticide=true;
 						}else{

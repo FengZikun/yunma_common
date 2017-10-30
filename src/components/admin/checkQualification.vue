@@ -119,7 +119,6 @@ export default{
 				userId:self.userId
 			}
 			var success=function(res){
-				console.log(res)
 				self.resData=res;
 				self.tradeMarkImgUrl=res.tradeMarkImgUrl;
 				self.tradeMarkLicense=res.tradeMarkLicense;
@@ -140,22 +139,19 @@ export default{
 		//审核通过
 		pass(){
 			var self=this;
-			var url='https://ym-a.top/cloud_code/POST/user/passCheckingUser.do';
-			var type='get';
-			var data={
-				userId:self.userId
+			if(self.tradeMarkImgUrl===null){
+				self.showWarn=true;
+				self.warnText='企业必须上传营业执照和商标注册证'
+				return
 			}
-			var success=function(res){
-				if(res.errorCode===0){
-					self.showWarn=true;
-					self.warnText="是否确定通过审核？"
-					self.sure=true;
-				}else{
-					self.showWarn=true;
-					self.warnText=res.msg;
-				}
+			if(self.tradeMarkLicense===null){
+				self.showWarn=true;
+				self.warnText='企业必须上传营业执照和商标注册证'
+				return
 			}
-			common.Ajax(url,type,data,success)
+			self.showWarn=true;
+			self.warnText="是否确定通过审核？"
+			self.sure=true;
 		},
 
 		//未通过原因
@@ -185,7 +181,21 @@ export default{
 
 		//确认
 		commit(){
-			router.go(-1);
+			var self=this;
+			var url='https://ym-a.top/cloud_code/POST/user/passCheckingUser.do';
+			var type='get';
+			var data={
+				userId:self.userId
+			}
+			var success=function(res){
+				if(res.errorCode===0){
+					router.go(-1);
+				}else{
+					self.showWarn=true;
+					self.warnText=res.msg;
+				}
+			}
+			common.Ajax(url,type,data,success)
 		}
 	},
 	created(){

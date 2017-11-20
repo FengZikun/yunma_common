@@ -295,15 +295,6 @@
     },
     props:['datas'],
     methods:{
-      // init:function(){
-      //   this.$http.get('https://ym-a.top/cloud_code/GET/product/group.do?detailId=1').then(function(res){
-      //     //console.log('请求成功');
-      //     // res=JSON.stringify(res);
-      //     //console.log(res.body);
-      //   },function(res){
-      //     //console.log('');
-      //   })
-      // },
       getdata:function(id){
         this.goodsid=id;
       },

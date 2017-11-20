@@ -895,6 +895,7 @@
                     dataType: 'json',
                     success: function (res) {
                       //console.log(res);
+                      console.log(res);
                       alert('创建成功')
                       router.push({path:'/twoCode/briefCode'})
                     },

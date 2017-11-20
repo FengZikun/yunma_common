@@ -32,7 +32,7 @@
         <p class="mbtitle">新增二级分类</p>
         <div class="addmessage">
           <span class="message-name star">名称分类：</span>
-          <input class="message-value" type="text" name="" v-model='name'>
+          <input class="message-value" type="text" name="" v-model='name' maxlength="8">
           <span class="message-after">限8个字符</span>
         </div>
         <div style="margin-top: 50px;">
@@ -91,170 +91,7 @@
           </div>
   </div>
 </template>
-<style scoped>
-/*@import "../../assets/css/common.css";*/
-  .center2 {
-    width: 90%;
-    height: 100px;
-    margin:10px auto 30px;
-  }
-  .center2 .span_first {
-    text-align: center;
-    display: inline-block;
-    width: 195px;
-    height: 35px;
-    background-color: #43C343;
-    margin-left: 0;
-    margin-top: 60px;
-  }
-  .center2 input {
-    float: left;
-    width: 200px;
-    height: 35px;
-    border:1px solid #EAEDF0;
-    border-radius: 5px;
-    padding-left: 10px;
-    margin-left: 56%;
-    margin-top: -6px;
-  }
-  .center2 span {
-    display: inline-block;
-    float: left;
-    width: 70px;
-    height: 35px;
-    background-color: #00BAFF;
-    color:#fff;
-    margin-left: 30px;
-    border-radius: 8px;
-    line-height: 35px;
-    font-size: 18px;
-  }
-  .order_center {
-    width: 90%;
-    min-height: 690px;
-    margin: 0 auto;
-  }
-  .order_center ul {
-    width: 100%;
-  }
-  .order_center li.li_one {
-    width: 100%;
-    height: 50px;
-    background-color: #E7EBEE;
-  }
-  .order_center li.li_one span {
-    display: inline-block;
-    width: 12.5%;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-  }
-  .order_center li.li_one span.span_bottom {
-    display: inline-block;
-    width: 12.5%;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-  }
-  .order_center li.li_two span.span_bottom {
-    display: inline-block;
-    width: 12.5%;
-    height: 80px;
-    line-height: 60px;
-    text-align: center;
-    padding-top: 8px;
-    overflow: hidden;
-  }
-  .order_center li.li_two span.span_bottom a {
-    color:#000;
-  }
-  a:hover {
-    text-decoration: none;
-  }
-  p:hover {
-    text-decoration: none;
-  }
-  .order_center_ul{
-    width: 100%;
-    padding-left: 0;
-  }
-  .pro_info_handle{
-    display: inline-block;
-  }
-  .pro_info{
-    width: 100%;
-    /*background-color: #eefaff;*/
-    /*border-radius: 8px;*/
-    text-align: left;
-    margin-bottom: 30px;
-  }
-  .bac_color{
-    width: 100%;
-    height: 50px;
-    background-color: #eefaff;
-    border-radius: 8px;
 
-  }
-  .pro_info > span{
-    position: absolute;
-    height: 50px;
-    line-height: 50px;
-  }
-  .pro_info_arrow{
-    
-    
-  }
-  .pro_info_group{
-    left: 20%;
-    position: absolute;
-    height: 50px;
-    line-height: 50px;
-  }
-  .pro_info_num{
-    left: 40%;
-    position: absolute;
-    height: 50px;
-    line-height: 50px;
-  }
-  .pro_info_handle{
-    position: absolute;
-    right: 20%;
-    position: absolute;
-    height: 50px;
-    line-height: 50px;
-  }
-  .pro_info_handle span{
-    color: #7cb5ef;
-  }
-  .sec_ul{
-    width: 100%;
-  }
-  .sec_pro_info{
-    width: 100%;
-    height: 50px;
-    margin-top: 20px;
-    border-radius: 8px;
-    border:1px solid #b7b7b9;
-  }
-  .select{
-    color:#00baff;
-  }
-  .page-num{
-    height: 138px;
-  }
-  .addmessage{
-    text-align: left;
-    margin-top: 20px;
-  }
-  .message-name{
-    display: inline-block;
-    width: 80px;
-    margin-left: 20px;
-    text-align: right;
-    color: #666;
-    vertical-align: top;
-  }
-</style>
 <script>
 import common from '../../common.js'
   export default{
@@ -426,3 +263,167 @@ import common from '../../common.js'
     }
   }
 </script>
+<style scoped>
+/*@import "../../assets/css/common.css";*/
+  .center2 {
+    width: 90%;
+    height: 100px;
+    margin:10px auto 30px;
+  }
+  .center2 .span_first {
+    text-align: center;
+    display: inline-block;
+    width: 195px;
+    height: 35px;
+    background-color: #43C343;
+    margin-left: 0;
+    margin-top: 60px;
+  }
+  .center2 input {
+    float: left;
+    width: 200px;
+    height: 35px;
+    border:1px solid #EAEDF0;
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-left: 56%;
+    margin-top: -6px;
+  }
+  .center2 span {
+    display: inline-block;
+    float: left;
+    width: 70px;
+    height: 35px;
+    background-color: #00BAFF;
+    color:#fff;
+    margin-left: 30px;
+    border-radius: 8px;
+    line-height: 35px;
+    font-size: 18px;
+  }
+  .order_center {
+    width: 90%;
+    min-height: 690px;
+    margin: 0 auto;
+  }
+  .order_center ul {
+    width: 100%;
+  }
+  .order_center li.li_one {
+    width: 100%;
+    height: 50px;
+    background-color: #E7EBEE;
+  }
+  .order_center li.li_one span {
+    display: inline-block;
+    width: 12.5%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+  }
+  .order_center li.li_one span.span_bottom {
+    display: inline-block;
+    width: 12.5%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+  }
+  .order_center li.li_two span.span_bottom {
+    display: inline-block;
+    width: 12.5%;
+    height: 80px;
+    line-height: 60px;
+    text-align: center;
+    padding-top: 8px;
+    overflow: hidden;
+  }
+  .order_center li.li_two span.span_bottom a {
+    color:#000;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  p:hover {
+    text-decoration: none;
+  }
+  .order_center_ul{
+    width: 100%;
+    padding-left: 0;
+  }
+  .pro_info_handle{
+    display: inline-block;
+  }
+  .pro_info{
+    width: 100%;
+    /*background-color: #eefaff;*/
+    /*border-radius: 8px;*/
+    text-align: left;
+    margin-bottom: 30px;
+  }
+  .bac_color{
+    width: 100%;
+    height: 50px;
+    background-color: #eefaff;
+    border-radius: 8px;
+
+  }
+  .pro_info > span{
+    position: absolute;
+    height: 50px;
+    line-height: 50px;
+  }
+  .pro_info_arrow{
+    
+    
+  }
+  .pro_info_group{
+    left: 20%;
+    position: absolute;
+    height: 50px;
+    line-height: 50px;
+  }
+  .pro_info_num{
+    left: 40%;
+    position: absolute;
+    height: 50px;
+    line-height: 50px;
+  }
+  .pro_info_handle{
+    position: absolute;
+    right: 20%;
+    position: absolute;
+    height: 50px;
+    line-height: 50px;
+  }
+  .pro_info_handle span{
+    color: #7cb5ef;
+  }
+  .sec_ul{
+    width: 100%;
+  }
+  .sec_pro_info{
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    border-radius: 8px;
+    border:1px solid #b7b7b9;
+  }
+  .select{
+    color:#00baff;
+  }
+  .page-num{
+    height: 138px;
+  }
+  .addmessage{
+    text-align: left;
+    margin-top: 20px;
+  }
+  .message-name{
+    display: inline-block;
+    width: 80px;
+    margin-left: 20px;
+    text-align: right;
+    color: #666;
+    vertical-align: top;
+  }
+</style>

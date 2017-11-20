@@ -1,23 +1,23 @@
 <template>
   <div>
     <div class="mengban" v-show='showWarn'>
-        <div class="warn">
-          <div class="classifyHeader">
-            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-          </div>
-          <div class="warnmain">
-            {{warnText}}
-          </div>
-          <div class="warnbottom">
-            <input type="button" name="" value="确定" @click='showWarn=false'>
-          </div>
+      <div class="warn">
+        <div class="classifyHeader">
+          <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+        </div>
+        <div class="warnmain">
+          {{warnText}}
+        </div>
+        <div class="warnbottom">
+          <input type="button" name="" value="确定" @click='showWarn=false'>
         </div>
       </div>
+    </div>
     <div class="mengban" v-if='showMB'>
       <div class="proclassify" >
-      <div class="classifyHeader">
-            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-          </div>
+        <div class="classifyHeader">
+          <span style="display:block;height:48px;line-height:48px;">操作提示</span>
+        </div>
         <div class="tishi">
           若此订单同步生成溯源码，执行此操作会将溯源码一起删除，慎重！
         </div>
@@ -32,9 +32,9 @@
       <div class="right-main-bottom">
         <div class="button-group">
           <a href="javascript:void(0)" @click='addOrder'>
-          <div class="add-pro">
-            +&nbsp;新增订单
-          </div>
+            <div class="add-pro">
+              +&nbsp;新增订单
+            </div>
           </a>
         </div>
         <div class="my-form">
@@ -83,7 +83,7 @@
         </div>
       </div>
     </div>
-      <div class="modelBg modHid" id='info'>
+    <div class="modelBg modHid" id='info'>
       <div class="modelContent">
         正在加载请等待
       </div>
@@ -91,116 +91,116 @@
   </div>
 </template>
 <style scoped>
-  /*@import "../assets/css/common.css";*/
-  .right-main{
-    width: 95%;
-    height: 1310px;
-    background: #fff;
-    border-radius: 8px;
-    margin: auto;
-    margin-top: 44px;
-  }
-  .right-main-top{
-    width: 90%;
-    margin: auto;
-    padding-top: 60px;
-    text-align: left;
-  }
-  .right-main-top2,
-  .right-main-top3{
-    margin-left: 25px;
-    color: #b3b3b3;
-  }
-  .right-main-top-icon1{
-    width: 18px;
-    height: 18px;
-    background: url("../../assets/img/icon_tishi.png") no-repeat;
-    float: left;
-    margin-right: 8px;
-  }
-  .right-main-bottom{
-    width: 95%;
-    margin:auto;
-    text-align: left;
-  }
-  .button-group{
-    margin-top: 40px;
-  }
-  .pro-li:nth-of-type(1){
-    height: 60px;
-    line-height: 60px;
-  }
-  .pro-li:first-of-type .pro-li-span{
-    height: 60px;
-    line-height: 60px;
-  }
-  .pro-li-span{
-    width: 9%;
-  }
-  .last{
-    width: 18%;
-    overflow-wrap: break-word;
-    height: 72px;
-    line-height: 24px;
-    white-space: pre-wrap;
-  }
-  .last a{
-    display: inline-flex;
-  }
-  .warnbottom{
-    text-align: right;
-    position: relative;
-    top: 140px;
-    right: 50px;
-  }
-  .warnmain{
-    position: relative;
-    top: 70px;
-    text-align: center;
-  }
-  .classifyHeader{
-    width: 100%;
-    height: 48px;
-    background: #f6f8fc;
-    padding: 0 20px;
-    box-sizing: border-box;
-    position: relative;
-  }
-  .tishi{
-    text-align: center;
-  }
-  .modelBg{
-   position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2000;
-    background: rgba(0, 0, 0, 0.6);
-  }
-  .modelContent{
-    width: 420px;
-    height: 250px;
-    background: #fff;
-    position: relative;
-    top: 50%;
-    margin: auto;
-    margin-top: -125px;
-    text-align: center;
-    line-height: 250px;
-  }
-    .modHid {
-    display: none;
-  }
+/*@import "../assets/css/common.css";*/
+.right-main{
+  width: 95%;
+  height: 1310px;
+  background: #fff;
+  border-radius: 8px;
+  margin: auto;
+  margin-top: 44px;
+}
+.right-main-top{
+  width: 90%;
+  margin: auto;
+  padding-top: 60px;
+  text-align: left;
+}
+.right-main-top2,
+.right-main-top3{
+  margin-left: 25px;
+  color: #b3b3b3;
+}
+.right-main-top-icon1{
+  width: 18px;
+  height: 18px;
+  background: url("../../assets/img/icon_tishi.png") no-repeat;
+  float: left;
+  margin-right: 8px;
+}
+.right-main-bottom{
+  width: 95%;
+  margin:auto;
+  text-align: left;
+}
+.button-group{
+  margin-top: 40px;
+}
+.pro-li:nth-of-type(1){
+  height: 60px;
+  line-height: 60px;
+}
+.pro-li:first-of-type .pro-li-span{
+  height: 60px;
+  line-height: 60px;
+}
+.pro-li-span{
+  width: 9%;
+}
+.last{
+  width: 18%;
+  overflow-wrap: break-word;
+  height: 72px;
+  line-height: 24px;
+  white-space: pre-wrap;
+}
+.last a{
+  display: inline-flex;
+}
+.warnbottom{
+  text-align: right;
+  position: relative;
+  top: 140px;
+  right: 50px;
+}
+.warnmain{
+  position: relative;
+  top: 70px;
+  text-align: center;
+}
+.classifyHeader{
+  width: 100%;
+  height: 48px;
+  background: #f6f8fc;
+  padding: 0 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+.tishi{
+  text-align: center;
+}
+.modelBg{
+ position: fixed;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ z-index: 2000;
+ background: rgba(0, 0, 0, 0.6);
+}
+.modelContent{
+  width: 420px;
+  height: 250px;
+  background: #fff;
+  position: relative;
+  top: 50%;
+  margin: auto;
+  margin-top: -125px;
+  text-align: center;
+  line-height: 250px;
+}
+.modHid {
+  display: none;
+}
 </style>
 <script>
-  import common from '../../common.js'
-  import router from '../../router.js'
-  import {mapMutations} from 'vuex'
-  export default{
-    data(){
-      return{
-        childCon:'我是子页面',
+import common from '../../common.js'
+import router from '../../router.js'
+import {mapMutations} from 'vuex'
+export default{
+  data(){
+    return{
+      childCon:'我是子页面',
         chechednum:0,    //全选单选控制
         proInfo:[],      //信息数组
         totalPage:[],    //页码数组
@@ -219,7 +219,7 @@
     methods:{
       ...mapMutations([
         'changeType'
-      ]),
+        ]),
       init:function(currentPage){
         var self=this;
         var url='https://ym-a.top/cloud_code/GET/product/productInfoList.do';
@@ -306,9 +306,18 @@
         var id=$(event.target).attr('data-id');
         var url='https://ym-a.top/cloud_code/POST/securityCode/createSecurityCode.do';
         var type='post';
-        var data={
-          orderId:id
-        };
+        if(self.datas.vendorId==231){
+          var data={
+            orderId:id,
+            addingNum:2
+          }
+          console.log(self.datas.vendorId)
+        }else{
+          var data={
+            orderId:id
+          };
+        }
+        
         var success=function(res){
           $('#info').addClass('modHid')
           if(res.errorCode===0){
@@ -359,12 +368,12 @@
         form.attr('target','');  
         form.attr('method','post');  
         form.attr('action',downloadURL);  
-                              
+
         var input1 = $('<input>');   
         input1.attr('type','hidden');   
         input1.attr('name','orderId');   
         input1.attr('value',id);    
-          
+
         $('body').append(form);  //将表单放置在web中  
         form.append(input1);   //将查询参数控件提交到表单上  
         form.submit();   //表单提交  
@@ -386,4 +395,4 @@
       this.init();
     }
   }
-</script>
+  </script>

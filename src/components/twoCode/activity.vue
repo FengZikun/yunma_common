@@ -119,7 +119,7 @@
 
               </ul>
             </div>
-            <div class="modelBg modHid">
+            <div class="mengban modHid">
               <div class="modelContent">
                 <div class="phoneHeader"></div>
                 <div class="phoneTitle"></div>
@@ -172,7 +172,7 @@
         .time:nth-of-type(2){
           white-space:pre-wrap; 
         }
-        .modelBg{
+        .mengban{
          position: fixed;
          top: 0;
          right: 0;
@@ -367,7 +367,7 @@
       // 预览
       showKuang(event){
         this.frameSrc='https://ym-a.top/wx/'+$(event.target).attr('data-url');
-        $('.modelBg').removeClass('modHid');
+        $('.mengban').removeClass('modHid');
       },
       // 隐藏预览
       hideKuang(event){

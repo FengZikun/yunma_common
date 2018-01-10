@@ -700,32 +700,26 @@ export default{
 				self.chooseClassify();
 				self.showMB=false;
 				if(self.pesticide){
-					if(self.pesticideType===null){
+					let errormsg = common.validator([
+						{value:self.pesticideType, name:'isEmpty',errormsg:'请选择农药登记类别代码'},
+						{value:self.pesticideNum, name:'isEmpty', errormsg:'请输入农药登记证号的后六位数字'},
+						{value:self.pesticideProduceType, name:'isEmpty', errormsg:'请选择生产类型'}
+						]);
+					if(errormsg){
 						self.showWarn=true;
-						self.warnText="请选择农药登记类别代码"
-						return
-					}
-					if(self.pesticideNum===null){
-						self.showWarn=true;
-						self.warnText="请输入农药登记证号的后六位数字"
-						return
-					}
-					if(self.pesticideProduceType===null){
-						self.showWarn=true;
-						self.warnText="请选择生产类型"
+						self.warnText=errormsg;
 						return
 					}
 				}
-				if(self.productType==''){
-					self.showWarn=true;
-					self.warnText="请选择商品类目"
-					return
-				}
-				if(self.productSpe==''){
-					self.showWarn=true;
-					self.warnText="请选择商品类型"
-					return
-				}
+				let errormsg = common.validator([
+						{value:self.productType, name:'isEmpty',errormsg:'请选择商品类目'},
+						{value:self.productSpe, name:'isEmpty', errormsg:'请选择商品类型'}
+						]);
+					if(errormsg){
+						self.showWarn=true;
+						self.warnText=errormsg;
+						return
+					}
 				this.onehide=true;
 				this.twohide=false;
 				this.threehide=true;
@@ -739,14 +733,14 @@ export default{
 					self.productType=$(event.target).text();
 					$(event.target).addClass('listselected');
 					$(event.target).parent().siblings().find('li').removeClass('listselected');
-						if(self.productType==='农药'){
-							self.pesticide=true;
-						}else{
-							self.pesticide=false;
-						}
+					if(self.productType==='农药'){
+						self.pesticide=true;
+					}else{
+						self.pesticide=false;
 					}
+				}
 
-				},
+			},
 			//选择产品分类
 			chooseClassify:function(){
 				var self=this;
@@ -792,13 +786,13 @@ export default{
 			//提交数据
 			complete:function(){
 				var self=this;
-				if(self.productName==''){
+				var errormsg = common.validator([
+					{value:self.productName, name:'isEmpty',errormsg:'请输入产品名'},
+					{value:self.imgId, name:'isEmpty', errormsg:'请上传图片'}
+					]);
+				if(errormsg){
 					self.showWarn=true;
-					self.warnText='请输入产品名';
-					return
-				}if(self.imgId==''){
-					self.showWarn=true;
-					self.warnText='请上传图片';
+					self.warnText=errormsg;
 					return
 				}
 				//修改

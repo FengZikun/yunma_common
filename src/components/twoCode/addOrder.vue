@@ -178,24 +178,15 @@
 			//提交
 			tijiao:function(){
 				var self=this;
-				if(self.productName===null){
+				let errormsg = common.validator([
+					{value:self.productName, name:'isEmpty', errormsg:'请选择产品'},
+					{value:self.productCount, name:'isEmpty', errormsg:'请输入产品个数'},
+					{value:self.expiryDate, name:'isEmpty', errormsg:'请定义有效时间'},
+					{value:self.referencePrice, name:'isEmpty', errormsg:'请输入参考价格'}
+					])
+				if(errormsg){
 					self.showWarn=true;
-					self.warnText="请选择产品"
-					return
-				}
-				if(self.productCount===null){
-					self.showWarn=true;
-					self.warnText="请输入产品个数"
-					return
-				}
-				if(self.expiryDate===null){
-					self.showWarn=true;
-					self.warnText="请定义有效时间"
-					return
-				}
-				if(self.referencePrice===null){
-					self.showWarn=true;
-					self.warnText="请输入参考价格"
+					self.warnText=errormsg;
 					return
 				}
 				var url='https://ym-a.top/cloud_code/POST/product/productOrder.do';

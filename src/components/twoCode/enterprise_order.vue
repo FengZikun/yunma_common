@@ -1,18 +1,5 @@
 <template>
   <div>
-    <div class="mengban" v-show='showWarn'>
-      <div class="warn">
-        <div class="classifyHeader">
-          <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-        </div>
-        <div class="warnmain">
-          {{warnText}}
-        </div>
-        <div class="warnbottom">
-          <input type="button" name="" value="确定" @click='showWarn=false'>
-        </div>
-      </div>
-    </div>
     <div class="mengban" v-if='showMB'>
       <div class="proclassify" >
         <div class="classifyHeader">
@@ -210,16 +197,15 @@ export default{
         currentPage:'',  //当前页
         totalPages:'',    //总页数
         keyword:'',
-        delOrder:null,
-        showWarn:false,
-        warnText:null
+        delOrder:null
       }
     },
     props:['datas'],
     methods:{
-      ...mapMutations([
-        'changeType'
-        ]),
+      ...mapMutations({
+        changeType:'b/changeType',
+        show:'warn/show'
+        }),
       init:function(currentPage){
         var self=this;
         var url='https://ym-a.top/cloud_code/GET/product/productInfoList.do';
@@ -259,8 +245,7 @@ export default{
           self.changeType('b');
           router.push({path:'detail'})
         }else{
-          self.showWarn=true;
-          self.warnText='请先生成二维码'
+          self.show('请先生成二维码')
         }
         
       },
@@ -321,12 +306,10 @@ export default{
         var success=function(res){
           $('#info').addClass('modHid')
           if(res.errorCode===0){
-            self.showWarn=true;
-            self.warnText='已成功生成二维码'
+            self.show('已成功生成二维码')
             self.init();
           }else{
-            self.showWarn=true;
-            self.warnText=res.msg;
+            self.show(res.msg);
           }
         };
         common.Ajax(url,type,data,success)

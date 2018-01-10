@@ -1,5 +1,19 @@
 <template>
   <div>
+    <div class="mengban" v-show='showWarn'>
+      <div class="warn">
+        <div class="classifyHeader">
+          <span style="display:block;height:48px;line-height:48px;">下载红包记录</span>
+        </div>
+        <div class="warnmain">
+          {{warnText}}
+          <input type="month" name="" v-model='time'>
+        </div>
+        <div class="warnbottom">
+          <input type="button" class="delbutton" name="" value="确定" @click='down'>
+        </div>
+      </div>
+    </div>
     <div class='top-title'>
       <router-link to="/twoCode/hongbao" class='title-one'>红包</router-link>
       <router-link to="/twoCode/rule" class='title-two'>规则</router-link>
@@ -31,7 +45,7 @@
               <span class="pro-li-span">{{item.rechargeMoney}}</span>
               <span class="pro-li-span" style="line-height:35px">{{item.startTime}}<br>{{item.endTime}}</span>
               <span class="pro-li-span"><span class="icon2"></span></span>
-              <span class="pro-li-span"><img src="../../assets/img/icon_yulan.png"></span>
+              <span class="pro-li-span"><img src="../../assets/img/icon_yulan.png" @click='showWarn=true'></span>
             </li>
           </ul>
         </div>
@@ -102,6 +116,9 @@
         childCon:'我是子页面',
         currentPage:null,
         info:null,
+        showWarn:false,
+        warnText:'请选择下载日期',
+        time:null
       }
     },
     props:['datas'],
@@ -120,6 +137,14 @@
           self.info=res.result.data;
         };
         common.Ajax(url,type,data,success);
+      },
+
+      //下载红包记录
+      down(){
+        var self=this;
+        var url='https://ym-a.top/cloud_code/redenvWallet/downloadWithdrawalsRecord.do?vendorId=' + parseInt(self.datas.vendorId) + '&time=' + self.time;
+        window.location.href=url;
+        self.showWarn=false;
       }
     },
     created:function(){

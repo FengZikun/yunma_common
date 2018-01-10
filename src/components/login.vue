@@ -142,13 +142,14 @@
       },
       login:function(){
         var self=this;
-        if(self.username==''){
-          alert('请输入用户名')
+        var errormsg = common.validator([
+          {value:self.username, name:'isEmpty',errormsg:'请输入用户名'},
+          {value:self.password, name:'isEmpty', errormsg:'请输入密码'}
+          ]);
+        if(errormsg){
+          alert(errormsg);
           return
-        }else if(self.password==''){
-          alert('请输入密码')
-          return
-        }else{
+        }
 
           var url='https://ym-a.top/cloud_code/POST/user/login.do';
           var type='post';
@@ -190,18 +191,17 @@
 
             };
             common.Ajax(url,type,data,success)
-          }
 
         },
 
         //验证密码
         passwdTest:function(){
           var self=this;
-          var passwordReg=/^([0-9]|[a-zA-Z]){8,16}$/;
-          if(!passwordReg.test(self.password)){
-            $('.pswWarn').removeClass('hidelist');
-          }else{
+          var errormsg = common.validator([{value:self.password, name:'passwdTest'}])
+          if(errormsg){
             $('.pswWarn').addClass('hidelist');
+          }else{
+            $('.pswWarn').removeClass('hidelist');
           }
         }
       },

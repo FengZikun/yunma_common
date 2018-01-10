@@ -589,29 +589,16 @@ Vue.use(VueHtml5Editor, {
 			//进入step3
 			showStep3:function(){
 				var self=this;
-				if(self.name===null){
+				var errormsg = common.validator([
+					{value:self.name, name:'isEmpty',errormsg:'请输入礼品名称'},
+					{value:self.price, name:'isEmpty', errormsg:'请输入市面价值'},
+					{value:self.imgId, name:'isEmpty', errormsg:'请选择图片'},
+					{value:self.weight, name:'isEmpty', errormsg:'请输入重量'},
+					{value:self.total, name:'isEmpty', errormsg:'请输入库存'},
+					]);
+				if(errormsg){
 					self.showWarn=true;
-					self.warnText='请输入礼品名称';
-					return
-				}
-				if(self.price===null){
-					self.showWarn=true;
-					self.warnText='请输入市面价值';
-					return
-				}
-				if(self.imgId===null){
-					self.showWarn=true;
-					self.warnText='请选择图片';
-					return
-				}
-				if(self.weight===null){
-					self.showWarn=true;
-					self.warnText='请输入重量';
-					return
-				}
-				if(self.total===null){
-					self.showWarn=true;
-					self.warnText='请输入库存';
+					self.warnText=errormsg;
 					return
 				}
 				self.onehide=true;

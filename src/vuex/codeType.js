@@ -1,4 +1,5 @@
 const codeType={
+	namespaced:true,
 	state: {
 		type:null
 	},

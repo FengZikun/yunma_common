@@ -236,7 +236,7 @@
   import common from '../../common.js'
   import cityMap from '../../china-main-city-map.js'
   import province from '../../province.js'
-  // import AMap from 'AMap'
+  import AMap from 'AMap'
   export default{
     data(){
       return{
@@ -265,11 +265,11 @@
         var self=this;
         var script = document.createElement('script')
         script.type = 'text/javascript'
-        script.src = 'https://webapi.amap.com/maps?v=1.3&key=14cd613422535548e97ba6762496e8ea'
+        script.src = 'https://webapi.amap.com/maps?v=1.3&key=8edcd442508cea06b316bb343f758ecd'
         document.body.appendChild(script)
         var scriptHeat = document.createElement('script')
         scriptHeat.type = 'text/javascript'
-        scriptHeat.src = 'http://a.amap.com/jsapi_demos/static/resource/heatmapData.js'
+        scriptHeat.src = 'https://a.amap.com/jsapi_demos/static/resource/heatmapData.js'
         document.body.appendChild(scriptHeat)
         var url='https://ym-a.top/cloud_code/GET/mapCount/mapSecurityCount.do';
         var type='get';
@@ -507,6 +507,7 @@
           if(params.seriesName=='市'){
             var thisName=params.name;
             //引入高德地图
+            console.log(thisName)
             var url='https://ym-a.top/cloud_code/GET/mapCount/heatMapForDistr.do';
             var type='post';
             var data={
@@ -515,7 +516,6 @@
             }
             var success=function(res){
               self.heatData=res.data;
-              //console.log(self.heatData)
               var AMap=require('AMap')
               var map = new AMap.Map("heatmap", {
                 resizeEnable: true,
@@ -536,6 +536,7 @@
                   max: 100
                 });
               });
+              console.log(AMap)
               // map.destroy()
               function isSupportCanvas() {
                 var elem = document.createElement('canvas');

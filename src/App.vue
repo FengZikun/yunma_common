@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <warn></warn>
     <hello v-if='vendorId!=""&&userType!=99&&vendorId!=undefined' v-bind:vendorId='vendorId' v-on:tuichu='logout'></hello>
     <admin v-if='userType==99' v-bind:vendorId='vendorId' v-on:tuichu='logout'></admin>
     <!---->
@@ -19,6 +20,7 @@
   import hello from './components/Hello.vue'
   import admin from './components/HelloAdmin.vue'
   import common from './common.js'
+  import warn from './warn.vue'
   import md5 from 'js-md5'
   import router from './router'
 
@@ -69,7 +71,8 @@
     },
     components:{
       hello,
-      admin
+      admin,
+      warn
     },
   }
 </script>

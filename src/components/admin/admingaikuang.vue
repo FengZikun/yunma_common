@@ -338,12 +338,30 @@
         //配置series时，折线图的symbol属性不能为‘none’，否则鼠标无法点击到折线上的拐点
 
         myChart.on('click', function (params) {
-          console.log(params.name)
+          // console.log(params.name)
           self.showMB=true;
+          var cliDay = params.name.split('-');
+          var year = parseInt(cliDay[0]);
+          var month = parseInt(cliDay[1]);
+          var day = parseInt(cliDay[2]);
+          var cliDate = new Date(year, month, day);
+          var infoDay = new Date(cliDate.getTime() + 1000*60*60*24);
+          if(infoDay.getMonth()<10){
+            var infoMonth = '0' + infoDay.getMonth();
+          }else{
+            var infoMonth = infoDay.getMonth().toString();
+          }
+          if(infoDay.getDate()<10){
+            var infoD = '0' + infoDay.getDate();
+          }else{
+            var infoD = infoDay.getDate().toString();
+          }
+          var infoDate = infoDay.getFullYear() + '-' + infoMonth + '-' + infoD;
           var url='https://ym-a.top/cloud_code/GET/mapCount/getSystemScanInfo.do';
           var type='get';
           var data={
-            userId:1
+            userId:1,
+            sTime:infoDate
           };
           var success=function(res){
             if(res.errorCode===0){

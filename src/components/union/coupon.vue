@@ -1,18 +1,5 @@
 <template>
 	<div>
-	    <div class="mengban" v-show='showWarn'>
-        <div class="warn">
-          <div class="classifyHeader">
-            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-          </div>
-          <div class="warnmain">
-            {{warnText}}
-          </div>
-          <div class="warnbottom">
-            <input type="button" name="" value="确定" @click='showWarn=false'>
-          </div>
-        </div>
-      </div>
 		<div class="mengban" v-show='showMB'>
 			<div class="proclassify" >
 				<div class="classifyHeader">
@@ -260,6 +247,7 @@
 		import common from '../../common.js'
 		import QRCode from 'qrcodejs2'
 		import {mapState} from 'vuex'
+		import {mapMutations} from 'vuex'
 		export default{
 			data(){
 				return{
@@ -283,8 +271,6 @@
 			        couponId:null,
 			        productUrl:null,
 			        wenUrl:null,
-			        showWarn:false,
-	        		warnText:'',
 	        		productUrlWxd:null,
 	        		appIdWxd:null,
 	        		credentialsLocationWxd:null,
@@ -298,7 +284,8 @@
 			},
 		computed:{
 			...mapState({
-				vendorId:state=>state.vendorId.vendorId
+				vendorId:state=>state.vendorId.vendorId,
+				show:'warn/show'
 			})
 		},
 		methods:{
@@ -456,13 +443,11 @@
 		              self.sandBox();
 		            }
 		            else{
-		              self.showWarn=true;
-		              self.warnText=res.msg
+		              self.show(res.msg);
 		            }
 		          },
 		          error:function(res){
-		           self.showWarn=true;
-		              self.warnText='更新出错'
+		           self.show('更新出错');
 		          }
 		        });
 		        self.showMB1=false;
@@ -486,13 +471,11 @@
 		              self.sandBox();
 		            }
 		            else{
-		              self.showWarn=true;
-		              self.warnText=res.msg
+		              self.show(res.msg);
 		            }
 		          },
 		          error:function(res){
-		           self.showWarn=true;
-		              self.warnText='更新出错'
+		           self.show('更新出错');
 		          }
 		        });
 		        self.showMB1=false;
@@ -511,8 +494,7 @@
 					success:function(res){
 						if(jQuery.isEmptyObject(res)){
 							self.showMB4=false;
-							self.showWarn=true;
-							self.warnText='请先关联微信小店';
+							self.show('请先关联微信小店');
 							return
 						}
 						else if(res.appId!=''&res.credentialsLocation!=''&res.secret!=''&res.mchId!=''&res.apiKey!=''){
@@ -530,8 +512,7 @@
 						}
 						else {
 							self.showMB4=false;
-							self.showWarn=true;
-							self.warnText='请补全关联微信小店信息';
+							self.show('请补全关联微信小店信息');
 							return
 						}
 					},
@@ -565,8 +546,7 @@
 				};
 				var success=function(res){
 					if(res.statuscode==1){
-						self.showWarn=true;
-						self.warnText=res.msg;
+						self.show(res.msg);
 					}
 					self.init(1)
 				};

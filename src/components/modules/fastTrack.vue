@@ -38,9 +38,9 @@
 			}
 		},
 		methods:{
-			...mapMutations([
-				'delThis3'
-				]),
+			...mapMutations({
+				delThis3:'banner1/delThis3'
+				}),
 			delFastTrack(){
 				this.delThis3();
 				$('.box').removeClass('detail');

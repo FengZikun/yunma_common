@@ -1,18 +1,5 @@
 <template>
 	<div>
-		<div class="mengban" v-show='showWarn'>
-			<div class="warn">
-				<div class="classifyHeader">
-					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
-				</div>
-				<div class="warnmain">
-					{{warnText}}
-				</div>
-				<div class="warnbottom">
-					<input type="button" class="delbutton" name="" value="确定" @click='showWarn=false'>
-				</div>
-			</div>
-		</div>
 		<div class="mengban" v-if='showMB'>
 			<div class="choosepro" >
 				<div class="choosepro-top">
@@ -230,8 +217,6 @@
         		mark:null,
         		ifChangeMode:null,
         		myTime:1,
-        		showWarn:null,
-        		warnText:null,
         		frameSrc:'',
         		classics:null,
         	}
@@ -241,9 +226,10 @@
         	'detail-page2':detailPage2
         },
         methods:{
-        	...mapMutations([
-        		'compile'
-        		]),
+        	...mapMutations({
+        		compile:'banner1/compile',
+        		show:'warn/show'
+        		}),
 			//初始化
 			init1:function(){
 				var self=this;
@@ -405,23 +391,19 @@
 			submit:function(){
 				var self=this;
 				if(self.anti_fake_name===null){
-					self.showWarn=true;
-					self.warnText='请输入扫码页名称'
+					self.show('请输入扫码页名称');
 					return
 				}
 				if(self.myTime===2&&self.startTime===null){
-					self.showWarn=true;
-					self.warnText='请选择开始时间'
+					self.show('请选择开始时间')
 					return
 				}
 				if(self.modelSelected===null){
-					self.showWarn=true;
-					self.warnText='请选择模板'
+					self.show('请选择模板')
 					return
 				}
 				if(self.orderId===null||self.orderId===''){
-					self.showWarn=true;
-					self.warnText='请选择订单'
+					self.show('请选择订单')
 					return
 				}
 				//修改

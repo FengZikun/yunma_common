@@ -1,18 +1,5 @@
 <template>
 	<div class="right-main">
-		<div class="mengban" v-show='showWarn2'>
-			<div class="warn">
-				<div class="classifyHeader">
-					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
-				</div>
-				<div class="warnmain">
-					{{warnText}}
-				</div>
-				<div class="warnbottom">
-					<input type="button" class="delbutton" name="" value="确定" @click='showWarn2=false'>
-				</div>
-			</div>
-		</div>
 		<div class="mengban" v-show='queren'>
 			<div class="queren">
 				<p style="color:red;text-align:center;height:30px;line-height:30px;">优惠券生成后无法修改和删除，请确认输入的信息</p>
@@ -61,7 +48,7 @@
 		<div class="step1" v-show='step1'>
 			<div class="top">
 				<img src="../../assets/img/buzhou1.png">
-				<span class="return"><router-link to='/union/coupon' style="text-decoration: none">返回</router-link></span>
+				<span class="return"><router-link to='/admin/coupon' style="text-decoration: none">返回</router-link></span>
 			</div>
 
 			<div class="main">
@@ -182,7 +169,7 @@
 			</div>
 			<div class="main">
 				<div class="bottom">
-					<router-link to='/union/coupon'><input class="next" type="button" name="" value="完成"></router-link>
+					<router-link to='/admin/coupon'><input class="next" type="button" name="" value="完成"></router-link>
 				</div>
 			</div>
 		</div>
@@ -303,6 +290,7 @@
 <script>
 import common from '../../common.js'
 import {mapState} from 'vuex'
+import {mapMutations} from 'vuex'
 export default{
 	data(){
 		return{
@@ -332,8 +320,6 @@ export default{
 			showWarn:false,
 			showMB2:false,
 			queren:false,
-			showWarn2:false,
-			warnText:null,
 			ymCouponId:null,
 			couponStockId:null,
 			jdUid:null,
@@ -351,6 +337,9 @@ export default{
 		})
 	},
 	methods:{
+		...mapMutations({
+			show:'warn/show'
+		}),
 			//选择优惠券类型
 			selectType:function(){
 				var self=this;
@@ -437,8 +426,7 @@ export default{
 								self.reduce=null;
 							}
 							else{
-								self.showWarn2=true;
-								self.warnText=res.msg;
+								self.show(res.msg);
 								return
 							}
 						},
@@ -518,19 +506,18 @@ export default{
 			confirm:function(){
 				var self=this;
 				let errormsg = common.validator([
-					{value:self.name, name:'isEmpty', errormsg:'请输入优惠券名称'},
+					{value:self.name, name:'isEmpty',errormsg:'请输入优惠券名称'},
 					{value:self.leastCost, name:'isEmpty', errormsg:'请输入最低使用限额'},
 					{value:self.reduce, name:'isEmpty', errormsg:'请输入优惠券面值'},
-					{value:[self.reduce,self.leastCost], name:'checkNum', errormsg:'面值必须小于最低使用限额'},
+					{value:[self.reduce, self.leastCost], name:'checkNum', errormsg:'面值必须小于最低使用限额'},
 					{value:self.stock, name:'isEmpty', errormsg:'请输入优惠券总数量'},
 					{value:self.buyerLimit, name:'isEmpty', errormsg:'请输入每人限领数量'},
-					{value:[self.buyerLimit,self.stock], name:'checkNum', errormsg:'限领数量必须小于总数量'},
+					{value:[self.buyerLimit, self.stock], name:'checkNum', errormsg:'限领数量必须小于总数量'},
 					{value:self.beginTime, name:'isEmpty', errormsg:'请设置开始时间'},
 					{value:self.endTime, name:'isEmpty', errormsg:'请设置结束时间'},
-					])
+					]);
 				if(errormsg){
-					self.showWarn2=true;
-					self.warnText=errormsg;
+					self.show(errormsg);
 					return
 				}
 				var url='https://ym-a.top/cloud_code/add/wd/coupon.do'
@@ -552,8 +539,7 @@ export default{
 						self.step2=false;
 						self.step4=true;
 					}else if(res.statuscode===-1){
-						self.showWarn2=true;
-						self.warnText=res.msg;
+						self.show(res.msg);
 					}
 				};
 				if(self.queren){
@@ -577,18 +563,15 @@ export default{
 			// 		//console.log(res)
 			// 		if(res.is_auth===1){
 			// 			if(self.leastCost===null){
-			// 				self.showWarn2=true;
-			// 				self.warnText="请输入最低使用限额";
+			// 				self.show("请输入最低使用限额");
 			// 				return
 			// 			}
 			// 			if(self.reduce===null){
-			// 				self.showWarn2=true;
-			// 				self.warnText="请输入代金券面值";
+			// 				self.show("请输入代金券面值");
 			// 				return
 			// 			}
 			// 			if(self.couponStockId===null){
-			// 				self.showWarn2=true;
-			// 				self.warnText="请输入优惠券ID";
+			// 				self.show("请输入优惠券ID");
 			// 				return
 			// 			}
 			// 			var url='https://ym-a.top/cloud_code/weChatCoupon/create.do';
@@ -604,14 +587,12 @@ export default{
 			// 					self.step3=false;
 			// 					self.step4=true;
 			// 				}else{
-			// 					self.showWarn2=true;
-			// 					self.warnText=res.msg;
+			// 					self.show(res.msg);
 			// 				}
 			// 			};
 			// 			common.Ajax(url,type,data,success)
 			// 		}else{
-			// 			self.showWarn2=true;
-			// 			self.warnText="请先点击授权链接";
+			// 			self.show("请先点击授权链接");
 			// 		}
 			// 	};
 			// 	common.Ajax(url,type,data,success)
@@ -621,13 +602,12 @@ export default{
 			confirm2:function(){
 				var self=this;
 				let errormsg = common.validator([
-					{value:self.leastCost, name:'isEmpty', errormsg:'请输入最低使用限额'},
+					{value:self.leastCost, name:'isEmpty',errormsg:'请输入最低使用限额'},
 					{value:self.reduce, name:'isEmpty', errormsg:'请输入代金券面值'},
 					{value:self.couponStockId, name:'isEmpty', errormsg:'请输入优惠券ID'}
-					])
+					]);
 				if(errormsg){
-					self.showWarn2=true;
-					self.warnText=errormsg;
+					self.show(errormsg);
 					return
 				}
 				var url='https://ym-a.top/cloud_code/weChatCoupon/create.do';
@@ -643,8 +623,7 @@ export default{
 						self.step3=false;
 						self.step4=true;
 					}else{
-						self.showWarn2=true;
-						self.warnText=res.msg;
+						self.show(res.msg);
 					}
 				};
 				common.Ajax(url,type,data,success)
@@ -652,32 +631,44 @@ export default{
 			//京东发布
 			jDconfirm:function(){
 				var self=this;
-				let errormsg = common.validator([
-					{value:self.name, name:'isEmpty', errormsg:'请输入优惠券名称'},
-					// {value:self.leastCost, name:'isEmpty', errormsg:'请输入最低使用限额'},
-					{value:self.reduce, name:'isEmpty', errormsg:'请输入优惠券面值'},
-					// {value:[self.reduce,self.leastCost], name:'checkNum', errormsg:'面值必须小于最低使用限额'},
-					{value:self.stock, name:'isEmpty', errormsg:'请输入优惠券总数量'},
-					// {value:self.buyerLimit, name:'isEmpty', errormsg:'请输入每人限领数量'},
-					{value:[self.buyerLimit,self.stock], name:'checkNum', errormsg:'限领数量必须小于总数量'},
-					{value:self.beginTime, name:'isEmpty', errormsg:'请设置开始时间'},
-					{value:self.endTime, name:'isEmpty', errormsg:'请设置结束时间'},
-					{value:self.quanbeginTime, name:'isEmpty', errormsg:'请设置领券开始时间'},
-					{value:self.quanendTime, name:'isEmpty', errormsg:'请设置领券结束时间'},
-					])
-				if(errormsg){
-					self.showWarn2=true;
-					self.warnText=errormsg;
+				if(self.name===null){
+					self.show("请输入优惠券名称");
 					return
 				}
 				if(self.typeArr==1&&self.jdleastCost===0){
-					self.showWarn2=true;
-					self.warnText="请输入最低使用限额";
+					self.show("请输入最低使用限额");
 					return
 				}
-				if(self.jdrule==3&&self.buyerLimit===1){
-					self.showWarn2=true;
-					self.warnText="请输入每人限领数量";
+				if(self.reduce===null){
+					self.show("请输入优惠券面值");
+					return
+				}
+				if(self.stock===null){
+					self.show("请输入优惠券总数量");
+					return
+				}
+				// if(self.jdrule==3&&self.buyerLimit===1){
+				// 	self.show("请输入每人限领数量");
+				// 	return
+				// }
+				if(parseInt(self.buyerLimit)>=parseInt(self.stock)){
+					self.show("限领数量必须小于总数量");
+					return
+				}
+				if(self.beginTime===null){
+					self.show("请设置开始时间");
+					return
+				}
+				if(self.endTime===null){
+					self.show("请设置结束时间");
+					return
+				}
+				if(self.quanbeginTime===null){
+					self.show("请设置领券开始时间");
+					return
+				}
+				if(self.quanendTime===null){
+					self.show("请设置领券结束时间");
 					return
 				}
 				var url='https://ym-a.top/cloud_code/ADD/JDCoupon/addJDCouponinfo.do'
@@ -708,8 +699,7 @@ export default{
 						self.step5=false;
 						self.step4=true;
 					}else if(res.statuscode===-1){
-						self.showWarn2=true;
-						self.warnText=res.msg;
+						self.show(res.msg);
 					}
 				};
 				common.Ajax(url,type,data,success);
@@ -724,6 +714,14 @@ export default{
 			//云码优惠券发布
 			ymConfirm:function(){
 				var self=this;
+				let errormsg = common.validator([
+					{value:self.ymCouponId, name:'isEmpty',errormsg:'请输入优惠券领取链接'},
+					{value:self.productUrl, name:'isEmpty', errormsg:'请输入产品地址'}
+					]);
+				if(errormsg){
+					self.show(errormsg);
+					return
+				}
 				$.ajax({
 					url:'https://ym-a.top/cloud_code/wqcoupon/addcoupon.do',
 					type:'post',
@@ -742,8 +740,7 @@ export default{
 							self.step6=false;
 							self.step4=true;
 						}else if(res.statuscode===-1){
-							self.showWarn2=true;
-							self.warnText='res.msg';
+							self.show(res.msg);
 						}
 					}
 				})

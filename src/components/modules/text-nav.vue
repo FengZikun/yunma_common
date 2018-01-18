@@ -64,9 +64,9 @@
 			}
 		},
 		methods:{
-			...mapMutations([
-				'delThis2'
-				]),
+			...mapMutations({
+				delThis2:'banner1/delThis2'
+				}),
 			delTextNav(){
 				this.delThis2();
 				$('.box').removeClass('detail');

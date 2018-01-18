@@ -125,18 +125,18 @@
       vendorId:state=>state.banner1.vendorId,
     }),
     methods:{
-      ...mapMutations([
-        'addFastTrack',
-        'addContinue',
-        'addPromotionVedio',
-        'addCoupon',
-        'addHongbao',
-        ]),
-      ...mapActions([
-        'showPicAd1',
-        'module',
-        'addVerify',
-        ]),
+      ...mapMutations({
+        addFastTrack:'banner1/addFastTrack',
+        addContinue:'banner1/addContinue',
+        addPromotionVedio:'banner1/addPromotionVedio',
+        addCoupon:'banner1/addCoupon',
+        addHongbao:'banner1/addHongbao'
+        }),
+      ...mapActions({
+        showPicAd1:'banner1/showPicAd1',
+        module:'banner1/module',
+        addVerify:'banner1/addVerify',
+        }),
       init(event){
         var self=this;
         console.log(self.isNew)

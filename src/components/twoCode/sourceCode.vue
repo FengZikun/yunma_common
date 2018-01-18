@@ -1,18 +1,5 @@
 <template>
   <div>
-    <div class="mengban" v-show='showWarn'>
-      <div class="warn">
-        <div class="classifyHeader">
-          <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-        </div>
-        <div class="warnmain">
-          {{warnText}}
-        </div>
-        <div class="warnbottom">
-          <input type="button" name="" value="确定" @click='showWarn=false'>
-        </div>
-      </div>
-    </div>
     <div class="mengban" v-if='showMB'>
       <div class="proclassify" >
         <div class="classifyHeader">
@@ -237,8 +224,6 @@
         totalPages:'',    //总页数
         keyword:'',
         delOrder:null,
-        showWarn:false,
-        warnText:null,
         showSource:false,
         orderId:null,
         proNum:null,
@@ -249,9 +234,10 @@
     },
     props:['datas'],
     methods:{
-      ...mapMutations([
-        'changeType'
-      ]),
+      ...mapMutations({
+        changeType:'codeType/changeType',
+        show:'warn/show'
+      }),
       init:function(currentPage){
         var self=this;
         var url='https://ym-a.top/cloud_code/GET/product/productInfoList.do';
@@ -291,8 +277,7 @@
           self.changeType('a');
           router.push({path:'detail'})
         }else{
-          self.showWarn=true;
-          self.warnText='请先生成二维码'
+          self.show('请先生成二维码');
         }
       },
       //新增
@@ -351,15 +336,13 @@
             //console.log(res);
             $('#info').addClass('modHid');
             if(res.errorCode===0){
-              self.showWarn=true;
-              self.warnText='已成功生成二维码';
+              self.show('已成功生成二维码');
               self.orderId=null;
               self.rowCount=null;
               self.boxCount=null;
               self.init();
             }else{
-              self.showWarn=true;
-              self.warnText=res.msg;
+              self.show(res.msg);
             }
           };
           common.Ajax(url,type,data,success)
@@ -398,17 +381,14 @@
             datatype:'json',
             success: function (res) {
                 if(res.statuscode==0){
-                  self.showWarn=true;
-                  self.warnText='此订单已升级为防窜货模式'
+                  self.show('此订单已升级为防窜货模式')
                 }
                 else{
-                  self.showWarn=true;
-                  self.warnText=res.msg
+                  self.show(res.msg)
                 }
               },
               error:function(res){
-               self.showWarn=true;
-                  self.warnText='升级失败'
+               self.show('升级失败')
               }
           })
         },

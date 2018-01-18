@@ -1,18 +1,5 @@
 <template>
 	<div class="right-main">
-		<div class="mengban" v-show='showWarn2'>
-			<div class="warn">
-				<div class="classifyHeader">
-					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
-				</div>
-				<div class="warnmain">
-					{{warnText}}
-				</div>
-				<div class="warnbottom">
-					<input type="button" name="" value="确定" @click='showWarn2=false'>
-				</div>
-			</div>
-		</div>
 		<div class="mengban" v-show='queren'>
 			<div class="queren">
 				<p style="color:red;text-align:center;height:30px;line-height:30px;">优惠券生成后无法修改和删除，请确认输入的信息</p>
@@ -42,82 +29,82 @@
 					<span>至</span>
 					<span class="message-value">{{endTime}}</span>
 				</div>
-			<div class="messagebox last">
-				<input class="querenButton" type="button" name="" value="发布" @click='confirm'>
-				<input class="querenButton" type="button" name="" value="取消" @click='queren=false'>
-			</div>
+				<div class="messagebox last">
+					<input class="querenButton" type="button" name="" value="发布" @click='confirm'>
+					<input class="querenButton" type="button" name="" value="取消" @click='queren=false'>
+				</div>
 
 
-		</div>
-	</div>
-
-	<div class="mengban" v-show='showMB2'>
-		<div style="width: 1000px;height: 850px; overflow-y: scroll;margin: auto;position: absolute;top:100px;left: 220px;">
-			<img style="width: 1000px" src="../../assets/img/2.jpg">
-		</div>
-		<img src="../../assets/img/icon_cha3.png" class="cha" @click='showMB=true;showMB2=false'>
-
-	</div>
-	<div class="step1" v-show='step1'>
-		<div class="top">
-			<img src="../../assets/img/buzhou1.png">
-			<span class="return"><router-link to='/admin/coupon' style="text-decoration: none">返回</router-link></span>
+			</div>
 		</div>
 
-		<div class="main">
-			<div class="option" v-bind:class='{hasSelect:ymShop}' @click='selectType'>云码优惠券</div>
-			<div class="option" v-bind:class='{hasSelect:weidian}' @click='selectType'>微店优惠券</div>
-			<div class="option" v-bind:class='{hasSelect:weixin}' @click='selectType'>微信商户号优惠券</div>
-			<div class="option" v-bind:class='{hasSelect:jingdong}' @click='selectType'>京东优惠券</div>
-		</div>
+		<div class="mengban" v-show='showMB2'>
+			<div style="width: 1000px;height: 850px; overflow-y: scroll;margin: auto;position: absolute;top:100px;left: 220px;">
+				<img style="width: 1000px" src="../../assets/img/2.jpg">
+			</div>
+			<img src="../../assets/img/icon_cha3.png" class="cha" @click='showMB=true;showMB2=false'>
 
-		<div class="bottom">
-			<input class="next" type="button" name="" value="下一步" @click='nextStep'>
 		</div>
-	</div>
-	<div class="step2" v-show='step2'>
-		<div class="top">
-			<img src="../../assets/img/buzhou2.png">
-			<a href="javascript:void(0)"><span class="return" @click='toStep1'>返回</span></a>
+		<div class="step1" v-show='step1'>
+			<div class="top">
+				<img src="../../assets/img/buzhou1.png">
+				<span class="return"><router-link to='/admin/coupon' style="text-decoration: none">返回</router-link></span>
+			</div>
+
+			<div class="main">
+				<div class="option" v-bind:class='{hasSelect:ymShop}' @click='selectType'>云码优惠券</div>
+				<div class="option" v-bind:class='{hasSelect:weidian}' @click='selectType'>微店优惠券</div>
+				<div class="option" v-bind:class='{hasSelect:weixin}' @click='selectType'>微信商户号优惠券</div>
+				<div class="option" v-bind:class='{hasSelect:jingdong}' @click='selectType'>京东优惠券</div>
+			</div>
+
+			<div class="bottom">
+				<input class="next" type="button" name="" value="下一步" @click='nextStep'>
+			</div>
 		</div>
-		<div class="main">
-			<div class="message-name title">
-				优惠券信息：
+		<div class="step2" v-show='step2'>
+			<div class="top">
+				<img src="../../assets/img/buzhou2.png">
+				<a href="javascript:void(0)"><span class="return" @click='toStep1'>返回</span></a>
 			</div>
-			<div class="messagebox2">
-				<span class="message-name">优惠券名称：</span>
-				<input class="message-value" type="" name="" v-model='name'>
-				<span class="message-after">（该优惠券名字会显示在大礼包页面，例：输入“蛋白粉”则显示“蛋白粉优惠券”）</span>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">最低使用限额：</span>
-				<input class="message-value" type="" name="" v-model='leastCost' @input='comparison'>
-				<span class="message-after">（必须大于优惠券面值）</span>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">优惠券面值：</span>
-				<input class="message-value" type="" name="" v-model='reduce' @input='comparison'>
-				<span class="message-after">（设置优惠券的金额）</span>
-				<span class='message-warn' v-if='showWarn'>面值必须小于最低使用限额</span>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">优惠券总数量：</span>
-				<input class="message-value" type="" name="" v-model='stock'>
-				<span class="message-after">（设置发放优惠券的总数量）</span>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">每人限领数量：</span>
-				<input class="message-value" type="" name="" v-model='buyerLimit'>
-				<span class="message-after">（每人限领张数，最多十张）</span>
-				<span class="message-warn" v-if='buyerLimit>10'>最多十张</span>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">优惠券有效期：</span>
-				<input class="message-value short2" type="date" name="" v-model='beginTime'>
-				<span>至</span>
-				<input class="message-value short2" type="date" name="" v-model='endTime'>
-				<span class="message-after">（设置开始结束时间）</span>
-			</div>
+			<div class="main">
+				<div class="message-name title">
+					优惠券信息：
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券名称：</span>
+					<input class="message-value" type="" name="" v-model='name'>
+					<span class="message-after">（该优惠券名字会显示在大礼包页面，例：输入“蛋白粉”则显示“蛋白粉优惠券”）</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">最低使用限额：</span>
+					<input class="message-value" type="" name="" v-model='leastCost' @input='comparison'>
+					<span class="message-after">（必须大于优惠券面值）</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券面值：</span>
+					<input class="message-value" type="" name="" v-model='reduce' @input='comparison'>
+					<span class="message-after">（设置优惠券的金额）</span>
+					<span class='message-warn' v-if='showWarn'>面值必须小于最低使用限额</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券总数量：</span>
+					<input class="message-value" type="" name="" v-model='stock'>
+					<span class="message-after">（设置发放优惠券的总数量）</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">每人限领数量：</span>
+					<input class="message-value" type="" name="" v-model='buyerLimit'>
+					<span class="message-after">（每人限领张数，最多十张）</span>
+					<span class="message-warn" v-if='buyerLimit>10'>最多十张</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券有效期：</span>
+					<input class="message-value short2" type="date" name="" v-model='beginTime'>
+					<span>至</span>
+					<input class="message-value short2" type="date" name="" v-model='endTime'>
+					<span class="message-after">（设置开始结束时间）</span>
+				</div>
 				<!-- <div class="messagebox2">
 					<span class="message-name">appKey：</span>
 					<input class="message-value" type="" name="">
@@ -186,67 +173,67 @@
 				</div>
 			</div>
 		</div>
-	<div class="step5" v-show='step5'>
-		<div class="top">
-			<img src="../../assets/img/buzhou2.png">
-			<a href="javascript:void(0)"><span class="return" @click='toStep1'>返回</span></a>
-		</div>
-		<div class="main">
-			<div class="message-name title">
-				优惠券信息：
+		<div class="step5" v-show='step5'>
+			<div class="top">
+				<img src="../../assets/img/buzhou2.png">
+				<a href="javascript:void(0)"><span class="return" @click='toStep1'>返回</span></a>
 			</div>
-			<div class="messagebox2">
-				<span class="message-name">优惠券名称：</span>
-				<input class="message-value" type="" name="" v-model='name'>
-				<span class="message-after">（该优惠券名字会显示在大礼包页面，例：输入“蛋白粉”则显示“蛋白粉优惠券”）</span>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">优惠券类型：</span>
-				<input class="mid" type="radio" name="jdtype" id="a" v-model='typeArr' value="0">
-				<label class="mid" for="a">京券</label>
-				<input class="mid" type="radio" name="jdtype" id="b" v-model='typeArr' value="1">
-				<label class="mid" for="b">东券</label>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">优惠券面值：</span>
-				<input class="message-value" type="" name="" v-model='reduce' @input='jdcomparison'>
-				<span class="message-after">（设置优惠券的金额）</span>
-				<span class='message-warn' v-if='showWarn'>面值必须小于最低使用限额</span>
-			</div>
-			<div class="messagebox2" v-if='typeArr==1'>
-				<span class="message-name">最低使用限额：</span>
-				<input class="message-value" type="" name="" v-model='jdleastCost' @input='jdcomparison'>
-				<span class="message-after">（必须大于优惠券面值）</span>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">优惠券总数量：</span>
-				<input class="message-value" type="" name="" v-model='stock'>
-				<span class="message-after">（设置发放优惠券的总数量）</span>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">每人限领数量：</span>
-				<input class="mid" type="radio" name="jdrule" id="c" v-model='jdrule' value="5">
-				<label class="mid" for="c">限领一张</label>
-				<input class="mid" type="radio" name="jdrule" id="d" v-model='jdrule' value="4">
-				<label class="mid" for="d">每天限领一张</label>
-				<input class="mid" type="radio" name="jdrule" id="e" v-model='jdrule' value="3">
-				<label class="mid" for="e">自定义每天限领数量</label>
-				<input class="message-value" type="" name="" v-model='jdbuyerLimit' v-if='jdrule==3'>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">优惠券有效期：</span>
-				<input class="message-value short2" type="date" name="" v-model='beginTime'>
-				<span>至</span>
-				<input class="message-value short2" type="date" name="" v-model='endTime'>
-				<span class="message-after">（设置开始结束时间）</span>
-			</div>
-			<div class="messagebox2">
-				<span class="message-name">领券开始时间：</span>
-				<input class="message-value short2" type="date" name="" v-model='quanbeginTime'>
-				<span>至</span>
-				<input class="message-value short2" type="date" name="" v-model='quanendTime'>
-				<span class="message-after">（设置开始结束时间）</span>
-			</div>
+			<div class="main">
+				<div class="message-name title">
+					优惠券信息：
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券名称：</span>
+					<input class="message-value" type="" name="" v-model='name'>
+					<span class="message-after">（该优惠券名字会显示在大礼包页面，例：输入“蛋白粉”则显示“蛋白粉优惠券”）</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券类型：</span>
+					<input class="mid" type="radio" name="jdtype" id="a" v-model='typeArr' value="0">
+					<label class="mid" for="a">京券</label>
+					<input class="mid" type="radio" name="jdtype" id="b" v-model='typeArr' value="1">
+					<label class="mid" for="b">东券</label>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券面值：</span>
+					<input class="message-value" type="" name="" v-model='reduce' @input='jdcomparison'>
+					<span class="message-after">（设置优惠券的金额）</span>
+					<span class='message-warn' v-if='showWarn'>面值必须小于最低使用限额</span>
+				</div>
+				<div class="messagebox2" v-if='typeArr==1'>
+					<span class="message-name">最低使用限额：</span>
+					<input class="message-value" type="" name="" v-model='jdleastCost' @input='jdcomparison'>
+					<span class="message-after">（必须大于优惠券面值）</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券总数量：</span>
+					<input class="message-value" type="" name="" v-model='stock'>
+					<span class="message-after">（设置发放优惠券的总数量）</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">每人限领数量：</span>
+					<input class="mid" type="radio" name="jdrule" id="c" v-model='jdrule' value="5">
+					<label class="mid" for="c">限领一张</label>
+					<input class="mid" type="radio" name="jdrule" id="d" v-model='jdrule' value="4">
+					<label class="mid" for="d">每天限领一张</label>
+					<input class="mid" type="radio" name="jdrule" id="e" v-model='jdrule' value="3">
+					<label class="mid" for="e">自定义每天限领数量</label>
+					<input class="message-value" type="" name="" v-model='jdbuyerLimit' v-if='jdrule==3'>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">优惠券有效期：</span>
+					<input class="message-value short2" type="date" name="" v-model='beginTime'>
+					<span>至</span>
+					<input class="message-value short2" type="date" name="" v-model='endTime'>
+					<span class="message-after">（设置开始结束时间）</span>
+				</div>
+				<div class="messagebox2">
+					<span class="message-name">领券开始时间：</span>
+					<input class="message-value short2" type="date" name="" v-model='quanbeginTime'>
+					<span>至</span>
+					<input class="message-value short2" type="date" name="" v-model='quanendTime'>
+					<span class="message-after">（设置开始结束时间）</span>
+				</div>
 				<!-- <div class="messagebox2">
 					<span class="message-name">appKey：</span>
 					<input class="message-value" type="" name="">
@@ -301,56 +288,58 @@
 </template>
 
 <script>
-	import common from '../../common.js'
-	import {mapState} from 'vuex'
-	export default{
-		data(){
-			return{
-				step1:true,
-				step2:false,
-				step3:false,
-				step4:false,
-				step5:false,
-				step6:false,
-				ymShop:false,
-				weidian:false,
-				weixin:false,
-				jingdong:false,
-				ifSwitch:false,
-				openGet:0,
-				ifSwitch2:false,
-				showFinish:0,
-				name:null,
-				reduce:null,
-				leastCost:null,
-				stock:null,
-				buyerLimit:null,
-				beginTime:null,
-				endTime:null,				
-				quanbeginTime:null,
-				quanendTime:null,
-				showWarn:false,
-				showMB2:false,
-				queren:false,
-				showWarn2:false,
-				warnText:null,
-				ymCouponId:null,
-				couponStockId:null,
-				jdUid:null,
-				typeArr:0,
-				jdrule:4,
-				jdbuyerLimit:1,
-				jdleastCost:0,
-				jdisplay:1,
-				productUrl:null
-			}
-		},
-		computed:{
-			...mapState({
-				vendorId:state=>state.vendorId.vendorId
-			})
-		},
-		methods:{
+import common from '../../common.js'
+import {mapState} from 'vuex'
+import {mapMutations} from 'vuex'
+export default{
+	data(){
+		return{
+			step1:true,
+			step2:false,
+			step3:false,
+			step4:false,
+			step5:false,
+			step6:false,
+			ymShop:false,
+			weidian:false,
+			weixin:false,
+			jingdong:false,
+			ifSwitch:false,
+			openGet:0,
+			ifSwitch2:false,
+			showFinish:0,
+			name:null,
+			reduce:null,
+			leastCost:null,
+			stock:null,
+			buyerLimit:null,
+			beginTime:null,
+			endTime:null,				
+			quanbeginTime:null,
+			quanendTime:null,
+			showWarn:false,
+			showMB2:false,
+			queren:false,
+			ymCouponId:null,
+			couponStockId:null,
+			jdUid:null,
+			typeArr:0,
+			jdrule:4,
+			jdbuyerLimit:1,
+			jdleastCost:0,
+			jdisplay:1,
+			productUrl:null
+		}
+	},
+	computed:{
+		...mapState({
+			vendorId:state=>state.vendorId.vendorId
+		})
+	},
+	methods:{
+		...mapMutations({
+			show:'warn/show'
+		}),
 			//选择优惠券类型
 			selectType:function(){
 				var self=this;
@@ -437,8 +426,7 @@
 								self.reduce=null;
 							}
 							else{
-								self.showWarn2=true;
-								self.warnText=res.msg;
+								self.show(res.msg);
 								return
 							}
 						},
@@ -517,44 +505,19 @@
 			//发布
 			confirm:function(){
 				var self=this;
-				if(self.name===null){
-					self.showWarn2=true;
-					self.warnText="请输入优惠券名称";
-					return
-				}
-				if(self.leastCost===null){
-					self.showWarn2=true;
-					self.warnText="请输入最低使用限额";
-					return
-				}
-				if(self.reduce===null){
-					self.showWarn2=true;
-					self.warnText="请输入优惠券面值";
-					return
-				}
-				if(self.stock===null){
-					self.showWarn2=true;
-					self.warnText="请输入优惠券总数量";
-					return
-				}
-				if(self.buyerLimit===null){
-					self.showWarn2=true;
-					self.warnText="请输入每人限领数量";
-					return
-				}
-				if(parseInt(self.buyerLimit)>=parseInt(self.stock)){
-					self.showWarn2=true;
-					self.warnText="限领数量必须小于总数量";
-					return
-				}
-				if(self.beginTime===null){
-					self.showWarn2=true;
-					self.warnText="请设置开始时间";
-					return
-				}
-				if(self.endTime===null){
-					self.showWarn2=true;
-					self.warnText="请设置结束时间";
+				let errormsg = common.validator([
+					{value:self.name, name:'isEmpty',errormsg:'请输入优惠券名称'},
+					{value:self.leastCost, name:'isEmpty', errormsg:'请输入最低使用限额'},
+					{value:self.reduce, name:'isEmpty', errormsg:'请输入优惠券面值'},
+					{value:[self.reduce, self.leastCost], name:'checkNum', errormsg:'面值必须小于最低使用限额'},
+					{value:self.stock, name:'isEmpty', errormsg:'请输入优惠券总数量'},
+					{value:self.buyerLimit, name:'isEmpty', errormsg:'请输入每人限领数量'},
+					{value:[self.buyerLimit, self.stock], name:'checkNum', errormsg:'限领数量必须小于总数量'},
+					{value:self.beginTime, name:'isEmpty', errormsg:'请设置开始时间'},
+					{value:self.endTime, name:'isEmpty', errormsg:'请设置结束时间'},
+					]);
+				if(errormsg){
+					self.show(errormsg);
 					return
 				}
 				var url='https://ym-a.top/cloud_code/add/wd/coupon.do'
@@ -576,8 +539,7 @@
 						self.step2=false;
 						self.step4=true;
 					}else if(res.statuscode===-1){
-						self.showWarn2=true;
-						self.warnText=res.msg;
+						self.show(res.msg);
 					}
 				};
 				if(self.queren){
@@ -601,18 +563,15 @@
 			// 		//console.log(res)
 			// 		if(res.is_auth===1){
 			// 			if(self.leastCost===null){
-			// 				self.showWarn2=true;
-			// 				self.warnText="请输入最低使用限额";
+			// 				self.show("请输入最低使用限额");
 			// 				return
 			// 			}
 			// 			if(self.reduce===null){
-			// 				self.showWarn2=true;
-			// 				self.warnText="请输入代金券面值";
+			// 				self.show("请输入代金券面值");
 			// 				return
 			// 			}
 			// 			if(self.couponStockId===null){
-			// 				self.showWarn2=true;
-			// 				self.warnText="请输入优惠券ID";
+			// 				self.show("请输入优惠券ID");
 			// 				return
 			// 			}
 			// 			var url='https://ym-a.top/cloud_code/weChatCoupon/create.do';
@@ -628,107 +587,88 @@
 			// 					self.step3=false;
 			// 					self.step4=true;
 			// 				}else{
-			// 					self.showWarn2=true;
-			// 					self.warnText=res.msg;
+			// 					self.show(res.msg);
 			// 				}
 			// 			};
 			// 			common.Ajax(url,type,data,success)
 			// 		}else{
-			// 			self.showWarn2=true;
-			// 			self.warnText="请先点击授权链接";
+			// 			self.show("请先点击授权链接");
 			// 		}
 			// 	};
 			// 	common.Ajax(url,type,data,success)
-				
+
 			// },
 			//提交微小店
 			confirm2:function(){
 				var self=this;
-						if(self.leastCost===null){
-							self.showWarn2=true;
-							self.warnText="请输入最低使用限额";
-							return
-						}
-						if(self.reduce===null){
-							self.showWarn2=true;
-							self.warnText="请输入代金券面值";
-							return
-						}
-						if(self.couponStockId===null){
-							self.showWarn2=true;
-							self.warnText="请输入优惠券ID";
-							return
-						}
-						var url='https://ym-a.top/cloud_code/weChatCoupon/create.do';
-						var type='get';
-						var data={
-							vendorId:self.vendorId,
-							couponStockId:self.couponStockId,
-							couponValue:self.reduce,
-							couponMininumn:self.leastCost
-						};
-						var success=function(res){
-							if(res.statuscode===1){
-								self.step3=false;
-								self.step4=true;
-							}else{
-								self.showWarn2=true;
-								self.warnText=res.msg;
-							}
-						};
-						common.Ajax(url,type,data,success)
+				let errormsg = common.validator([
+					{value:self.leastCost, name:'isEmpty',errormsg:'请输入最低使用限额'},
+					{value:self.reduce, name:'isEmpty', errormsg:'请输入代金券面值'},
+					{value:self.couponStockId, name:'isEmpty', errormsg:'请输入优惠券ID'}
+					]);
+				if(errormsg){
+					self.show(errormsg);
+					return
+				}
+				var url='https://ym-a.top/cloud_code/weChatCoupon/create.do';
+				var type='get';
+				var data={
+					vendorId:self.vendorId,
+					couponStockId:self.couponStockId,
+					couponValue:self.reduce,
+					couponMininumn:self.leastCost
+				};
+				var success=function(res){
+					if(res.statuscode===1){
+						self.step3=false;
+						self.step4=true;
+					}else{
+						self.show(res.msg);
+					}
+				};
+				common.Ajax(url,type,data,success)
 			},
 			//京东发布
 			jDconfirm:function(){
 				var self=this;
 				if(self.name===null){
-					self.showWarn2=true;
-					self.warnText="请输入优惠券名称";
+					self.show("请输入优惠券名称");
 					return
 				}
 				if(self.typeArr==1&&self.jdleastCost===0){
-					self.showWarn2=true;
-					self.warnText="请输入最低使用限额";
+					self.show("请输入最低使用限额");
 					return
 				}
 				if(self.reduce===null){
-					self.showWarn2=true;
-					self.warnText="请输入优惠券面值";
+					self.show("请输入优惠券面值");
 					return
 				}
 				if(self.stock===null){
-					self.showWarn2=true;
-					self.warnText="请输入优惠券总数量";
+					self.show("请输入优惠券总数量");
 					return
 				}
 				// if(self.jdrule==3&&self.buyerLimit===1){
-				// 	self.showWarn2=true;
-				// 	self.warnText="请输入每人限领数量";
+				// 	self.show("请输入每人限领数量");
 				// 	return
 				// }
 				if(parseInt(self.buyerLimit)>=parseInt(self.stock)){
-					self.showWarn2=true;
-					self.warnText="限领数量必须小于总数量";
+					self.show("限领数量必须小于总数量");
 					return
 				}
 				if(self.beginTime===null){
-					self.showWarn2=true;
-					self.warnText="请设置开始时间";
+					self.show("请设置开始时间");
 					return
 				}
 				if(self.endTime===null){
-					self.showWarn2=true;
-					self.warnText="请设置结束时间";
+					self.show("请设置结束时间");
 					return
 				}
 				if(self.quanbeginTime===null){
-					self.showWarn2=true;
-					self.warnText="请设置领券开始时间";
+					self.show("请设置领券开始时间");
 					return
 				}
 				if(self.quanendTime===null){
-					self.showWarn2=true;
-					self.warnText="请设置领券结束时间";
+					self.show("请设置领券结束时间");
 					return
 				}
 				var url='https://ym-a.top/cloud_code/ADD/JDCoupon/addJDCouponinfo.do'
@@ -759,8 +699,7 @@
 						self.step5=false;
 						self.step4=true;
 					}else if(res.statuscode===-1){
-						self.showWarn2=true;
-						self.warnText=res.msg;
+						self.show(res.msg);
 					}
 				};
 				common.Ajax(url,type,data,success);
@@ -775,6 +714,14 @@
 			//云码优惠券发布
 			ymConfirm:function(){
 				var self=this;
+				let errormsg = common.validator([
+					{value:self.ymCouponId, name:'isEmpty',errormsg:'请输入优惠券领取链接'},
+					{value:self.productUrl, name:'isEmpty', errormsg:'请输入产品地址'}
+					]);
+				if(errormsg){
+					self.show(errormsg);
+					return
+				}
 				$.ajax({
 					url:'https://ym-a.top/cloud_code/wqcoupon/addcoupon.do',
 					type:'post',
@@ -793,8 +740,7 @@
 							self.step6=false;
 							self.step4=true;
 						}else if(res.statuscode===-1){
-							self.showWarn2=true;
-							self.warnText='res.msg';
+							self.show(res.msg);
 						}
 					}
 				})
@@ -812,9 +758,9 @@
 			}
 		},
 	}
-</script>
+	</script>
 
-<style scoped>
+	<style scoped>
 	div{
 		text-align: left;
 	}
@@ -941,47 +887,47 @@
 	/*.messagebox2 .message-name{
 		color: #666666;
 		width:100px;
-	}*/
-	a:hover{
-		text-decoration: none;
-	}
-	.cha{
-		position: absolute;
-		top: 70px;
-		right: 100px;
-	}
-	.queren{
-		width: 400px;
-		height: 500px;
-		background: #fff;
-		box-shadow: 0 0 50px rgba(175,186,203,0.23);
-		position: absolute;
-		top: 20%;
-		left: 50%;
-		margin-left: -200px;
+		}*/
+		a:hover{
+			text-decoration: none;
+		}
+		.cha{
+			position: absolute;
+			top: 70px;
+			right: 100px;
+		}
+		.queren{
+			width: 400px;
+			height: 500px;
+			background: #fff;
+			box-shadow: 0 0 50px rgba(175,186,203,0.23);
+			position: absolute;
+			top: 20%;
+			left: 50%;
+			margin-left: -200px;
 
-	}
-	.queren .messagebox{
-		margin-top: 20px;
-	}
-	.queren .messagebox .message-name{
-		margin-left: 10px;
-	}
-	.queren .messagebox .message-value{
-		border: none;
-	}
-	.last{
-		text-align: center;
-		margin-top: 80px!important;
-	}
+		}
+		.queren .messagebox{
+			margin-top: 20px;
+		}
+		.queren .messagebox .message-name{
+			margin-left: 10px;
+		}
+		.queren .messagebox .message-value{
+			border: none;
+		}
+		.last{
+			text-align: center;
+			margin-top: 80px!important;
+		}
 	/*.right-main-top-icon1{
 		width: 18px;
 		height: 18px;
 		background: url("../../assets/img/icon_tishi.png") no-repeat;
 		float: left;
 		margin-right: 8px;
-	}*/
-</style>
+		}*/
+		</style>
 
 
 

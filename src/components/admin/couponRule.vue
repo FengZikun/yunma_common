@@ -14,19 +14,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="mengban" v-show='showWarn'>
-			<div class="warn">
-				<div class="classifyHeader">
-					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
-				</div>
-				<div class="warnmain">
-					{{warnText}}
-				</div>
-				<div class="warnbottom">
-					<input class="delbutton" type="button" name="" value="确定" @click='showWarn=false;showMB=false'>
-				</div>
-			</div>
-		</div>
 		<div class="mengban" v-if='content'>
 			<div class="contentBox">
 				<div class="contentTop">
@@ -112,6 +99,7 @@
 	import common from '../../common.js'
 	import router from '../../router.js'
 	import {mapState} from 'vuex'
+	import {mapMutations} from 'vuex'
 	export default{
 		data(){
 			return{
@@ -122,8 +110,6 @@
 		        totalPages:'',    //总页数
 		        content:false,
 		        contentInfo:null,
-		        showWarn:false,
-		        warnText:null,
 		        showMB:false,
 		        delId:null,
 
@@ -135,6 +121,9 @@
 			})
 		},
 		methods:{
+			...mapMutations({
+				show:'warn/show'
+			}),
 			init:function(currentPage){
 				var self=this;
 				var url='https://ym-a.top/cloud_code/GET/couponRule/info.do';
@@ -169,12 +158,11 @@
 				};
 				var success=function(res){
 					if(res.statuscode===1){
+						self.showMB=false;
 						self.init(self.currentPage);
-						self.showWarn=true;
-						self.warnText='删除成功';
+						self.show('删除成功');
 					}else{
-						self.showWarn=true;
-						self.warnText=res.msg;
+						self.show(res.msg);
 					}
 				};
 				common.Ajax(url,type,data,success)

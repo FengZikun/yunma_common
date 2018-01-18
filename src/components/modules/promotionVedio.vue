@@ -34,9 +34,9 @@ import {mapMutations} from 'vuex'
 			}
 		},
 		methods:{
-			...mapMutations([
-				'delThis5'
-				]),
+			...mapMutations({
+				delThis5:'banner1/delThis5'
+				}),
 			delPicPromotionVedio(){
 				this.delThis5();
 				$('.box').removeClass('detail');

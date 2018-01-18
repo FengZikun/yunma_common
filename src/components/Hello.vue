@@ -1,18 +1,5 @@
 <template>
   <div class='fixed'>
-    <div class="mengban" v-show='showWarn'>
-      <div class="warn">
-        <div class="classifyHeader">
-          <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-        </div>
-        <div class="warnmain">
-          {{warnText}}
-        </div>
-        <div class="warnbottom">
-          <input type="button" name="" value="确定" @click='showWarn=false'>
-        </div>
-      </div>
-    </div>
     <div class="row logo">
       <div class="col-md-2">
         <div class="img-responsive">
@@ -330,7 +317,8 @@
       ...mapMutations({
         getVendorId:'vendorId/getVendorId',
         getCheckComment:'vendorId/getCheckComment',
-        logOut:'vendorId/logOut'
+        logOut:'vendorId/logOut',
+        show:'warn/show'
       }),
       init:function(){
         var self=this;
@@ -385,8 +373,7 @@
           dataType: 'json',
           success: function (res) {
             if(res.status == "-1"){
-              self.showWarn=true;
-              self.warnText='请先绑定公众号'
+              self.show('请先绑定公众号');
               router.push('/enterprise/en_public');
             }
             else{

@@ -1,4 +1,5 @@
 const banner1={
+	namespaced:true,
 	state:{
 		isNew:true,
 		vendorId:null,

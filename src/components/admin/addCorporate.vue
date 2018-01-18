@@ -15,19 +15,6 @@
       </div>
 
     </div>
-    <div class="mengban" v-show='showWarn'>
-        <div class="warn">
-          <div class="classifyHeader">
-            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-          </div>
-          <div class="warnmain">
-            {{warnText}}
-          </div>
-          <div class="warnbottom">
-            <input type="button" name="" value="确定" @click='showWarn=false'>
-          </div>
-        </div>
-      </div>
     <form id='myform' class="message" enctype="multipart/form-data">
 
       <div class='message-box'>
@@ -349,6 +336,7 @@
 <script>
 import common from '../../common.js'
 import router from '../../router.js'
+import {mapMutations} from 'vuex'
   export default{
     data(){
       return{
@@ -368,12 +356,13 @@ import router from '../../router.js'
         Emaill:null,
         link:"http://",
         vendorMall:null,
-        wxConfig:null,
-        showWarn:false,
-        warnText:null
+        wxConfig:null
       }
     },
     methods:{
+      ...mapMutations({
+        show:'warn/show'
+      }),
       //同步显示图片
       change:function(eImg){
         const reader = new FileReader();
@@ -466,7 +455,7 @@ import router from '../../router.js'
             }
           },
           error:function(res){
-            //console.log("error")
+            console.log("error")
           }
         });
       },
@@ -474,24 +463,14 @@ import router from '../../router.js'
       //提交数据
       confirm:function(){
         var self=this;
-        if(self.brandName==null){
-          self.showWarn=true;
-          self.warnText='请输入厂商名称';
-          return
-        }
-        if(self.industryName==null){
-          self.showWarn=true;
-          self.warnText='请选择所属行业';
-          return
-        }
-        if(self.customPhone==null){
-          self.showWarn=true;
-          self.warnText='请输入联系方式';
-          return
-        }
-        if(self.Emaill==null){
-          self.showWarn=true;
-          self.warnText='请输入邮箱';
+        let errormsg = common.validator([
+          {value:self.brandName, name:'isEmpty',errormsg:'请输入厂商名称'},
+          {value:self.industryName, name:'isEmpty', errormsg:'请选择所属行业'},
+          {value:self.customPhone, name:'isEmpty', errormsg:'请输入联系方式'},
+          {value:self.Emaill, name:'isEmpty', errormsg:'请输入邮箱'},
+          ]);
+        if(errormsg){
+          self.show(errormsg);
           return
         }
         var data=new FormData($('#myform')[0]);

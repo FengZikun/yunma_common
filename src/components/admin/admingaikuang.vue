@@ -342,14 +342,14 @@
           self.showMB=true;
           var cliDay = params.name.split('-');
           var year = parseInt(cliDay[0]);
-          var month = parseInt(cliDay[1]);
+          var month = parseInt(cliDay[1])-1;
           var day = parseInt(cliDay[2]);
           var cliDate = new Date(year, month, day);
           var infoDay = new Date(cliDate.getTime() + 1000*60*60*24);
-          if(infoDay.getMonth()<10){
-            var infoMonth = '0' + infoDay.getMonth();
+          if((infoDay.getMonth()+1)<10){
+            var infoMonth = '0' + (infoDay.getMonth()+1);
           }else{
-            var infoMonth = infoDay.getMonth().toString();
+            var infoMonth = (infoDay.getMonth()+1).toString();
           }
           if(infoDay.getDate()<10){
             var infoD = '0' + infoDay.getDate();

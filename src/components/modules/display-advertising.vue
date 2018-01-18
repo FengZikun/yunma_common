@@ -39,9 +39,9 @@
 			}
 		},
 		methods:{
-			...mapActions([
-				'delThis1'
-				]),
+			...mapActions({
+				delThis1:'banner1/delThis1'
+				}),
 			init(){
 				
 			},

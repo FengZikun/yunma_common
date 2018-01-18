@@ -23,9 +23,9 @@ import {mapMutations} from 'vuex'
 			}
 		},
 		methods:{
-			...mapMutations([
-				'delThis6'
-				]),
+			...mapMutations({
+				delThis6:'banner1/delThis6'
+				}),
 			delCoupon(){
 				this.delThis6();
 			}

@@ -19,9 +19,9 @@ import {mapMutations} from 'vuex'
 			}
 		},
 		methods:{
-			...mapMutations([
-				'delThis4'
-				]),
+			...mapMutations({
+				delThis4:'banner1/delThis4'
+				}),
 			delContinue(){
 				this.delThis4()
 			}

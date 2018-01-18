@@ -17,7 +17,7 @@ Vue.use(VueResource)
 Vue.config.productionTip = false
 //开启debug模式
 Vue.config.debug = true
-
+Vue.component('warn',Warn)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -1,18 +1,6 @@
 <template>
 	<div>
-		<div class="mengban" v-show='showWarn'>
-				<div class="warn">
-					<div class="classifyHeader">
-						<span style="display:block;height:48px;line-height:48px;">操作提示</span>
-					</div>
-					<div class="warnmain">
-						{{warnText}}
-					</div>
-					<div class="warnbottom">
-						<input type="button" name="" value="确定" @click='showWarn=false'>
-					</div>
-				</div>
-			</div>
+		
 		<div class="mengban" v-if='showMB'>
 			<div class="choosepro" >
 				<div class="choosepro-top">
@@ -93,6 +81,7 @@
 	import common from '../../common.js'
 	import router from '../../router.js'
 	import {mapState} from 'vuex'
+	import {mapMutations} from 'vuex'
 	export default{
 		data(){
 			return{
@@ -120,6 +109,11 @@
 			}
 		},
 		methods:{
+
+			...mapMutations({
+				show:'warn/show'
+			}),
+			
 			//选择产品
 			selectPro:function(){
 				var self=this;
@@ -185,8 +179,7 @@
 					{value:self.referencePrice, name:'isEmpty', errormsg:'请输入参考价格'}
 					])
 				if(errormsg){
-					self.showWarn=true;
-					self.warnText=errormsg;
+					self.show(errormsg)
 					return
 				}
 				var url='https://ym-a.top/cloud_code/POST/product/productOrder.do';

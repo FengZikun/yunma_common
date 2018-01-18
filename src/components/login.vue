@@ -122,6 +122,7 @@
         getUserId:'vendorId/getUserId',
         getCheckComment:'vendorId/getCheckComment',
         ifTest:'vendorId/ifTest',
+        show:'warn/show'
       }),
 
       //判断登录状态
@@ -147,7 +148,7 @@
           {value:self.password, name:'isEmpty', errormsg:'请输入密码'}
           ]);
         if(errormsg){
-          alert(errormsg);
+          self.show(errormsg);
           return
         }
 
@@ -186,7 +187,7 @@
                 }
               }else{
                 //console.log(res)
-                alert(res.msg)
+                self.show(res.msg)
               }
 
             };

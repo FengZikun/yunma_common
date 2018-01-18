@@ -1,18 +1,6 @@
 <template>
   <div>
-  <div class="mengban" v-show='showWarn'>
-        <div class="warn">
-          <div class="classifyHeader">
-            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-          </div>
-          <div class="warnmain">
-            {{warnText}}
-          </div>
-          <div class="warnbottom">
-            <input type="button" name="" value="确定" @click='showWarn=false'>
-          </div>
-        </div>
-      </div>
+  
           <div class="message">
             <div class='message-box'>
               <span class='textname'>输入原密码：</span>
@@ -87,54 +75,47 @@
 </style>
 <script>
 import common from '../../common.js'
+import {mapMutations} from 'vuex'
 import md5 from 'js-md5'
 let Base64 = require('js-base64').Base64;
-
   export default{
     data(){
       return{
         oldPassword:null,
         newPassword:null,
         checkPassword:null,
-        showWarn:false,
-        warnText:null,
         passwordReg:/^([0-9]|[a-zA-Z]){8,16}$/
       }
     },
     props:['datas'],
     methods:{
+      ...mapMutations({
+        show:'warn/show'
+      }),
       init:function(){
         var self=this;
       },
       //保存新密码
       saveNewPassword:function(){
         var self=this;
-        if(self.oldPassword===null){
+        let errormsg = common.validator([
+            {value:self.oldPassword, name:'isEmpty',errormsg:'请输入原密码'},
+            {value:[self.oldPassword, self.datas.passWord], name:'psDetection', errormsg:'请输入正确的原密码'},
+            {value:self.newPassword, name:'isEmpty', errormsg:'请输入新密码'},
+            {value:self.checkPassword, name:'isEmpty', errormsg:'请再次输入新密码'},
+            ]);
+          if(errormsg){
+            self.show(errormsg);
+            return
+          }
+        if(self.checkPassword!=self.newPassword){
           self.showWarn=true;
-          self.warnText='请输入原密码';
-          return
-        }else if(Base64.encode(md5(self.oldPassword))!=self.datas.passWord){
-          self.showWarn=true;
-          self.warnText='请输入正确的原密码';
-          return
-        }
-        if(self.newPassword===null){
-          self.showWarn=true;
-          self.warnText='请输入新密码';
-          return
-        }
-        if(self.checkPassword===null){
-          self.showWarn=true;
-          self.warnText='请再次输入新密码';
-          return
-        }else if(self.checkPassword!=self.newPassword){
-          self.showWarn=true;
-          self.warnText='请确保两次输入的密码一致';
+          self.show('请确保两次输入的密码一致');
           return
         }
         if(!self.passwordReg.test(self.newPassword)){
           self.showWarn=true;
-          self.warnText='密码最少为8位，最多为16位';
+          self.show('密码最少为8位，最多为16位');
           return
         }
         //发送请求
@@ -147,7 +128,7 @@ let Base64 = require('js-base64').Base64;
         var success=function(res){
           if(res.errorCode===0){
             self.showWarn=true;
-            self.warnText='修改成功';
+            self.show('修改成功');
           }
         };
         common.Ajax(url,type,data,success)

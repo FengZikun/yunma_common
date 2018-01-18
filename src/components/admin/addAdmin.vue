@@ -1,18 +1,5 @@
 <template>
 	<div class="right-main">
-	<div class="mengban" v-show='showWarn'>
-        <div class="warn">
-          <div class="classifyHeader">
-            <span style="display:block;height:48px;line-height:48px;">操作提示</span>
-          </div>
-          <div class="warnmain">
-            {{warnText}}
-          </div>
-          <div class="warnbottom">
-            <input type="button" name="" value="确定" @click='showWarn=false'>
-          </div>
-        </div>
-      </div>
 		<div class="mengban" v-if='showMB'>
 			<div class="choosepro" >
 				<div class="choosepro-top">
@@ -80,15 +67,16 @@
 </template>
 
 <script>
-	import common from '../../common.js'
-	import router from '../../router.js'
-	export default{
-		data(){
-			return{
-				userName:null,
-				passwd:null,
-				vendorName:null,
-				showMB:false,
+import common from '../../common.js'
+import router from '../../router.js'
+import {mapMutations} from 'vuex'
+export default{
+	data(){
+		return{
+			userName:null,
+			passwd:null,
+			vendorName:null,
+			showMB:false,
 				currentPage:'',  //当前页
        			totalPages:'',    //总页数
        			proInfo:[],      //信息数组
@@ -96,12 +84,12 @@
 		        resData:[],      //请求回的所有数据
 		        vendorName:null,
 		        vendorId:null,
-		        showWarn:false,
-		        warnText:null
 		    }
 		},
 		methods:{
-
+			...mapMutations({
+				show:'warn/show'
+			}),
 			//初始化
 			init:function(currentPage){
 				var self=this;
@@ -127,25 +115,15 @@
 			addNew:function(){
 				var self=this;
 				var passwdReg=/^([0-9]|[a-zA-Z]){8,16}$/;
-				if(self.userName===null){
-					self.showWarn=true;
-					self.warnText='请输入用户名';
+				let errormsg = common.validator([
+					{value:self.userName, name:'isEmpty',errormsg:'请输入用户名'},
+					{value:self.passwd, name:'isEmpty', errormsg:'请输入8~16位的密码'},
+					{value:self.passwd, name:'passwdTest', errormsg:'密码不符合规范，请重新设置'},
+					{value:self.vendorName, name:'isEmpty', errormsg:'请选择厂商'},
+					]);
+				if(errormsg){
+					self.show(errormsg);
 					return
-				}
-				if(self.passwd===null){
-					self.showWarn=true;
-					self.warnText='请输入8~16位的密码';
-					return;
-				}
-				if(!passwdReg.test(self.passwd)){
-					self.showWarn=true;
-					self.warnText='密码不符合规范，请重新设置';
-					return;
-				}
-				if(self.vendorName===null){
-					self.showWarn=true;
-					self.warnText='请选择厂商';
-					return;
 				}
 				var url='https://ym-a.top/cloud_code/POST/user/vendorUser.do';
 				var type='post';
@@ -226,9 +204,9 @@
 			this.init();
 		}
 	}
-</script>
+	</script>
 
-<style scoped>
+	<style scoped>
 	
 	.message-name{
 		display: inline-block;
@@ -270,4 +248,4 @@
 		margin-left: 50px;
 		margin-bottom: 34px;
 	}
-</style>
+	</style>

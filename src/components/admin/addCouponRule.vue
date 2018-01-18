@@ -312,8 +312,6 @@
 						$(selVen).addClass('has-select').removeClass('check-box');
 					}
 				}
-				
-				
 			},
 
 			//确认已选

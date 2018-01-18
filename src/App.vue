@@ -71,8 +71,7 @@
     },
     components:{
       hello,
-      admin,
-      warn
+      admin
     },
   }
 </script>

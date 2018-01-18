@@ -1,19 +1,6 @@
 <template>
 	<div class="right-main">
 
-		<div class="mengban" v-show='showWarn'>
-			<div class="warn">
-				<div class="classifyHeader">
-					<span style="display:block;height:48px;line-height:48px;">操作提示</span>
-				</div>
-				<div class="warnmain">
-					{{warnText}}
-				</div>
-				<div class="warnbottom">
-					<input type="button" class="delbutton" name="" value="确定" @click='showWarn=false'>
-				</div>
-			</div>
-		</div>
 		<div class="step1" v-bind:class='{hidestep:onehide}'>
 			<div class="top">
 				<img src="../../assets/img/chanpin_buzhou1.png">
@@ -21,17 +8,7 @@
 			</div>
 			<div class="main">
 				<ul class="ul" @click.prevent='choosed'>
-					<a href="javascript:void(0)"><li class="list">小食品</li></a>
-					<a href="javascript:void(0)"><li class="list">酒水</li></a>
-					<a href="javascript:void(0)"><li class="list">饮料</li></a>
-					<a href="javascript:void(0)"><li class="list">鞋靴箱包</li></a>
-					<a href="javascript:void(0)"><li class="list">个护化妆</li></a>
-					<a href="javascript:void(0)"><li class="list">家居建材</li></a>
-					<a href="javascript:void(0)"><li class="list">家居家纺</li></a>
-					<a href="javascript:void(0)"><li class="list">居家日用</li></a>
-					<a href="javascript:void(0)"><li class="list">母婴用品</li></a>
-					<a href="javascript:void(0)"><li class="list">农药</li></a>
-					<a href="javascript:void(0)"><li class="list">其他</li></a>
+					<a href="javascript:void(0)" v-for='item in list'><li class="list">{{item}}</li></a>
 				</ul>
 				<div class="nongyao" v-if='pesticide'>
 					<div class="pesticideMessage">
@@ -588,6 +565,7 @@ import common from '../../common.js'
 import VueHtml5Editor from 'vue-html5-editor'
 import Vue from 'vue'
 import router from '../../router.js'
+import {mapMutations} from 'vuex'
 export default{
 	data(){
 		return{
@@ -634,17 +612,19 @@ export default{
 			classifyData:null,		//分组
 			selected:{'children':null},
 			chilselected:null,
-			showWarn:false,
-			warnText:null,
 			pesticide:false,
 			pesticideType:null,
 			pesticideNum:null,
 			pesticideProduceType:null,
-			pesticideProductCode:null
+			pesticideProductCode:null,
+			list:['小食品','酒水','饮料','鞋靴箱包','个护化妆','家居建材','家居家纺','居家日用','母婴用品','农药','其他']
 		}
 	},
 	props:['productid','vendorId'],
 	methods:{
+		...mapMutations({
+			show:'warn/show'
+		}),
 			//进入step1
 			init:function(){
 				var self=this;
@@ -706,20 +686,18 @@ export default{
 						{value:self.pesticideProduceType, name:'isEmpty', errormsg:'请选择生产类型'}
 						]);
 					if(errormsg){
-						self.showWarn=true;
-						self.warnText=errormsg;
+						self.show(errormsg);
 						return
 					}
 				}
 				let errormsg = common.validator([
-						{value:self.productType, name:'isEmpty',errormsg:'请选择商品类目'},
-						{value:self.productSpe, name:'isEmpty', errormsg:'请选择商品类型'}
-						]);
-					if(errormsg){
-						self.showWarn=true;
-						self.warnText=errormsg;
-						return
-					}
+					{value:self.productType, name:'isEmpty',errormsg:'请选择商品类目'},
+					{value:self.productSpe, name:'isEmpty', errormsg:'请选择商品类型'}
+					]);
+				if(errormsg){
+					self.show(errormsg);
+					return
+				}
 				this.onehide=true;
 				this.twohide=false;
 				this.threehide=true;
@@ -764,7 +742,7 @@ export default{
 			confirmClassify:function(){
 				var self=this;
 				if(self.selected.name==undefined){
-					alert('请选择分组')
+					self.show('请选择分组')
 				}else if(self.chilselected==null){
 					var id=self.selected.id;
 					self.rowId=id;
@@ -791,8 +769,7 @@ export default{
 					{value:self.imgId, name:'isEmpty', errormsg:'请上传图片'}
 					]);
 				if(errormsg){
-					self.showWarn=true;
-					self.warnText=errormsg;
+					self.show(errormsg);
 					return
 				}
 				//修改
@@ -998,7 +975,7 @@ export default{
 			addparameter:function(){
 				var self=this;
 				if(self.parametername==''){
-					alert('请添加参数')
+					self.show('请添加参数')
 					return
 				}
 				var name=self.parametername;

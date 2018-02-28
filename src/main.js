@@ -2,7 +2,8 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import Warn from './warn'
+import Warn from './components/modules/warn'
+import Page from './components/modules/page'
 import router from './router'
 import './assets/css/bootstrap.min.css'
 import './assets/js/bootstrap.min'
@@ -18,11 +19,12 @@ Vue.config.productionTip = false
 //开启debug模式
 Vue.config.debug = true
 Vue.component('warn',Warn)
+Vue.component('page',Page)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
   template: '<App/>',
-  components: {App, Warn}
+  components: {App, Warn, Page}
 })

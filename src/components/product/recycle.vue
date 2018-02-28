@@ -83,19 +83,7 @@
               <input type="button" name="" value="还原" class="delbutton" @click='mengban2(null)'>
               <input type="button" name="" value="彻底删除" class="delbutton" @click='mengban(null)'>
             </div>
-            <div class="page-num">
-              <ul class="page-num-ul">
-                <a href="javascript:void(0)"><li class="page-num-li-arrow page-num-li" v-if='currentPage>1' @click='prevPage'><span class="arrow-left"></span></li></a>
-                <a href="javascript:void(0)"><li class="page-num-li" v-if='currentPage>4&&totalPage.length!=1&&totalPage[0]!=1' v-bind:data-page='1' @click.self='changePage'>1</li></a>
-                <a href="javascript:void(0)"><li class="page-num-li" v-if='currentPage>4&&totalPage.length!=1&&totalPage[0]!=1'>...</li></a>
-                <a href="javascript:void(0)"><li class="page-num-li" v-for='item in totalPage' v-bind:class='{dangqianye:item==currentPage}' v-bind:data-page='item' @click.self='changePage'>{{item}}</li></a>
-                <a href="javascript:void(0)"><li class="page-num-li" v-if='totalPages>5&&currentPage<totalPages-2'>...</li></a>
-                <a href="javascript:void(0)"><li class="page-num-li" v-if='totalPages>5&&currentPage<totalPages-2' v-bind:data-page='resData.totalPages' @click.self='changePage'>{{resData.totalPages}}</li></a>
-
-                <a href="javascript:void(0)"><li class="page-num-li page-num-li-arrow" v-if='currentPage<totalPages' @click='nextPage'><span class="arrow-right"></span></li></a>
-
-              </ul>
-            </div>
+            <page v-on:finit='init'></page>
             </div>
           </div>
   </div>
@@ -150,6 +138,7 @@
 </style>
 <script>
 import common from '../../common.js'
+import {mapMutations} from 'vuex'
   export default{
     data(){
       return{
@@ -170,6 +159,9 @@ import common from '../../common.js'
     },
     props:['vendorId'],
     methods:{
+      ...mapMutations({
+        getData:'page/getData'
+      }),
       //初始化
       init:function(currentPage){
         var self=this;
@@ -181,13 +173,12 @@ import common from '../../common.js'
             currentPage:currentPage
           };
         var success=function(res){
-            var pagenum=res.totalPages;
-            self.totalPage=[];
             self.resData=res;
             self.proInfo=res.result.data;
-            self.totalPages=res.totalPages;
             self.currentPage=res.currentPage;
-            self.getPage();
+            var totalPage=[];
+            totalPage = self.getPage(res.currentPage, res.totalPages);
+            self.getData({currentPage:res.currentPage, totalPages:res.totalPages, totalPage:totalPage})
           }
         //调用ajax
         common.Ajax(url,type,data,success)
@@ -250,13 +241,12 @@ import common from '../../common.js'
           keyword:self.keyword
         };
         var success=function(res){
-          var pagenum=res.totalPages;
-          self.totalPage=[];
           self.resData=res;
           self.proInfo=res.result.data;
-          self.totalPages=res.totalPages;
           self.currentPage=res.currentPage;
-          self.getPage();
+          var totalPage=[];
+          totalPage = self.getPage(res.currentPage, res.totalPages);
+          self.getData({currentPage:res.currentPage, totalPages:res.totalPages, totalPage:totalPage})
         }
         //调用ajax
         common.Ajax(url,type,data,success)
@@ -317,6 +307,7 @@ import common from '../../common.js'
             id:huanyuandata,
             deleteFlag:0
           };
+        console.log(data)
         var success=function(res){
             self.init(self.currentPage);
             self.showMB2=false;
@@ -338,14 +329,7 @@ import common from '../../common.js'
         }
         var id=$(event.target).attr('data-id');
         this.$emit('updata',id);
-      },
-      //翻页
-      changePage:common.changePage,
-      //上一页
-      prevPage:common.prevPage,
-
-      //下一页
-      nextPage:common.nextPage,
+      }
     },
     created:function(){
       this.init();

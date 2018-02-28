@@ -69,19 +69,7 @@
           </span>
           <input type="button" name="" value="删除" class="delbutton" @click='mengban'>
         </div>
-        <div class="page-num">
-          <ul class="page-num-ul">
-            <a href="javascript:void(0)"><li class="page-num-li-arrow page-num-li" v-if='currentPage>1' @click='prevPage'><span class="arrow-left"></span></li></a>
-            <a href="javascript:void(0)"><li class="page-num-li" v-if='currentPage>4&&totalPage.length!=1&&totalPage[0]!=1' v-bind:data-page='1' @click.self='changePage'>1</li></a>
-            <a href="javascript:void(0)"><li class="page-num-li" v-if='currentPage>4&&totalPage.length!=1&&totalPage[0]!=1'>...</li></a>
-            <a href="javascript:void(0)"><li class="page-num-li" v-for='item in totalPage' v-bind:class='{dangqianye:item==currentPage}' v-bind:data-page='item' @click.self='changePage'>{{item}}</li></a>
-            <a href="javascript:void(0)"><li class="page-num-li" v-if='totalPages>5&&currentPage<totalPages-2'>...</li></a>
-            <a href="javascript:void(0)"><li class="page-num-li" v-if='totalPages>5&&currentPage<totalPages-2' v-bind:data-page='resData.totalPages' @click.self='changePage'>{{resData.totalPages}}</li></a>
-
-            <a href="javascript:void(0)"><li class="page-num-li page-num-li-arrow" v-if='currentPage<totalPages' @click='nextPage'><span class="arrow-right"></span></li></a>
-
-          </ul>
-        </div>
+        <page v-on:finit='init'></page>
       </div>
     </div>
   </div>
@@ -134,6 +122,7 @@
 </style>
 <script>
   import common from '../../common.js'
+  import {mapMutations} from 'vuex'
   export default{
     data(){
       return{
@@ -151,6 +140,9 @@
     },
     props:['vendorId'],
     methods:{
+      ...mapMutations({
+        getData:'page/getData'
+      }),
       //获取数据
       init:function(currentPage){
         var self=this;
@@ -163,12 +155,11 @@
         };
         var success=function(res){
           self.gifts=res.result.data;
-          self.totalPages=res.totalPages;
           self.currentPage=res.currentPage;
-          self.resData=res;
-          self.totalPage=[];
-          self.getPage()
-          //console.log(res)
+          var totalPage=[];
+          totalPage = self.getPage(res.currentPage, res.totalPages);
+          self.getData({currentPage:res.currentPage, totalPages:res.totalPages, totalPage:totalPage})
+          
         }
         common.Ajax(url,type,data,success)
       },
@@ -267,25 +258,16 @@
           keyword:self.keyword
         };
         var success=function(res){
-          var pagenum=res.totalPages;
-          self.totalPage=[];
           self.resData=res;
           self.gifts=res.result.data;
-          self.totalPages=res.totalPages;
           self.currentPage=res.currentPage;
-          self.getPage();
+          var totalPage=[];
+          totalPage = self.getPage(res.currentPage, res.totalPages);
+          self.getData({currentPage:res.currentPage, totalPages:res.totalPages, totalPage:totalPage})
         }
         //调用ajax
         common.Ajax(url,type,data,success)
       },
-      //翻页
-      changePage:common.changePage,
-
-      //上一页
-      prevPage:common.prevPage,
-
-      //下一页
-      nextPage:common.nextPage,
       //获取页数
       getPage:common.getPage,
     },

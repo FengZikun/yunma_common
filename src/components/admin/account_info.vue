@@ -51,21 +51,7 @@
           </ul>
         </div>
       </div>
-      <div class="page-button">
-        <div class="page-num">
-          <ul class="page-num-ul">
-            <a href="javascript:void(0)"><li class="page-num-li-arrow page-num-li" v-if='currentPage>1' @click='prevPage'><span class="arrow-left"></span></li></a>
-            <a href="javascript:void(0)"><li class="page-num-li" v-if='currentPage>4&&totalPage.length!=1&&totalPage[0]!=1' v-bind:data-page='1' @click.self='changePage'>1</li></a>
-            <a href="javascript:void(0)"><li class="page-num-li" v-if='currentPage>4&&totalPage.length!=1&&totalPage[0]!=1'>...</li></a>
-            <a href="javascript:void(0)"><li class="page-num-li" v-for='item in totalPage' v-bind:class='{dangqianye:item==currentPage}' v-bind:data-page='item' @click.self='changePage'>{{item}}</li></a>
-            <a href="javascript:void(0)"><li class="page-num-li" v-if='totalPages>5&&currentPage<totalPages-2'>...</li></a>
-            <a href="javascript:void(0)"><li class="page-num-li" v-if='totalPages>5&&currentPage<totalPages-2' v-bind:data-page='resData.totalPages' @click.self='changePage'>{{resData.totalPages}}</li></a>
-
-            <a href="javascript:void(0)"><li class="page-num-li page-num-li-arrow" v-if='currentPage<totalPages' @click='nextPage'><span class="arrow-right"></span></li></a>
-
-          </ul>
-        </div>
-      </div>
+      <page v-on:finit='init'></page>
     </div>
   </div>
 </template>
@@ -150,23 +136,24 @@
 </style>
 <script>
   import common from '../../common.js'
+  import {mapMutations} from 'vuex'
   export default{
     data(){ 
       return{
         childCon:'我是子页面',
         getInfo:[],
-        totalPage:[],    //页码数组
         resData:[],      //请求回的所有数据
         showMB:false,    //蒙版开关
         showMB2:false,    //蒙版开关2
-        currentPage:'',  //当前页
-        totalPages:'',    //总页数
         newPassword:null,
         checkPassword:null,
         userid:null,
       }
     },
     methods:{
+      ...mapMutations({
+        getData:'page/getData'
+      }),
       //初始化
       init:function(currentPage){
         var self=this;
@@ -180,11 +167,11 @@
         var success=function(res){
           self.getInfo=res.result.data;
           var pagenum=res.totalPages;
-          self.totalPage=[];
-          self.resData=res;
-          self.totalPages=res.totalPages;
           self.currentPage=res.currentPage;
-          self.getPage();
+          self.resData=res;
+          var totalPage=[];
+          totalPage = self.getPage(res.currentPage, res.totalPages);
+          self.getData({currentPage:res.currentPage, totalPages:res.totalPages, totalPage:totalPage})
         }
         //调用ajax
         common.Ajax(url,type,data,success)

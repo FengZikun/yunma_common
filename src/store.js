@@ -11,6 +11,7 @@ import vendorId from './vuex/vendorId.js'
 import detailBill from './vuex/detailBill.js'
 import checkQualification from './vuex/checkQualification.js'
 import warn from './vuex/warn.js'
+import page from './vuex/page.js'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -25,7 +26,8 @@ const store = new Vuex.Store({
 		vendorId:vendorId,
 		detailBill:detailBill,
 		checkQualification:checkQualification,
-		warn:warn
+		warn:warn,
+		page:page
 	}
 })
 

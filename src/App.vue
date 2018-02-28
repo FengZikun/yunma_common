@@ -20,7 +20,6 @@
   import hello from './components/Hello.vue'
   import admin from './components/HelloAdmin.vue'
   import common from './common.js'
-  import warn from './warn.vue'
   import md5 from 'js-md5'
   import router from './router'
 

@@ -160,6 +160,7 @@
             passwd:pswd,
           };
           var success=function(res){
+            console.log(res)
             if(res.statuscode==1){
               self.userId=res.id;
               self.vendorId=res.vendorId;

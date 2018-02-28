@@ -174,7 +174,7 @@
 								</span> -->
 								<span class="pro-li-span">
 			                      <span title="删除" class="shanchu" v-bind:data-id='pro.couponId' @click='mengban3'></span>
-
+								  <span @click='changeTime'><a href="javascript:void(0)">更新有效时间</a></span>
 			                    </span>
 							</li>
 							<li class="pro-li" v-for="ym in ymInfo" v-if='ymInfo!=null'>
@@ -331,6 +331,7 @@
 		        	data:{vendorId:self.vendorId},
 		        	dataType:'json',
 		        	success:function(res){
+		        		console.log(res)
 		        		if($.isEmptyObject(res)){
 		        			self.ymInfo=null
 		        		}else{	
@@ -538,7 +539,7 @@
 			delcoupon:function(){
 				var self=this;
 				self.showMB3=false;
-				var url='https://ym-a.top/cloud_code//DELETE/coupon/info.do';
+				var url='https://ym-a.top/cloud_code/DELETE/coupon/info.do';
 				var type='get';
 				var data={
 					vendorId:self.vendorId,
@@ -552,6 +553,23 @@
 				};
 				common.Ajax(url,type,data,success)
 			},
+
+			//修改优惠券有效时间
+			changeTime(){
+				var self=this;
+				var url='https://ym-a.top/cloud_code/GET/GetUrlForUpdateWdAccessToken';
+				var type = 'get';
+				var data = {
+					vendorId:self.vendorId
+				}
+				var success = function(res){
+					if(res.errorCode===0){
+						window.open(res.uri);
+					}
+				}
+				common.Ajax(url,type,data,success)
+			},
+
 			//获取页数
 			getPage:common.getPage,
      		//翻页

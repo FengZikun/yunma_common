@@ -128,7 +128,7 @@
 									<input class="clear" type="button" name="" value="清空" @click='clearPro'>
 								</div>
 								<ul class="ul4">
-									<li v-for='(item,index) in selectedPro'>
+									<li v-for='(item,index) in selectedPro' :data-index='index'>
 										{{item}}
 										<!-- <div class="quan2" v-bind:data-index='index'></div> -->
 									</li>
@@ -382,6 +382,12 @@
 				self.clearVendor();
 				self.blackList=[];
 			},
+
+			//删除此项
+			// delThis(e){
+			// 	console.log($(e.target).attr('data-index'));
+			// 	this.selectedPro.splice($(e.target).attr('data-index'),1);
+			// },
 
 			//提交创建
 			tijiao:function(){

@@ -20,24 +20,46 @@ const common={
 		})
 	},
 	//获取页数
-  getPage:function(){
+  getPage:function(currentPage, totalPages){
     var self=this;
-    var lastpage=self.totalPages-2;
-    if(self.currentPage<=4&&self.totalPages<=5){
-     self.totalPage=self.totalPages;
-     return
-   };
-   if(self.currentPage<4&&self.totalPages>5){
-     self.totalPage=5;
-   }else if(self.currentPage>=4&&self.currentPage<=lastpage){
-    var i=self.currentPage-3;
-    var len=self.currentPage+2;
-    for(i,len;i<=len;i++){
-      self.totalPage.push(i);
+    if(currentPage == null){
+      var lastpage=self.totalPages-2;
+      if(self.currentPage<=4&&self.totalPages<=5){
+       self.totalPage=self.totalPages;
+       return
+     };
+     if(self.currentPage<4&&self.totalPages>5){
+       self.totalPage=5;
+     }else if(self.currentPage>=4&&self.currentPage<=lastpage){
+      var i=self.currentPage-3;
+      var len=self.currentPage+2;
+      for(i,len;i<=len;i++){
+        self.totalPage.push(i);
+      }
+    }else if(self.currentPage>lastpage){
+      self.totalPage=[lastpage-2,lastpage-1,lastpage,lastpage+1,lastpage+2];
     }
-  }else if(self.currentPage>lastpage){
-    self.totalPage=[lastpage-2,lastpage-1,lastpage,lastpage+1,lastpage+2];
+  }else{
+    var lastpage=totalPages-2;
+    var totalPage = [];
+      if(currentPage<=4&&totalPages<=5){
+       totalPage=totalPages;
+       return totalPage
+     };
+     if(currentPage<4&&totalPages>5){
+       totalPage=5;
+     }else if(currentPage>=4&&currentPage<=lastpage){
+      var i=currentPage-3;
+      var len=currentPage+2;
+      for(i,len;i<=len;i++){
+        totalPage.push(i);
+      }
+    }else if(currentPage>lastpage){
+      totalPage=[lastpage-2,lastpage-1,lastpage,lastpage+1,lastpage+2];
+    }
+    return totalPage
   }
+
 
 },
 	//翻页

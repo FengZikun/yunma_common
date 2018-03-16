@@ -529,7 +529,7 @@
               map.plugin(["AMap.Heatmap"], function() {
                 heatmap = new AMap.Heatmap(map, {
                   radius: 25,
-                  opacity: [0.1, 0.8]
+                  opacity: [0.3, 0.8]
                 });
                 heatmap.setDataSet({
                   data: self.heatData,

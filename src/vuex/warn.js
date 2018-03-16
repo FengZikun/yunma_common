@@ -11,7 +11,6 @@ const warn = {
 		},
 		hide(state){
 			state.showWarn = false;
-			state.warnText = null;
 		}
 	}
 }

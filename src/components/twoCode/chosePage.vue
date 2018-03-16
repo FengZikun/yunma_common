@@ -30,9 +30,9 @@ import {mapMutations} from 'vuex'
       }
     },
     methods:{
-      ...mapMutations([
-        'reset'
-        ]),
+      ...mapMutations({
+        reset:'banner1/reset'
+        }),
       next(){
         if(this.muban===1){
           router.push({path:'/twoCode/detailPage'});

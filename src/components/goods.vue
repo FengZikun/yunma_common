@@ -4,30 +4,21 @@
       <div class='col-md-2'>
         <div class='goods_left'>
           <ul class='goods_menu'>
-            <router-link tag='li' to="/goods/progaikuang" class='goods_li goods_li_1'>
-              <span class='img img1'></span><a href="javascript:void(0)"><span>概况</span></a>
-            </router-link>
-            
 
-            <li class='goods_li_1'>
-              <div class="change_color" @click="showList">
-                <span class='img img7'></span><a href="javascript:void(0)"><span>产品库</span><span class='arrow'></span></a>
+            <li class='goods_li_1' :class='{goods_li:!item.children}' v-for='item in bar'>
+
+              <router-link tag='li' :to="item.path" v-if='!item.children'>
+                <span class='img' :class='item.class'></span><a href="javascript:void(0)"><span>{{item.name}}</span></a>
+              </router-link>
+              
+              <div class="change_color" @click="showList" v-else>
+                <span class='img' :class='item.class'></span><a href="javascript:void(0)"><span>{{item.name}}</span><span class='arrow'></span></a>
               </div>
               
-              <ul class='goods_sub2 hidelist'>
-                <router-link tag='li' to="/goods/pro_message"><a>产品管理</a></router-link>
-                <router-link tag='li' to="/goods/classify"><a>产品分类</a></router-link>
+              <ul class='hidelist' :class='item.childClass' v-if='item.children'>
+                <router-link tag='li' v-for='childItem in item.children' :to="childItem.path"><a>{{childItem.name}}</a></router-link>
               </ul>
-            </li>
-            <li class='goods_li_1'>
-              <div class="change_color" @click="showList">
-                <span class='img img8'></span><a href="javascript:void(0)"><span>礼品库</span><span class='arrow'></span></a>
-              </div>
-              
-              <ul class='goods_sub3 hidelist'>
-                <router-link tag='li' to="/goods/gift"><a>礼品管理</a></router-link>
-                <router-link tag='li' to="/goods/groups"><a>分组管理</a></router-link>
-              </ul>
+
             </li>
           </ul>
         </div>
@@ -121,7 +112,44 @@
         childCon:'我是子页面',
         goodsid:'',
         vendorId:'',
-        proNum:null
+        proNum:null,
+        bar:[
+          {
+            name:'概况',
+            path:'/goods/progaikuang',
+            class:'img1'
+          },
+          {
+            name:'产品库',
+            class:'img7',
+            childClass:'goods_sub2',
+            children:[
+              {
+                name:'产品管理',
+                path:'/goods/pro_message'
+              },
+              {
+                name:'产品分类',
+                path:'/goods/classify'
+              }
+            ]
+          },
+          {
+            name:'礼品库',
+            class:'img8',
+            childClass:'goods_sub3',
+            children:[
+              {
+                name:'礼品管理',
+                path:'/goods/gift'
+              },
+              {
+                name:'分组管理',
+                path:'/goods/groups'
+              }
+            ]
+          },
+        ]
       }
     },
     props:['datas'],

@@ -4,40 +4,9 @@
       <div class='col-md-2'>
         <div class='goods_left'>
           <ul class='goods_menu'>
-            <li class='goods_li goods_li_1'>
-              <router-link to="/admin/admingaikuang"><div class="change_color">
-                <span class='img img1'></span><a href="javascript:void(0)"><span>概况</span></a>
-              </div></router-link>
-              
-            </li>
-            <li class='goods_li_1'>
-              <router-link to="/admin/corporate"><div class="change_color">
-                <span class='img img2'></span><a href="javascript:void(0)"><span>企业信息</span></a>
-              </div></router-link>
-            </li>
-            <li class='goods_li_1'>
-              <router-link to="/admin/accountinfo"><div class="change_color">
-                <span class='img img3'></span><a href="javascript:void(0)"><span>账号信息</span></a>
-              </div></router-link>
-            </li>
-            <li class='goods_li_1'>
-              <router-link to="/admin/weixin"><div class="change_color">
-                <span class='img img3'></span><a href="javascript:void(0)"><span>微信公众号信息</span></a>
-              </div></router-link>
-            </li>
-            <li class='goods_li_1'>
-              <router-link to="/admin/enterpriseBill"><div class="change_color">
-                <span class='img img15'></span><a href="javascript:void(0)"><span>企业账单</span></a>
-              </div></router-link>
-
-              <!-- <ul class='goods_sub2 hidelist'>
-                <router-link tag='li' to="/admin/coupon"><a>新建优惠券</a></router-link>
-                <router-link tag='li' to="/admin/couponRule"><a>发放规则</a></router-link>
-              </ul> -->
-            </li>
-            <li class='goods_li_1'>
-              <router-link to="/admin/checkPending"><div class="change_color">
-                <span class='img img16'></span><a href="javascript:void(0)"><span>待审核</span></a>
+            <li class='goods_li goods_li_1' v-for='item in bar'>
+              <router-link :to="item.path"><div class="change_color">
+                <span class='img' :class='item.class'></span><a href="javascript:void(0)"><span>{{item.name}}</span></a>
               </div></router-link>
             </li>
           </ul>
@@ -87,25 +56,10 @@
     width: 100%;
     display: none;
   }
-  /*.goods_menu .goods_li_2 .goods_sub2 li {
-    margin-top: -14px;
-  }*/
   .goods_menu .goods_li_3 .goods_sub3 {
     width: 100%;
     display: none;
   }
-  /*.goods_menu .goods_li_3 .goods_sub3 li {
-    margin-top: -14px;
-  }*/
-  /*.rig {
-    width: 100%;
-    height: 1000px;
-    margin:0;
-    border-radius: 10px;
-    background-color: #f0f4fa;
-    margin-top: 0;
-    border: 1px solid white;
-  }*/
   .page-ckp-showNum {
     display: flex;
     justify-content: space-between;
@@ -290,7 +244,39 @@
       return{
         childCon:'我是子页面',
         goodsid:'',
-        detailId:null
+        detailId:null,
+        bar:[
+          {
+            name:'概况',
+            path:'/admin/admingaikuang',
+            class:'img1'
+          },
+          {
+            name:'企业信息',
+            path:'/admin/corporate',
+            class:'img2'
+          },
+          {
+            name:'账号信息',
+            path:'/admin/accountinfo',
+            class:'img3'
+          },
+          {
+            name:'微信公众号信息',
+            path:'/admin/weixin',
+            class:'img3'
+          },
+          {
+            name:'企业账单',
+            path:'/admin/enterpriseBill',
+            class:'img15'
+          },
+          {
+            name:'待审核',
+            path:'/admin/checkPending',
+            class:'img16'
+          },
+        ]
       }
     },
     props:['datas'],

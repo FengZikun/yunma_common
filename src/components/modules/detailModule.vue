@@ -148,11 +148,11 @@
 			}
 		},
 		methods:{
-			...mapActions([
-				'setPic',
-				'changeState',
-				'addPicNum'
-				]),
+			...mapActions({
+				setPic:'banner1/setPic',
+				changeState:'banner1/changeState',
+				addPicNum:'banner1/addPicNum'
+				}),
 			//同步显示图片
 			change:function(eImg){
 				const reader = new FileReader();
@@ -204,7 +204,7 @@
 					return this.$store.state.banner1.verifyData.cell.a
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'a')
+					this.$store.commit('banner1/updateMessage', 'a')
 				}
 			},
 			verifyB:{
@@ -212,7 +212,7 @@
 					return this.$store.state.banner1.verifyData.cell.b
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'b')
+					this.$store.commit('banner1/updateMessage', 'b')
 				}
 			},
 			verifyC:{
@@ -220,7 +220,7 @@
 					return this.$store.state.banner1.verifyData.cell.c
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'c')
+					this.$store.commit('banner1/updateMessage', 'c')
 				}
 			},
 			verifyD:{
@@ -228,7 +228,7 @@
 					return this.$store.state.banner1.verifyData.cell.d
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'd')
+					this.$store.commit('banner1/updateMessage', 'd')
 				}
 			},
 			verifyE:{
@@ -241,7 +241,7 @@
 					return this.$store.state.banner1.verifyData.cell.f
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'f')
+					this.$store.commit('banner1/updateMessage', 'f')
 				}
 			},
 			verifyG:{
@@ -249,7 +249,7 @@
 					return this.$store.state.banner1.verifyData.cell.g
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'g')
+					this.$store.commit('banner1/updateMessage', 'g')
 				}
 			},
 			verifyH:{
@@ -257,7 +257,7 @@
 					return this.$store.state.banner1.verifyData.cell.h
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'h')
+					this.$store.commit('banner1/updateMessage', 'h')
 				}
 			},
 			verifyI:{
@@ -265,7 +265,7 @@
 					return this.$store.state.banner1.verifyData.cell.i
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'i')
+					this.$store.commit('banner1/updateMessage', 'i')
 				}
 			},
 			website:{
@@ -273,7 +273,7 @@
 					return this.$store.state.banner1.fastTrackData.website
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'website')
+					this.$store.commit('banner1/updateMessage', 'website')
 				}
 			},
 			websiteVal:{
@@ -281,7 +281,7 @@
 					return this.$store.state.banner1.fastTrackData.websiteVal
 				},
 				set (value) {
-					this.$store.commit('changeVal',{value:value,type:'website'})
+					this.$store.commit('banner1/changeVal',{value:value,type:'website'})
 				}
 			},
 			officialAccounts:{
@@ -289,7 +289,7 @@
 					return this.$store.state.banner1.fastTrackData.officialAccounts
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'officialAccounts')
+					this.$store.commit('banner1/updateMessage', 'officialAccounts')
 				}
 			},
 			officialAccountsVal:{
@@ -297,7 +297,7 @@
 					return this.$store.state.banner1.fastTrackData.officialAccountsVal
 				},
 				set (value) {
-					this.$store.commit('changeVal',{value:value,type:'officialAccounts'})
+					this.$store.commit('banner1/changeVal',{value:value,type:'officialAccounts'})
 				}
 			},
 			complain:{
@@ -305,7 +305,7 @@
 					return this.$store.state.banner1.fastTrackData.complain
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'complain')
+					this.$store.commit('banner1/updateMessage', 'complain')
 				}
 			},
 			complainVal:{
@@ -313,7 +313,7 @@
 					return this.$store.state.banner1.fastTrackData.complainVal
 				},
 				set (value) {
-					this.$store.commit('changeVal',{value:value,type:'complain'})
+					this.$store.commit('banner1/changeVal',{value:value,type:'complain'})
 				}
 			},
 			weiStore:{
@@ -321,7 +321,7 @@
 					return this.$store.state.banner1.fastTrackData.weiStore
 				},
 				set (value) {
-					this.$store.commit('updateMessage', 'weiStore')
+					this.$store.commit('banner1/updateMessage', 'weiStore')
 				}
 			},
 			weiStoreVal:{
@@ -329,7 +329,7 @@
 					return this.$store.state.banner1.fastTrackData.weiStoreVal
 				},
 				set (value) {
-					this.$store.commit('changeVal',{value:value,type:'weiStore'})
+					this.$store.commit('banner1/changeVal',{value:value,type:'weiStore'})
 				}
 			},
 			title:{
@@ -337,7 +337,7 @@
 					return this.$store.state.banner1.promotionVedioData.title
 				},
 				set (value) {
-					this.$store.commit('changeVal',{value:value,type:'title'})
+					this.$store.commit('banner1/changeVal',{value:value,type:'title'})
 				}
 			},
 			videoSrc:{
@@ -348,15 +348,15 @@
 					if(/embed/.test(value)){
 						var a=value.replace(/width=\'480\'/,'width=\"100vw\"');
 						a=a.replace(/400/,'219')
-						this.$store.commit('changeVal',{value:a,type:'videoSrc'})
+						this.$store.commit('banner1/changeVal',{value:a,type:'videoSrc'})
 					}
 					if(/iframe/.test(value)){
 						var a=value.replace(/width=510/,'width=100%');
 						a=a.replace(/498/,'219')
-						this.$store.commit('changeVal',{value:a,type:'videoSrc'})
+						this.$store.commit('banner1/changeVal',{value:a,type:'videoSrc'})
 					}
 					else{
-						this.$store.commit('changeVal',{value:value,type:'videoSrc'})
+						this.$store.commit('banner1/changeVal',{value:value,type:'videoSrc'})
 					}
 					
 				}
@@ -366,7 +366,7 @@
 					return this.$store.state.banner1.data.bannerPic[0].address;
 				},
 				set (value) {
-					this.$store.commit('changeVal',{value:value,type:'bannerPic0'})
+					this.$store.commit('banner1/changeVal',{value:value,type:'bannerPic0'})
 				}
 			},
 			address2:{
@@ -374,7 +374,7 @@
 					return this.$store.state.banner1.data.bannerPic[1].address;
 				},
 				set (value) {
-					this.$store.commit('changeVal',{value:value,type:'bannerPic1'})
+					this.$store.commit('banner1/changeVal',{value:value,type:'bannerPic1'})
 				}
 			},
 			address3:{
@@ -382,7 +382,7 @@
 					return this.$store.state.banner1.data.bannerPic[2].address;
 				},
 				set (value) {
-					this.$store.commit('changeVal',{value:value,type:'bannerPic2'})
+					this.$store.commit('banner1/changeVal',{value:value,type:'bannerPic2'})
 				}
 			},
 		}

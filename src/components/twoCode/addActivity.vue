@@ -53,7 +53,8 @@
 				<p class="right-main-top1">
 					<span class="right-main-top-icon1"></span>
 					新建扫码页是根据需求定义推广溯源的企业或产品的功能。
-					<router-link to='/twoCode/activity'><span class='returnBtn'>返回</span></router-link>
+					<router-link to='/twoCode/activity' v-if='type===1'><span class='returnBtn'>返回</span></router-link>
+					<router-link to='/twoCode/activitySu' v-else><span class='returnBtn'>返回</span></router-link>
 				</p>
 				<div class="right-main-top2">
 					<p style="color: red;">重要提示：</p>

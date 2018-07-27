@@ -37,7 +37,8 @@
 				<p class="right-main-top1">
 					<span class="right-main-top-icon1"></span>
 					您可以在此页面根据需求新增订单，可以选择已有的产品，定义“数量”，“有效期”等。
-					<router-link to='/twoCode/enterprise_order'><span class='returnBtn'>返回</span></router-link>
+					<router-link to='/twoCode/enterprise_order' v-if='type===1'><span class='returnBtn'>返回</span></router-link>
+					<router-link to='/twoCode/sourceCode' v-else><span class='returnBtn'>返回</span></router-link>
 				</p>
 			</div>
 			<div class="right-main-bottom">

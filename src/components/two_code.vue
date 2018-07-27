@@ -67,6 +67,12 @@
                     <router-link tag='li' to="/twoCode/analysis">
                       <a>渠道信息分析</a>
                     </router-link>
+                    <router-link tag='li' to="/twoCode/scanSu">
+                    <a>扫码明细</a>
+                  </router-link>
+                  <router-link tag='li' to="/twoCode/suggestion">
+                    <a>用户意见</a>
+                  </router-link>
                   </ul>
                 </li>
 

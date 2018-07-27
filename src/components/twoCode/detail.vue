@@ -7,7 +7,8 @@
 		</div>
 		<div class="right-main">
 			<p class="return">
-				<router-link to='/twoCode/enterprise_order'>返回</router-link>
+				<router-link to='/twoCode/enterprise_order' v-if='type===1'>返回</router-link>
+				<router-link to='/twoCode/sourceCode' v-else>返回</router-link>
 			</p>
 			<div class="right-main-top">
 				<div class="left">

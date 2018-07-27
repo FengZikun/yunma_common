@@ -6,13 +6,15 @@
     <div style="position:relative;">
       <span class="beizhuSpan">备注：</span><span></span><textarea v-model="moduleRemark" class="beizhuInput"></textarea>
     </div>
-    <router-link to='/twoCode/briefCode' class="nextBtn">上一步</router-link>
+    <router-link to='/twoCode/briefCode' class="nextBtn" v-if='type===1'>上一步</router-link>
+    <router-link to='/twoCode/briefCodeSu' class="nextBtn" v-else>上一步</router-link>
     <div class="nextBtn" @click='checkName'>下一步</div>
   </div>
 </template>
 <script>
   import router from '../../router'
   import {mapMutations} from 'vuex'
+  import {mapState} from 'vuex'
   export default{
     data(){
       return {
@@ -23,6 +25,9 @@
       }
     },
     props: ['datas'],
+    computed: mapState({
+      type: state=>state.b.type
+    }),
     methods:{
       ...mapMutations({
         show:'warn/show'

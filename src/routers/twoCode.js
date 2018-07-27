@@ -1,177 +1,150 @@
-import twoCode from '../components/two_code.vue'
-import hongbao from '../components/twoCode/hongbao.vue'
-import addHB from '../components/twoCode/addHB.vue'
-import rule from '../components/twoCode/rule.vue'
-import addRule from '../components/twoCode/addRule.vue'
-import addIntegralRule from '../components/twoCode/addIntegralRule.vue'
-import IntegralUseRule from '../components/twoCode/IntegralUseRule.vue'
-import addIntegralUseRule from '../components/twoCode/addIntegralUseRule.vue'
-import userInfomation from '../components/twoCode/userInfomation.vue'
-import addActivity from '../components/twoCode/addActivity.vue'
-import analysis from '../components/twoCode/analysis.vue'
-import signIn from '../components/twoCode/signIn.vue'
-import sourceCode from '../components/twoCode/sourceCode.vue'
-import game from '../components/twoCode/game.vue'
-import gameRule from '../components/twoCode/gameRule.vue'
-import exhibitors from '../components/twoCode/exhibitors.vue'
-import addGame from '../components/twoCode/addGame.vue'
-import addGameRule from '../components/twoCode/addGameRule.vue'
-import userDetail from '../components/twoCode/userDetail.vue'
-import exchange from '../components/twoCode/exchange.vue'
-import briefCode from '../components/twoCode/briefCode.vue'
-import briefCodeSu from '../components/twoCode/briefCodeSu.vue'
-import chosePage from '../components/twoCode/chosePage.vue'
-import setupPage from '../components/twoCode/setupPage.vue'
-import detailPage from '../components/twoCode/detailPage.vue'
-import detailPage2 from '../components/twoCode/detailPage2.vue'
-import channel from '../components/twoCode/channel.vue'
-import enterprise_order from '../components/twoCode/enterprise_order.vue'
-import gaikuang from '../components/twoCode/gaikuang.vue'
-import activity from '../components/twoCode/activity.vue'
-import activitySu from '../components/twoCode/activitySu.vue'
-import scan from '../components/twoCode/scan.vue'
-import addOrder from '../components/twoCode/addOrder.vue'
-import detail from '../components/twoCode/detail.vue'
-
 const twoCodeRouter={
 	path:'/twoCode',
-	component:twoCode,
+	component: () => import('../components/two_code.vue'),
 	children:[
 	{
 		path:'',
-		component:gaikuang
+		component: () => import('../components/twoCode/gaikuang.vue')
 	},
 	{
 		path:'gaikuang',
-		component:gaikuang
+		component: () => import('../components/twoCode/gaikuang.vue')
 	},
 	{
 		path:'briefCode',
-		component: briefCode
+		component: () => import('../components/twoCode/briefCode.vue') 
 	},
 	{
 		path:'briefCodeSu',
-		component: briefCodeSu
+		component: () => import('../components/twoCode/briefCodeSu.vue')
 	},
 	{
 		path:'setupPage',
-		component: setupPage
+		component: () => import('../components/twoCode/setupPage.vue')
 	},
 	{
 		path:'chosePage',
-		component:chosePage
+		component: () => import('../components/twoCode/chosePage.vue')
 	},
 	{
 		path:'detailPage',
-		component:detailPage
+		component: () => import('../components/twoCode/detailPage.vue')
 	},
 	{
 		path:'detailPage2',
-		component:detailPage2
+		component: () => import('../components/twoCode/detailPage2.vue')
 	},
 	{
 		path:'activity',
-		component:activity
+		component: () => import('../components/twoCode/activity.vue')
 	},
 	{
 		path:'activitySu',
-		component:activitySu
+		component: () => import('../components/twoCode/activitySu.vue')
 	},
 	{
 		path:'scan',
-		component:scan
+		component: () => import('../components/twoCode/scan.vue')
+	},
+	{
+		path:'scanSu',
+		component: () => import('../components/twoCode/scanSu.vue')
+	},
+	{
+		path:'suggestion',
+		component: () => import('../components/twoCode/suggestion.vue')
 	},
 	{
 		path:'channel',
-		component:channel
+		component: () => import('../components/twoCode/channel.vue')
 	},
 	{
 		path:'hongbao',
-		component:hongbao
+		component: () => import('../components/twoCode/hongbao.vue')
 	},
 	{
 		path:'addHB',
-		component:addHB
+		component: () => import('../components/twoCode/addHB.vue')
 	},
 	{
 		path:'rule',
-		component:rule
+		component: () => import('../components/twoCode/rule.vue')
 	},
 	{
 		path:'addRule',
-		component:addRule
+		component: () => import('../components/twoCode/addRule.vue')
 	},
 	{
 		path:'enterprise_order',
-		component:enterprise_order
+		component: () => import('../components/twoCode/enterprise_order.vue')
 	},
 	{
 		path:'addOrder',
-		component:addOrder
+		component: () => import('../components/twoCode/addOrder.vue')
 	},
 	{
 		path:'detail',
-		component:detail
+		component: () => import('../components/twoCode/detail.vue')
 	},
 	{
 		path:'addActivity',
-		component:addActivity
+		component: () => import('../components/twoCode/addActivity.vue')
 	},
 	{
 		path:'analysis',
-		component:analysis
+		component: () => import('../components/twoCode/analysis.vue')
 	},
 	{
 		path:'sourceCode',
-		component:sourceCode
+		component: () => import('../components/twoCode/sourceCode.vue')
 	},
 	{
 		path:'game',
-		component:game
+		component: () => import('../components/twoCode/game.vue')
 	},
 	{
 		path:'gameRule',
-		component:gameRule
+		component: () => import('../components/twoCode/gameRule.vue')
 	},
 	{
 		path:'exhibitors',
-		component:exhibitors
+		component: () => import('../components/twoCode/exhibitors.vue')
 	},
 	{
 		path:'addGame',
-		component:addGame
+		component: () => import('../components/twoCode/addGame.vue')
 	},
 	{
 		path:'addGameRule',
-		component:addGameRule
+		component: () => import('../components/twoCode/addGameRule.vue')
 	},
 	{
 		path:'signIn',
-		component:signIn
+		component: () => import('../components/twoCode/signIn.vue')
 	},
 	{
 		path:'addIntegralRule',
-		component:addIntegralRule
+		component: () => import('../components/twoCode/addIntegralRule.vue')
 	},
 	{
 		path:'IntegralUseRule',
-		component:IntegralUseRule
+		component: () => import('../components/twoCode/IntegralUseRule.vue')
 	},
 	{
 		path:'addIntegralUseRule',
-		component:addIntegralUseRule
+		component: () => import('../components/twoCode/addIntegralUseRule.vue')
 	},
 	{
 		path:'userInfomation',
-		component:userInfomation
+		component: () => import('../components/twoCode/userInfomation.vue')
 	},
 	{
 		path:'userDetail',
-		component:userDetail
+		component: () => import('../components/twoCode/userDetail.vue')
 	},
 	{
 		path:'exchange',
-		component:exchange
+		component: () => import('../components/twoCode/exchange.vue')
 	}
 	]
 }

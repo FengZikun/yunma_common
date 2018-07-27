@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <warn></warn>
+    <loading></loading>
     <hello v-if='vendorId!=""&&userType!=99&&vendorId!=undefined' v-bind:vendorId='vendorId' v-on:tuichu='logout'></hello>
     <admin v-if='userType==99' v-bind:vendorId='vendorId' v-on:tuichu='logout'></admin>
     <!---->

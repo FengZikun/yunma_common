@@ -1,66 +1,54 @@
- import enterprise from '../components/shouye/enterprise.vue'
- import enterprise_message from '../components/shouye/enterprise_message.vue'
- import enterprise_cer from '../components/shouye/enterprise_cer.vue'
- import enterprise_news from '../components/shouye/enterprise_news.vue'
- import shouyegaikuang from '../components/shouye/shouyegaikuang.vue'
- import complete from '../components/shouye/complete.vue'
- import en_public from '../components/shouye/en_public.vue'
- import trade from '../components/shouye/trade.vue'
- import safety from '../components/shouye/safety.vue'
- import revise from '../components/shouye/revise.vue'
- import passward from '../components/shouye/passward.vue'
- import account from '../components/shouye/account.vue'
  const shouye={
     path:'/enterprise',
-    component:enterprise,
+    component: () => import('../components/shouye/enterprise.vue'),
     children:[
     {
       path:'',
-      component:shouyegaikuang
+      component: () => import('../components/shouye/shouyegaikuang.vue')
     },
     {
       path:'shouyegaikuang',
-      component:shouyegaikuang
+      component: () => import('../components/shouye/shouyegaikuang.vue')
     },
     {
       path:'enterprise_message',
-      component:enterprise_message
+      component: () => import('../components/shouye/enterprise_message.vue')
     },
     {
       path:'enterprise_cer',
-      component:enterprise_cer
+      component: () => import('../components/shouye/enterprise_cer.vue')
     },
     {
       path:'en_public',
-      component:en_public
+      component: () => import('../components/shouye/en_public.vue')
     },
     {
       path:'trade',
-      component:trade
+      component: () => import('../components/shouye/trade.vue')
     },
     {
       path:'safety',
-      component:safety
+      component: () => import('../components/shouye/safety.vue')
     },
     {
       path:'revise',
-      component:revise
+      component: () => import('../components/shouye/revise.vue')
     },
     {
       path:'enterprise_news',
-      component:enterprise_news
+      component: () => import('../components/shouye/enterprise_news.vue')
     },
     {
       path:'passward',
-      component:passward
+      component: () => import('../components/shouye/passward.vue')
     },
     {
       path:'account',
-      component:account
+      component: () => import('../components/shouye/account.vue')
     },
     {
       path:'complete',
-      component:complete
+      component: () => import('../components/shouye/complete.vue')
     },
     ]
   }

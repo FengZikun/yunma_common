@@ -239,7 +239,7 @@
     border-radius: 5px;
     overflow: hidden;
     position: absolute;
-    left: 31px;
+    left: 42px;
     top: 20px;
     z-index: 1;
     font-size: 18px;

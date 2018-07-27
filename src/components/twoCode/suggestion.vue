@@ -6,7 +6,7 @@
             <div class='right-main-top'>
             <p class='right-main-top1'>
               <span class='right-main-top-icon1'></span>
-              <span style="color: #b3b3b3;">查看V3.4版防伪码扫码明细记录</span>
+              <span style="color: #b3b3b3;">查看V3.4版溯源码用户意见</span>
             </p>
           </div>
           <div class="right-main-bottom">
@@ -17,30 +17,25 @@
               <div class="my-form">
                 <ul class="pro-list" style="overflow-y:auto">
                   <li class="pro-li">
-                    <span class="pro-li-span">头像</span>
-                    <span class="pro-li-span">扫码者昵称</span>
-                    <span class="pro-li-span">防伪码</span>
-                    <span class="pro-li-span">扫码结果</span>
-                    <span class="pro-li-span">商品名称</span>
-                    <!-- <span class="pro-li-span">投诉反馈</span> -->
-                    <span class="pro-li-span">扫码时间</span>
-                    <!-- <span class="pro-li-span">所属经销商</span> -->
-                    <span class="pro-li-span">扫码地区</span>
+                    <span class="pro-li-span">意见编号</span>
+                    <span class="pro-li-span">意见类型</span>
+                    <span class="pro-li-span">意见编号</span>
+                    <span class="pro-li-span">产品名</span>
+                    <span class="pro-li-span">用户联系方式</span>
                   </li>
                   <li v-for="data in list">
-                    <span class="pro-li-span"><span class='photo1' v-bind:style="{backgroundImage: 'url(' + data.picUrl + ')'}"></span></span>
-                    <span class="pro-li-span">{{data.nickName}}</span>
-                    <span class="pro-li-span span2">{{data.securityCode}}</span>
-                    <span class="pro-li-span" v-if="data.count==1">正常</span>
-                    <span class="pro-li-span" v-if="data.count>1">扫码次数过多</span>
+                    <span class="pro-li-span">{{data.suggestioId}}</span>
+                    <span class="pro-li-span span2" v-if="data.suggestType==='1'">产品质量</span>
+                    <span class="pro-li-span span2" v-if="data.suggestType==='2'">服务态度</span>
+                    <span class="pro-li-span span2" v-if="data.suggestType==='3'">产品包装</span>
+                    <span class="pro-li-span span2" v-if="data.suggestType==='4'">其他</span>
+                    <span class="pro-li-span">{{data.suggestInfo}}</span>
                     <span class="pro-li-span">{{data.productName}}</span>
-                    <!-- <span class="pro-li-span">投诉反馈</span> -->
-                    <span class="pro-li-span">{{data.scanTime}}</span>
-                    <!-- <span class="pro-li-span">所属经销商</span> -->
-                    <span class="pro-li-span">{{data.address}}</span>
+                    <span class="pro-li-span">{{data.phoneNum}}</span>
                   </li>
                 </ul>
               </div>
+              <page v-on:finit='init'></page>
             </div>
           </div>
         </template>
@@ -77,7 +72,7 @@
           text-align: left;
         }
         .pro-li-span{
-          width: 14.6%;
+          width: 20.6%;
         }
         .pro-li-span:nth-of-type(2){
           width: 12%;
@@ -102,6 +97,8 @@
       <script>
         import '../../assets/js/echarts.js'
         import '../../assets/js/china.js'
+        import common from '../../common.js'
+        import {mapMutations} from 'vuex'
         export default{
           data(){
             return{
@@ -112,23 +109,35 @@
           },
           props:['datas'],
           methods:{
-            init:function(){
+            ...mapMutations({
+              getData:'page/getData'
+            }),
+
+            init:function(currentPage){
               var self=this;
-              var data={vendorId:self.datas.vendorId};
+              var data={
+                vendorId:self.datas.vendorId,
+                currentPage:currentPage
+              };
               $.ajax({
-                url: 'https://ym-a.top/cloud_code/GET/mapCount/countInfo.do',
+                url: 'https://ym-a.top/cloud_code/GET/productTracing/getTracingSuggestionInfo.do',
                 type:'get',
                 data: data,
                 dataType: 'json',
                 success: function (res) {
-                  console.log(res)
-                  self.list=res.data;
+                  self.list=res.result.data;
+                  var totalPage=[];
+                  totalPage = self.getPage(res.currentPage, res.totalPages);
+                  self.getData({currentPage:res.currentPage, totalPages:res.totalPages, totalPage:totalPage})
                 },
                 error:function(res){
                   //console.log("error")
                 }
               })
             },
+
+            //获取页数
+            getPage:common.getPage,
           },
           created:function(){
               this.init()

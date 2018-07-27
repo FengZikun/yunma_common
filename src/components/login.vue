@@ -122,7 +122,9 @@
         getUserId:'vendorId/getUserId',
         getCheckComment:'vendorId/getCheckComment',
         ifTest:'vendorId/ifTest',
-        show:'warn/show'
+        show:'warn/show',
+        loading: 'warn/loading',
+        close: 'warn/close'
       }),
 
       //判断登录状态
@@ -151,7 +153,7 @@
           self.show(errormsg);
           return
         }
-
+          self.loading();
           var url='https://ym-a.top/cloud_code/POST/user/login.do';
           var type='post';
           var pswd=Base64.encode(md5(self.password));
@@ -160,7 +162,7 @@
             passwd:pswd,
           };
           var success=function(res){
-            console.log(res)
+            self.close();
             if(res.statuscode==1){
               self.userId=res.id;
               self.vendorId=res.vendorId;

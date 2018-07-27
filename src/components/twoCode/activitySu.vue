@@ -211,9 +211,9 @@
     },
     props:['datas'],
     methods:{
-      ...mapMutations([
-        'changeType'
-      ]),
+      ...mapMutations({
+          changeType:'b/changeType'
+        }),
       //初始化
       init:function(currentPage){
         var self=this;

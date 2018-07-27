@@ -1,88 +1,72 @@
-import admin from '../components/admin.vue'
-import admingaikuang from '../components/admin/admingaikuang.vue'
-import corporate from '../components/admin/corporate_info.vue'
-import accountinfo from '../components/admin/account_info.vue'
-import detailBill from '../components/admin/detailBill.vue'
-import weixin from '../components/admin/weixin.vue'
-import coupon from '../components/admin/coupon.vue'
-import checkQualification from '../components/admin/checkQualification.vue'
-import checkPending from '../components/admin/checkPending.vue'
-import corporateDetail from '../components/admin/corporateDetail.vue'
-import addCorporate from '../components/admin/addCorporate.vue'
-import addAdmin from '../components/admin/addAdmin.vue'
-import newActivities from '../components/admin/new_activities.vue'
-import couponRule from '../components/admin/couponRule.vue'
-import addCouponRule from '../components/admin/addCouponRule.vue'
-import enterpriseBill from '../components/admin/enterprise_bill.vue'
 
 const adminrouter={
 	path:'/admin', //路由路径这里是根路径
-    component:admin,  //模板
+    component: () => import('../components/admin.vue'),  //模板
     children:[
     {
       path:'',
-      component:admingaikuang
+      component: () => import('../components/admin/admingaikuang.vue')
     },
     {
       path:'admingaikuang',
-      component:admingaikuang
+      component: () => import('../components/admin/admingaikuang.vue')
     },
     {
       path:'corporate',
-      component:corporate
+      component: () => import('../components/admin/corporate_info.vue')
     },
     {
       path:'accountinfo',
-      component:accountinfo
+      component: () => import('../components/admin/account_info.vue')
     },
     {
       path:'weixin',
-      component:weixin
+      component: () => import('../components/admin/weixin.vue')
     },
     {
       path:'corporateDetail',
-      component:corporateDetail
+      component: () => import('../components/admin/corporateDetail.vue')
     },
     {
       path:'addCorporate',
-      component:addCorporate
+      component: () => import('../components/admin/addCorporate.vue')
     },
     {
       path:'addAdmin',
-      component:addAdmin
+      component: () => import('../components/admin/addAdmin.vue')
     },
     {
       path:'couponRule',
-      component:couponRule
+      component: () => import('../components/admin/couponRule.vue')
     },
 
     {
       path:'addCouponRule',
-      component:addCouponRule
+      component: () => import('../components/admin/coupon.vue')
     },
     {
       path:'coupon',
-      component:coupon
+      component: () => import('../components/admin/checkQualification.vue')
     },
     {
       path:'newActivities',
-      component:newActivities
+      component: () => import('../components/admin/checkPending.vue')
     },
     {
       path:'enterpriseBill',
-      component:enterpriseBill
+      component: () => import('../components/admin/new_activities.vue')
     },
     {
       path:'detailBill',
-      component:detailBill
+      component: () => import('../components/admin/detailBill.vue')
     },
     {
       path:'checkPending',
-      component:checkPending
+      component: () => import('../components/admin/addCouponRule.vue')
     },
     {
       path:'checkQualification',
-      component:checkQualification
+      component: () => import('../components/admin/enterprise_bill.vue')
     },
     ]
 }

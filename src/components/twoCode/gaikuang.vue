@@ -516,6 +516,7 @@
             }
             var success=function(res){
               self.heatData=res.data;
+              console.log(res.data)
               var AMap=require('AMap')
               var map = new AMap.Map("heatmap", {
                 resizeEnable: true,
@@ -536,7 +537,6 @@
                   max: 100
                 });
               });
-              console.log(AMap)
               // map.destroy()
               function isSupportCanvas() {
                 var elem = document.createElement('canvas');

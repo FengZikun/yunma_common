@@ -1,38 +1,31 @@
 
-import union from '../components/union.vue'
-import bulletinBoard from '../components/union/bulletin_board.vue'
-import bill from '../components/union/bill.vue'
-import wdBill from '../components/union/wdBill.vue'
-import coupon from '../components/union/coupon.vue'
-import newActivities from '../components/union/new_activities.vue'
-
 const unionrouter={
 	path:'/union',
-	component:union,
+	component: () => import('../components/union.vue'),
 	children:[
 	{
 		path:'',
-		component:coupon
+		component: () => import('../components/union/coupon.vue')
 	},
 	{
 		path:'bulletinBoard',
-		component:bulletinBoard
+		component: () => import('../components/union/bulletin_board.vue')
 	},
 	{
 		path:'bill',
-		component:bill
+		component: () => import('../components/union/bill.vue')
 	},
 	{
 		path:'wdBill',
-		component:wdBill
+		component: () => import('../components/union/wdBill.vue')
 	},
 	{
 		path:'coupon',
-		component:coupon
+		component: () => import('../components/union/coupon.vue')
 	},
 	{
 		path:'newActivities',
-		component:newActivities
+		component: () => import('../components/union/new_activities.vue')
 	}
 	]
 }

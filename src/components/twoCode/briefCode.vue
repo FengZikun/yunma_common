@@ -203,6 +203,7 @@
   }
 </style>
 <script>
+  import {mapMutations} from 'vuex'
   export default{
     data(){
       return {
@@ -213,6 +214,9 @@
     },
     props:['datas'],
     methods:{
+      ...mapMutations({
+          changeType:'b/changeType'
+        }),
       init:function(){
         var self=this;
         var data={vendorId:self.datas.vendorId};
@@ -233,6 +237,7 @@
       },
       refresh(){
         this.$emit('sub', "refresh",'1');
+        this.changeType('b');
       },
       hideKuang(event){
         $(event.target).parent().parent().addClass('modHid');

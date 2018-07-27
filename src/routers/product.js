@@ -1,71 +1,59 @@
- import goods from '../components/goods.vue'
- import groups from '../components/product/groups.vue'
- import gift from '../components/product/gift.vue'
- import classify from '../components/product/classify.vue'
- import progaikuang from '../components/product/gaikuang.vue'
- import updataproduct from '../components/product/updataproduct.vue'
- import proinfo from '../components/product/proinfo.vue'
- import prodetail from '../components/product/prodetail.vue'
- import giftrecycle from '../components/product/giftrecycle.vue'
- import updatagift from '../components/product/updatagift.vue'
- import pro_message from '../components/product/pro_message.vue'
- import recycle from '../components/product/recycle.vue'
 
  const product={
     path:'/goods',
-    component:goods,
+    component: () => import('../components/goods.vue'),
     children:[
     {
       path:'',
-      component:progaikuang
+      component: () => import('../components/product/gaikuang.vue')
     },
     {
       path:'progaikuang',
-      component:progaikuang
+      component: () => import('../components/product/gaikuang.vue')
     },
     {
       path:'pro_message',
-      component:pro_message,
+      component: () => import('../components/product/pro_message.vue'),
     },
     {
       path:'updataproduct',
-      component:updataproduct
+      component: () => import('../components/product/updataproduct.vue')
     },
     {
       path:'classify',
-      component:classify
+      component: () => import('../components/product/classify.vue')
     },
     {
       path:'proinfo',
-      component:proinfo
+      component: () => import('../components/product/proinfo.vue')
     },
     {
       path:'prodetail',
-      component:prodetail
+      component: () => import('../components/product/prodetail.vue')
     },
     {
       path:'recycle',
-      component:recycle
+      component: () => import('../components/product/recycle.vue')
     },
     {
       path:'gift',
-      component:gift
+      component: () => import('../components/product/gift.vue')
     },
     {
       path:'groups',
-      component:groups
+      component: () => import('../components/product/groups.vue')
     },
     {
       path:'giftrecycle',
-      component:giftrecycle
+      component: () => import('../components/product/giftrecycle.vue')
     },
     {
       path:'updatagift',
-      component:updatagift
+      component: () => import('../components/product/updatagift.vue')
     },
 	{
 	path:'/classify',
-	component:classify
+	component: () => import('../components/product/classify.vue')
 	},
     ]
   }

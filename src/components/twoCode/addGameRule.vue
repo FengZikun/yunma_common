@@ -47,7 +47,7 @@
 					<span class="message-name">设置获得率：</span>
 					<div class="characterBox" v-for='(item,index) in parseInt(fontNumText.substring(0,fontNumText.length-1))'>
 						<input :disabled='ruleId!==null' class="character" type="text" name="" maxlength="1" v-model='fontArr[index].word'><br>
-						(<input class="probability" type="text" name="" v-model='fontArr[index].word_rate' maxlength="2">%)
+						(<input class="probability" type="number" min="0" name="" v-model='fontArr[index].word_rate' maxlength="2">%)
 					</div>
 				</div>
 			</div>

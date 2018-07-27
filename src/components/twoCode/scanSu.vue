@@ -30,9 +30,8 @@
                   <li v-for="data in list">
                     <span class="pro-li-span"><span class='photo1' v-bind:style="{backgroundImage: 'url(' + data.picUrl + ')'}"></span></span>
                     <span class="pro-li-span">{{data.nickName}}</span>
-                    <span class="pro-li-span span2">{{data.securityCode}}</span>
-                    <span class="pro-li-span" v-if="data.count==1">正常</span>
-                    <span class="pro-li-span" v-if="data.count>1">扫码次数过多</span>
+                    <span class="pro-li-span span2">{{data.tracingCode}}</span>
+                    <span class="pro-li-span">{{data.count}}</span>
                     <span class="pro-li-span">{{data.productName}}</span>
                     <!-- <span class="pro-li-span">投诉反馈</span> -->
                     <span class="pro-li-span">{{data.scanTime}}</span>
@@ -116,7 +115,7 @@
               var self=this;
               var data={vendorId:self.datas.vendorId};
               $.ajax({
-                url: 'https://ym-a.top/cloud_code/GET/mapCount/countInfo.do',
+                url: 'https://ym-a.top/cloud_code/GET/productTracing/getCustomerTracingScanInfo.do',
                 type:'get',
                 data: data,
                 dataType: 'json',

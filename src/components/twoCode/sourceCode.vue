@@ -235,7 +235,7 @@
     props:['datas'],
     methods:{
       ...mapMutations({
-        changeType:'codeType/changeType',
+        changeType:'b/changeType',
         show:'warn/show'
       }),
       init:function(currentPage){
